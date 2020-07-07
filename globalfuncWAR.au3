@@ -5431,11 +5431,25 @@ EndFunc
 
 Func generali($general, $nomergenerala)
 	Sleep(1000 * $tormoza)
-	Local $ty = 0, $tx = 0, $search = 0, $i = 0, $t = 0
+	Local $ty = 0, $tx = 0, $search = 0, $i = 0, $t = 0, $ii = 0
 	Local $general1x = 0, $general1y = 0, $general2x = 0, $general2y = 0
-	;Примерное место для цикла поиска ген в звезде
-	If _imagesearch($general, 1, $tx, $ty, 20) = 0 Then Return 0
 	
+	;If _imagesearch($general, 1, $tx, $ty, 20) = 0 Then Return 0
+	While 1
+		If _imagesearcharea($general, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+		
+		$ii = $ii + 1
+		zvezdamovepolzunokdown(0)
+		zvezdamovepolzunokdown(0)
+
+		Sleep(Random(500, 1000, 1) * $tormoza)
+		If $ii > 5 Then
+			If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
+				Return 1
+			EndIf
+		EndIf
+	WEnd
+
 	If $nomergenerala = 1 Then
 		While $i < 10
 			MouseMove($tx, $ty, 10 * $tormoza)
