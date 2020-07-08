@@ -1021,3 +1021,32 @@ Func alarmBeep()
 	Beep(1500, 500)
 	Beep(2500, 500)
 EndFunc
+
+Func getPassagesDir()
+	Local $txtDir = @ScriptDir
+
+	If read_ini(11) <> "" Then
+		$txtDir = @ScriptDir & "\" & read_ini(11)
+	EndIf
+
+	Return $txtDir
+EndFunc
+
+Func getAllPassages($passagesDir)
+	Local $str, $filelist
+
+	$filelist = _FileListToArray($passagesDir, "*.txt", 1)
+
+	If @error = 0 Then
+		For $i = 1 To UBound($filelist) - 1
+			$str &= $filelist[$i] & "|"
+		Next
+		Return $str
+	ElseIf @error = 1 Then
+		MsgBox(0, "Внимание!!!", "Папка с прохождениями не найдена!")
+		Return 0
+	ElseIf @error = 4 Then
+		MsgBox(0, "Внимание!!!", "Файлы с прохождением не найдены!")
+		Return 0
+	EndIf
+EndFunc

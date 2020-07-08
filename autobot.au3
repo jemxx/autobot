@@ -3,7 +3,7 @@
 #AutoIt3Wrapper_Outfile=Autobot_test.exe
 #AutoIt3Wrapper_Outfile_x64=Autobot_test_x64.exe
 #AutoIt3Wrapper_Res_Description=Автобот для The Settlers
-#AutoIt3Wrapper_Res_Fileversion=0.0.10.19
+#AutoIt3Wrapper_Res_Fileversion=0.0.10.21
 #AutoIt3Wrapper_Res_Fileversion_AutoIncrement=y
 #AutoIt3Wrapper_Res_ProductName=Автобот
 #AutoIt3Wrapper_Res_ProductVersion=0.10
@@ -21,7 +21,7 @@
 If ProcessExists("Универсальный_бот.exe") Then ProcessClose ("Универсальный_бот.exe")
 
 Global $dr = "media\specialists\"
-Global $alarm = 0;
+Global $alarm = 0, $passagesDir
 
 Global $k_x, $k_y, $tochka_sektora_x=0, $tochka_sektora_y=0
 Global $shtuk, $i = 1, $register = 0
@@ -40,22 +40,17 @@ HotKeySet("{F9}", "_pause")
 HotKeySet("{F7}", "ProverkaSliva")
 HotKeySet("{F11}", "terminater")
 
-Global $filelist = _FileListToArray(@ScriptDir, "*.txt", 1)
+$passagesDir = getPassagesDir()
+$stroka = getAllPassages($passagesDir)
 
-If @error = 4 Then
-   MsgBox(0, "Внимание!!!", "Файлы с прохождением не найдены.")
-EndIf
-For $i = 1 To UBound($filelist) - 1
-   $stroka = $stroka & $filelist[$i] & "|"
-Next
 ;Рисуем окно бота
 #Region ### START Koda GUI section ### Form=
 	Global $level = GUICreate("Автобот", 225, 360, @DesktopWidth - 245, 20)
 	GUISetBkColor(16777088)
 	GUICtrlCreateLabel("Проходим по файлу", 5, 10)
 	Global $file_gui = GUICtrlCreateCombo("", 5, 30, 215, 20, $cbs_dropdownlist)
-	GUICtrlSetData(-1, $stroka)
-	_guictrlcombobox_setcuebanner($file_gui, read_ini(3))
+	GUICtrlSetData(-1, $stroka, read_ini(3))
+	;_GUICtrlComboBox_SetCueBanner($file_gui, read_ini(3))
 	GUICtrlCreateLabel("Начинаем со строки", 5, 60)
 	Global $file_gui2 = GUICtrlCreateInput("1", 5, 80, 215, 20)
 	Global $obnova = GUICtrlCreateCheckbox("Проверять обновления", 5, 105, 180, 25)
@@ -91,14 +86,13 @@ Next
 		Else
 			Run("media\serverOFF.exe")
 		EndIf
-	 EndIf
+	EndIf
 
 	Global $no1_1 = GUICtrlCreateButton("ЗАПУСК", 5, 200, 215, 30)
 	Global $pr8 = GUICtrlCreateButton("Поддержать проект", 5, 265, 215, 20)
 	Global $pr9 = GUICtrlCreateButton("Справка", 5, 290, 215, 20)
 	GUICtrlCreateLabel("F7 - пауза до слива", 5, 320)
 	GUICtrlCreateLabel("F9 - пауза, F11 - прервать", 5, 340)
-	;GUICtrlCreateLabel("Версия " & $version, 5, 360)
 	$haccelinterupt = GUICtrlCreateDummy()
 	Dim $accelkeys[1][2] = [["z", $haccelinterupt]]
 	GUISetAccelerators($accelkeys)
@@ -116,21 +110,29 @@ Next
 			Case $no1_1
 				tormoza()
 				TrayTip("", "Мы запустились...", 0)
-				$i = GUICtrlRead($file_gui2)
-				setstatistik()
-				$register = 0
-				Global $abot = GUICtrlRead($file_gui)
-				If $abot = "" Then $abot = read_ini(3)
-				Global $bbot = FileOpen($abot)
-				If GUICtrlRead($obnova) == $GUI_CHECKED Then
-				obnova()
+				
+				Global $abot = $passagesDir & "\" & GUICtrlRead($file_gui)
+				If FileExists($abot) Then 
+					$i = GUICtrlRead($file_gui2)
+					setstatistik()
+					$register = 0
+				
+					If GUICtrlRead($obnova) == $GUI_CHECKED Then
+						obnova()
+					EndIf
+					If GUICtrlRead($alarmCheckBox) == $GUI_CHECKED Then
+						$alarm = 1;
+					EndIf
+					If ProcessExists("proverkasliva.exe") Then 
+						ProcessClose("proverkasliva.exe")
+					EndIf	
+
+					register()
+					gogogogo()
+				Else
+					MsgBox(0, "Внимание!!!", "Выбранный файл с прохождением не найден!")
+					Exit
 				EndIf
-				If GUICtrlRead($alarmCheckBox) == $GUI_CHECKED Then
-				$alarm = 1;
-				EndIf
-				If ProcessExists("proverkasliva.exe") Then ProcessClose("proverkasliva.exe")
-				register()
-				gogogogo()
 			Case $pr8
 				ShellExecute("media\help.html")
 			Case $pr9
