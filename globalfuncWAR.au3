@@ -6533,7 +6533,7 @@ EndFunc
 
 Func rungeolog($kuda, $skolko, $kakih)
    Local $i = 0, $ii = 0, $tx, $ty
-   Local $vidgeologov[10] = ["media\vesel_geolog.bmp", "media\geolog.bmp", "media\x2geolog.bmp", "media\zelezny_geolog.bmp", "media\kamen_geolog.bmp", $dr & "byvalyj_geolog.bmp", $dr & "zolotoj_geolog.bmp", $dr & "arheolog_geolog.bmp", $dr & "prelestnyj_geolog.bmp", $dr & "skrupuleznyj_geolog.bmp"]
+   Local $vidgeologov[10] = ["media\vesel_geolog.bmp", "media\geolog.bmp", "media\x2geolog.bmp", "media\zelezny_geolog.bmp", "media\kamen_geolog.bmp", "media\byvalyj_geolog.bmp", "media\zolotoj_geolog.bmp", "media\arheolog_geolog.bmp", "media\prelestnyj_geolog.bmp", "media\skrupuleznyj_geolog.bmp"]
    WinActivate("The Settlers Онлайн")
    chatoff()
    drugioff()

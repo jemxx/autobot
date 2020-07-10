@@ -744,15 +744,15 @@ Func komanda($delaem)
 				ElseIf $parametr[4] = "Каменный" Then
 					$kakih = "media\kamen_geolog.bmp"
 				ElseIf $parametr[4] = "Бывалый" Then
-					$kakih = $dr & "byvalyj_geolog.bmp"
+					$kakih = "media\byvalyj_geolog.bmp"
 				ElseIf $parametr[4] = "Золотая" Then
-					$kakih = $dr & "zolotaya_geolog.bmp"
+					$kakih = "media\zolotaya_geolog.bmp"
 				ElseIf $parametr[4] = "Археолог" Then
-					$kakih = $dr & "arheolog_geolog.bmp"
+					$kakih = "media\arheolog_geolog.bmp"
 				ElseIf $parametr[4] = "Прелестный" Then
-					$kakih = $dr & "prelestnyj_geolog.bmp"
+					$kakih = "media\prelestnyj_geolog.bmp"
 				ElseIf $parametr[4] = "Скрупулезный" Then
-					$kakih = $dr & "skrupuleznyj_geolog.bmp"
+					$kakih = "media\skrupuleznyj_geolog.bmp"
 				Else
 					MsgBox(0, "!!!", "Не правильный параметр типа геолога")
 					Return 0
@@ -774,15 +774,15 @@ Func komanda($delaem)
 				ElseIf $parametr[4] = "Каменный" Then
 					$kakih = "media\kamen_geolog.bmp"
 				ElseIf $parametr[4] = "Бывалый" Then
-					$kakih = $dr & "byvalyj_geolog.bmp"
+					$kakih = "media\byvalyj_geolog.bmp"
 				ElseIf $parametr[4] = "Золотая" Then
-					$kakih = $dr & "zolotaya_geolog.bmp"
+					$kakih = "media\zolotaya_geolog.bmp"
 				ElseIf $parametr[4] = "Археолог" Then
-					$kakih = $dr & "arheolog_geolog.bmp"
+					$kakih = "media\arheolog_geolog.bmp"
 				ElseIf $parametr[4] = "Прелестный" Then
-					$kakih = $dr & "prelestnyj_geolog.bmp"
+					$kakih = "media\prelestnyj_geolog.bmp"
 				ElseIf $parametr[4] = "Скрупулезный" Then
-					$kakih = $dr & "skrupuleznyj_geolog.bmp"
+					$kakih = "media\skrupuleznyj_geolog.bmp"
 				Else
 					MsgBox(0, "!!!", "Не правильный параметр типа геолога")
 					Return 0
