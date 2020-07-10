@@ -3,7 +3,7 @@
 #AutoIt3Wrapper_Outfile=Autobot_test.exe
 #AutoIt3Wrapper_Outfile_x64=Autobot_test_x64.exe
 #AutoIt3Wrapper_Res_Description=Автобот для The Settlers
-#AutoIt3Wrapper_Res_Fileversion=0.0.10.25
+#AutoIt3Wrapper_Res_Fileversion=0.0.10.26
 #AutoIt3Wrapper_Res_Fileversion_AutoIncrement=y
 #AutoIt3Wrapper_Res_ProductName=Автобот
 #AutoIt3Wrapper_Res_ProductVersion=0.10
@@ -816,21 +816,21 @@ Func komanda($delaem)
 			   ElseIf $parametr[6] = "Бесстрашный" Then
 				  $kakih = "media\scout6.bmp"
 			   ElseIf $parametr[6] = "Авантюрист" Then
-				  $kakih = "media\avantyurist.bmp"
+				  $kakih = "media\scout7.bmp"
 			   ElseIf $parametr[6] = "Зои" Then
-				  $kakih = "media\zoi.bmp"
+				  $kakih = "media\scout8.bmp"
 			   ElseIf $parametr[6] = "Искренний" Then
-				  $kakih = "media\iskrennij.bmp"
+				  $kakih = "media\scout9.bmp"
 			   ElseIf $parametr[6] = "Скромный" Then
-				  $kakih = "media\skromnyj.bmp"
+				  $kakih = "media\scout10.bmp"
 			   ElseIf $parametr[6] = "Зачарованный" Then
-				  $kakih = "media\zacharovannyj.bmp"
+				  $kakih = "media\scout11.bmp"
 			   ElseIf $parametr[6] = "Милый" Then
-				  $kakih = "media\milyj.bmp"
+				  $kakih = "media\scout12.bmp"
 			   ElseIf $parametr[6] = "Настойчивый" Then
-				  $kakih = "media\nastojchivyj.bmp"
+				  $kakih = "media\scout13.bmp"
 			   ElseIf $parametr[6] = "Безудержный" Then
-				  $kakih = "media\bezuderzhnyj.bmp"
+				  $kakih = "media\scout14.bmp"
 			   Else
 				  MsgBox(0, "!!!", "Не правильный параметр типа Разведчика")
 				  Return 0
@@ -855,21 +855,21 @@ Func komanda($delaem)
 			   ElseIf $parametr[6] = "Бесстрашный" Then
 				  $kakih = "media\scout6.bmp"
 			   ElseIf $parametr[6] = "Авантюрист" Then
-				  $kakih = "media\avantyurist.bmp"
+				  $kakih = "media\scout7.bmp"
 			   ElseIf $parametr[6] = "Зои" Then
-				  $kakih = "media\zoi.bmp"
+				  $kakih = "media\scout8.bmp"
 			   ElseIf $parametr[6] = "Искренний" Then
-				  $kakih = "media\iskrennij.bmp"
+				  $kakih = "media\scout9.bmp"
 			   ElseIf $parametr[6] = "Скромный" Then
-				  $kakih = "media\skromnyj.bmp"
+				  $kakih = "media\scout10.bmp"
 			   ElseIf $parametr[6] = "Зачарованный" Then
-				  $kakih = "media\zacharovannyj.bmp"
+				  $kakih = "media\scout11.bmp"
 			   ElseIf $parametr[6] = "Милый" Then
-				  $kakih = "media\milyj.bmp"
+				  $kakih = "media\scout12.bmp"
 			   ElseIf $parametr[6] = "Настойчивый" Then
-				  $kakih = "media\nastojchivyj.bmp"
+				  $kakih = "media\scout13.bmp"
 			   ElseIf $parametr[6] = "Безудержный" Then
-				  $kakih = "media\bezuderzhnyj.bmp"
+				  $kakih = "media\scout14.bmp"
 			   Else
 				  MsgBox(0, "!!!", "Не правильный параметр типа Разведчика")
 				  Return 0
