@@ -3,7 +3,7 @@
 #AutoIt3Wrapper_Outfile=Autobot_test.exe
 #AutoIt3Wrapper_Outfile_x64=Autobot_test_x64.exe
 #AutoIt3Wrapper_Res_Description=Автобот для The Settlers
-#AutoIt3Wrapper_Res_Fileversion=0.0.10.21
+#AutoIt3Wrapper_Res_Fileversion=0.0.10.25
 #AutoIt3Wrapper_Res_Fileversion_AutoIncrement=y
 #AutoIt3Wrapper_Res_ProductName=Автобот
 #AutoIt3Wrapper_Res_ProductVersion=0.10
@@ -827,7 +827,7 @@ Func komanda($delaem)
 			   ElseIf $parametr[6] = "Зачарованный" Then
 				  $kakih = $dr & "zacharovannyj.bmp"
 			   ElseIf $parametr[6] = "Милый" Then
-				  $kakih =$dr & "milyj.bmp"
+				  $kakih = $dr & "milyj.bmp"
 			   ElseIf $parametr[6] = "Настойчивый" Then
 				  $kakih = $dr & "nastojchivyj.bmp"
 			   ElseIf $parametr[6] = "Безудержный" Then
@@ -887,6 +887,20 @@ Func komanda($delaem)
 		Case "СборКоллекций"
 			collectwarikiatprikl()
 			Return 1
+		Case "ЖмемПоКоординатам"
+			$centrovat = 1
+			Local $perebor = 1
+			$parametr = StringSplit($komanda[2], ",")
+			$komand_na_massiv = UBound($parametr)
+			While $perebor < $komand_na_massiv
+				If $parametr[$perebor] = "НеЦентровать" Then
+					$centrovat = 0
+					ExitLoop
+				EndIf
+				$perebor = $perebor + 1
+			WEnd
+			
+			Return clickOnCoordinates("media\army_values\" & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7])
 		Case "Нажать"
 			If $komanda[2] = "0" Then
 			   MouseMove(@DesktopWidth / 2, @DesktopHeight / 2, 10 * $tormoza)

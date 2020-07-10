@@ -6845,3 +6845,37 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 		WEnd
 	EndIf
  EndFunc
+
+Func clickOnCoordinates($img, $k_x, $k_y, $else_x, $else_y, $kudax, $kuday)
+	Local $tx = 0, $ty = 0, $i = 0
+
+	Sleep(1000 * $tormoza)
+
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+		If (200 < ($tochka_sektora_x + $kudax)) AND (($tochka_sektora_x + $kudax) < (@DesktopWidth - 200)) Then
+			If (200 < ($tochka_sektora_y + $kuday)) AND (($tochka_sektora_y + $kuday) < (@DesktopHeight - 200)) Then
+				$centrovat = 1
+			Else
+				$centrovat = 1
+				If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+			EndIf
+		Else
+			$centrovat = 1
+			If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+		EndIf
+	Else
+		$centrovat = 1
+		If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+	EndIf
+
+	$kudax = $tochka_sektora_x + $kudax
+	$kuday = $tochka_sektora_y + $kuday
+
+	MouseMove($kudax, $kuday, 10 * $tormoza)
+	Sleep(200 * $tormoza)
+	MouseClick("left", $kudax, $kuday, 2)
+	go5()
+	Sleep(200 * $tormoza)
+
+	Return 1
+EndFunc
