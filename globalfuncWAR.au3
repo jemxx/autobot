@@ -6702,9 +6702,14 @@ Global $gx, $gy, $finterrupt = 0, $gpx = 0, $gpy = 0, $vidpoiska = 0, $tippoiska
 #EndRegion
 
 Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
-	Local $vidrazvedov[14] = ["media\scout1.bmp", "media\scout2.bmp", "media\scout3.bmp", "media\scout4.bmp", "media\scout5.bmp", "media\scout6.bmp", $dr & "avantyurist.bmp", $dr & "zoi.bmp", $dr & "iskrennij.bmp", $dr & "skromnyj.bmp", $dr & "zacharovannyj.bmp", $dr & "milyj.bmp", $dr & "nastojchivyj.bmp", $dr & "bezuderzhnyj.bmp"]
 	Local $seychactetka = 0
 	Local $i = 0, $ii = 0, $tx, $ty
+	Local $vidrazvedov[14] = [_
+		"media\scout1.bmp", "media\scout2.bmp", "media\scout3.bmp", "media\scout4.bmp", "media\scout5.bmp", "media\scout6.bmp", _
+		"media\avantyurist.bmp", "media\zoi.bmp", "media\iskrennij.bmp", "media\skromnyj.bmp", "media\zacharovannyj.bmp", _
+		"media\milyj.bmp", "media\nastojchivyj.bmp", "media\bezuderzhnyj.bmp" _
+	]
+	
 	WinActivate("The Settlers Онлайн")
 	Switch $tippoiska
 		Case "Быстрый"
@@ -6744,7 +6749,11 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 					If _imagesearcharea($vidrazvedov[2], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
 					If _imagesearcharea($vidrazvedov[3], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
 					If _imagesearcharea($vidrazvedov[4], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[5], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+					If _imagesearcharea($vidrazvedov[5], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then
+						If $tetki = 1 Then $seychactetka = 1
+						ExitLoop
+					EndIf
+					If _imagesearcharea($vidrazvedov[6], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
 					If _imagesearcharea($vidrazvedov[7], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
 					If _imagesearcharea($vidrazvedov[8], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
 					If _imagesearcharea($vidrazvedov[9], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
@@ -6752,10 +6761,7 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 					If _imagesearcharea($vidrazvedov[11], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
 					If _imagesearcharea($vidrazvedov[12], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
 					If _imagesearcharea($vidrazvedov[13], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-				    If _imagesearcharea($vidrazvedov[6], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then
-						If $tetki = 1 Then $seychactetka = 1
-						ExitLoop
-					EndIf
+				   
 					$ii = $ii + 1
 					zvezdamovepolzunokdown(0)
 					zvezdamovepolzunokdown(0)

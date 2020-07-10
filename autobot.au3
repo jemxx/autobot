@@ -20,7 +20,6 @@
 
 If ProcessExists("Универсальный_бот.exe") Then ProcessClose ("Универсальный_бот.exe")
 
-Global $dr = "media\specialists\"
 Global $alarm = 0, $passagesDir
 
 Global $k_x, $k_y, $tochka_sektora_x=0, $tochka_sektora_y=0
@@ -817,21 +816,21 @@ Func komanda($delaem)
 			   ElseIf $parametr[6] = "Бесстрашный" Then
 				  $kakih = "media\scout6.bmp"
 			   ElseIf $parametr[6] = "Авантюрист" Then
-				  $kakih = $dr & "avantyurist.bmp"
+				  $kakih = "media\avantyurist.bmp"
 			   ElseIf $parametr[6] = "Зои" Then
-				  $kakih = $dr & "zoi.bmp"
+				  $kakih = "media\zoi.bmp"
 			   ElseIf $parametr[6] = "Искренний" Then
-				  $kakih = $dr & "iskrennij.bmp"
+				  $kakih = "media\iskrennij.bmp"
 			   ElseIf $parametr[6] = "Скромный" Then
-				  $kakih = $dr & "skromnyj.bmp"
+				  $kakih = "media\skromnyj.bmp"
 			   ElseIf $parametr[6] = "Зачарованный" Then
-				  $kakih = $dr & "zacharovannyj.bmp"
+				  $kakih = "media\zacharovannyj.bmp"
 			   ElseIf $parametr[6] = "Милый" Then
-				  $kakih = $dr & "milyj.bmp"
+				  $kakih = "media\milyj.bmp"
 			   ElseIf $parametr[6] = "Настойчивый" Then
-				  $kakih = $dr & "nastojchivyj.bmp"
+				  $kakih = "media\nastojchivyj.bmp"
 			   ElseIf $parametr[6] = "Безудержный" Then
-				  $kakih = $dr & "bezuderzhnyj.bmp"
+				  $kakih = "media\bezuderzhnyj.bmp"
 			   Else
 				  MsgBox(0, "!!!", "Не правильный параметр типа Разведчика")
 				  Return 0
@@ -856,21 +855,21 @@ Func komanda($delaem)
 			   ElseIf $parametr[6] = "Бесстрашный" Then
 				  $kakih = "media\scout6.bmp"
 			   ElseIf $parametr[6] = "Авантюрист" Then
-				  $kakih = $dr & "avantyurist.bmp"
+				  $kakih = "media\avantyurist.bmp"
 			   ElseIf $parametr[6] = "Зои" Then
-				  $kakih = $dr & "zoi.bmp"
+				  $kakih = "media\zoi.bmp"
 			   ElseIf $parametr[6] = "Искренний" Then
-				  $kakih = $dr & "iskrennij.bmp"
+				  $kakih = "media\iskrennij.bmp"
 			   ElseIf $parametr[6] = "Скромный" Then
-				  $kakih = $dr & "skromnyj.bmp"
+				  $kakih = "media\skromnyj.bmp"
 			   ElseIf $parametr[6] = "Зачарованный" Then
-				  $kakih = $dr & "zacharovannyj.bmp"
+				  $kakih = "media\zacharovannyj.bmp"
 			   ElseIf $parametr[6] = "Милый" Then
-				  $kakih = $dr & "milyj.bmp"
+				  $kakih = "media\milyj.bmp"
 			   ElseIf $parametr[6] = "Настойчивый" Then
-				  $kakih = $dr & "nastojchivyj.bmp"
+				  $kakih = "media\nastojchivyj.bmp"
 			   ElseIf $parametr[6] = "Безудержный" Then
-				  $kakih = $dr & "bezuderzhnyj.bmp"
+				  $kakih = "media\bezuderzhnyj.bmp"
 			   Else
 				  MsgBox(0, "!!!", "Не правильный параметр типа Разведчика")
 				  Return 0
