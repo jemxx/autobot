@@ -3,7 +3,7 @@
 #AutoIt3Wrapper_Outfile=Autobot_test.exe
 #AutoIt3Wrapper_Outfile_x64=Autobot_test_x64.exe
 #AutoIt3Wrapper_Res_Description=Автобот для The Settlers
-#AutoIt3Wrapper_Res_Fileversion=0.0.10.26
+#AutoIt3Wrapper_Res_Fileversion=0.0.10.27
 #AutoIt3Wrapper_Res_Fileversion_AutoIncrement=y
 #AutoIt3Wrapper_Res_ProductName=Автобот
 #AutoIt3Wrapper_Res_ProductVersion=0.10
