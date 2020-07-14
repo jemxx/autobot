@@ -960,9 +960,9 @@ Func getGeneralData($general)
 		$generalData[1] = 2
 		$generalData[2] = "media\army_values\NOstoikii.bmp"
 	ElseIf $general = "Скрытный" Then
-		$generalData[0] = "media\army_values\skromnii.bmp"
+		$generalData[0] = "media\army_values\skrytnyj.bmp"
 		$generalData[1] = 4
-		$generalData[2] = "media\army_values\NOskromnii.bmp"
+		$generalData[2] = "media\army_values\NOskrytnyj.bmp"
 	ElseIf $general = "ЗолотойИнтендант" Then
 		$generalData[0] = "media\army_values\bigavtobus.bmp"
 		$generalData[1] = 12
