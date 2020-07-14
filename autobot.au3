@@ -3,10 +3,10 @@
 #AutoIt3Wrapper_Outfile=Autobot_test.exe
 #AutoIt3Wrapper_Outfile_x64=Autobot_test_x64.exe
 #AutoIt3Wrapper_Res_Description=Автобот для The Settlers
-#AutoIt3Wrapper_Res_Fileversion=0.0.10.27
+#AutoIt3Wrapper_Res_Fileversion=0.0.11.1
 #AutoIt3Wrapper_Res_Fileversion_AutoIncrement=y
 #AutoIt3Wrapper_Res_ProductName=Автобот
-#AutoIt3Wrapper_Res_ProductVersion=0.10
+#AutoIt3Wrapper_Res_ProductVersion=0.11
 #AutoIt3Wrapper_Res_LegalCopyright=2020 © by mysettlers.ru & Jemxx
 #AutoIt3Wrapper_Res_Language=1049
 #AutoIt3Wrapper_Run_AU3Check=n
@@ -17,6 +17,12 @@
 ;#pragma compile(Fileversion, 0.0.10.9)
 ;#pragma compile(LegalCopyright, "2020 © by mysettlers.ru & Jemxx")
 ;#pragma compile(Compression, 5)
+
+If WinExists('[CLASS:AutoIt v3;TITLE:' & @ScriptName & ']') Then
+    MsgBox(48, @ScriptName, 'Разрешено запускать только одну копию Автобота!' & @CRLF & @CRLF & 'ОК ==> ВЫХОД')
+    Exit
+EndIf
+AutoItWinSetTitle(@ScriptName)
 
 If ProcessExists("Универсальный_бот.exe") Then ProcessClose ("Универсальный_бот.exe")
 
@@ -231,13 +237,6 @@ EndFunc
 
 Func startflag($stroka)
 ;функция исполнения флагов
-   #comments-start
-   If StringLeft($stroka, 9) = "/Скорость" Then
-	  $parametr = StringSplit($stroka, "=")
-	  $stroka = "/Скорость"
-   EndIf
-   #comments-end
-
    If StringInStr($stroka, "=") Then
 	  $parametr = StringSplit($stroka, "=")
 	  $stroka = $parametr[1]
