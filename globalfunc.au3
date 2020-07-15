@@ -403,24 +403,30 @@ EndFunc
 Func openzvezdaP()
 	;writelog("openzvezda | ")
 	WinActivate("The Settlers Онлайн")
+
 	Local $ty = 0, $tx = 0, $search = 0
+	Local $htimer = TimerInit()
+
 	setstatistik()
 	;Register()
+	
 	$search =  _imagesearch("media\zvezda_is_displayed.bmp", 1, $tx, $ty, 70)
-	Local $htimer = TimerInit()
 	While ($search <> 1) AND (TimerDiff($htimer) < 60000)
 		$search = _imagesearcharea("media\zvezda.bmp", 1, (@DesktopWidth/2 - 100), (@DesktopHeight/2), (@DesktopWidth/2 + 100), (@DesktopHeight), $tx, $ty, 80)
-			If $search = 1 Then
-				MouseMove($tx, $ty, 10 * $tormoza)
-				Sleep(3000 * $tormoza)
-				MouseClick("left", $tx + Random(0, 5, 1), $ty + Random(0, 5, 1), 1)
-				Sleep(3000 * $tormoza)
-				removemouse(300, 0, 100)
-				;$clicked = 1
-			EndIf
+		
+		If $search = 1 Then
+			MouseMove($tx, $ty, 10 * $tormoza)
+			Sleep(1000 * $tormoza)
+			MouseClick("left", $tx + Random(0, 5, 1), $ty + Random(0, 5, 1), 1)
+			Sleep(1000 * $tormoza)
+			removemouse(300, 0, 100)
+			;$clicked = 1
+		EndIf
+
 		sleepwhile("media\zvezda_is_displayed.bmp", 80, 10)
 		$search = _imagesearch("media\zvezda_is_displayed.bmp", 1, $tx, $ty, 70)
 	WEnd
+	
 	If $search = 1 Then
 		Global $Zvezda_area[4] = [$tx - 520, $ty, $tx, $ty + 340]
 		Return 1
