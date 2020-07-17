@@ -1173,10 +1173,12 @@ Func vvodzifr($skolko)
 
 	$i = 0
 	$error = 0
-	While StringInStr($skolko, "0") <> 0
-		$skolko = $skolko - 1
-		$i = $i + 1
-	WEnd
+	If read_ini(5) = 1 Then 
+		While StringInStr($skolko, "0") <> 0
+			$skolko = $skolko - 1
+			$i = $i + 1
+		WEnd
+	EndIf	
 	
 	If $i = 0 Then
 		MouseMove($polezifrx, $polezifry, 10 * $tormoza)
