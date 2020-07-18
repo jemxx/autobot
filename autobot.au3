@@ -12,12 +12,6 @@
 #AutoIt3Wrapper_Run_AU3Check=n
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
 
-;#pragma compile(ProductName, "Автобот")
-;#pragma compile(ProductVersion, "0.10")
-;#pragma compile(Fileversion, 0.0.10.9)
-;#pragma compile(LegalCopyright, "2020 © by mysettlers.ru & Jemxx")
-;#pragma compile(Compression, 5)
-
 If WinExists('[CLASS:AutoIt v3;TITLE:' & @ScriptName & ']') Then
     MsgBox(48, @ScriptName, 'Разрешено запускать только одну копию Автобота!' & @CRLF & @CRLF & 'ОК ==> ВЫХОД')
     Exit
@@ -34,7 +28,6 @@ Global $komand_na_massiv = 0
 Global $strokadlaperehoda = 0
 Global $centrovat = 1, $currentbuf = 0
 Global $stroka
-Global $version = "0.10"
 
 #include "globalfunc.au3"
 #include "globalfuncWAR.au3"
@@ -55,7 +48,6 @@ $stroka = getAllPassages($passagesDir)
 	GUICtrlCreateLabel("Проходим по файлу", 5, 10)
 	Global $file_gui = GUICtrlCreateCombo("", 5, 30, 215, 20, $cbs_dropdownlist)
 	GUICtrlSetData(-1, $stroka, read_ini(3))
-	;_GUICtrlComboBox_SetCueBanner($file_gui, read_ini(3))
 	GUICtrlCreateLabel("Начинаем со строки", 5, 60)
 	Global $file_gui2 = GUICtrlCreateInput("1", 5, 80, 215, 20)
 	Global $obnova = GUICtrlCreateCheckbox("Проверять обновления", 5, 105, 180, 25)
@@ -237,31 +229,31 @@ EndFunc
 
 Func startflag($stroka)
 ;функция исполнения флагов
-   If StringInStr($stroka, "=") Then
-	  $parametr = StringSplit($stroka, "=")
-	  $stroka = $parametr[1]
-   EndIf
+	If StringInStr($stroka, "=") Then
+		$parametr = StringSplit($stroka, "=")
+		$stroka = $parametr[1]
+	EndIf
 
-   Switch $stroka
-	  Case "/СтартПроверкиСвязи"
-		 If ProcessExists("serverOFF.exe") Then
-			Return 1
-		 Else
-			Run("media\serverOFF.exe")
-			Return 1
-		 EndIf
-	  Case "/СтопПроверкиСвязи"
-		 If ProcessExists("serverOFF.exe") Then
-			ProcessClose("serverOFF.exe")
-			Return 1
-		 Else
-			Return 1
-		 EndIf
-	  Case "/Скорость"
-		 $tormoza = $parametr[2]
-	  Case "/Тревога"
-		 $alarm = $parametr[2]
-   EndSwitch
+	Switch $stroka
+		Case "/СтартПроверкиСвязи"
+			If ProcessExists("serverOFF.exe") Then
+				Return 1
+			Else
+				Run("media\serverOFF.exe")
+				Return 1
+			EndIf
+		Case "/СтопПроверкиСвязи"
+			If ProcessExists("serverOFF.exe") Then
+				ProcessClose("serverOFF.exe")
+				Return 1
+			Else
+				Return 1
+			EndIf
+		Case "/Скорость"
+			$tormoza = $parametr[2]
+		Case "/Тревога"
+			$alarm = $parametr[2]
+	EndSwitch
 EndFunc
 
 Func komanda($delaem)
