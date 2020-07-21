@@ -2817,7 +2817,10 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 					If _imagesearcharea($vidrazvedov[10], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
 					If _imagesearcharea($vidrazvedov[11], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
 					If _imagesearcharea($vidrazvedov[12], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[13], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+					If _imagesearcharea($vidrazvedov[13], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then 
+						If $tetki = 1 Then $seychactetka = 1
+						ExitLoop
+					EndIf
 				   
 					$ii = $ii + 1
 					zvezdamovepolzunokdown(0)
@@ -2863,7 +2866,7 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 			If openzvezda() = 1 Then
 				While 1
 					If _imagesearcharea($kakih, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then
-						If $kakih = "media\scout6.bmp" Then
+						If ($kakih = $vidrazvedov[5] Or $kakih = $vidrazvedov[13]) Then
 							If $tetki = 1 Then $seychactetka = 1
 						EndIf
 						ExitLoop
