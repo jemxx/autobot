@@ -21,6 +21,7 @@ AutoItWinSetTitle(@ScriptName)
 If ProcessExists("Универсальный_бот.exe") Then ProcessClose ("Универсальный_бот.exe")
 
 Global $alarm = 0, $passagesDir
+Global $userDIR = "media\users\"
 
 Global $k_x, $k_y, $tochka_sektora_x=0, $tochka_sektora_y=0
 Global $shtuk, $i = 1, $register = 0
