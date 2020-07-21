@@ -2342,16 +2342,16 @@ EndFunc
 
 Func openpriklaxxx($kartinka, $kartinka2)
 	Local $tx = 0, $ty = 0
-	If haveimage("media\army_values\" & $kartinka2, 30) = 1 Then
+	If haveimage($userDIR & $kartinka2, 30) = 1 Then
 		Return 1
 	EndIf
 	If openzvezda() = 1 Then
 		If selecttabatzvezda("prikli", 0) = 1 Then
-			While (_imagesearch("media\army_values\" & $kartinka, 1, $tx, $ty, 20) = 0)
+			While (_imagesearch($userDIR & $kartinka, 1, $tx, $ty, 20) = 0)
 				zvezdamovepolzunokdown(1)
 				Sleep(300 * $tormoza)
 			WEnd
-			If findclickoncenterandwaitresult("media\army_values\" & $kartinka, "media\army_values\open_prikla2.bmp", 20, 20, 5, 5, 1, 300, 5) = 1 Then
+			If findclickoncenterandwaitresult($userDIR & $kartinka, "media\army_values\open_prikla2.bmp", 20, 20, 5, 5, 1, 300, 5) = 1 Then
 				zmemsmennuyukartinku("media\army_values\open_prikla2.bmp", 30, "media\army_values\open_prikla2_.bmp", 30)
 				Sleep(2000 * $tormoza)
 				zmemsmennuyukartinku("media\army_values\open_prikla2.bmp", 30, "media\army_values\open_prikla2_.bmp", 30)
