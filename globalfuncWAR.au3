@@ -2402,7 +2402,7 @@ Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 	chatoff()
 	drugioff()
 	While 1
-		If openotpravkagen("media\army_values\" & $prikl) = 1 Then
+		If openotpravkagen($userDIR & $prikl) = 1 Then
 			While ($generalov <> $shtuk) AND ($i < (read_ini(4) / 2))
 				If haveimagearea("media\error_otpravka.bmp", 40, $area5_top_x, $area5_top_y, $area5_bottom_x, $area5_bottom_y) = 1 Then
 					$error_otpravka = $error_otpravka + 1
