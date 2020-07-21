@@ -967,7 +967,7 @@ EndFunc
 
 Func openpriglosdruga($prikl, $imya)
 	While 1
-		If findclickoncenterandwaitresult("media\army_values\" & $prikl, "media\army_values\priglos.bmp", 30, 30, 5, 10, 1, -300, -300) = 1 Then
+		If findclickoncenterandwaitresult($userDIR & $prikl, "media\army_values\priglos.bmp", 30, 30, 5, 10, 1, -300, -300) = 1 Then
 			If findclickoncenterandwaitresult("media\army_values\priglos.bmp", "media\army_values\igroki_in_prikla.bmp", 30, 30, 10, 10, 1, -300, -300) = 1 Then
 				If findclickoncenterandwaitresult("media\army_values\plus_igrok.bmp", "media\army_values\okdrug_off.bmp", 30, 30, 10, 10, 1, -300, -300) = 1 Then
 					Return 1
