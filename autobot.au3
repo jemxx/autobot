@@ -268,7 +268,7 @@ Func komanda($delaem)
 				Return 0
 			EndIf
 		Case "ПерейтиВприкл"
-			If gotopriclanosleep("media\army_values\" & $komanda[2]) = 1 Then
+			If gotopriclanosleep($userDIR & $komanda[2]) = 1 Then
 				podgotovka()
 				Return 1
 			EndIf
