@@ -273,7 +273,7 @@ Func komanda($delaem)
 				Return 1
 			EndIf
 		Case "ПерейтиДомой"
-			Return gotohome("media\army_values\" & $komanda[2])
+			Return gotohome($userDIR & $komanda[2])
 		Case "ОтправитьВприключение"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[2])
