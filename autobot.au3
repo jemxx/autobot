@@ -466,7 +466,7 @@ Func komanda($delaem)
 				EndIf
 				$perebor = $perebor + 1
 			WEnd
-			Return movegenapxpnoini($parametr[6], $parametr[7], "media\army_values\" & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[8], $parametr[9], "media\army_values\" & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5])
+			Return movegenapxpnoini($parametr[6], $parametr[7], $userDIR & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[8], $parametr[9], $userDIR & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5])
 		Case "ЗавершитьПрикл"
 			Return endpricla($komanda[2])
 		Case "Ждем"
