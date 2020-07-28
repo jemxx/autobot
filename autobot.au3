@@ -410,7 +410,7 @@ Func komanda($delaem)
 				If openzvezdap() = 1 Then
 					If selecttabatzvezda("specialisti", 1) = 1 Then
 						If generali($generalData[0], $parametr[2]) = 1 Then
-							Return atakalageraotkritimgenoynoini($parametr[3], $parametr[4], "media\army_values\" & $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9])
+							Return atakalageraotkritimgenoynoini($parametr[3], $parametr[4], $userDIR & $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9])
 						EndIf
 					EndIf
 				EndIf
