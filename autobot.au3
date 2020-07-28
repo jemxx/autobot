@@ -618,7 +618,7 @@ Func komanda($delaem)
 			   $img_usilka = "media\army_values\nubi_in_zvezda.bmp"
 			   $tb_name = "raznoe"
 			EndIf
-			Return plunusilok_koordinati($tb_name, $img_usilka, $parametr[2], $parametr[3], "media\army_values\" & $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $currentbuf)
+			Return plunusilok_koordinati($tb_name, $img_usilka, $parametr[2], $parametr[3], $userDIR & $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $currentbuf)
 		Case "СборОстатковАрмии"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
