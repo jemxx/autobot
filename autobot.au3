@@ -360,11 +360,11 @@ Func komanda($delaem)
 								generali($gena, $parametr[2])
 							WEnd
 							$gluksnaboromarmii = 0
-							Return atakalageraotkritimgenoynoini($parametr[11], $parametr[12], "media\army_values\" & $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17])
+							Return atakalageraotkritimgenoynoini($parametr[11], $parametr[12], $userDIR & $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17])
 						EndIf
 						If $parametr[3] = "1" Then
 							If haveimage("media\army_values\1.bmp", 20) = 1 Then
-								Return atakalageraotkritimgenoynoini($parametr[13], $parametr[14], "media\army_values\" & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
+								Return atakalageraotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
 							Else
 								While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
 									zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
@@ -373,7 +373,7 @@ Func komanda($delaem)
 									generali($gena, $parametr[2])
 								WEnd
 								$gluksnaboromarmii = 0
-								Return atakalageraotkritimgenoynoini($parametr[13], $parametr[14], "media\army_values\" & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
+								Return atakalageraotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
 							EndIf
 						EndIf
 						If $parametr[3] = "П" Then
@@ -384,7 +384,7 @@ Func komanda($delaem)
 								generali($gena, $parametr[2])
 							WEnd
 							$gluksnaboromarmii = 0
-							Return atakalageraotkritimgenoynoini($parametr[13], $parametr[14], "media\army_values\" & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
+							Return atakalageraotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
 						Else
 							Return 0
 						EndIf
