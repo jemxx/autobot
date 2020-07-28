@@ -427,7 +427,7 @@ Func komanda($delaem)
 				EndIf
 				$perebor = $perebor + 1
 			WEnd
-			Return atakgenapxpnoini("media\army_values\" & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9])
+			Return atakgenapxpnoini($userDIR & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9])
 		Case "ЖдемГенерала"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
