@@ -453,7 +453,7 @@ Func komanda($delaem)
 
 			$generalData = getGeneralData($parametr[1])
 
-			Return perestanovka_geni_iz_zvezdinoini($generalData[0], $parametr[2], 2, 2, "media\army_values\" & $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9])
+			Return perestanovka_geni_iz_zvezdinoini($generalData[0], $parametr[2], 2, 2, $userDIR & $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9])
 		Case "ПеренестиПоКоординатам"
 			$centrovat = 1
 			Local $perebor = 1
