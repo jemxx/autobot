@@ -507,17 +507,17 @@ Func komanda($delaem)
 			$full = $generalData[1]
 
 			If $parametr[2] = "Э" Then
-				While viborgenipodataku_elitanoini("media\army_values\" & $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $full) <> 1
+				While viborgenipodataku_elitanoini($userDIR & $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $full) <> 1
 					zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
 				WEnd
 			EndIf
 			If $parametr[2] = "П" Then
-				While viborgenipodatakunoini("media\army_values\" & $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], $full) <> 1
+				While viborgenipodatakunoini($userDIR & $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], $full) <> 1
 					zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
 				WEnd
 			EndIf
 			If $parametr[2] = "1" Then
-				While viborgenipodataku_1nnoini("media\army_values\" & $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], 1, 0, 0, 0, 0, 0, 0, 0, 0, 4) <> 1
+				While viborgenipodataku_1nnoini($userDIR & $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], 1, 0, 0, 0, 0, 0, 0, 0, 0, 4) <> 1
 					zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
 				WEnd
 			EndIf
