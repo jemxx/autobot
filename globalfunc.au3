@@ -875,7 +875,7 @@ $ay = $ay + 3
 Func getGeneralData($general)
 	Local $generalData[3]
 
-	;1 - 285  2 - 235  3 - 265  4 - 215  5 - 195  6 - 180  7 - 165  8 - 155  9 - 295  10 - 2000  11 - 205  12 - 3000
+	;1 - 285  2 - 235  3 - 265  4 - 215  5 - 195  6 - 180  7 - 165  8 - 155  9 - 295  10 - 2000  12 - 3000
 
 	If $general = "Интедант" Then
 		$generalData[0] = "media\army_values\avtobus.bmp"
@@ -959,7 +959,7 @@ Func getGeneralData($general)
 		$generalData[2] = "media\army_values\NOstarshij.bmp"
 	ElseIf $general = "Сильвана" Then
 		$generalData[0] = "media\army_values\silvana.bmp"
-		$generalData[1] = 11
+		$generalData[1] = 5
 		$generalData[2] = "media\army_values\NOsilvana.bmp"
 	ElseIf $general = "Стойкая" Then
 		$generalData[0] = "media\army_values\stoikii.bmp"
@@ -1004,8 +1004,6 @@ Func getFullGeneralImg($code)
 		$fullGenaImg = "media\army_values\starshij_fill.bmp"
 	ElseIf $code = 10 Then
 		$fullGenaImg = "media\army_values\auto_full.bmp"
-	ElseIf $code = 11 Then
-		$fullGenaImg = "media\army_values\silvana_full.bmp"
 	ElseIf $code = 11 Then
 		$fullGenaImg = "media\army_values\bigavtobus_full.bmp"
 	EndIf
