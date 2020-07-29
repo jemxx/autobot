@@ -875,7 +875,7 @@ $ay = $ay + 3
 Func getGeneralData($general)
 	Local $generalData[3]
 
-	;1 - 285  2 - 235  3 - 265  4 - 215  5 - 195  6 - 180  7 - 165  8 - 155  9 - 295  10 - 2000  12 - 3000
+	;1 - 285  2 - 235  3 - 265  4 - 215  5 - 195  6 - 180  7 - 165  8 - 155  9 - 295  10 - 2000  11 - 3000
 
 	If $general = "Интедант" Then
 		$generalData[0] = "media\army_values\avtobus.bmp"
@@ -971,7 +971,7 @@ Func getGeneralData($general)
 		$generalData[2] = "media\army_values\NOskrytnyj.bmp"
 	ElseIf $general = "ЗолотойИнтендант" Then
 		$generalData[0] = "media\army_values\bigavtobus.bmp"
-		$generalData[1] = 12
+		$generalData[1] = 11
 		$generalData[2] = "media\army_values\NObigavtobus.bmp"
 	Else
 		MsgBox(0, "!!!", "Не правильный параметр типа Генерала")
