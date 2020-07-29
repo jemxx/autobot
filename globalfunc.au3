@@ -1001,7 +1001,7 @@ Func getFullGeneralImg($code)
 	ElseIf $code = 8 Then
 		$fullGenaImg = "media\army_values\mladshij_full.bmp"
 	ElseIf $code = 9 Then
-		$fullGenaImg = "media\army_values\starshij_fill.bmp"
+		$fullGenaImg = "media\army_values\starshij_full.bmp"
 	ElseIf $code = 10 Then
 		$fullGenaImg = "media\army_values\auto_full.bmp"
 	ElseIf $code = 11 Then
