@@ -3,10 +3,9 @@
 #AutoIt3Wrapper_Outfile=Autobot_test.exe
 #AutoIt3Wrapper_Outfile_x64=Autobot_test_x64.exe
 #AutoIt3Wrapper_Res_Description=Автобот для The Settlers
-#AutoIt3Wrapper_Res_Fileversion=0.0.12.1
-#AutoIt3Wrapper_Res_Fileversion_AutoIncrement=y
+#AutoIt3Wrapper_Res_Fileversion=0.0.13.15
 #AutoIt3Wrapper_Res_ProductName=Автобот
-#AutoIt3Wrapper_Res_ProductVersion=0.12
+#AutoIt3Wrapper_Res_ProductVersion=0.13
 #AutoIt3Wrapper_Res_LegalCopyright=2020 © by mysettlers.ru & Jemxx
 #AutoIt3Wrapper_Res_Language=1049
 #AutoIt3Wrapper_Run_AU3Check=n
