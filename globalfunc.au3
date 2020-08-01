@@ -875,103 +875,97 @@ $ay = $ay + 3
 Func getGeneralData($general)
 	Local $generalData[3]
 
-	;1 - 285  2 - 235  3 - 265  4 - 215  5 - 195  6 - 180  7 - 165  8 - 155  9 - 295  10 - 2000  11 - 3000
-
-	If $general = "Интедант" Then
+	If ($general = "Интедант" Or $general = "Интендант") Then
 		$generalData[0] = "media\army_values\avtobus.bmp"
-		$generalData[1] = 10
-		$generalData[2] = "media\army_values\NOAvtobus.bmp"
-	ElseIf $general = "Интендант" Then
-		$generalData[0] = "media\army_values\avtobus.bmp"
-		$generalData[1] = 10
+		$generalData[1] = 2000
 		$generalData[2] = "media\army_values\NOAvtobus.bmp"
 	ElseIf $general = "Клаус" Then
 		$generalData[0] = "media\army_values\klaus.bmp"
-		$generalData[1] = 10
+		$generalData[1] = 2000
 		$generalData[2] = "media\army_values\NOklaus.bmp"
 	ElseIf $general = "Майор" Then
 		$generalData[0] = "media\army_values\major.bmp"
-		$generalData[1] = 1
+		$generalData[1] = 285
 		$generalData[2] = "media\army_values\NOMajor.bmp"
 	ElseIf $general = "Нинзя" Then
 		$generalData[0] = "media\army_values\ninza.bmp"
-		$generalData[1] = 2
+		$generalData[1] = 235
 		$generalData[2] = "media\army_values\NOninza.bmp"
 	ElseIf $general = "Ветеран" Then
 		$generalData[0] = "media\army_values\veteran.bmp"
-		$generalData[1] = 3
+		$generalData[1] = 265
 		$generalData[2] = "media\army_values\NOveteran.bmp"
 	ElseIf $general = "Дракул" Then
 		$generalData[0] = "media\army_values\drakula.bmp"
-		$generalData[1] = 4
+		$generalData[1] = 215
 		$generalData[2] = "media\army_values\NOdrakula.bmp"
 	ElseIf $general = "Генеральша" Then
 		$generalData[0] = "media\army_values\miss_klaus.bmp"
-		$generalData[1] = 4
+		$generalData[1] = 215
 		$generalData[2] =  "media\army_values\NOmiss_klaus.bmp"
 	ElseIf $general = "Защитник" Then
 		$generalData[0] = "media\army_values\pfobnybr.bmp"
-		$generalData[1] = 4
+		$generalData[1] = 215
 		$generalData[2] = "media\army_values\nopfobnybr.bmp"
 	ElseIf $general = "Золотой" Then
 		$generalData[0] = "media\army_values\zolotoy.bmp"
-		$generalData[1] = 4
+		$generalData[1] = 215
 		$generalData[2] = "media\army_values\NOzolotoy.bmp"
 	ElseIf $general = "Жнец" Then
 		$generalData[0] = "media\army_values\znec.bmp"
-		$generalData[1] = 4
+		$generalData[1] = 215
 		$generalData[2] = "media\army_values\NOznec.bmp"
 	ElseIf $general = "Простой" Then
 		$generalData[0] = "media\army_values\General.bmp"
-		$generalData[1] = 4
+		$generalData[1] = 215
 		$generalData[2] = "media\army_values\NOgena.bmp"
 	ElseIf $general = "Нусала" Then
 		$generalData[0] = "media\army_values\nusa.bmp"
-		$generalData[1] = 6
+		$generalData[1] = 180
 		$generalData[2] = "media\army_values\NOnusa.bmp"
 	ElseIf $general = "Варгус" Then
 		$generalData[0] = "media\army_values\vargus.bmp"
-		$generalData[1] = 5
+		$generalData[1] = 195
 		$generalData[2] = "media\army_values\NOvargus.bmp"
 	ElseIf $general = "Анслем" Then
 		$generalData[0] = "media\army_values\anslem.bmp"
-		$generalData[1] = 7
+		$generalData[1] = 165
 		$generalData[2] = "media\army_values\NOanslem.bmp"
 	ElseIf $general = "Медик" Then
 		$generalData[0] = "media\army_values\medik.bmp"
-		$generalData[1] = 4
+		$generalData[1] = 215
 		$generalData[2] = "media\army_values\NOmedik.bmp"
 	ElseIf ($general = "Учёный" Or $general = "Ученый") Then
 		$generalData[0] = "media\army_values\ucheniy.bmp"
-		$generalData[1] = 4
+		$generalData[1] = 215
 		$generalData[2] = "media\army_values\NOucheniy.bmp"
 	ElseIf $general = "Борис" Then
 		$generalData[0] = "media\army_values\boris.bmp"
-		$generalData[1] = 5
+		$generalData[1] = 195
 		$generalData[2] = "media\army_values\NOboris.bmp"
 	ElseIf $general = "Малец" Then
 		$generalData[0] = "media\army_values\mladshij.bmp"
-		$generalData[1] = 8
+		$generalData[1] = 155
 		$generalData[2] = "media\army_values\NOmladshij.bmp"
 	ElseIf $general = "Близнец" Then
 		$generalData[0] = "media\army_values\starshij.bmp"
-		$generalData[1] = 9
+		$generalData[1] = 295
 		$generalData[2] = "media\army_values\NOstarshij.bmp"
 	ElseIf $general = "Сильвана" Then
 		$generalData[0] = "media\army_values\silvana.bmp"
-		$generalData[1] = 5
+		$generalData[1] = 195
 		$generalData[2] = "media\army_values\NOsilvana.bmp"
 	ElseIf $general = "Стойкая" Then
 		$generalData[0] = "media\army_values\stoikii.bmp"
-		$generalData[1] = 2
+		$generalData[1] = 235
 		$generalData[2] = "media\army_values\NOstoikii.bmp"
 	ElseIf $general = "Скрытный" Then
 		$generalData[0] = "media\army_values\skrytnyj.bmp"
-		$generalData[1] = 4
+		$generalData[1] = 215
 		$generalData[2] = "media\army_values\NOskrytnyj.bmp"
 	ElseIf $general = "ЗолотойИнтендант" Then
 		$generalData[0] = "media\army_values\bigavtobus.bmp"
-		$generalData[1] = 11
+		$generalData[1] = 3000
 		$generalData[2] = "media\army_values\NObigavtobus.bmp"
 	Else
 		MsgBox(0, "!!!", "Не правильный параметр типа Генерала")
@@ -981,31 +975,11 @@ Func getGeneralData($general)
 	Return $generalData
 EndFunc
 
-Func getFullGeneralImg($code)
-   	Local $fullGenaImg = 0
-
-	If $code = 1 Then
-		$fullGenaImg = "media\army_values\major_full.bmp"
-	ElseIf $code = 2 Then
-		$fullGenaImg = "media\army_values\ninz_full.bmp"
-	ElseIf $code = 3 Then
-		$fullGenaImg = "media\army_values\vet_full.bmp"
-	ElseIf $code = 4 Then
-		$fullGenaImg = "media\army_values\gena_full.bmp"
-	ElseIf $code = 5 Then
-		$fullGenaImg = "media\army_values\vargus_full.bmp"
-	ElseIf $code = 6 Then
-		$fullGenaImg = "media\army_values\nusa_full.bmp"
-	ElseIf $code = 7 Then
-		$fullGenaImg = "media\army_values\anslem_full.bmp"
-	ElseIf $code = 8 Then
-		$fullGenaImg = "media\army_values\mladshij_full.bmp"
-	ElseIf $code = 9 Then
-		$fullGenaImg = "media\army_values\starshij_full.bmp"
-	ElseIf $code = 10 Then
-		$fullGenaImg = "media\army_values\auto_full.bmp"
-	ElseIf $code = 11 Then
-		$fullGenaImg = "media\army_values\bigavtobus_full.bmp"
+Func getFullGeneralImg($max)
+	Local $fullGenaImg = 0
+	
+	If FileExists("media\army_values\" & $max & ".bmp") Then
+		$fullGenaImg = "media\army_values\" & $max & ".bmp"
 	EndIf
 
 	Return $fullGenaImg
