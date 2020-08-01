@@ -539,11 +539,11 @@ Func komanda($delaem)
 			EndIf
 		Case "ЖмемКартинку"
 			$parametr = StringSplit($komanda[2], ",")
-			zmemsmennuyukartinku("media\users\" & $parametr[1], $parametr[2], "media\users\" & $parametr[3], $parametr[4])
+			zmemsmennuyukartinku($userDIR & $parametr[1], $parametr[2], $userDIR & $parametr[3], $parametr[4])
 			Return 1
 		Case "ЖмемКартинкуИждем"
 			$parametr = StringSplit($komanda[2], ",")
-			Return zmemsmennuyukartinkuizdem("media\users\" & $parametr[1], $parametr[2], "media\users\" & $parametr[3], $parametr[4], "media\users\" & $parametr[5], $parametr[6])
+			Return zmemsmennuyukartinkuizdem($userDIR & $parametr[1], $parametr[2], $userDIR & $parametr[3], $parametr[4], $userDIR & $parametr[5], $parametr[6])
 		Case "Сообщение"
 			MsgBox(0, "Сообщение", $komanda[2])
 			Return 1
@@ -701,9 +701,9 @@ Func komanda($delaem)
 		Case "ЖдемКартинку"
 			$parametr = StringSplit($komanda[2], ",")
 			If $parametr[1] = "1" Then
-				Return sleepwhile("media\users\" & $parametr[2], $parametr[3], $parametr[4])
+				Return sleepwhile($userDIR & $parametr[2], $parametr[3], $parametr[4])
 			ElseIf $parametr[1] = "0" Then
-				Return sleepnowhile("media\users\" & $parametr[2], $parametr[3], $parametr[4])
+				Return sleepnowhile($userDIR & $parametr[2], $parametr[3], $parametr[4])
 			Else
 				Return 0
 			EndIf
