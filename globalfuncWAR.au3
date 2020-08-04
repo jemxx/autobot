@@ -1826,221 +1826,309 @@ Func endpricla($sekund)
 	Return 0
 EndFunc
 
-Func ozidanierasstanovki($image, $yes)
-	writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКУ " & $yes & @CRLF)
-	Local $tx = 0, $ty = 0, $i = 0
+Func ozidanierasstanovki2($image, $yes)
+; Ждем одного генерала
+    writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
+	Local $tx = 0, $ty = 0, $i = 0, $fl = 0
 	Sleep(500 * $tormoza)
-	If openzvezdap() = 1 Then
-		selecttabatzvezda("specialisti", 1)
-		While (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) AND ($i < 300)
-			Sleep(3000 * $tormoza)
-			If $i = 20 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 40 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 60 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 80 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 100 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 120 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 140 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 160 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 180 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 200 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 220 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 240 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			$i = $i + 1
-		WEnd
-		If $yes = 1 Then
-			zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-		EndIf
-		If $i = 300 Then
-			writelog("=====ОШИБКА " & $i & @CRLF)
+
+		If openzvezdap() = 0 Then
 			Return 0
 		EndIf
-		writelog("=====УСПЕХ " & $i & @CRLF)
-		Return 1
+
+		selecttabatzvezda("specialisti", 0)
+		while 1
+			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) Then
+				$fl = 1
+				ExitLoop
+			Else
+				if zvezdamovepolzunokdown(1) = 0 then ExitLoop
+			EndIf
+		Wend
+
+	If ($fl = 1) and ($yes = 1) Then
+		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 	EndIf
-	writelog("=====ОШИБКА " & $i & @CRLF)
-	Return 0
+
+	If $i = 300 Then
+			writelog("=====ОШИБКА " & $i & @CRLF)
+			Return 0
+	EndIf
+
+	writelog("=====УСПЕХ " & $i & @CRLF)
+	Return 1
 EndFunc
 
-Func ozidanierasstanovki2($image, $yes)
-	writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
-	Local $tx = 0, $ty = 0, $i = 0
+Func ozidanierasstanovki($image, $yes)
+; Ждем всех генералов
+    writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
+	Local $tx = 0, $ty = 0, $i = 0, $fl = 0, $fl2 = 0
 	Sleep(500 * $tormoza)
-	If openzvezdap() = 1 Then
-		selecttabatzvezda("specialisti", 1)
-		While (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 0) AND ($i < 300)
-			Sleep(3000 * $tormoza)
-			If $i = 20 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 40 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 60 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 80 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 100 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 120 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 140 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 160 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 180 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 200 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 220 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 240 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			$i = $i + 1
-		WEnd
-		If $yes = 1 Then
-			zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-		EndIf
-		If $i = 300 Then
-			writelog("=====ОШИБКА " & $i & @CRLF)
+
+		If openzvezdap() = 0 Then
 			Return 0
 		EndIf
-		writelog("=====УСПЕХ " & $i & @CRLF)
-		Return 1
+
+		If $fl2 = 0 Then
+			selecttabatzvezda("specialisti", 0) ; передергиваем звезду
+		Else
+			selecttabatzvezda("specialisti", 1) ; если нашли картинку хоть одного неактивного гены  (fl2 = 1) то звезду не передергиваем
+		EndIf
+
+		; первый цикл - ищем экран где есть картинка неактивного гены
+		while 1
+			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) Then
+				; нашли вкладку со скрином неактивного гены, взвели fl2 = 1
+				$fl2 = 1
+				ExitLoop
+			Else
+				; листаем пока не найдем картинки неактивного гены или пока еще можно листать
+				if zvezdamovepolzunokdown(1) = 0 then ExitLoop
+			EndIf
+		Wend
+
+		; второй цикл - ищем экран где нет ни одной картинки неактивного гены
+		while 1
+			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 0) Then
+				$fl = 1
+				ExitLoop
+			EndIf
+		Wend
+
+
+
+	If ($fl = 1) and ($yes = 1) Then
+		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 	EndIf
-	writelog("=====ОШИБКА " & $i & @CRLF)
-	Return 0
+
+	If $i = 300 Then
+			writelog("=====ОШИБКА " & $i & @CRLF)
+			Return 0
+	EndIf
+
+	writelog("=====УСПЕХ " & $i & @CRLF)
+	Return 1
 EndFunc
+
+
+;~ ; исходный
+;~ Func ozidanierasstanovki2($image, $yes)
+;~ ; Ждем всех генералов
+;~     writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
+;~ 	Local $tx = 0, $ty = 0, $i = 0
+;~ 	Sleep(500 * $tormoza)
+;~ 	If openzvezdap() = 1 Then
+;~ 		selecttabatzvezda("specialisti", 1)
+;~ 		While (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 0) AND ($i < 300)
+;~ 			Sleep(3000 * $tormoza)
+;~ 			If $i = 20 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 40 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 60 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 80 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 100 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 120 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 140 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 160 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 180 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 200 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 220 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 240 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			$i = $i + 1
+;~ 		WEnd
+;~ 		If $yes = 1 Then
+;~ 			zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 		EndIf
+;~ 		If $i = 300 Then
+;~ 			writelog("=====ОШИБКА " & $i & @CRLF)
+;~ 			Return 0
+;~ 		EndIf
+;~ 		writelog("=====УСПЕХ " & $i & @CRLF)
+;~ 		Return 1
+;~ 	EndIf
+;~ 	writelog("=====ОШИБКА " & $i & @CRLF)
+;~ 	Return 0
+;~ EndFunc
+
+;~ Func ozidanierasstanovki($image, $yes)
+;~ ; Ждем всех генералов
+;~ 	writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКУ " & $yes & @CRLF)
+;~ 	Local $tx = 0, $ty = 0, $i = 0
+;~ 	Sleep(500 * $tormoza)
+;~ 	If openzvezdap() = 1 Then
+;~ 		selecttabatzvezda("specialisti", 1)
+;~ 		While (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) AND ($i < 300)
+;~ 			Sleep(3000 * $tormoza)
+;~ 			If $i = 20 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 40 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 60 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 80 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 100 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 120 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 140 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 160 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 180 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 200 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 220 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			If $i = 240 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			$i = $i + 1
+;~ 		WEnd
+;~ 		If $yes = 1 Then
+;~ 			zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 		EndIf
+;~ 		If $i = 300 Then
+;~ 			writelog("=====ОШИБКА " & $i & @CRLF)
+;~ 			Return 0
+;~ 		EndIf
+;~ 		writelog("=====УСПЕХ " & $i & @CRLF)
+;~ 		Return 1
+;~ 	EndIf
+;~ 	writelog("=====ОШИБКА " & $i & @CRLF)
+;~ 	Return 0
+;~ EndFunc
 
 Func vibor_elitnoy_armii($tabname)
 	writelog("| VA " & $tabname)
