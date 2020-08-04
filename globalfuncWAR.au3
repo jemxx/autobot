@@ -3,12 +3,12 @@ Dim $proverkasliva
 Func podgotovka()
 	chatoff()
 	drugioff()
-	zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\army_values\Close.bmp", 30)
-	zmemsmennuyukartinku("media\army_values\Close.bmp", 30, "media\army_values\Close_.bmp", 30)
+	zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
+	zmemsmennuyukartinku("media\Close.bmp", 30, "media\Close_.bmp", 30)
 	openmashtab()
 	collectwarikiatprikl()
-	zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\army_values\Close.bmp", 30)
-	zmemsmennuyukartinku("media\army_values\Close.bmp", 30, "media\army_values\Close_.bmp", 30)
+	zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
+	zmemsmennuyukartinku("media\Close.bmp", 30, "media\Close_.bmp", 30)
 	If openzvezdap() = 1 Then
 		If selecttabatzvezda("specialisti", 0) = 1 Then
 			zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
@@ -193,10 +193,10 @@ Func perestanovka_geni_iz_zvezdi($general, $nomergenerala, $voisko, $tip_voiska,
 	While $gluksnaboromarmii <> 1
 		writelog($gluksnaboromarmii)
 		If openzvezdap() = 1 Then
-			While _imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
+			While _imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
 				generali($general, $nomergenerala)
 				Sleep(1000 * $tormoza)
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
 			WEnd
 			If $voisko = 0 Then
 				If $tip_voiska = 0 Then
@@ -224,7 +224,7 @@ Func perestanovka_geni_iz_zvezdi($general, $nomergenerala, $voisko, $tip_voiska,
 	If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 1 Then
 		$kudax = $tochka_sektora_x + read_ini($kudax)
 		$kuday = $tochka_sektora_y + read_ini($kuday)
-		While (_imagesearch("media\army_values\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 10)
+		While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 10)
 			MouseMove($kudax, $kuday, 10 * $tormoza)
 			Sleep(200 * $tormoza)
 			MouseClick("left", $kudax, $kuday, 1)
@@ -246,12 +246,12 @@ Func movegenapxp($otkudax, $otkuday, $img, $k_x, $k_y, $else_x, $else_y, $kudax,
 	If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 1 Then
 		$otkudax = $tochka_sektora_x + read_ini($otkudax)
 		$otkuday = $tochka_sektora_y + read_ini($otkuday)
-		While (_imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0) AND ($i < 10)
+		While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0) AND ($i < 10)
 			MouseMove($otkudax, $otkuday, 10 * $tormoza)
 			Sleep(500 * $tormoza)
 			MouseClick("left", $otkudax, $otkuday, 1)
 			go5()
-			sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+			sleepwhile("media\zadacha_geni.bmp", 30, 10)
 			$i = $i + 1
 		WEnd
 		If $i = 10 Then
@@ -262,8 +262,8 @@ Func movegenapxp($otkudax, $otkuday, $img, $k_x, $k_y, $else_x, $else_y, $kudax,
 		If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 1 Then
 			$kudax = $tochka_sektora_x + read_ini($kudax)
 			$kuday = $tochka_sektora_y + read_ini($kuday)
-			sleepwhile("media\army_values\Otmena.bmp", 30, 10)
-			While (_imagesearch("media\army_values\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 10)
+			sleepwhile("media\Otmena.bmp", 30, 10)
+			While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 10)
 				MouseMove($kudax, $kuday, 10 * $tormoza)
 				Sleep(500 * $tormoza)
 				MouseClick("left", $kudax, $kuday, 1)
@@ -286,11 +286,11 @@ Func atakgenapxp($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $kudax,
 	If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
 	$otkudax = $tochka_sektora_x + read_ini($otkudax)
 	$otkuday = $tochka_sektora_y + read_ini($otkuday)
-	While (_imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 6)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 6)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(500 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
-		sleepwhile("media\army_values\zadacha_geni.bmp", 30, 5)
+		sleepwhile("media\zadacha_geni.bmp", 30, 5)
 		go5()
 		$i = $i + 1
 	WEnd
@@ -302,8 +302,8 @@ Func atakgenapxp($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $kudax,
 	If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
 	$kudax = $tochka_sektora_x + read_ini($kudax)
 	$kuday = $tochka_sektora_y + read_ini($kuday)
-	sleepwhile("media\army_values\Otmena.bmp", 30, 10)
-	While (_imagesearch("media\army_values\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 6)
+	sleepwhile("media\Otmena.bmp", 30, 10)
+	While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 6)
 		MouseMove($kudax, $kuday, 10 * $tormoza)
 		Sleep(500 * $tormoza)
 		MouseClick("left", $kudax, $kuday, 1)
@@ -326,8 +326,8 @@ Func atakalageraotkritimgenoy($kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y
 	If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
 	$kudax = $tochka_sektora_x + read_ini($kudax)
 	$kuday = $tochka_sektora_y + read_ini($kuday)
-	sleepwhile("media\army_values\Otmena.bmp", 30, 10)
-	While (_imagesearch("media\army_values\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 6)
+	sleepwhile("media\Otmena.bmp", 30, 10)
+	While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 6)
 		MouseMove($kudax, $kuday, 10 * $tormoza)
 		Sleep(500 * $tormoza)
 		MouseClick("left", $kudax, $kuday, 1)
@@ -347,9 +347,9 @@ Func atakagenoyizzvezdi_elita($general, $nomergenerala, $mo, $ks, $strelki, $sb,
 	$gluksnaboromarmii = 0
 	While $gluksnaboromarmii <> 1
 		If openzvezdap() = 1 Then
-			While _imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
+			While _imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
 				generali($general, $nomergenerala)
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
 			WEnd
 			If apply_elitnoy_army($mo, $ks, $strelki, $sb, $rizari, $km, $mechniki, $gena, 0) = 1 Then
 				$gluksnaboromarmii = 0
@@ -367,9 +367,9 @@ Func atakagenoyizzvezdi($general, $nomergenerala, $nubi, $menti, $soldati, $elit
 	$gluksnaboromarmii = 0
 	While $gluksnaboromarmii <> 1
 		If openzvezdap() = 1 Then
-			While _imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
+			While _imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
 				generali($general, $nomergenerala)
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
 			WEnd
 			If applyarmy($nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena, 0) = 1 Then
 				$gluksnaboromarmii = 0
@@ -387,11 +387,11 @@ Func atakagenoyizzvezdi_1n($general, $nomergenerala, $nubi, $menti, $soldati, $e
 	$gluksnaboromarmii = 0
 	While $gluksnaboromarmii <> 1
 		If openzvezdap() = 1 Then
-			While _imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
+			While _imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
 				generali($general, $nomergenerala)
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
 			WEnd
-			If haveimage("media\army_values\1.bmp", 20) = 1 Then
+			If haveimage("media\1.bmp", 20) = 1 Then
 				$gluksnaboromarmii = 0
 				Return atakalageraotkritimgenoy($kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
 			ElseIf applyarmy($nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena, 0) = 1 Then
@@ -411,12 +411,12 @@ Func viborgenipodataku_elita($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otku
 	go5()
 	$otkudax = $tochka_sektora_x + read_ini($otkudax)
 	$otkuday = $tochka_sektora_y + read_ini($otkuday)
-	While (_imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(200 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
 		go5()
-		sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
 		$i = $i + 1
 	WEnd
 	If $i = 10 Then
@@ -433,12 +433,12 @@ Func viborgenipodataku($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $
 	go5()
 	$otkudax = $tochka_sektora_x + read_ini($otkudax)
 	$otkuday = $tochka_sektora_y + read_ini($otkuday)
-	While (_imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(200 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
 		go5()
-		sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
 		$i = $i + 1
 	WEnd
 	If $i = 10 Then
@@ -455,18 +455,18 @@ Func viborgenipodataku_1n($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday
 	go5()
 	$otkudax = $tochka_sektora_x + read_ini($otkudax)
 	$otkuday = $tochka_sektora_y + read_ini($otkuday)
-	While (_imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(200 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
 		go5()
-		sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
 		$i = $i + 1
 	WEnd
 	If $i = 10 Then
 		Return 0
-	ElseIf haveimage("media\army_values\1.bmp", 20) = 1 Then
-		zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+	ElseIf haveimage("media\1.bmp", 20) = 1 Then
+		zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 		Return 1
 	Else
 		Return applyarmy($nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena, 1)
@@ -516,10 +516,10 @@ Func atakalageraotkritimgenoynoini($kudax, $kuday, $img, $k_x, $k_y, $else_x, $e
 		$centrovat = 1
 		If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
 	EndIf
-	sleepwhile("media\army_values\Otmena.bmp", 30, 10)
+	sleepwhile("media\Otmena.bmp", 30, 10)
 	$kudax = $tochka_sektora_x + $kudax
 	$kuday = $tochka_sektora_y + $kuday
-	While (_imagesearch("media\army_values\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 6)
+	While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 6)
 		MouseMove($kudax, $kuday, 10 * $tormoza)
 		Sleep(700 * $tormoza)
 		MouseClick("left", $kudax, $kuday, 1)
@@ -551,11 +551,11 @@ Func atakgenapxpnoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $k
 	EndIf
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
-	While (_imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 6)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 6)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(500 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
-		sleepwhile("media\army_values\zadacha_geni.bmp", 30, 5)
+		sleepwhile("media\zadacha_geni.bmp", 30, 5)
 		go5()
 		$i = $i + 1
 	WEnd
@@ -582,8 +582,8 @@ Func atakgenapxpnoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $k
 	EndIf
 	$kudax = $tochka_sektora_x + $kudax
 	$kuday = $tochka_sektora_y + $kuday
-	sleepwhile("media\army_values\Otmena.bmp", 30, 10)
-	While (_imagesearch("media\army_values\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 6)
+	sleepwhile("media\Otmena.bmp", 30, 10)
+	While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 6)
 		MouseMove($kudax, $kuday, 10 * $tormoza)
 		Sleep(700 * $tormoza)
 		MouseClick("left", $kudax, $kuday, 1)
@@ -606,10 +606,10 @@ Func perestanovka_geni_iz_zvezdinoini($general, $nomergenerala, $voisko, $tip_vo
 		writelog($gluksnaboromarmii)
 		If openzvezdap() = 1 Then
 			If selecttabatzvezda("specialisti", 1) = 0 Then Return 0
-			While _imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
+			While _imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
 				generali($general, $nomergenerala)
 				Sleep(1000 * $tormoza)
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
 			WEnd
 			If $voisko = 0 Then
 				If $tip_voiska = 0 Then
@@ -634,7 +634,7 @@ Func perestanovka_geni_iz_zvezdinoini($general, $nomergenerala, $voisko, $tip_vo
 	WEnd
 	$gluksnaboromarmii = 0
 	zmemsmennuyukartinku("media\truba.bmp", 50, "media\truba_.bmp", 50)
-	sleepwhile("media\army_values\Otmena.bmp", 30, 10)
+	sleepwhile("media\Otmena.bmp", 30, 10)
 	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
 		If (200 < ($tochka_sektora_x + $kudax)) AND (($tochka_sektora_x + $kudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $kuday)) AND (($tochka_sektora_y + $kuday) < (@DesktopHeight - 200)) Then
@@ -653,7 +653,7 @@ Func perestanovka_geni_iz_zvezdinoini($general, $nomergenerala, $voisko, $tip_vo
 	EndIf
 	$kudax = $tochka_sektora_x + $kudax
 	$kuday = $tochka_sektora_y + $kuday
-	While (_imagesearch("media\army_values\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 10)
+	While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 10)
 		MouseMove($kudax, $kuday, 10 * $tormoza)
 		Sleep(200 * $tormoza)
 		MouseClick("left", $kudax, $kuday, 1)
@@ -690,12 +690,12 @@ Func viborgenipodatakunoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkud
 	go5()
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
-	While (_imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(200 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
 		go5()
-		sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
 		$i = $i + 1
 	WEnd
 	If $i = 10 Then
@@ -727,12 +727,12 @@ Func viborgenipodataku_elitanoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, 
 	go5()
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
-	While (_imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(200 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
 		go5()
-		sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
 		$i = $i + 1
 	WEnd
 	If $i = 10 Then
@@ -764,18 +764,18 @@ Func viborgenipodataku_1nnoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $ot
 	go5()
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
-	While (_imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(200 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
 		go5()
-		sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
 		$i = $i + 1
 	WEnd
 	If $i = 10 Then
 		Return 0
-	ElseIf haveimage("media\army_values\1.bmp", 20) = 1 Then
-		zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+	ElseIf haveimage("media\1.bmp", 20) = 1 Then
+		zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 		Return 1
 	Else
 		Return applyarmy($nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena, 1)
@@ -786,7 +786,7 @@ EndFunc
 Func open_usilok($tb_name, $img_usilka, $currentbuf)
 	Local $i = 0
 	If $currentbuf = 1 Then
-		If haveimage("media\army_values\Otmena.bmp", 50) = 1 Then Return 1
+		If haveimage("media\Otmena.bmp", 50) = 1 Then Return 1
 	EndIf
 	If openzvezdap() = 1 Then
 		If selecttabatzvezda($tb_name, 1) = 1 Then
@@ -795,7 +795,7 @@ Func open_usilok($tb_name, $img_usilka, $currentbuf)
 				Sleep(Random(500, 1000, 1) * $tormoza)
 				$i = $i + 1
 			WEnd
-			Return findclickoncenterandwaitresult($img_usilka, "media\army_values\Otmena.bmp", 30, 80, 5, 5, 0, 30, 30)
+			Return findclickoncenterandwaitresult($img_usilka, "media\Otmena.bmp", 30, 80, 5, 5, 0, 30, 30)
 		EndIf
 	EndIf
 	Return 0
@@ -827,11 +827,11 @@ Func plunusilok_koordinati($tb_name, $img_usilka, $kudax, $kuday, $img, $k_x, $k
 	Sleep(500 * $tormoza)
 	go5()
 	If $tb_name = "usiliteli" Then
-		If $currentbuf = 0 Then zmemsmennuyukartinku("media\army_values\Otmena.bmp", 30, "media\army_values\Otmena_.bmp", 30)
+		If $currentbuf = 0 Then zmemsmennuyukartinku("media\Otmena.bmp", 30, "media\Otmena_.bmp", 30)
 		Return 1
 	ElseIf $tb_name = "raznoe" Then
-		zmemsmennuyukartinku("media\army_values\nubook.bmp", 30, "media\army_values\nubook.bmp", 30)
-		zmemsmennuyukartinku("media\army_values\Otmena.bmp", 30, "media\army_values\Otmena_.bmp", 30)
+		zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook.bmp", 30)
+		zmemsmennuyukartinku("media\Otmena.bmp", 30, "media\Otmena_.bmp", 30)
 		Return 1
 	Else
 		Return 0
@@ -844,7 +844,7 @@ Func proverkasliva()
 	$proverkasliva = NOT $proverkasliva
 	TrayTip("", "Проверка слива запущена", 0)
 	While $proverkasliva
-		If _imagesearcharea("media\army_values\friend_atak.bmp", 1, $ax, 0, $ax + 300, $ay + 700, $tx, $ty, 30) = 1 Then
+		If _imagesearcharea("media\friend_atak.bmp", 1, $ax, 0, $ax + 300, $ay + 700, $tx, $ty, 30) = 1 Then
 			TrayTip("", "Друг сливается...", 0)
 			Sleep(12000 * $tormoza)
 			$proverkasliva = NOT $proverkasliva
@@ -901,12 +901,12 @@ Func movegenapxpnoini($otkudax, $otkuday, $img, $k_x, $k_y, $else_x, $else_y, $k
 	EndIf
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
-	While (_imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0) AND ($i < 10)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0) AND ($i < 10)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(500 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
 		go5()
-		sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
 		$i = $i + 1
 	WEnd
 	If $i = 10 Then
@@ -932,8 +932,8 @@ Func movegenapxpnoini($otkudax, $otkuday, $img, $k_x, $k_y, $else_x, $else_y, $k
 	EndIf
 	$kudax = $tochka_sektora_x + $kudax
 	$kuday = $tochka_sektora_y + $kuday
-	sleepwhile("media\army_values\Otmena.bmp", 30, 10)
-	While (_imagesearch("media\army_values\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 10)
+	sleepwhile("media\Otmena.bmp", 30, 10)
+	While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 10)
 		MouseMove($kudax, $kuday, 10 * $tormoza)
 		Sleep(500 * $tormoza)
 		MouseClick("left", $kudax, $kuday, 1)
@@ -951,25 +951,25 @@ EndFunc
 
 Func otpravitgenu($general, $nomergenerala)
 	openzvezdap()
-	While haveimage("media\army_values\zadacha_geni.bmp", 30) = 0
+	While haveimage("media\zadacha_geni.bmp", 30) = 0
 		If openzvezdap() = 1 Then
 			If selecttabatzvezda("specialisti", 1) = 1 Then
 				generali($general, $nomergenerala)
 				Sleep(1000 * $tormoza)
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
 			EndIf
 		EndIf
 	WEnd
-	zmemsmennuyukartinku("media\army_values\gohome.bmp", 30, "media\army_values\gohome_.bmp", 30)
-	zmemsmennuyukartinku("media\army_values\nubook.bmp", 30, "media\army_values\nubook_.bmp", 30)
+	zmemsmennuyukartinku("media\gohome.bmp", 30, "media\gohome_.bmp", 30)
+	zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
 	Return 1
 EndFunc
 
 Func openpriglosdruga($prikl, $imya)
 	While 1
-		If findclickoncenterandwaitresult($userDIR & $prikl, "media\army_values\priglos.bmp", 30, 30, 5, 10, 1, -300, -300) = 1 Then
-			If findclickoncenterandwaitresult("media\army_values\priglos.bmp", "media\army_values\igroki_in_prikla.bmp", 30, 30, 10, 10, 1, -300, -300) = 1 Then
-				If findclickoncenterandwaitresult("media\army_values\plus_igrok.bmp", "media\army_values\okdrug_off.bmp", 30, 30, 10, 10, 1, -300, -300) = 1 Then
+		If findclickoncenterandwaitresult($userDIR & $prikl, "media\priglos.bmp", 30, 30, 5, 10, 1, -300, -300) = 1 Then
+			If findclickoncenterandwaitresult("media\priglos.bmp", "media\igroki_in_prikla.bmp", 30, 30, 10, 10, 1, -300, -300) = 1 Then
+				If findclickoncenterandwaitresult("media\plus_igrok.bmp", "media\okdrug_off.bmp", 30, 30, 10, 10, 1, -300, -300) = 1 Then
 					Return 1
 				Else
 					Return 0
@@ -1006,16 +1006,16 @@ Func stoitligena($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday)
 	EndIf
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
-	While (_imagesearch("media\army_values\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(500 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
-		sleepwhile("media\army_values\zadacha_geni.bmp", 30, 5)
+		sleepwhile("media\zadacha_geni.bmp", 30, 5)
 		go5()
 		$i = $i + 1
 	WEnd
 	If $i < 10 Then
-		zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+		zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 		Return 1
 	EndIf
 	Return 0
@@ -1048,17 +1048,17 @@ Func applyarmy($nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $pu
 	writelog("=====AA " & $nubi & "," & $menti & "," & $soldati & "," & $elita & "," & $luki & "," & $dluki & "," & $arbi & "," & $koni & "," & $puhi & "," & $gena & "," & $yes & @CRLF)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
 	If smena_armii(0) = 0 Then Return 0
-	$search = _imagesearch("media\army_values\0.bmp", 1, $tx, $ty, 20)
+	$search = _imagesearch("media\0.bmp", 1, $tx, $ty, 20)
 	If $nubi = 0 AND $menti = 0 AND $soldati = 0 AND $elita = 0 AND $luki = 0 AND $dluki = 0 AND $arbi = 0 AND $koni = 0 AND $puhi = 0 AND $search = 1 Then
 		If $yes = 0 Then
 			$gluksnaboromarmii = $gluksnaboromarmii + 1
 			Return 1
 		EndIf
 		$gluksnaboromarmii = $gluksnaboromarmii + 1
-		zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+		zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 		Return 1
 	EndIf
-	zmemsmennuyukartinku("media\army_values\sbros.bmp", 50, "media\army_values\sbros_.bmp", 50)
+	zmemsmennuyukartinku("media\sbros.bmp", 50, "media\sbros_.bmp", 50)
 	$diffarmy = $puhi
 	If setarmy("puhi", $puhi, $gena) = 1 Then
 		$diffarmy = $diffarmy + $arbi
@@ -1119,11 +1119,11 @@ Func setarmy($kogo, $skolko, $gena)
 			$i = 0
 			$search = 0
 			Return 1
-			If findclickoncenterandwaitresult1("media\search_button_OK_enabled.bmp", "media\army_values\zdem.bmp", 30, 20, 3, 5, 1, -100, 1) = 1 Then
+			If findclickoncenterandwaitresult1("media\search_button_OK_enabled.bmp", "media\zdem.bmp", 30, 20, 3, 5, 1, -100, 1) = 1 Then
 				While ($i < 30 * $tormoza) AND ($search = 0)
 					Sleep(1000 * $tormoza)
 					$i = $i + 1
-					$search = _imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20)
+					$search = _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
 				WEnd
 				If $i < 20 Then
 					Return 1
@@ -1173,13 +1173,13 @@ Func vvodzifr($skolko)
 
 	$i = 0
 	$error = 0
-	If read_ini(5) = 1 Then 
+	If read_ini(5) = 1 Then
 		While StringInStr($skolko, "0") <> 0
 			$skolko = $skolko - 1
 			$i = $i + 1
 		WEnd
-	EndIf	
-	
+	EndIf
+
 	If $i = 0 Then
 		MouseMove($polezifrx, $polezifry, 10 * $tormoza)
 		MouseClick("left", $polezifrx, $polezifry, 2)
@@ -1213,7 +1213,7 @@ EndFunc
 Func okclosegena($yes)
 	writelog("==OKG | ")
 	Local $ty = 0, $tx = 0, $search = 0, $i = 0
-	$search = _imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20)
+	$search = _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
 	If $search = 0 Then
 		writelog(" Генерал закрыт ")
 		Return 1
@@ -1224,8 +1224,8 @@ Func okclosegena($yes)
 		While ($i < 6 * $tormoza) AND ($search = 0)
 			Sleep(1000 * $tormoza)
 			$i = $i + 1
-			sleepwhile("media\army_values\nub_gena.bmp", 20, 10)
-			$search = _imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20)
+			sleepwhile("media\nub_gena.bmp", 20, 10)
+			$search = _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
 		WEnd
 		If $i < 6 Then
 			If $yes = 0 Then
@@ -1233,11 +1233,11 @@ Func okclosegena($yes)
 				Return 1
 			EndIf
 			$gluksnaboromarmii = $gluksnaboromarmii + 1
-			zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+			zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 			writelog(" Успешно ")
 			Return 1
 		Else
-			zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+			zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 			TrayTip("", "Ошибка: Не назначили войска", 0)
 			writelog(" ОШИБКА ")
 			Return 0
@@ -1252,7 +1252,7 @@ Func viborarmii($tabname)
 	Local $ty = 0, $tx = 0, $search = 0, $ay = 0, $ax = 0
 	Switch $tabname
 		Case "nubi"
-			$search = _imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 96
 				$strelkay = $ty + 24
@@ -1260,7 +1260,7 @@ Func viborarmii($tabname)
 				$maxy = $ty + 24
 				$minx = $tx + 6
 				$miny = $ty + 24
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -1268,7 +1268,7 @@ Func viborarmii($tabname)
 				Return 0
 			EndIf
 		Case "menti"
-			$search = _imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 347
 				$strelkay = $ty + 24
@@ -1276,7 +1276,7 @@ Func viborarmii($tabname)
 				$maxy = $ty + 24
 				$minx = $tx + 257
 				$miny = $ty + 24
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -1284,7 +1284,7 @@ Func viborarmii($tabname)
 				Return 0
 			EndIf
 		Case "luki"
-			$search = _imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 220
 				$strelkay = $ty + 24
@@ -1292,7 +1292,7 @@ Func viborarmii($tabname)
 				$maxy = $ty + 24
 				$minx = $tx + 130
 				$miny = $ty + 24
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -1300,7 +1300,7 @@ Func viborarmii($tabname)
 				Return 0
 			EndIf
 		Case "dluki"
-			$search = _imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 220
 				$strelkay = $ty + 78
@@ -1308,7 +1308,7 @@ Func viborarmii($tabname)
 				$maxy = $ty + 78
 				$minx = $tx + 130
 				$miny = $ty + 78
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -1316,7 +1316,7 @@ Func viborarmii($tabname)
 				Return 0
 			EndIf
 		Case "koni"
-			$search = _imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 96
 				$strelkay = $ty + 78
@@ -1324,7 +1324,7 @@ Func viborarmii($tabname)
 				$maxy = $ty + 78
 				$minx = $tx + 6
 				$miny = $ty + 78
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -1332,7 +1332,7 @@ Func viborarmii($tabname)
 				Return 0
 			EndIf
 		Case "soldati"
-			$search = _imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 347
 				$strelkay = $ty + 78
@@ -1340,7 +1340,7 @@ Func viborarmii($tabname)
 				$maxy = $ty + 78
 				$minx = $tx + 257
 				$miny = $ty + 78
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -1348,7 +1348,7 @@ Func viborarmii($tabname)
 				Return 0
 			EndIf
 		Case "elita"
-			$search = _imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 220
 				$strelkay = $ty + 132
@@ -1356,7 +1356,7 @@ Func viborarmii($tabname)
 				$maxy = $ty + 132
 				$minx = $tx + 130
 				$miny = $ty + 132
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -1364,7 +1364,7 @@ Func viborarmii($tabname)
 				Return 0
 			EndIf
 		Case "arbi"
-			$search = _imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 96
 				$strelkay = $ty + 132
@@ -1372,7 +1372,7 @@ Func viborarmii($tabname)
 				$maxy = $ty + 132
 				$minx = $tx + 6
 				$miny = $ty + 132
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -1380,7 +1380,7 @@ Func viborarmii($tabname)
 				Return 0
 			EndIf
 		Case "puhi"
-			$search = _imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 347
 				$strelkay = $ty + 132
@@ -1388,7 +1388,7 @@ Func viborarmii($tabname)
 				$maxy = $ty + 132
 				$minx = $tx + 257
 				$miny = $ty + 132
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -1412,7 +1412,7 @@ Func generalixxx($general, $nomergenerala)
 			Sleep(100 * $tormoza)
 			MouseClick("left", $general1x + Random(1, 2, 1) - 2, $general1y + Random(1, 2, 1) - 2, 1)
 			go5()
-			sleepwhile("media\army_values\zadacha_geni.bmp", 30, 20)
+			sleepwhile("media\zadacha_geni.bmp", 30, 20)
 			Return 1
 		EndIf
 		If _imagesearcharea($general, 1, $general1x, $general1y - 50, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
@@ -1423,7 +1423,7 @@ Func generalixxx($general, $nomergenerala)
 				Sleep(100 * $tormoza)
 				MouseClick("left", $general2x + Random(1, 2, 1) - 2, $general2y + Random(1, 2, 1) - 2, 1)
 				go5()
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 20)
+				sleepwhile("media\zadacha_geni.bmp", 30, 20)
 				Return 1
 			EndIf
 		ElseIf _imagesearcharea($general, 1, 0, $general1y, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
@@ -1434,7 +1434,7 @@ Func generalixxx($general, $nomergenerala)
 				Sleep(100 * $tormoza)
 				MouseClick("left", $general2x + Random(1, 2, 1) - 2, $general2y + Random(1, 2, 1) - 2, 1)
 				go5()
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 20)
+				sleepwhile("media\zadacha_geni.bmp", 30, 20)
 				Return 1
 			EndIf
 		EndIf
@@ -1446,7 +1446,7 @@ Func generalixxx($general, $nomergenerala)
 				Sleep(100 * $tormoza)
 				MouseClick("left", $general3x + Random(1, 2, 1) - 2, $general3y + Random(1, 2, 1) - 2, 1)
 				go5()
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 20)
+				sleepwhile("media\zadacha_geni.bmp", 30, 20)
 				Return 1
 			EndIf
 		ElseIf _imagesearcharea($general, 1, 0, $general2y, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
@@ -1457,7 +1457,7 @@ Func generalixxx($general, $nomergenerala)
 				Sleep(100 * $tormoza)
 				MouseClick("left", $general3x + Random(1, 2, 1) - 2, $general3y + Random(1, 2, 1) - 2, 1)
 				go5()
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 20)
+				sleepwhile("media\zadacha_geni.bmp", 30, 20)
 				Return 1
 			EndIf
 		EndIf
@@ -1469,7 +1469,7 @@ Func generalixxx($general, $nomergenerala)
 				Sleep(100 * $tormoza)
 				MouseClick("left", $general4x + Random(1, 2, 1) - 2, $general4y + Random(1, 2, 1) - 2, 2)
 				go5()
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 20)
+				sleepwhile("media\zadacha_geni.bmp", 30, 20)
 				Return 1
 			EndIf
 		ElseIf _imagesearcharea($general, 1, 0, $general3y, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
@@ -1480,7 +1480,7 @@ Func generalixxx($general, $nomergenerala)
 				Sleep(100 * $tormoza)
 				MouseClick("left", $general4x + Random(1, 2, 1) - 2, $general4y + Random(1, 2, 1) - 2, 2)
 				go5()
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 20)
+				sleepwhile("media\zadacha_geni.bmp", 30, 20)
 				Return 1
 			EndIf
 		EndIf
@@ -1492,11 +1492,11 @@ Func generali($general, $nomergenerala)
 	Sleep(1000 * $tormoza)
 	Local $ty = 0, $tx = 0, $search = 0, $i = 0, $t = 0, $ii = 0
 	Local $general1x = 0, $general1y = 0, $general2x = 0, $general2y = 0
-	
+
 	;If _imagesearch($general, 1, $tx, $ty, 20) = 0 Then Return 0
 	While 1
 		If _imagesearcharea($general, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-		
+
 		$ii = $ii + 1
 		zvezdamovepolzunokdown(0)
 		zvezdamovepolzunokdown(0)
@@ -1515,8 +1515,8 @@ Func generali($general, $nomergenerala)
 			Sleep(500 * $tormoza)
 			MouseClick("left", $tx + Random(1, 2, 1) - 2, $ty + Random(1, 2, 1) - 2, 1)
 			go5()
-			sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
-			If haveimage("media\army_values\zadacha_geni.bmp", 30) = 1 Then Return 1
+			sleepwhile("media\zadacha_geni.bmp", 30, 10)
+			If haveimage("media\zadacha_geni.bmp", 30) = 1 Then Return 1
 			$i = $i + 1
 		WEnd
 		Return 0
@@ -1537,8 +1537,8 @@ Func generali($general, $nomergenerala)
 					Sleep(500 * $tormoza)
 					MouseClick("left", $tx + Random(1, 2, 1) - 2, $ty + Random(1, 2, 1) - 2, 1)
 					go5()
-					sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
-					If haveimage("media\army_values\zadacha_geni.bmp", 30) = 1 Then Return 1
+					sleepwhile("media\zadacha_geni.bmp", 30, 10)
+					If haveimage("media\zadacha_geni.bmp", 30) = 1 Then Return 1
 					$t = $t + 1
 				WEnd
 			EndIf
@@ -1560,8 +1560,8 @@ Func generali($general, $nomergenerala)
 				Sleep(100 * $tormoza)
 				MouseClick("left", $general2x + Random(1, 2, 1) - 2, $general2y + Random(1, 2, 1) - 2, 1)
 				go5()
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
-				If haveimage("media\army_values\zadacha_geni.bmp", 30) = 1 Then Return 1
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
+				If haveimage("media\zadacha_geni.bmp", 30) = 1 Then Return 1
 			EndIf
 		ElseIf _imagesearcharea($general, 1, 0, $ty, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
 			$general2x = $tx
@@ -1571,8 +1571,8 @@ Func generali($general, $nomergenerala)
 				Sleep(100 * $tormoza)
 				MouseClick("left", $general2x + Random(1, 2, 1) - 2, $general2y + Random(1, 2, 1) - 2, 1)
 				go5()
-				sleepwhile("media\army_values\zadacha_geni.bmp", 30, 10)
-				If haveimage("media\army_values\zadacha_geni.bmp", 30) = 1 Then Return 1
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
+				If haveimage("media\zadacha_geni.bmp", 30) = 1 Then Return 1
 			EndIf
 		Else
 			Return 0
@@ -1691,10 +1691,10 @@ Func openprikla($kartinka, $kartinka2)
 				zvezdamovepolzunokdown(1)
 				Sleep(300 * $tormoza)
 			WEnd
-			If findclickoncenterandwaitresult($kartinka, "media\army_values\open_prikla2.bmp", 20, 20, 5, 5, 1, 300, 5) = 1 Then
-				zmemsmennuyukartinku("media\army_values\open_prikla2.bmp", 30, "media\army_values\open_prikla2_.bmp", 30)
+			If findclickoncenterandwaitresult($kartinka, "media\open_prikla2.bmp", 20, 20, 5, 5, 1, 300, 5) = 1 Then
+				zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
 				Sleep(2000 * $tormoza)
-				zmemsmennuyukartinku("media\army_values\open_prikla2.bmp", 30, "media\army_values\open_prikla2_.bmp", 30)
+				zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
 				Return 1
 			EndIf
 		EndIf
@@ -1706,11 +1706,11 @@ Func openotpravkagen($kartinka)
 	WinActivate("The Settlers Онлайн")
 	writelog("=====ОТПРАВКА ГЕНЕРАЛОВ " & $kartinka & @CRLF)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
-	If findclickoncenterandwaitresult($kartinka, "media\army_values\otpravit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
-		If findclickoncenterandwaitresult("media\army_values\otpravit.bmp", "media\army_values\otpravka_no.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+	If findclickoncenterandwaitresult($kartinka, "media\otpravit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+		If findclickoncenterandwaitresult("media\otpravit.bmp", "media\otpravka_no.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
 			Sleep(2000 * $tormoza)
-			sleepwhile("media\army_values\otppravka_vniz.bmp", 100, 5)
-			If _imagesearcharea("media\army_values\otpravka_no.bmp", 1, 500, 100, @DesktopWidth - 200, @DesktopHeight, $tx, $ty, 40) = 0 Then Return 0
+			sleepwhile("media\otppravka_vniz.bmp", 100, 5)
+			If _imagesearcharea("media\otpravka_no.bmp", 1, 500, 100, @DesktopWidth - 200, @DesktopHeight, $tx, $ty, 40) = 0 Then Return 0
 			$area1_top_x = $tx - 305
 			$area1_top_y = $ty - 316
 			$area1_bottom_x = $tx - 46
@@ -1742,9 +1742,9 @@ EndFunc
 Func gotopricla($kartinka)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
 	writelog("=====ПЕРЕХОД В ПРИКЛЮЧЕНИЕ " & $kartinka & @CRLF)
-	If findclickoncenterandwaitresult($kartinka, "media\army_values\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
-		If findclickoncenterandwaitresult("media\army_values\posetit.bmp", "media\army_values\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
-			While (_imagesearch("media\army_values\perehod_v_zonu.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 100)
+	If findclickoncenterandwaitresult($kartinka, "media\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+		If findclickoncenterandwaitresult("media\posetit.bmp", "media\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+			While (_imagesearch("media\perehod_v_zonu.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 100)
 				Sleep(6000 * $tormoza)
 				$i = $i + 1
 			WEnd
@@ -1765,9 +1765,9 @@ EndFunc
 Func gotopriclanosleep($kartinka)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
 	writelog("=====ПЕРЕХОД В ПРИКЛЮЧЕНИЕ " & $kartinka & @CRLF)
-	If findclickoncenterandwaitresult($kartinka, "media\army_values\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
-		If findclickoncenterandwaitresult("media\army_values\posetit.bmp", "media\army_values\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
-			While (_imagesearch("media\army_values\perehod_v_zonu.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 100)
+	If findclickoncenterandwaitresult($kartinka, "media\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+		If findclickoncenterandwaitresult("media\posetit.bmp", "media\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+			While (_imagesearch("media\perehod_v_zonu.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 100)
 				Sleep(6000 * $tormoza)
 				$i = $i + 1
 			WEnd
@@ -1783,9 +1783,9 @@ EndFunc
 
 Func gotohome($kartinka)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
-	If findclickoncenterandwaitresult($kartinka, "media\army_values\gotohome.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
-		If findclickoncenterandwaitresult("media\army_values\gotohome.bmp", "media\army_values\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
-			While (_imagesearch("media\army_values\perehod_v_zonu.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 100)
+	If findclickoncenterandwaitresult($kartinka, "media\gotohome.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+		If findclickoncenterandwaitresult("media\gotohome.bmp", "media\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+			While (_imagesearch("media\perehod_v_zonu.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 100)
 				Sleep(6000 * $tormoza)
 				$i = $i + 1
 			WEnd
@@ -1807,15 +1807,15 @@ EndFunc
 Func endpricla($sekund)
 	Sleep($sekund * 1000)
 	writelog("=====ЗАКОНЧИМ ПРИКЛЮЧЕНИЕ " & $sekund & @CRLF)
-	zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\army_values\KNZOK.bmp", 30)
-	If findclickoncenterandwaitnoneresult("media\army_values\KNZOK.bmp", 20, 10, 10, 100, 10) = 1 Then
+	zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\KNZOK.bmp", 30)
+	If findclickoncenterandwaitnoneresult("media\KNZOK.bmp", 20, 10, 10, 100, 10) = 1 Then
 		Sleep(1000 * $tormoza)
-		zmemsmennuyukartinku("media\army_values\KNZOK.bmp", 30, "media\army_values\KNZOK_.bmp", 30)
-		While haveimage("media\army_values\go_home.bmp", 50) = 0
+		zmemsmennuyukartinku("media\KNZOK.bmp", 30, "media\KNZOK_.bmp", 30)
+		While haveimage("media\go_home.bmp", 50) = 0
 			Sleep(1000 * $tormoza)
 		WEnd
-		If findclickoncenterandwaitresult("media\army_values\go_home.bmp", "media\army_values\perehod_v_zonu.bmp", 50, 20, 2, 60, 0, 200, 2) = 1 Then
-			While haveimage("media\army_values\perehod_v_zonu.bmp", 50) = 1
+		If findclickoncenterandwaitresult("media\go_home.bmp", "media\perehod_v_zonu.bmp", 50, 20, 2, 60, 0, 200, 2) = 1 Then
+			While haveimage("media\perehod_v_zonu.bmp", 50) = 1
 				Sleep(1000 * $tormoza)
 			WEnd
 			writelog("=====УСПЕХ " & @CRLF)
@@ -1826,220 +1826,144 @@ Func endpricla($sekund)
 	Return 0
 EndFunc
 
-Func ozidanierasstanovki($image, $yes)
-	writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКУ " & $yes & @CRLF)
-	Local $tx = 0, $ty = 0, $i = 0
+;~ Исходный код
+;~ Func ozidanierasstanovki2($image, $yes)
+;~ ; Ждем генерала
+;~     writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
+;~ 	Local $tx = 0, $ty = 0, $i = 0
+;~ 	Sleep(500 * $tormoza)
+;~ 	If openzvezdap() = 1 Then
+;~ 		selecttabatzvezda("specialisti", 0)
+;~ 		While (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 0) AND ($i < 300)
+;~ 			Sleep(3000 * $tormoza)
+;~ 			If mod($i, 30) = 0 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 1 Then
+;~ 					selecttabatzvezda("specialisti", 0)
+;~ 				Else
+;~ 						Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			$i = $i + 1
+;~ 		WEnd
+;~ 		If $yes = 1 Then
+;~ 			zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 		EndIf
+;~ 		If $i = 300 Then
+;~ 			writelog("=====ОШИБКА " & $i & @CRLF)
+;~ 			Return 0
+;~ 		EndIf
+;~ 		writelog("=====УСПЕХ " & $i & @CRLF)
+;~ 		Return 1
+;~ 	EndIf
+;~ 	writelog("=====ОШИБКА " & $i & @CRLF)
+;~ 	Return 0
+;~ EndFunc
+
+;~ Func ozidanierasstanovki($image, $yes)
+;~ ; Ждем всех генералов
+;~ 	writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКУ " & $yes & @CRLF)
+;~ 	Local $tx = 0, $ty = 0, $i = 0
+;~ 	Sleep(500 * $tormoza)
+;~ 	If openzvezdap() = 1 Then
+;~ 		selecttabatzvezda("specialisti", 0)
+;~ 		While (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) AND ($i < 300)
+;~ 			Sleep(3000 * $tormoza)
+;~ 			If mod($i, 30) = 0 Then
+;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 				If openzvezdap() = 0 Then
+;~ 					Return 0
+;~ 				EndIf
+;~ 				Sleep(500 * $tormoza)
+;~ 			EndIf
+;~ 			$i = $i + 1
+;~ 		WEnd
+;~ 		If $yes = 1 Then
+;~ 			zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 		EndIf
+;~ 		If $i = 300 Then
+;~ 			writelog("=====ОШИБКА " & $i & @CRLF)
+;~ 			Return 0
+;~ 		EndIf
+;~ 		writelog("=====УСПЕХ " & $i & @CRLF)
+;~ 		Return 1
+;~ 	EndIf
+;~ 	writelog("=====ОШИБКА " & $i & @CRLF)
+;~ 	Return 0
+;~ EndFunc
+
+; Vasuta - Попытка переписать функцию ожидания генералов
+Func ozidanierasstanovki2($image, $yes)
+; Ждем одного генерала
+    writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
+	Local $tx = 0, $ty = 0, $i = 0, $fl = 0
 	Sleep(500 * $tormoza)
-	If openzvezdap() = 1 Then
-		selecttabatzvezda("specialisti", 1)
-		While (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) AND ($i < 300)
-			Sleep(3000 * $tormoza)
-			If $i = 20 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 40 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 60 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 80 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 100 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 120 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 140 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 160 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 180 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 200 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 220 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 240 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			$i = $i + 1
-		WEnd
-		If $yes = 1 Then
-			zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-		EndIf
-		If $i = 300 Then
-			writelog("=====ОШИБКА " & $i & @CRLF)
+	while ($i < 300)
+		If openzvezdap() = 0 Then
 			Return 0
 		EndIf
-		writelog("=====УСПЕХ " & $i & @CRLF)
-		Return 1
+		selecttabatzvezda("specialisti", 0)
+		while 1
+			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) Then
+				$fl = 1
+				ExitLoop
+			Else
+				If (zvezdamovepolzunokdown(1) = 0) then
+					zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+					ExitLoop
+				EndIf
+			EndIf
+		WEnd
+		$i = $i + 1
+		Sleep(5000 * $tormoza)
+		If ($fl = 1) Then ExitLoop
+	Wend
+	If ($fl = 1) and ($yes = 1) Then
+		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 	EndIf
-	writelog("=====ОШИБКА " & $i & @CRLF)
-	Return 0
+	If $i = 300 Then
+		writelog("=====ОШИБКА " & $i & @CRLF)
+		Return 0
+	EndIf
+	writelog("=====УСПЕХ " & $i & @CRLF)
+	Return 1
 EndFunc
 
-Func ozidanierasstanovki2($image, $yes)
-	writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
-	Local $tx = 0, $ty = 0, $i = 0
+Func ozidanierasstanovki($image, $image_NA, $yes)
+; Ждем всех генералов
+    writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
+	Local $tx = 0, $ty = 0, $i = 0, $fl = 0
 	Sleep(500 * $tormoza)
-	If openzvezdap() = 1 Then
-		selecttabatzvezda("specialisti", 1)
-		While (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 0) AND ($i < 300)
-			Sleep(3000 * $tormoza)
-			If $i = 20 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 40 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 60 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 80 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 100 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 120 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 140 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 160 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 180 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 200 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 220 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			If $i = 240 Then
-				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-				If openzvezdap() = 0 Then
-					Return 0
-				EndIf
-				Sleep(500 * $tormoza)
-			EndIf
-			$i = $i + 1
-		WEnd
-		If $yes = 1 Then
-			zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-		EndIf
-		If $i = 300 Then
-			writelog("=====ОШИБКА " & $i & @CRLF)
+	while 1 AND ($i < 300)
+		If openzvezdap() = 0 Then
 			Return 0
 		EndIf
-		writelog("=====УСПЕХ " & $i & @CRLF)
-		Return 1
+		selecttabatzvezda("specialisti", 0)
+		while 1
+			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) AND (_imagesearcharea($image_NA, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 0)  Then
+				$fl = 1
+				ExitLoop
+			Else
+				If (zvezdamovepolzunokdown(1) = 0) then
+					zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+					ExitLoop
+				EndIf
+			EndIf
+		WEnd
+		$i = $i + 1
+		Sleep(5000 * $tormoza)
+		If ($fl = 1) Then ExitLoop
+	Wend
+	If ($fl = 1) and ($yes = 1) Then
+		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 	EndIf
-	writelog("=====ОШИБКА " & $i & @CRLF)
-	Return 0
+	If $i = 300 Then
+		writelog("=====ОШИБКА " & $i & @CRLF)
+			Return 0
+	EndIf
+	writelog("=====УСПЕХ " & $i & @CRLF)
+	Return 1
 EndFunc
 
 Func vibor_elitnoy_armii($tabname)
@@ -2047,7 +1971,7 @@ Func vibor_elitnoy_armii($tabname)
 	Local $ty = 0, $tx = 0, $search = 0, $ay = 0, $ax = 0
 	Switch $tabname
 		Case "mechniki"
-			$search = _imagesearch("media\army_values\mechnik.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 96
 				$strelkay = $ty + 24
@@ -2055,7 +1979,7 @@ Func vibor_elitnoy_armii($tabname)
 				$maxy = $ty + 24
 				$minx = $tx + 6
 				$miny = $ty + 24
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -2063,7 +1987,7 @@ Func vibor_elitnoy_armii($tabname)
 				Return 0
 			EndIf
 		Case "rizari"
-			$search = _imagesearch("media\army_values\mechnik.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 347
 				$strelkay = $ty + 24
@@ -2071,7 +1995,7 @@ Func vibor_elitnoy_armii($tabname)
 				$maxy = $ty + 24
 				$minx = $tx + 257
 				$miny = $ty + 24
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -2079,7 +2003,7 @@ Func vibor_elitnoy_armii($tabname)
 				Return 0
 			EndIf
 		Case "km"
-			$search = _imagesearch("media\army_values\mechnik.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 220
 				$strelkay = $ty + 24
@@ -2087,7 +2011,7 @@ Func vibor_elitnoy_armii($tabname)
 				$maxy = $ty + 24
 				$minx = $tx + 130
 				$miny = $ty + 24
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -2095,7 +2019,7 @@ Func vibor_elitnoy_armii($tabname)
 				Return 0
 			EndIf
 		Case "sb"
-			$search = _imagesearch("media\army_values\mechnik.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 220
 				$strelkay = $ty + 78
@@ -2103,7 +2027,7 @@ Func vibor_elitnoy_armii($tabname)
 				$maxy = $ty + 78
 				$minx = $tx + 130
 				$miny = $ty + 78
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -2111,7 +2035,7 @@ Func vibor_elitnoy_armii($tabname)
 				Return 0
 			EndIf
 		Case "strelki"
-			$search = _imagesearch("media\army_values\mechnik.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 96
 				$strelkay = $ty + 78
@@ -2119,7 +2043,7 @@ Func vibor_elitnoy_armii($tabname)
 				$maxy = $ty + 78
 				$minx = $tx + 6
 				$miny = $ty + 78
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -2127,7 +2051,7 @@ Func vibor_elitnoy_armii($tabname)
 				Return 0
 			EndIf
 		Case "ks"
-			$search = _imagesearch("media\army_values\mechnik.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 347
 				$strelkay = $ty + 78
@@ -2135,7 +2059,7 @@ Func vibor_elitnoy_armii($tabname)
 				$maxy = $ty + 78
 				$minx = $tx + 257
 				$miny = $ty + 78
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -2143,7 +2067,7 @@ Func vibor_elitnoy_armii($tabname)
 				Return 0
 			EndIf
 		Case "mo"
-			$search = _imagesearch("media\army_values\mechnik.bmp", 1, $tx, $ty, 20)
+			$search = _imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20)
 			If $search = 1 Then
 				$strelkax = $tx + 96
 				$strelkay = $ty + 132
@@ -2151,7 +2075,7 @@ Func vibor_elitnoy_armii($tabname)
 				$maxy = $ty + 132
 				$minx = $tx + 6
 				$miny = $ty + 132
-				_imagesearcharea("media\army_values\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
+				_imagesearcharea("media\delimetr.bmp", 1, $strelkax - 100, $strelkay - 40, $strelkax, $strelkay, $ax, $ay, 40)
 				$polezifrx = $ax + 25
 				$polezifry = $ay
 				Return 1
@@ -2166,7 +2090,7 @@ Func apply_elitnoy_army($mo, $ks, $strelki, $sb, $rizari, $km, $mechniki, $gena,
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
 	writelog(@CRLF & "=====AEA " & $mo & "," & $ks & "," & $strelki & "," & $sb & "," & $rizari & "," & $km & "," & $mechniki & "," & $gena & "," & $yes & @CRLF)
 	If smena_armii(1) = 0 Then Return 0
-	$search = _imagesearch("media\army_values\0.bmp", 1, $tx, $ty, 20)
+	$search = _imagesearch("media\0.bmp", 1, $tx, $ty, 20)
 	go5()
 	If $mo = 0 AND $ks = 0 AND $strelki = 0 AND $sb = 0 AND $km = 0 AND $rizari = 0 AND $mechniki = 0 AND $search = 1 Then
 		If $yes = 0 Then
@@ -2174,10 +2098,10 @@ Func apply_elitnoy_army($mo, $ks, $strelki, $sb, $rizari, $km, $mechniki, $gena,
 			Return 1
 		EndIf
 		$gluksnaboromarmii = $gluksnaboromarmii + 1
-		zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+		zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 		Return 1
 	EndIf
-	zmemsmennuyukartinku("media\army_values\sbros.bmp", 50, "media\army_values\sbros_.bmp", 50)
+	zmemsmennuyukartinku("media\sbros.bmp", 50, "media\sbros_.bmp", 50)
 	$diffarmy = $mo
 	If set_elitnoy_army("mo", $mo, $gena) = 1 Then
 		$diffarmy = $diffarmy + $ks
@@ -2234,11 +2158,11 @@ Func set_elitnoy_army($kogo, $skolko, $gena)
 			$search = 0
 			writelog("Успех " & $i & @CRLF)
 			Return 1
-			If findclickoncenterandwaitresult1("media\search_button_OK_enabled.bmp", "media\army_values\zdem.bmp", 30, 20, 3, 5, 1, -100, 1) = 1 Then
+			If findclickoncenterandwaitresult1("media\search_button_OK_enabled.bmp", "media\zdem.bmp", 30, 20, 3, 5, 1, -100, 1) = 1 Then
 				While ($i < 30 * $tormoza) AND ($search = 0)
 					Sleep(1000 * $tormoza)
 					$i = $i + 1
-					$search = _imagesearch("media\army_values\mechnik.bmp", 1, $tx, $ty, 20)
+					$search = _imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20)
 				WEnd
 				If $i < 20 Then
 					Return 1
@@ -2271,7 +2195,7 @@ EndFunc
 Func okclose_elitnoy_gena($yes)
 	Local $ty = 0, $tx = 0, $search = 0, $i = 0
 	writelog("==OKEG | ")
-	$search = _imagesearch("media\army_values\mechnik.bmp", 1, $tx, $ty, 20)
+	$search = _imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20)
 	If $search = 0 Then
 		writelog(" Генерал закрыт ")
 		Return 1
@@ -2282,8 +2206,8 @@ Func okclose_elitnoy_gena($yes)
 		While ($i < 6 * $tormoza) AND ($search = 0)
 			Sleep(1000 * $tormoza)
 			$i = $i + 1
-			sleepwhile("media\army_values\mechnik.bmp", 20, 10)
-			$search = _imagesearch("media\army_values\mechnik.bmp", 1, $tx, $ty, 20)
+			sleepwhile("media\mechnik.bmp", 20, 10)
+			$search = _imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20)
 		WEnd
 		If $i < 6 Then
 			If $yes = 0 Then
@@ -2291,11 +2215,11 @@ Func okclose_elitnoy_gena($yes)
 				Return 1
 			EndIf
 			$gluksnaboromarmii = $gluksnaboromarmii + 1
-			zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+			zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 			writelog(" Успешно ")
 			Return 1
 		Else
-			zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+			zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 			TrayTip("", "Ошибка: Не назначили войска", 0)
 			writelog(" ОШИБКА ")
 			Return 0
@@ -2309,13 +2233,13 @@ Func smena_armii($kakaya)
 	Local $tx = 0, $ty = 0, $i = 0
 	If $kakaya = 1 Then
 		writelog("Элитная армия ")
-		If _imagesearch("media\army_values\mechnik.bmp", 1, $tx, $ty, 20) = 1 Then
+		If _imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20) = 1 Then
 			writelog("уже назначена" & @CRLF)
 			Return 1
 		Else
-			zmemsmennuyukartinku("media\army_values\zamena_boicov.bmp", 50, "media\army_values\zamena_boicov_.bmp", 50)
+			zmemsmennuyukartinku("media\zamena_boicov.bmp", 50, "media\zamena_boicov_.bmp", 50)
 			$i = 0
-			While (_imagesearch("media\army_values\mechnik.bmp", 1, $tx, $ty, 20) <> 1) AND ($i < 30)
+			While (_imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20) <> 1) AND ($i < 30)
 				Sleep(2000 * $tormoza)
 				$i = $i + 1
 			WEnd
@@ -2323,13 +2247,13 @@ Func smena_armii($kakaya)
 		EndIf
 	Else
 		writelog("Простая армия ")
-		If _imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20) = 1 Then
+		If _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20) = 1 Then
 			writelog("уже назначена" & @CRLF)
 			Return 1
 		Else
-			zmemsmennuyukartinku("media\army_values\zamena_boicov.bmp", 50, "media\army_values\zamena_boicov_.bmp", 50)
+			zmemsmennuyukartinku("media\zamena_boicov.bmp", 50, "media\zamena_boicov_.bmp", 50)
 			$i = 0
-			While (_imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20) <> 1) AND ($i < 30)
+			While (_imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20) <> 1) AND ($i < 30)
 				Sleep(2000 * $tormoza)
 				$i = $i + 1
 			WEnd
@@ -2351,10 +2275,10 @@ Func openpriklaxxx($kartinka, $kartinka2)
 				zvezdamovepolzunokdown(1)
 				Sleep(300 * $tormoza)
 			WEnd
-			If findclickoncenterandwaitresult($userDIR & $kartinka, "media\army_values\open_prikla2.bmp", 20, 20, 5, 5, 1, 300, 5) = 1 Then
-				zmemsmennuyukartinku("media\army_values\open_prikla2.bmp", 30, "media\army_values\open_prikla2_.bmp", 30)
+			If findclickoncenterandwaitresult($userDIR & $kartinka, "media\open_prikla2.bmp", 20, 20, 5, 5, 1, 300, 5) = 1 Then
+				zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
 				Sleep(2000 * $tormoza)
-				zmemsmennuyukartinku("media\army_values\open_prikla2.bmp", 30, "media\army_values\open_prikla2_.bmp", 30)
+				zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
 				Return 1
 			EndIf
 		EndIf
@@ -2366,7 +2290,7 @@ Func sborostatkovarmii($army_type)
 	Local $tx = 0, $ty = 0
 	If $army_type = 1 Then
 		If smena_armii($army_type) = 1 Then
-			_imagesearch("media\army_values\mechnik.bmp", 1, $tx, $ty, 20)
+			_imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20)
 			MouseClick("left", $tx + 83, $ty + 24, 1)
 			MouseClick("left", $tx + 83, $ty + 78, 1)
 			MouseClick("left", $tx + 83, $ty + 131, 1)
@@ -2379,7 +2303,7 @@ Func sborostatkovarmii($army_type)
 		EndIf
 	ElseIf $army_type = 0 Then
 		If smena_armii($army_type) = 1 Then
-			_imagesearch("media\army_values\nub_gena.bmp", 1, $tx, $ty, 20)
+			_imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
 			MouseClick("left", $tx + 332, $ty + 132, 1)
 			MouseClick("left", $tx + 208, $ty + 132, 1)
 			MouseClick("left", $tx + 83, $ty + 132, 1)
@@ -2409,8 +2333,8 @@ Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 					If $error_otpravka = 5 Then ExitLoop
 				EndIf
 				If _imagesearcharea($gena, 1, $area1_top_x, $area1_top_y, $area1_bottom_x, $area1_bottom_y, $tx, $ty, 20) = 1 Then
-					If _imagesearcharea("media\army_values\Gena_plus.bmp", 1, $area1_top_x, $area1_top_y, $area1_bottom_x, $area1_bottom_y, $tx, $ty, 20) = 1 Then
-						While _imagesearcharea("media\army_values\Gena_plus_yes.bmp", 1, $area1_top_x, $area1_top_y, $area1_bottom_x, $area1_bottom_y, $ax, $ay, 20) <> 1
+					If _imagesearcharea("media\Gena_plus.bmp", 1, $area1_top_x, $area1_top_y, $area1_bottom_x, $area1_bottom_y, $tx, $ty, 20) = 1 Then
+						While _imagesearcharea("media\Gena_plus_yes.bmp", 1, $area1_top_x, $area1_top_y, $area1_bottom_x, $area1_bottom_y, $ax, $ay, 20) <> 1
 							If haveimagearea("media\error_otpravka.bmp", 40, $area5_top_x, $area5_top_y, $area5_bottom_x, $area5_bottom_y) = 1 Then
 								$error_otpravka = $error_otpravka + 1
 								If $error_otpravka = 5 Then ExitLoop 2
@@ -2440,8 +2364,8 @@ Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 				EndIf
 				If $generalov = $shtuk Then ExitLoop
 				If _imagesearcharea($gena, 1, $area2_top_x, $area2_top_y, $area2_bottom_x, $area2_bottom_y, $tx, $ty, 20) = 1 Then
-					If _imagesearcharea("media\army_values\Gena_plus.bmp", 1, $area2_top_x, $area2_top_y, $area2_bottom_x, $area2_bottom_y, $tx, $ty, 20) = 1 Then
-						While _imagesearcharea("media\army_values\Gena_plus_yes.bmp", 1, $area2_top_x, $area2_top_y, $area2_bottom_x, $area2_bottom_y, $ax, $ay, 20) <> 1
+					If _imagesearcharea("media\Gena_plus.bmp", 1, $area2_top_x, $area2_top_y, $area2_bottom_x, $area2_bottom_y, $tx, $ty, 20) = 1 Then
+						While _imagesearcharea("media\Gena_plus_yes.bmp", 1, $area2_top_x, $area2_top_y, $area2_bottom_x, $area2_bottom_y, $ax, $ay, 20) <> 1
 							If haveimagearea("media\error_otpravka.bmp", 40, $area5_top_x, $area5_top_y, $area5_bottom_x, $area5_bottom_y) = 1 Then
 								$error_otpravka = $error_otpravka + 1
 								If $error_otpravka = 5 Then ExitLoop 2
@@ -2471,8 +2395,8 @@ Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 				EndIf
 				If $generalov = $shtuk Then ExitLoop
 				If _imagesearcharea($gena, 1, $area3_top_x, $area3_top_y, $area3_bottom_x, $area3_bottom_y, $tx, $ty, 20) = 1 Then
-					If _imagesearcharea("media\army_values\Gena_plus.bmp", 1, $area3_top_x, $area3_top_y, $area3_bottom_x, $area3_bottom_y, $tx, $ty, 20) = 1 Then
-						While _imagesearcharea("media\army_values\Gena_plus_yes.bmp", 1, $area3_top_x, $area3_top_y, $area3_bottom_x, $area3_bottom_y, $ax, $ay, 20) <> 1
+					If _imagesearcharea("media\Gena_plus.bmp", 1, $area3_top_x, $area3_top_y, $area3_bottom_x, $area3_bottom_y, $tx, $ty, 20) = 1 Then
+						While _imagesearcharea("media\Gena_plus_yes.bmp", 1, $area3_top_x, $area3_top_y, $area3_bottom_x, $area3_bottom_y, $ax, $ay, 20) <> 1
 							If haveimagearea("media\error_otpravka.bmp", 40, $area5_top_x, $area5_top_y, $area5_bottom_x, $area5_bottom_y) = 1 Then
 								$error_otpravka = $error_otpravka + 1
 								If $error_otpravka = 5 Then ExitLoop 2
@@ -2502,8 +2426,8 @@ Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 				EndIf
 				If $generalov = $shtuk Then ExitLoop
 				If _imagesearcharea($gena, 1, $area4_top_x, $area4_top_y, $area4_bottom_x, $area4_bottom_y, $tx, $ty, 20) = 1 Then
-					If _imagesearcharea("media\army_values\Gena_plus.bmp", 1, $area4_top_x, $area4_top_y, $area4_bottom_x, $area4_bottom_y, $tx, $ty, 20) = 1 Then
-						While _imagesearcharea("media\army_values\Gena_plus_yes.bmp", 1, $area4_top_x, $area4_top_y, $area4_bottom_x, $area4_bottom_y, $ax, $ay, 20) <> 1
+					If _imagesearcharea("media\Gena_plus.bmp", 1, $area4_top_x, $area4_top_y, $area4_bottom_x, $area4_bottom_y, $tx, $ty, 20) = 1 Then
+						While _imagesearcharea("media\Gena_plus_yes.bmp", 1, $area4_top_x, $area4_top_y, $area4_bottom_x, $area4_bottom_y, $ax, $ay, 20) <> 1
 							If haveimagearea("media\error_otpravka.bmp", 40, $area5_top_x, $area5_top_y, $area5_bottom_x, $area5_bottom_y) = 1 Then
 								$error_otpravka = $error_otpravka + 1
 								If $error_otpravka = 5 Then ExitLoop 2
@@ -2532,7 +2456,7 @@ Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 					EndIf
 				EndIf
 				If $generalov = $shtuk Then ExitLoop
-				$search = _imagesearcharea("media\army_values\otppravka_vniz.bmp", 1, 500, 100, @DesktopWidth - 200, @DesktopHeight, $tx, $ty, 90)
+				$search = _imagesearcharea("media\otppravka_vniz.bmp", 1, 500, 100, @DesktopWidth - 200, @DesktopHeight, $tx, $ty, 90)
 				MouseMove($tx, $ty, 10 * $tormoza)
 				Sleep(100 * $tormoza)
 				MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
@@ -2541,10 +2465,10 @@ Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 				$i = $i + 1
 			WEnd
 			If $generalov = $shtuk Then
-				zmemsmennuyukartinku("media\army_values\otpravka_ok.bmp", 30, "media\army_values\otpravka_ok_.bmp", 30)
+				zmemsmennuyukartinku("media\otpravka_ok.bmp", 30, "media\otpravka_ok_.bmp", 30)
 				Return 1
 			EndIf
-			zmemsmennuyukartinku("media\army_values\closegena.bmp", 90, "media\army_values\closegena_.bmp", 90)
+			zmemsmennuyukartinku("media\closegena.bmp", 90, "media\closegena_.bmp", 90)
 			$generalov = 0
 			$error_otpravka = 0
 			$i = 0
@@ -2555,14 +2479,14 @@ EndFunc
 Func skolko_voisk_v_gene($imya, $area_top_x, $area_top_y, $area_bottom_x, $area_bottom_y)
 	Sleep(1000 * $tormoza)
 	Local $i = 0, $tx, $ty, $current_nik1_x, $current_nik1_y, $error = 0, $nik_symbol
-	If _imagesearcharea("media\army_values\text\X.bmp", 1, $area_top_x, $area_top_y, $area_bottom_x, $area_bottom_y, $tx, $ty, 40) = 0 Then
+	If _imagesearcharea("media\text\X.bmp", 1, $area_top_x, $area_top_y, $area_bottom_x, $area_bottom_y, $tx, $ty, 40) = 0 Then
 		Return 0
 	EndIf
 	If $imya = "+" Then
 		MouseMove($tx, $ty, 10 * $tormoza)
 		Sleep(100 * $tormoza)
 		Sleep(900 * $tormoza)
-		If (haveimage("media\army_values\otpravkingena2.bmp", read_ini(2)) = 0) AND (haveimage("media\army_values\otpravkingena.bmp", read_ini(2)) = 0) Then
+		If (haveimage("media\otpravkingena2.bmp", read_ini(2)) = 0) AND (haveimage("media\otpravkingena.bmp", read_ini(2)) = 0) Then
 			go5()
 			Return 0
 		Else
@@ -2573,7 +2497,7 @@ Func skolko_voisk_v_gene($imya, $area_top_x, $area_top_y, $area_bottom_x, $area_
 	$current_nik1_y = $ty - 10
 	While $i < StringLen($imya)
 		$nik_symbol = StringMid($imya, $i + 1, 1)
-		If (_imagesearcharea("media\army_values\text\" & $nik_symbol & ".bmp", 1, $current_nik1_x - 1, $current_nik1_y, $current_nik1_x + 15, $current_nik1_y + 25, $tx, $ty, 10) = 1) OR (_imagesearcharea("media\army_values\text\" & $nik_symbol & "_.bmp", 1, $current_nik1_x - 1, $current_nik1_y, $current_nik1_x + 15, $current_nik1_y + 25, $tx, $ty, 10) = 1) OR (_imagesearcharea("media\army_values\text\" & $nik_symbol & "__.bmp", 1, $current_nik1_x - 1, $current_nik1_y, $current_nik1_x + 15, $current_nik1_y + 25, $tx, $ty, 10) = 1) Then
+		If (_imagesearcharea("media\text\" & $nik_symbol & ".bmp", 1, $current_nik1_x - 1, $current_nik1_y, $current_nik1_x + 15, $current_nik1_y + 25, $tx, $ty, 10) = 1) OR (_imagesearcharea("media\text\" & $nik_symbol & "_.bmp", 1, $current_nik1_x - 1, $current_nik1_y, $current_nik1_x + 15, $current_nik1_y + 25, $tx, $ty, 10) = 1) OR (_imagesearcharea("media\text\" & $nik_symbol & "__.bmp", 1, $current_nik1_x - 1, $current_nik1_y, $current_nik1_x + 15, $current_nik1_y + 25, $tx, $ty, 10) = 1) Then
 			$i = $i + 1
 			$current_nik1_x = $tx
 		Else
@@ -2766,7 +2690,7 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 	Local $vidrazvedov[14] = ["media\scout1.bmp", "media\scout2.bmp", "media\scout3.bmp", "media\scout4.bmp", "media\scout5.bmp", _
 		"media\scout6.bmp", "media\scout7.bmp", "media\scout8.bmp", "media\scout9.bmp", "media\scout10.bmp", _
 		"media\scout11.bmp", "media\scout12.bmp", "media\scout13.bmp", "media\scout14.bmp"]
-	
+
 	WinActivate("The Settlers Онлайн")
 	Switch $tippoiska
 		Case "Быстрый"
@@ -2817,11 +2741,11 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 					If _imagesearcharea($vidrazvedov[10], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
 					If _imagesearcharea($vidrazvedov[11], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
 					If _imagesearcharea($vidrazvedov[12], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[13], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then 
+					If _imagesearcharea($vidrazvedov[13], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then
 						If $tetki = 1 Then $seychactetka = 1
 						ExitLoop
 					EndIf
-				   
+
 					$ii = $ii + 1
 					zvezdamovepolzunokdown(0)
 					zvezdamovepolzunokdown(0)

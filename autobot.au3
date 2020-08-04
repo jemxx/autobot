@@ -1,7 +1,7 @@
 #Region ;**** Directives created by AutoIt3Wrapper_GUI ****
 #AutoIt3Wrapper_Icon=media\icon.ico
-#AutoIt3Wrapper_Outfile=Autobot_test.exe
-#AutoIt3Wrapper_Outfile_x64=Autobot_test_x64.exe
+#AutoIt3Wrapper_Outfile=Autobot.exe
+#AutoIt3Wrapper_Outfile_x64=Autobot_x64.exe
 #AutoIt3Wrapper_Res_Description=Автобот для The Settlers
 #AutoIt3Wrapper_Res_Fileversion=0.0.13.15
 #AutoIt3Wrapper_Res_ProductName=Автобот
@@ -107,22 +107,22 @@ $stroka = getAllPassages($passagesDir)
 			Case $no1_1
 				tormoza()
 				TrayTip("", "Мы запустились...", 0)
-				
+
 				Global $abot = $passagesDir & "\" & GUICtrlRead($file_gui)
-				If FileExists($abot) Then 
+				If FileExists($abot) Then
 					$i = GUICtrlRead($file_gui2)
 					setstatistik()
 					$register = 0
-				
+
 					If GUICtrlRead($obnova) == $GUI_CHECKED Then
 						obnova()
 					EndIf
 					If GUICtrlRead($alarmCheckBox) == $GUI_CHECKED Then
 						$alarm = 1;
 					EndIf
-					If ProcessExists("proverkasliva.exe") Then 
+					If ProcessExists("proverkasliva.exe") Then
 						ProcessClose("proverkasliva.exe")
-					EndIf	
+					EndIf
 
 					register()
 					gogogogo()
@@ -266,13 +266,16 @@ Func komanda($delaem)
 			Else
 				Return 0
 			EndIf
+
 		Case "ПерейтиВприкл"
 			If gotopriclanosleep($userDIR & $komanda[2]) = 1 Then
 				podgotovka()
 				Return 1
 			EndIf
+
 		Case "ПерейтиДомой"
 			Return gotohome($userDIR & $komanda[2])
+
 		Case "ОтправитьВприключение"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[2])
@@ -280,11 +283,13 @@ Func komanda($delaem)
 			If otpravkagenvprikl($parametr[1], $generalData[0], $parametr[3], $parametr[4]) = 1 Then
 				Return 1
 			EndIf
+
 		Case "ОтправитьДомой"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
 
 			Return otpravitgenu($generalData[0], $parametr[2])
+
 		Case "Набрать"
 			$parametr = StringSplit($komanda[2], ",")
 
@@ -297,7 +302,7 @@ Func komanda($delaem)
 					If generali($gena, $parametr[2]) = 1 Then
 						If $parametr[3] = "Э" Then
 							While apply_elitnoy_army($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $full, $parametr[11]) <> 1
-								zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 								openzvezdap()
 								selecttabatzvezda("specialisti", 1)
 								generali($gena, $parametr[2])
@@ -305,11 +310,11 @@ Func komanda($delaem)
 							Return 1
 						EndIf
 						If $parametr[3] = "1" Then
-							If haveimage("media\army_values\1.bmp", 20) = 1 Then
+							If haveimage("media\1.bmp", 20) = 1 Then
 								Return 1
 							Else
 								While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, $parametr[13]) <> 1
-									zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+									zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 									openzvezdap()
 									selecttabatzvezda("specialisti", 1)
 									generali($gena, $parametr[2])
@@ -319,7 +324,7 @@ Func komanda($delaem)
 						EndIf
 						If $parametr[3] = "П" Then
 							While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, $parametr[13]) <> 1
-								zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 								openzvezdap()
 								selecttabatzvezda("specialisti", 1)
 								generali($gena, $parametr[2])
@@ -331,6 +336,7 @@ Func komanda($delaem)
 					EndIf
 				EndIf
 			EndIf
+
 		Case "НабратьИатаковать"
 			$centrovat = 1
 			Local $perebor = 1
@@ -353,7 +359,7 @@ Func komanda($delaem)
 					If generali($gena, $parametr[2]) = 1 Then
 						If $parametr[3] = "Э" Then
 							While apply_elitnoy_army($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $full, 0) <> 1
-								zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 								openzvezdap()
 								selecttabatzvezda("specialisti", 1)
 								generali($gena, $parametr[2])
@@ -362,11 +368,11 @@ Func komanda($delaem)
 							Return atakalageraotkritimgenoynoini($parametr[11], $parametr[12], $userDIR & $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17])
 						EndIf
 						If $parametr[3] = "1" Then
-							If haveimage("media\army_values\1.bmp", 20) = 1 Then
+							If haveimage("media\1.bmp", 20) = 1 Then
 								Return atakalageraotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
 							Else
 								While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
-									zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+									zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 									openzvezdap()
 									selecttabatzvezda("specialisti", 1)
 									generali($gena, $parametr[2])
@@ -377,7 +383,7 @@ Func komanda($delaem)
 						EndIf
 						If $parametr[3] = "П" Then
 							While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
-								zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 								openzvezdap()
 								selecttabatzvezda("specialisti", 1)
 								generali($gena, $parametr[2])
@@ -390,6 +396,7 @@ Func komanda($delaem)
 					EndIf
 				EndIf
 			EndIf
+
 		Case "Атаковать"
 			$centrovat = 1
 			Local $perebor = 1
@@ -414,6 +421,7 @@ Func komanda($delaem)
 					EndIf
 				EndIf
 			WEnd
+
 		Case "АтакаПоКоординатам"
 			$centrovat = 1
 			Local $perebor = 1
@@ -427,18 +435,22 @@ Func komanda($delaem)
 				$perebor = $perebor + 1
 			WEnd
 			Return atakgenapxpnoini($userDIR & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9])
+
 		Case "ЖдемГенерала"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
+					Return ozidanierasstanovki2($generalData[0], $parametr[2])
 
-			Return ozidanierasstanovki2($generalData[0], $parametr[2])
+
 		Case "ЖдемВсехГенералов"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
+					Return ozidanierasstanovki($generalData[0], $generalData[2], $parametr[2])
+;					Return ozidanierasstanovki($generalData[2], $parametr[2])
 
-			Return ozidanierasstanovki($generalData[2], $parametr[2])
+
 		Case "ПеренестиГенерала"
-			$centrovat = 1
+				$centrovat = 1
 			Local $perebor = 1
 			$parametr = StringSplit($komanda[2], ",")
 			$komand_na_massiv = UBound($parametr)
@@ -507,32 +519,32 @@ Func komanda($delaem)
 
 			If $parametr[2] = "Э" Then
 				While viborgenipodataku_elitanoini($userDIR & $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $full) <> 1
-					zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+					zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 				WEnd
 			EndIf
 			If $parametr[2] = "П" Then
 				While viborgenipodatakunoini($userDIR & $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], $full) <> 1
-					zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+					zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 				WEnd
 			EndIf
 			If $parametr[2] = "1" Then
 				While viborgenipodataku_1nnoini($userDIR & $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], 1, 0, 0, 0, 0, 0, 0, 0, 0, 4) <> 1
-					zmemsmennuyukartinku("media\army_values\closegena.bmp", 30, "media\army_values\closegena_.bmp", 30)
+					zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 				WEnd
 			EndIf
 			Return 1
 		Case "СбросЗадания"
 			If $komanda[2] = 0 Then
-				zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\army_values\Close.bmp", 30)
+				zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
 				zmemsmennuyukartinku("media\KN_Z.bmp", 30, "media\KN_Z_.bmp", 30)
 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 				Return 1
 			Else
-				zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\army_values\Close.bmp", 30)
+				zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
 				zmemsmennuyukartinku("media\KN_Z.bmp", 30, "media\KN_Z_.bmp", 30)
 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 				Sleep(10000)
-				zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\army_values\Close.bmp", 30)
+				zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 				Return 1
 			EndIf
@@ -548,18 +560,18 @@ Func komanda($delaem)
 			Return 1
 		Case "Стрельнуть"
 			If $komanda[2] = "Бронзоподкова" Then
-				If open_usilok("usiliteli", "media\army_values\br_podkova.bmp", 0) = 1 Then
-					zmemsmennuyukartinku("media\army_values\nubook.bmp", 30, "media\army_values\nubook.bmp", 30)
+				If open_usilok("usiliteli", "media\br_podkova.bmp", 0) = 1 Then
+					zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook.bmp", 30)
 					Return 1
 				EndIf
 			ElseIf $komanda[2] = "Платиноподкова" Then
-				If open_usilok("usiliteli", "media\army_values\pl_podkova.bmp", 0) = 1 Then
-					zmemsmennuyukartinku("media\army_values\nubook.bmp", 30, "media\army_values\nubook.bmp", 30)
+				If open_usilok("usiliteli", "media\pl_podkova.bmp", 0) = 1 Then
+					zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook.bmp", 30)
 					Return 1
 				EndIf
 			ElseIf $komanda[2] = "Обсидиановая" Then
-				If open_usilok("usiliteli", "media\army_values\obsid_podkova.bmp", 0) = 1 Then
-					zmemsmennuyukartinku("media\army_values\nubook.bmp", 30, "media\army_values\nubook.bmp", 30)
+				If open_usilok("usiliteli", "media\obsid_podkova.bmp", 0) = 1 Then
+					zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook.bmp", 30)
 					Return 1
 				EndIf
 			EndIf
@@ -584,25 +596,25 @@ Func komanda($delaem)
 				$perebor = $perebor + 1
 			WEnd
 			If $parametr[1] = "Стрела" Then
-			   $img_usilka = "media\army_values\strela.bmp"
+			   $img_usilka = "media\strela.bmp"
 			   $tb_name = "usiliteli"
 			ElseIf $parametr[1] = "ГорящаяСтрела" Then
-			   $img_usilka = "media\army_values\gor_strela.bmp"
+			   $img_usilka = "media\gor_strela.bmp"
 			   $tb_name = "usiliteli"
 			ElseIf $parametr[1] = "ШокоСтрела" Then
-			   $img_usilka = "media\army_values\shoko_strela.bmp"
+			   $img_usilka = "media\shoko_strela.bmp"
 			   $tb_name = "usiliteli"
 			ElseIf $parametr[1] = "Баллиста" Then
-			   $img_usilka = "media\army_values\balista.bmp"
+			   $img_usilka = "media\balista.bmp"
 			   $tb_name = "usiliteli"
 			ElseIf $parametr[1] = "БольшаяКатапульта" Then
-			   $img_usilka = "media\army_values\bolshaja_katapulta.bmp"
+			   $img_usilka = "media\bolshaja_katapulta.bmp"
 			   $tb_name = "usiliteli"
 			ElseIf $parametr[1] = "МаленькаяКатапульта" Then
-			   $img_usilka = "media\army_values\malenkaja_katapulta.bmp"
+			   $img_usilka = "media\malenkaja_katapulta.bmp"
 			   $tb_name = "usiliteli"
 			ElseIf $parametr[1] = "Убийца" Then
-			   $img_usilka = "media\army_values\boshka.bmp"
+			   $img_usilka = "media\boshka.bmp"
 			   $tb_name = "usiliteli"
 			ElseIf $parametr[1] = "Стейк" Then
 			   $img_usilka = "media\steik.bmp"
@@ -614,7 +626,7 @@ Func komanda($delaem)
 			   $img_usilka = "media\irma.bmp"
 			   $tb_name = "usiliteli"
 			ElseIf $parametr[1] = "Нубы" Then
-			   $img_usilka = "media\army_values\nubi_in_zvezda.bmp"
+			   $img_usilka = "media\nubi_in_zvezda.bmp"
 			   $tb_name = "raznoe"
 			EndIf
 			Return plunusilok_koordinati($tb_name, $img_usilka, $parametr[2], $parametr[3], $userDIR & $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $currentbuf)
@@ -744,7 +756,7 @@ Func komanda($delaem)
 				ElseIf $parametr[4] = "Скрупулезный" Then
 					$kakih = "media\skrupuleznyj_geolog.bmp"
 				Else
-					MsgBox(0, "!!!", "Не правильный параметр типа геолога")
+					MsgBox(0, "!!!", "Неправильный параметр типа геолога")
 					Return 0
 				EndIf
 				Return rungeolog($parametr[2], $parametr[3], $kakih)
@@ -774,13 +786,13 @@ Func komanda($delaem)
 				ElseIf $parametr[4] = "Скрупулезный" Then
 					$kakih = "media\skrupuleznyj_geolog.bmp"
 				Else
-					MsgBox(0, "!!!", "Не правильный параметр типа геолога")
+					MsgBox(0, "!!!", "Неправильный параметр типа геолога")
 					Return 0
 				EndIf
 				rungeolog($parametr[2], $parametr[3], $kakih)
 				Return 1
 			Else
-				MsgBox(0, "!!!", "Не правильный параметр флага")
+				MsgBox(0, "!!!", "Неправильный параметр флага")
 				Return 0
 			EndIf
 		Case "СобратьПочту"
@@ -823,7 +835,7 @@ Func komanda($delaem)
 				ElseIf $parametr[6] = "Безудержный" Then
 					$kakih = "media\scout14.bmp"
 				Else
-					MsgBox(0, "!!!", "Не правильный параметр типа Разведчика")
+					MsgBox(0, "!!!", "Неправильный параметр типа Разведчика")
 					Return 0
 				EndIf
 				Return runrazved($parametr[2], $parametr[3], $parametr[4], $parametr[5], $kakih)
@@ -862,13 +874,13 @@ Func komanda($delaem)
 				ElseIf $parametr[6] = "Безудержный" Then
 					$kakih = "media\scout14.bmp"
 				Else
-					MsgBox(0, "!!!", "Не правильный параметр типа Разведчика")
+					MsgBox(0, "!!!", "Неправильный параметр типа Разведчика")
 					Return 0
 				EndIf
 				runrazved($parametr[2], $parametr[3], $parametr[4], $parametr[5], $kakih)
 				Return 1
 			Else
-			   MsgBox(0, "!!!", "Не правильный параметр флага")
+			   MsgBox(0, "!!!", "Неправильный параметр флага")
 			   Return 0
 			EndIf
 		Case "ПОВТОРИТЬ"
@@ -889,7 +901,7 @@ Func komanda($delaem)
 				EndIf
 				$perebor = $perebor + 1
 			WEnd
-			
+
 			Return clickOnCoordinates($userDIR & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7])
 		Case "Нажать"
 			If $komanda[2] = "0" Then
