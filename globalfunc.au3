@@ -893,6 +893,31 @@ Func getDataGroupSpecialists($type)
 	EndIf
 EndFunc
 
+Func getSpecialistData($name, $type)
+	Local $i = 0
+	Local $itemData
+	Local $specialists = getDataGroupSpecialists($type)
+
+	While 1
+		$itemName = Json_Get($specialists, '[' & $i & '].name')
+
+		If @error Then ExitLoop
+		If $name = $itemName Then
+			$itemData = "media\" & Json_Get($specialists, '[' & $i & '].img_active')
+			ExitLoop
+		EndIf
+
+		$i += 1
+	WEnd
+
+	if ($itemData = "") Then
+		MsgBox(0, "Внимание!", "Не правильный параметр типа специалиста")
+		Return 0
+	Else
+		Return $itemData	
+	EndIf
+EndFunc
+
 Func getGeneralData($general)
 	Local $i = 0
 	Local $generalData[3]

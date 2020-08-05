@@ -25,5 +25,17 @@
     {"name": "Стойкая", "max_capacity": 235, "img_active": "stoikii.bmp", "img_noactive": "NOstoikii.bmp"},
     {"name": "Скрытный", "max_capacity": 215, "img_active": "skrytnyj.bmp", "img_noactive": "NOskrytnyj.bmp"},
     {"name": "ЗолотойИнтендант", "max_capacity": 3000, "img_active": "bigavtobus.bmp", "img_noactive": "NObigavtobus.bmp"}
+  ],
+  "geologists": [
+    {"name": "Золотой", "img_active": "vesel_geolog.bmp"},
+    {"name": "Простой", "img_active": "geolog.bmp"},
+    {"name": "Старательный", "img_active": "x2geolog.bmp"},
+    {"name": "Железный", "img_active": "zelezny_geolog.bmp"},
+    {"name": "Каменный", "img_active": "kamen_geolog.bmp"},
+    {"name": "Бывалый", "img_active": "byvalyj_geolog.bmp"},
+    {"name": "Золотая", "img_active": "zolotaya_geolog.bmp"},
+    {"name": "Археолог", "img_active": "arheolog_geolog.bmp"},
+    {"name": "Прелестный", "img_active": "prelestnyj_geolog.bmp"},
+    {"name": "Скрупулезный", "img_active": "skrupuleznyj_geolog.bmp"}
   ]
 }

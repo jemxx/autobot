@@ -721,63 +721,13 @@ Func komanda($delaem)
 			Return 1
 		Case "Геологи"
 			$parametr = StringSplit($komanda[2], ",")
+			$kakih = (UBound($parametr) = 4) ? 0 : getSpecialistData($parametr[4], "geologists")
+
+			Local $status = rungeolog($parametr[2], $parametr[3], $kakih)
+
 			If $parametr[1] = 0 Then
-				If UBound($parametr) = 4 Then Return rungeolog($parametr[2], $parametr[3], 0)
-				If $parametr[4] = "Золотой" Then
-					$kakih = "media\vesel_geolog.bmp"
-				ElseIf $parametr[4] = "Простой" Then
-					$kakih = "media\geolog.bmp"
-				ElseIf $parametr[4] = "Старательный" Then
-					$kakih = "media\x2geolog.bmp"
-				ElseIf $parametr[4] = "Железный" Then
-					$kakih = "media\zelezny_geolog.bmp"
-				ElseIf $parametr[4] = "Каменный" Then
-					$kakih = "media\kamen_geolog.bmp"
-				ElseIf $parametr[4] = "Бывалый" Then
-					$kakih = "media\byvalyj_geolog.bmp"
-				ElseIf $parametr[4] = "Золотая" Then
-					$kakih = "media\zolotaya_geolog.bmp"
-				ElseIf $parametr[4] = "Археолог" Then
-					$kakih = "media\arheolog_geolog.bmp"
-				ElseIf $parametr[4] = "Прелестный" Then
-					$kakih = "media\prelestnyj_geolog.bmp"
-				ElseIf $parametr[4] = "Скрупулезный" Then
-					$kakih = "media\skrupuleznyj_geolog.bmp"
-				Else
-					MsgBox(0, "!!!", "Не правильный параметр типа геолога")
-					Return 0
-				EndIf
-				Return rungeolog($parametr[2], $parametr[3], $kakih)
+				Return $status
 			ElseIf $parametr[1] = 1 Then
-				If UBound($parametr) = 4 Then
-					rungeolog($parametr[2], $parametr[3], 0)
-					Return 1
-				EndIf
-				If $parametr[4] = "Золотой" Then
-					$kakih = "media\vesel_geolog.bmp"
-				ElseIf $parametr[4] = "Простой" Then
-					$kakih = "media\geolog.bmp"
-				ElseIf $parametr[4] = "Старательный" Then
-					$kakih = "media\x2geolog.bmp"
-				ElseIf $parametr[4] = "Железный" Then
-					$kakih = "media\zelezny_geolog.bmp"
-				ElseIf $parametr[4] = "Каменный" Then
-					$kakih = "media\kamen_geolog.bmp"
-				ElseIf $parametr[4] = "Бывалый" Then
-					$kakih = "media\byvalyj_geolog.bmp"
-				ElseIf $parametr[4] = "Золотая" Then
-					$kakih = "media\zolotaya_geolog.bmp"
-				ElseIf $parametr[4] = "Археолог" Then
-					$kakih = "media\arheolog_geolog.bmp"
-				ElseIf $parametr[4] = "Прелестный" Then
-					$kakih = "media\prelestnyj_geolog.bmp"
-				ElseIf $parametr[4] = "Скрупулезный" Then
-					$kakih = "media\skrupuleznyj_geolog.bmp"
-				Else
-					MsgBox(0, "!!!", "Не правильный параметр типа геолога")
-					Return 0
-				EndIf
-				rungeolog($parametr[2], $parametr[3], $kakih)
 				Return 1
 			Else
 				MsgBox(0, "!!!", "Не правильный параметр флага")
