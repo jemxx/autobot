@@ -626,6 +626,206 @@ func RoditelskayaKategoriya()
 endfunc
 #EndRegion
 
+func opensvadba()
+	Local $i=0
+	WinActivate("The Settlers Онлайн")
+	MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
+	MouseDown("left")
+	MouseMove(@DesktopWidth/2+100, @DesktopHeight/2, 10 * $tormoza)
+	Sleep(1000 * $tormoza)
+	MouseUp("left")
+	Sleep(1000 * $tormoza)
+	MouseUp("left")
+	Send("{0}")
+	Sleep(3000 * $tormoza)
+	if openzvezda() = 1 then
+		If SelectTabAtZvezda("raznoe", 1) <> 0 then
+			findclickoncenterandwaitresult("media\svadba.bmp", "media\Otmena.bmp", 30, 50, 5, 5, 0, 30, 30)
+			MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
+			Sleep(500 * $tormoza)
+			MouseClick("left", @DesktopWidth/2, @DesktopHeight/2, 1)
+			Sleep(10000 * $tormoza)
+			ZmemSmennuyuKartinku("media\Otmena.bmp", 90, "media\Otmena_.bmp", 90)
+			go5()
+			Sleep(20000 * $tormoza)
+			ZmemSmennuyuKartinkuIZdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
+			Sleep(10000 * $tormoza)
+			while (findclickoncenterandwaitresult("media\Svadba1.bmp", "media\Close.bmp", 30, 50, 5, 5, 0, 30, 30) = 0) AND ($i < 20)
+				$i = $i + 1
+				zvezdamovepolzunokdown(1)
+			Wend
+			ZmemSmennuyuKartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+			If $i = 20 then
+				Return 0
+			Endif
+		Else
+			Return 0
+		EndIf
+	EndIf
+	Sleep(3000 * $tormoza)
+	; кидаем торт
+ 	if openzvezda() = 1 then
+		If selecttabatzvezda("usiliteli", 1) = 1 Then
+			While (haveimage("media\tort.bmp", 50) = 0) AND ($i < 6)
+				zvezdamovepolzunokdown(1)
+				Sleep(Random(500, 1000, 1) * $tormoza)
+				$i = $i + 1
+			WEnd
+			findclickoncenterandwaitresult("media\tort.bmp", "media\Otmena.bmp", 30, 50, 5, 5, 0, 30, 30)
+			MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
+			Sleep(500 * $tormoza)
+			MouseClick("left", @DesktopWidth/2, @DesktopHeight/2, 1)
+			Sleep(10000 * $tormoza)
+			ZmemSmennuyuKartinku("media\Otmena.bmp", 90, "media\Otmena_.bmp", 90)
+		EndIf
+	Else
+		Return 0
+	EndIf
+	go5()
+	Sleep(20000 * $tormoza)
+	ZmemSmennuyuKartinkuIZdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
+	while (findclickoncenterandwaitresult("media\Svadba1+.bmp", "media\KN_Z.bmp", 30, 50, 5, 5, 0, 30, 30) = 0) AND ($i < 20)
+		$i = $i + 1
+		zvezdamovepolzunokdown(1)
+	Wend
+	If $i = 20 then
+		Return 0
+	Endif
+	ZmemSmennuyuKartinku("media\KN_Z.bmp", 30, "media\KN_Z_.bmp", 30)
+	ZmemSmennuyuKartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+	go5()
+	Sleep(20000 * $tormoza)
+	ZmemSmennuyuKartinkuIZdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
+	while (findclickoncenterandwaitresult("media\svadba+.bmp", "media\KN_Z.bmp", 30, 50, 5, 5, 0, 30, 30) = 0) AND ($i < 20)
+		$i = $i + 1
+		zvezdamovepolzunokdown(1)
+	Wend
+	If $i = 20 then
+		Return 0
+	Endif
+	ZmemSmennuyuKartinku("media\KN_Z.bmp", 30, "media\KN_Z_.bmp", 30)
+	ZmemSmennuyuKartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+ 	Return 1
+endfunc
+
+func openpanda()
+	Local $i=0
+	WinActivate("The Settlers Онлайн")
+	MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
+	MouseDown("left")
+	MouseMove(@DesktopWidth/2+100, @DesktopHeight/2, 10 * $tormoza)
+	Sleep(1000 * $tormoza)
+	MouseUp("left")
+	Sleep(1000 * $tormoza)
+	MouseUp("left")
+	Send("{0}")
+	Sleep(3000 * $tormoza)
+	if openzvezda() = 1 then
+		If SelectTabAtZvezda("raznoe", 1) <> 0 then
+			findclickoncenterandwaitresult("media\panda.bmp", "media\Otmena.bmp", 30, 50, 5, 5, 0, 30, 30)
+			MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
+			Sleep(500 * $tormoza)
+			MouseClick("left", @DesktopWidth/2, @DesktopHeight/2, 1)
+			Sleep(10000 * $tormoza)
+			ZmemSmennuyuKartinku("media\Otmena.bmp", 90, "media\Otmena_.bmp", 90)
+			go5()
+			Sleep(20000 * $tormoza)
+		Else
+			Return 0
+		EndIf
+	EndIf
+	Sleep(10000 * $tormoza)
+	ZmemSmennuyuKartinkuIZdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
+	while (findclickoncenterandwaitresult("media\panda1.bmp", "media\KN_Z.bmp", 30, 50, 5, 5, 0, 30, 30) = 0) AND ($i < 20)
+		$i = $i + 1
+		zvezdamovepolzunokdown(1)
+	Wend
+	If $i = 20 then
+		Return 0
+	Endif
+	ZmemSmennuyuKartinku("media\KN_Z.bmp", 30, "media\KN_Z_.bmp", 30)
+	ZmemSmennuyuKartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+	Sleep(10000 * $tormoza)
+	ZmemSmennuyuKartinkuIZdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
+	$i = 0
+	while (findclickoncenterandwaitresult("media\panda1+.bmp", "media\KN_Z.bmp", 30, 50, 5, 5, 0, 30, 30) = 0) AND ($i < 20)
+		$i = $i + 1
+		zvezdamovepolzunokdown(1)
+	Wend
+	If $i = 20 then
+		Return 0
+	Endif
+	ZmemSmennuyuKartinku("media\KN_Z.bmp", 30, "media\KN_Z_.bmp", 30)
+	ZmemSmennuyuKartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+	Sleep(10000 * $tormoza)
+	ZmemSmennuyuKartinkuIZdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
+	$i = 0
+	ZmemSmennuyuKartinku("media\KN_Z.bmp", 30, "media\KN_Z_.bmp", 30)
+	while (findclickoncenterandwaitresult("media\panda2.bmp", "media\KN_Z_No_OK.bmp", 30, 50, 5, 5, 0, 30, 30) = 0) AND ($i < 20)
+		$i = $i + 1
+		zvezdamovepolzunokdown(1)
+	Wend
+	ZmemSmennuyuKartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+	If $i = 20 then
+		Return 0
+	Endif
+	; кидаем клетку
+ 	if openzvezda() = 1 then
+		If selecttabatzvezda("usiliteli", 1) = 1 Then
+			While (haveimage("media\kletka.bmp", 50) = 0) AND ($i < 6)
+				zvezdamovepolzunokdown(1)
+				Sleep(Random(500, 1000, 1) * $tormoza)
+				$i = $i + 1
+			WEnd
+			findclickoncenterandwaitresult("media\kletka.bmp", "media\Otmena.bmp", 30, 50, 5, 5, 0, 30, 30)
+			MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
+			Sleep(500 * $tormoza)
+			MouseClick("left", @DesktopWidth/2, @DesktopHeight/2, 1)
+			Sleep(10000 * $tormoza)
+			ZmemSmennuyuKartinku("media\Otmena.bmp", 90, "media\Otmena_.bmp", 90)
+		EndIf
+	Else
+		Return 0
+	EndIf
+	go5()
+	Sleep(20000 * $tormoza)
+	ZmemSmennuyuKartinkuIZdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
+	while (findclickoncenterandwaitresult("media\panda2.bmp", "media\KN_Z.bmp", 30, 50, 5, 5, 0, 30, 30) = 0) AND ($i < 20)
+		$i = $i + 1
+		zvezdamovepolzunokdown(1)
+	Wend
+	If $i = 20 then
+		Return 0
+	Endif
+	ZmemSmennuyuKartinku("media\KN_Z.bmp", 30, "media\KN_Z_.bmp", 30)
+	ZmemSmennuyuKartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+	go5()
+	Sleep(20000 * $tormoza)
+	ZmemSmennuyuKartinkuIZdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
+	while (findclickoncenterandwaitresult("media\panda2+.bmp", "media\KN_Z.bmp", 30, 50, 5, 5, 0, 30, 30) = 0) AND ($i < 20)
+		$i = $i + 1
+		zvezdamovepolzunokdown(1)
+	Wend
+	If $i = 20 then
+		Return 0
+	Endif
+	ZmemSmennuyuKartinku("media\KN_Z.bmp", 30, "media\KN_Z_.bmp", 30)
+	ZmemSmennuyuKartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+	go5()
+	Sleep(20000 * $tormoza)
+	ZmemSmennuyuKartinkuIZdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
+	while (findclickoncenterandwaitresult("media\panda+.bmp", "media\KN_Z.bmp", 30, 50, 5, 5, 0, 30, 30) = 0) AND ($i < 20)
+		$i = $i + 1
+		zvezdamovepolzunokdown(1)
+	Wend
+	If $i = 20 then
+		Return 0
+	Endif
+	ZmemSmennuyuKartinku("media\KN_Z.bmp", 30, "media\KN_Z_.bmp", 30)
+	ZmemSmennuyuKartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+ 	Return 1
+endfunc
+
 func opentitka($yes)
 Local $i=0
 WinActivate("The Settlers Онлайн")
@@ -703,6 +903,7 @@ if openzvezda() = 1 then
 	endif
 endif
 endfunc
+
 func CloseTitka()
    WinActivate("The Settlers Онлайн")
    Sleep(5000 * $tormoza)

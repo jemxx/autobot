@@ -694,10 +694,19 @@ Func komanda($delaem)
 			EndIf
 			$parametr = StringSplit($komanda[2], ",")
 			Return proverkasliva2($parametr[1], $parametr[2])
+
 		Case "ОткрытьМонетку"
 			Return opentitka($komanda[2])
+
 		Case "ЗакрытьМонетку"
 			Return closetitka()
+
+		Case "Автосвадьба"
+			Return opensvadba()
+
+		Case "Автопанда"
+			Return openpanda()
+
 		Case "Звук"
 			If $komanda[2] = "1" Then
 			   alarmBeep()

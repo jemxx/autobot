@@ -1910,14 +1910,14 @@ Func ozidanierasstanovki2($image, $yes)
 				ExitLoop
 			Else
 				If (zvezdamovepolzunokdown(1) = 0) then
-					zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+					; zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 					ExitLoop
 				EndIf
 			EndIf
 		WEnd
-		$i = $i + 1
-		Sleep(5000 * $tormoza)
 		If ($fl = 1) Then ExitLoop
+		$i = $i + 1
+		Sleep(30000 * $tormoza)
 	Wend
 	If ($fl = 1) and ($yes = 1) Then
 		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
@@ -1946,14 +1946,14 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
 				ExitLoop
 			Else
 				If (zvezdamovepolzunokdown(1) = 0) then
-					zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+					; zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 					ExitLoop
 				EndIf
 			EndIf
 		WEnd
-		$i = $i + 1
-		Sleep(5000 * $tormoza)
 		If ($fl = 1) Then ExitLoop
+		$i = $i + 1
+		Sleep(30000 * $tormoza)
 	Wend
 	If ($fl = 1) and ($yes = 1) Then
 		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
