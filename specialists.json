@@ -38,4 +38,21 @@
     {"name": "Прелестный", "img_active": "prelestnyj_geolog.bmp"},
     {"name": "Скрупулезный", "img_active": "skrupuleznyj_geolog.bmp"}
   ]
+  ,
+  "scouts": [
+    {"name": "Следопыт", "img_active": "scout1.bmp"},
+    {"name": "Опытный", "img_active": "scout2.bmp"},
+    {"name": "Везучий", "img_active": "scout3.bmp"},
+    {"name": "Храбрый", "img_active": "scout4.bmp"},
+    {"name": "Простой", "img_active": "scout5.bmp"},
+    {"name": "Бесстрашный", "img_active": "scout6.bmp"},
+    {"name": "Авантюрист", "img_active": "scout7.bmp"},
+    {"name": "Зои", "img_active": "scout8.bmp"},
+    {"name": "Искренний", "img_active": "scout9.bmp"},
+    {"name": "Скромный", "img_active": "scout10.bmp"},
+    {"name": "Зачарованный", "img_active": "scout11.bmp"},
+    {"name": "Милый", "img_active": "scout12.bmp"},
+    {"name": "Настойчивый", "img_active": "scout13.bmp"},
+    {"name": "Безудержный", "img_active": "scout14.bmp"}
+  ]
 }

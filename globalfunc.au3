@@ -910,12 +910,7 @@ Func getSpecialistData($name, $type)
 		$i += 1
 	WEnd
 
-	if ($itemData = "") Then
-		MsgBox(0, "Внимание!", "Не правильный параметр типа специалиста")
-		Return 0
-	Else
-		Return $itemData	
-	EndIf
+	Return $itemData	
 EndFunc
 
 Func getGeneralData($general)

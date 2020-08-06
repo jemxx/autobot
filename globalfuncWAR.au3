@@ -2770,10 +2770,14 @@ Global $gx, $gy, $finterrupt = 0, $gpx = 0, $gpy = 0, $vidpoiska = 0, $tippoiska
 Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 	Local $seychactetka = 0
 	Local $i = 0, $ii = 0, $tx, $ty
-	Local $vidrazvedov[14] = ["media\scout1.bmp", "media\scout2.bmp", "media\scout3.bmp", "media\scout4.bmp", "media\scout5.bmp", _
-		"media\scout6.bmp", "media\scout7.bmp", "media\scout8.bmp", "media\scout9.bmp", "media\scout10.bmp", _
-		"media\scout11.bmp", "media\scout12.bmp", "media\scout13.bmp", "media\scout14.bmp"]
-	
+
+	Local $vidrazvedov[0]
+	Local $allScoutsJson = getDataGroupSpecialists("scouts")
+	Local $count = UBound($allScoutsJson) - 1
+	For $j = 0 To $count  Step + 1
+		_ArrayAdd($vidrazvedov, "media\" & Json_Get($allScoutsJson, '[' & $j & '].img_active'))
+	Next
+
 	WinActivate("The Settlers Онлайн")
 	Switch $tippoiska
 		Case "Быстрый"
