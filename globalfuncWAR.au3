@@ -1104,7 +1104,7 @@ Func setarmy($kogo, $skolko, $gena)
 
 	$fullGenaImg = getFullGeneralImg($gena)
 
-	If $skolko = 1000 Then
+	If $skolko = 3000 Then
 		viborarmii($kogo)
 		$i = 0
 		$search = 0
@@ -2142,7 +2142,7 @@ Func set_elitnoy_army($kogo, $skolko, $gena)
 
 	$fullGenaImg = getFullGeneralImg($gena)
 
-	If $skolko = 1000 Then
+	If $skolko = 3000 Then
 		vibor_elitnoy_armii($kogo)
 		$i = 0
 		$search = 0
@@ -2504,7 +2504,7 @@ Func skolko_voisk_v_gene($imya, $area_top_x, $area_top_y, $area_bottom_x, $area_
 			$error = $error + 1
 			$i = $i + 1
 			$current_nik1_x = $current_nik1_x + 7
-			If $error = 1 Then $i = 1000
+			If $error = 1 Then $i = 3000
 		EndIf
 	WEnd
 	If $i = StringLen($imya) Then
