@@ -1124,9 +1124,9 @@ Func getGeneralData($general)
 
 		If @error Then ExitLoop
 		If $general = $generalName Then
-			$generalData[0] = "media\army_values\" & Json_Get($specialists, '[' & $i & '].img_active')
+			$generalData[0] = "media\" & Json_Get($specialists, '[' & $i & '].img_active')
 			$generalData[1] = Json_Get($specialists, '[' & $i & '].max_capacity')
-			$generalData[2] = "media\army_values\" & Json_Get($specialists, '[' & $i & '].img_noactive')
+			$generalData[2] = "media\" & Json_Get($specialists, '[' & $i & '].img_noactive')
 			ExitLoop
 		EndIf
 
