@@ -1104,7 +1104,7 @@ Func setarmy($kogo, $skolko, $gena)
 
 	$fullGenaImg = getFullGeneralImg($gena)
 
-	If $skolko = 1000 Then
+	If $skolko = 3000 Then
 		viborarmii($kogo)
 		$i = 0
 		$search = 0
@@ -2142,7 +2142,7 @@ Func set_elitnoy_army($kogo, $skolko, $gena)
 
 	$fullGenaImg = getFullGeneralImg($gena)
 
-	If $skolko = 1000 Then
+	If $skolko = 3000 Then
 		vibor_elitnoy_armii($kogo)
 		$i = 0
 		$search = 0
@@ -2504,7 +2504,7 @@ Func skolko_voisk_v_gene($imya, $area_top_x, $area_top_y, $area_bottom_x, $area_
 			$error = $error + 1
 			$i = $i + 1
 			$current_nik1_x = $current_nik1_x + 7
-			If $error = 1 Then $i = 1000
+			If $error = 1 Then $i = 3000
 		EndIf
 	WEnd
 	If $i = StringLen($imya) Then
@@ -2515,88 +2515,95 @@ Func skolko_voisk_v_gene($imya, $area_top_x, $area_top_y, $area_bottom_x, $area_
 EndFunc
 
 Func rungeolog($kuda, $skolko, $kakih)
-   Local $i = 0, $ii = 0, $tx, $ty
-   Local $vidgeologov[10] = ["media\vesel_geolog.bmp", "media\geolog.bmp", "media\x2geolog.bmp", "media\zelezny_geolog.bmp", "media\kamen_geolog.bmp", "media\byvalyj_geolog.bmp", "media\zolotoj_geolog.bmp", "media\arheolog_geolog.bmp", "media\prelestnyj_geolog.bmp", "media\skrupuleznyj_geolog.bmp"]
-   WinActivate("The Settlers Онлайн")
-   chatoff()
-   drugioff()
-   If openzvezda() = 0 Then Return 0
-   If selecttabatzvezda("specialisti", 0) = 0 Then Return 0
-   If $kakih == 0 Then
-		While $i < $skolko
-			If openzvezda() = 1 Then
-				If selecttabatzvezda("specialisti", 1) = 1 Then
-					While 1
-						If _imagesearcharea($vidgeologov[0], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[1], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[2], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[3], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[4], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[5], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[6], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[7], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[8], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[9], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						$ii = $ii + 1
-						zvezdamovepolzunokdown(1)
-						Sleep(Random(500, 1000, 1))
-						If $ii > 8 Then
-							If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
-								Return 0
+   	Local $i = 0, $ii = 0, $tx, $ty
+	   
+	Local $vidgeologov[0]
+	Local $allGeologistsJson = getDataGroupSpecialists("geologists")
+	Local $count = UBound($allGeologistsJson) - 1
+	For $j = 0 To $count  Step + 1
+		_ArrayAdd($vidgeologov, "media\" & Json_Get($allGeologistsJson, '[' & $j & '].img_active'))
+	Next
+
+	WinActivate("The Settlers Онлайн")
+	chatoff()
+	drugioff()
+	If openzvezda() = 0 Then Return 0
+	If selecttabatzvezda("specialisti", 0) = 0 Then Return 0
+	If $kakih == 0 Then
+			While $i < $skolko
+				If openzvezda() = 1 Then
+					If selecttabatzvezda("specialisti", 1) = 1 Then
+						While 1
+							If _imagesearcharea($vidgeologov[0], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+							If _imagesearcharea($vidgeologov[1], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+							If _imagesearcharea($vidgeologov[2], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+							If _imagesearcharea($vidgeologov[3], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+							If _imagesearcharea($vidgeologov[4], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+							If _imagesearcharea($vidgeologov[5], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+							If _imagesearcharea($vidgeologov[6], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+							If _imagesearcharea($vidgeologov[7], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+							If _imagesearcharea($vidgeologov[8], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+							If _imagesearcharea($vidgeologov[9], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+							$ii = $ii + 1
+							zvezdamovepolzunokdown(1)
+							Sleep(Random(500, 1000, 1))
+							If $ii > 8 Then
+								If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
+									Return 0
+								EndIf
 							EndIf
-						EndIf
-					WEnd
-					$ii = 0
-					While $ii < 6
-						MouseMove($tx, $ty, 10 * $tormoza)
-						Sleep(300 * $tormoza)
-						MouseClick("left", $tx + Random(-2, 2, 1), $ty + Random(-2, 2, 1), 1)
-						removemouse(543, 0, 100)
-						sleepwhile("media\search_treasure_menu.bmp", 20, 10)
-						If haveimage("media\search_treasure_menu.bmp", 20) = 1 Then ExitLoop
-						$ii = $ii + 1
-						If $ii = 6 Then Return 0
-					WEnd
-					selecttabatgeolog($kuda, 1)
-					$i = $i + 1
+						WEnd
+						$ii = 0
+						While $ii < 6
+							MouseMove($tx, $ty, 10 * $tormoza)
+							Sleep(300 * $tormoza)
+							MouseClick("left", $tx + Random(-2, 2, 1), $ty + Random(-2, 2, 1), 1)
+							removemouse(543, 0, 100)
+							sleepwhile("media\search_treasure_menu.bmp", 20, 10)
+							If haveimage("media\search_treasure_menu.bmp", 20) = 1 Then ExitLoop
+							$ii = $ii + 1
+							If $ii = 6 Then Return 0
+						WEnd
+						selecttabatgeolog($kuda, 1)
+						$i = $i + 1
+					EndIf
 				EndIf
-			EndIf
-		WEnd
-		Return 1
-	Else
-		While $i < $skolko
-			If openzvezda() = 1 Then
-				If selecttabatzvezda("specialisti", 1) = 1 Then
-					While 1
-						If _imagesearcharea($kakih, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						$ii = $ii + 1
-						zvezdamovepolzunokdown(1)
-						Sleep(Random(500, 1000, 1))
-						If $ii > 8 Then
-							If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
-								Return 0
+			WEnd
+			Return 1
+		Else
+			While $i < $skolko
+				If openzvezda() = 1 Then
+					If selecttabatzvezda("specialisti", 1) = 1 Then
+						While 1
+							If _imagesearcharea($kakih, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+							$ii = $ii + 1
+							zvezdamovepolzunokdown(1)
+							Sleep(Random(500, 1000, 1))
+							If $ii > 8 Then
+								If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
+									Return 0
+								EndIf
 							EndIf
-						EndIf
-					WEnd
-					$ii = 0
-					While $ii < 6
-						MouseMove($tx, $ty, 10 * $tormoza)
-						Sleep(300 * $tormoza)
-						MouseClick("left", $tx + Random(-2, 2, 1), $ty + Random(-2, 2, 1), 1)
-						sleepwhile("media\search_treasure_menu.bmp", 20, 10)
-						If haveimage("media\search_treasure_menu.bmp", 20) = 1 Then ExitLoop
-						$ii = $ii + 1
-						If $ii = 6 Then Return 0
-					WEnd
-					selecttabatgeolog($kuda, 1)
-					$i = $i + 1
+						WEnd
+						$ii = 0
+						While $ii < 6
+							MouseMove($tx, $ty, 10 * $tormoza)
+							Sleep(300 * $tormoza)
+							MouseClick("left", $tx + Random(-2, 2, 1), $ty + Random(-2, 2, 1), 1)
+							sleepwhile("media\search_treasure_menu.bmp", 20, 10)
+							If haveimage("media\search_treasure_menu.bmp", 20) = 1 Then ExitLoop
+							$ii = $ii + 1
+							If $ii = 6 Then Return 0
+						WEnd
+						selecttabatgeolog($kuda, 1)
+						$i = $i + 1
+					EndIf
 				EndIf
-			EndIf
-		WEnd
-		Return 1
-	EndIf
-	Return 0
-EndFunc
+			WEnd
+			Return 1
+		EndIf
+		Return 0
+	EndFunc
 
 Global $gx, $gy, $finterrupt = 0, $gpx = 0, $gpy = 0, $vidpoiska = 0, $tippoiska = 0, $kartinkatippoiska = 0, $kartinkavidpoiska = 0, $kartinkatippoiska2 = 0, $kartinkavidpoiska2 = 0, $schet = 0
 #Region Запуск Почты
@@ -2687,9 +2694,13 @@ Global $gx, $gy, $finterrupt = 0, $gpx = 0, $gpy = 0, $vidpoiska = 0, $tippoiska
 Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 	Local $seychactetka = 0
 	Local $i = 0, $ii = 0, $tx, $ty
-	Local $vidrazvedov[14] = ["media\scout1.bmp", "media\scout2.bmp", "media\scout3.bmp", "media\scout4.bmp", "media\scout5.bmp", _
-		"media\scout6.bmp", "media\scout7.bmp", "media\scout8.bmp", "media\scout9.bmp", "media\scout10.bmp", _
-		"media\scout11.bmp", "media\scout12.bmp", "media\scout13.bmp", "media\scout14.bmp"]
+
+	Local $vidrazvedov[0]
+	Local $allScoutsJson = getDataGroupSpecialists("scouts")
+	Local $count = UBound($allScoutsJson) - 1
+	For $j = 0 To $count  Step + 1
+		_ArrayAdd($vidrazvedov, "media\" & Json_Get($allScoutsJson, '[' & $j & '].img_active'))
+	Next
 
 	WinActivate("The Settlers Онлайн")
 	Switch $tippoiska

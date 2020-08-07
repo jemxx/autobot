@@ -1,4 +1,5 @@
 #include "imagesearch32.au3"
+#include "Json.au3"
 #Include <GUIConstants.au3>
 #include "File.au3"
 #include <WinAPIEx.au3>
@@ -409,11 +410,11 @@ Func openzvezdaP()
 
 	setstatistik()
 	;Register()
-
+	
 	$search =  _imagesearch("media\zvezda_is_displayed.bmp", 1, $tx, $ty, 70)
 	While ($search <> 1) AND (TimerDiff($htimer) < 60000)
 		$search = _imagesearcharea("media\zvezda.bmp", 1, (@DesktopWidth/2 - 100), (@DesktopHeight/2), (@DesktopWidth/2 + 100), (@DesktopHeight), $tx, $ty, 80)
-
+		
 		If $search = 1 Then
 			MouseMove($tx, $ty, 10 * $tormoza)
 			Sleep(1000 * $tormoza)
@@ -426,7 +427,7 @@ Func openzvezdaP()
 		sleepwhile("media\zvezda_is_displayed.bmp", 80, 10)
 		$search = _imagesearch("media\zvezda_is_displayed.bmp", 1, $tx, $ty, 70)
 	WEnd
-
+	
 	If $search = 1 Then
 		Global $Zvezda_area[4] = [$tx - 520, $ty, $tx, $ty + 340]
 		Return 1
@@ -1073,114 +1074,78 @@ $ay = $ay + 3
  endfunc
 
 ;Add Jemxx
-Func getGeneralData($general)
-	Local $generalData[3]
+Func getDataGroupSpecialists($type)
+	Local $specJson, $specTmp, $specialists
 
-	If ($general = "Интедант" Or $general = "Интендант") Then
-		$generalData[0] = "media\avtobus.bmp"
-		$generalData[1] = 2000
-		$generalData[2] = "media\NOAvtobus.bmp"
-	ElseIf $general = "Клаус" Then
-		$generalData[0] = "media\klaus.bmp"
-		$generalData[1] = 2000
-		$generalData[2] = "media\NOklaus.bmp"
-	ElseIf $general = "Майор" Then
-		$generalData[0] = "media\major.bmp"
-		$generalData[1] = 285
-		$generalData[2] = "media\NOMajor.bmp"
-	ElseIf $general = "Нинзя" Then
-		$generalData[0] = "media\ninza.bmp"
-		$generalData[1] = 235
-		$generalData[2] = "media\NOninza.bmp"
-	ElseIf $general = "Ветеран" Then
-		$generalData[0] = "media\veteran.bmp"
-		$generalData[1] = 265
-		$generalData[2] = "media\NOveteran.bmp"
-	ElseIf $general = "Дракул" Then
-		$generalData[0] = "media\drakula.bmp"
-		$generalData[1] = 215
-		$generalData[2] = "media\NOdrakula.bmp"
-	ElseIf $general = "Генеральша" Then
-		$generalData[0] = "media\miss_klaus.bmp"
-		$generalData[1] = 215
-		$generalData[2] =  "media\NOmiss_klaus.bmp"
-	ElseIf $general = "Защитник" Then
-		$generalData[0] = "media\pfobnybr.bmp"
-		$generalData[1] = 215
-		$generalData[2] = "media\nopfobnybr.bmp"
-	ElseIf $general = "Золотой" Then
-		$generalData[0] = "media\zolotoy.bmp"
-		$generalData[1] = 215
-		$generalData[2] = "media\NOzolotoy.bmp"
-	ElseIf $general = "Жнец" Then
-		$generalData[0] = "media\znec.bmp"
-		$generalData[1] = 215
-		$generalData[2] = "media\NOznec.bmp"
-	ElseIf $general = "Простой" Then
-		$generalData[0] = "media\General.bmp"
-		$generalData[1] = 215
-		$generalData[2] = "media\NOgena.bmp"
-	ElseIf $general = "Нусала" Then
-		$generalData[0] = "media\nusa.bmp"
-		$generalData[1] = 180
-		$generalData[2] = "media\NOnusa.bmp"
-	ElseIf $general = "Варгус" Then
-		$generalData[0] = "media\vargus.bmp"
-		$generalData[1] = 195
-		$generalData[2] = "media\NOvargus.bmp"
-	ElseIf $general = "Анслем" Then
-		$generalData[0] = "media\anslem.bmp"
-		$generalData[1] = 165
-		$generalData[2] = "media\NOanslem.bmp"
-	ElseIf $general = "Медик" Then
-		$generalData[0] = "media\medik.bmp"
-		$generalData[1] = 215
-		$generalData[2] = "media\NOmedik.bmp"
-	ElseIf ($general = "Учёный" Or $general = "Ученый") Then
-		$generalData[0] = "media\ucheniy.bmp"
-		$generalData[1] = 215
-		$generalData[2] = "media\NOucheniy.bmp"
-	ElseIf $general = "Борис" Then
-		$generalData[0] = "media\boris.bmp"
-		$generalData[1] = 195
-		$generalData[2] = "media\NOboris.bmp"
-	ElseIf $general = "Малец" Then
-		$generalData[0] = "media\mladshij.bmp"
-		$generalData[1] = 155
-		$generalData[2] = "media\NOmladshij.bmp"
-	ElseIf $general = "Близнец" Then
-		$generalData[0] = "media\starshij.bmp"
-		$generalData[1] = 295
-		$generalData[2] = "media\NOstarshij.bmp"
-	ElseIf $general = "Сильвана" Then
-		$generalData[0] = "media\silvana.bmp"
-		$generalData[1] = 195
-		$generalData[2] = "media\NOsilvana.bmp"
-	ElseIf $general = "Стойкая" Then
-		$generalData[0] = "media\stoikii.bmp"
-		$generalData[1] = 235
-		$generalData[2] = "media\NOstoikii.bmp"
-	ElseIf $general = "Скрытный" Then
-		$generalData[0] = "media\skrytnyj.bmp"
-		$generalData[1] = 215
-		$generalData[2] = "media\NOskrytnyj.bmp"
-	ElseIf $general = "ЗолотойИнтендант" Then
-		$generalData[0] = "media\bigavtobus.bmp"
-		$generalData[1] = 3000
-		$generalData[2] = "media\NObigavtobus.bmp"
+	If FileExists(@ScriptDir & "\specialists.json") Then
+		$specJson = FileRead(@ScriptDir & "\specialists.json")
+		$specTmp = Json_Decode($specJson)
+		$specialists = Json_Get($specTmp, "." & $type)
+
+		If IsArray($specialists) Then
+			Return $specialists
+		Else
+			MsgBox(0 + 16, "Ошибка!", "Не удалось получить данные специалистов!")
+			Exit
+		EndIf
 	Else
-		MsgBox(0, "!!!", "Неправильный параметр типа Генерала")
-		Return 0
+		MsgBox(0 + 16, "Ошибка!", "Не найден файл " & @ScriptDir & "\specialists.json")
+		Exit	
 	EndIf
+EndFunc
 
-	Return $generalData
+Func getSpecialistData($name, $type)
+	Local $i = 0
+	Local $itemData
+	Local $specialists = getDataGroupSpecialists($type)
+
+	While 1
+		$itemName = Json_Get($specialists, '[' & $i & '].name')
+
+		If @error Then ExitLoop
+		If $name = $itemName Then
+			$itemData = "media\" & Json_Get($specialists, '[' & $i & '].img_active')
+			ExitLoop
+		EndIf
+
+		$i += 1
+	WEnd
+
+	Return $itemData	
+EndFunc
+
+Func getGeneralData($general)
+	Local $i = 0
+	Local $generalData[3]
+	Local $specialists = getDataGroupSpecialists("generals")
+
+	While 1
+		$generalName = Json_Get($specialists, '[' & $i & '].name')
+
+		If @error Then ExitLoop
+		If $general = $generalName Then
+			$generalData[0] = "media\" & Json_Get($specialists, '[' & $i & '].img_active')
+			$generalData[1] = Json_Get($specialists, '[' & $i & '].max_capacity')
+			$generalData[2] = "media\" & Json_Get($specialists, '[' & $i & '].img_noactive')
+			ExitLoop
+		EndIf
+
+		$i += 1
+	WEnd
+
+	if ($generalData[0] = "") Then
+		MsgBox(0, "Внимание!", "Не правильный параметр типа Генерала")
+		Return 0
+	Else
+		Return $generalData	
+	EndIf
 EndFunc
 
 Func getFullGeneralImg($max)
 	Local $fullGenaImg = 0
-
-	If FileExists("media\" & $max & ".bmp") Then
-		$fullGenaImg = "media\" & $max & ".bmp"
+	
+	If FileExists("media\army_values\" & $max & ".bmp") Then
+		$fullGenaImg = "media\army_values\" & $max & ".bmp"
 	EndIf
 
 	Return $fullGenaImg

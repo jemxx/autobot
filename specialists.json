@@ -1,0 +1,58 @@
+{
+  "generals": [
+    {"name": "Интедант", "max_capacity": 2000, "img_active": "avtobus.bmp", "img_noactive": "NOAvtobus.bmp"},
+    {"name": "Интендант", "max_capacity": 2000, "img_active": "avtobus.bmp", "img_noactive": "NOAvtobus.bmp"},
+    {"name": "Клаус", "max_capacity": 2000, "img_active": "klaus.bmp", "img_noactive": "NOklaus.bmp"},
+    {"name": "Майор", "max_capacity": 285, "img_active": "major.bmp", "img_noactive": "NOMajor.bmp"},
+    {"name": "Нинзя", "max_capacity": 235, "img_active": "ninza.bmp", "img_noactive": "NOninza.bmp"},
+    {"name": "Ветеран", "max_capacity": 265, "img_active": "veteran.bmp", "img_noactive": "NOveteran.bmp"},
+    {"name": "Дракул", "max_capacity": 215, "img_active": "drakula.bmp", "img_noactive": "NOdrakula.bmp"},
+    {"name": "Генеральша", "max_capacity": 215, "img_active": "miss_klaus.bmp", "img_noactive": "NOmiss_klaus.bmp"},
+    {"name": "Защитник", "max_capacity": 215, "img_active": "pfobnybr.bmp", "img_noactive": "nopfobnybr.bmp"},
+    {"name": "Золотой", "max_capacity": 215, "img_active": "zolotoy.bmp", "img_noactive": "NOzolotoy.bmp"},
+    {"name": "Жнец", "max_capacity": 215, "img_active": "znec.bmp", "img_noactive": "NOznec.bmp"},
+    {"name": "Простой", "max_capacity": 215, "img_active": "General.bmp", "img_noactive": "NOgena.bmp"},
+    {"name": "Нусала", "max_capacity": 180, "img_active": "nusa.bmp", "img_noactive": "NOnusa.bmp"},
+    {"name": "Варгус", "max_capacity": 195, "img_active": "vargus.bmp", "img_noactive": "NOvargus.bmp"},
+    {"name": "Анслем", "max_capacity": 165, "img_active": "anslem.bmp", "img_noactive": "NOanslem.bmp"},
+    {"name": "Медик", "max_capacity": 215, "img_active": "medik.bmp", "img_noactive": "NOmedik.bmp"},
+    {"name": "Учёный", "max_capacity": 215, "img_active": "ucheniy.bmp", "img_noactive": "NOucheniy.bmp"},
+    {"name": "Ученый", "max_capacity": 215, "img_active": "ucheniy.bmp", "img_noactive": "NOucheniy.bmp"},
+    {"name": "Борис", "max_capacity": 195, "img_active": "boris.bmp", "img_noactive": "NOboris.bmp"},
+    {"name": "Малец", "max_capacity": 155, "img_active": "mladshij.bmp", "img_noactive": "NOmladshij.bmp"},
+    {"name": "Близнец", "max_capacity": 295, "img_active": "starshij.bmp", "img_noactive": "NOstarshij.bmp"},
+    {"name": "Сильвана", "max_capacity": 195, "img_active": "silvana.bmp", "img_noactive": "NOsilvana.bmp"},
+    {"name": "Стойкая", "max_capacity": 235, "img_active": "stoikii.bmp", "img_noactive": "NOstoikii.bmp"},
+    {"name": "Скрытный", "max_capacity": 215, "img_active": "skrytnyj.bmp", "img_noactive": "NOskrytnyj.bmp"},
+    {"name": "ЗолотойИнтендант", "max_capacity": 3000, "img_active": "bigavtobus.bmp", "img_noactive": "NObigavtobus.bmp"}
+  ],
+  "geologists": [
+    {"name": "Золотой", "img_active": "vesel_geolog.bmp"},
+    {"name": "Простой", "img_active": "geolog.bmp"},
+    {"name": "Старательный", "img_active": "x2geolog.bmp"},
+    {"name": "Железный", "img_active": "zelezny_geolog.bmp"},
+    {"name": "Каменный", "img_active": "kamen_geolog.bmp"},
+    {"name": "Бывалый", "img_active": "byvalyj_geolog.bmp"},
+    {"name": "Золотая", "img_active": "zolotaya_geolog.bmp"},
+    {"name": "Археолог", "img_active": "arheolog_geolog.bmp"},
+    {"name": "Прелестный", "img_active": "prelestnyj_geolog.bmp"},
+    {"name": "Скрупулезный", "img_active": "skrupuleznyj_geolog.bmp"}
+  ]
+  ,
+  "scouts": [
+    {"name": "Следопыт", "img_active": "scout1.bmp"},
+    {"name": "Опытный", "img_active": "scout2.bmp"},
+    {"name": "Везучий", "img_active": "scout3.bmp"},
+    {"name": "Храбрый", "img_active": "scout4.bmp"},
+    {"name": "Простой", "img_active": "scout5.bmp"},
+    {"name": "Бесстрашный", "img_active": "scout6.bmp"},
+    {"name": "Авантюрист", "img_active": "scout7.bmp"},
+    {"name": "Зои", "img_active": "scout8.bmp"},
+    {"name": "Искренний", "img_active": "scout9.bmp"},
+    {"name": "Скромный", "img_active": "scout10.bmp"},
+    {"name": "Зачарованный", "img_active": "scout11.bmp"},
+    {"name": "Милый", "img_active": "scout12.bmp"},
+    {"name": "Настойчивый", "img_active": "scout13.bmp"},
+    {"name": "Безудержный", "img_active": "scout14.bmp"}
+  ]
+}
