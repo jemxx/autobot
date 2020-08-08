@@ -1,9 +1,9 @@
 #Region ;**** Directives created by AutoIt3Wrapper_GUI ****
 #AutoIt3Wrapper_Icon=media\icon.ico
-#AutoIt3Wrapper_Outfile=Autobot_test.exe
+#AutoIt3Wrapper_Outfile=Autobot.exe
 #AutoIt3Wrapper_Outfile_x64=Autobot_test_x64.exe
 #AutoIt3Wrapper_Res_Description=Автобот для The Settlers
-#AutoIt3Wrapper_Res_Fileversion=0.0.13.15
+#AutoIt3Wrapper_Res_Fileversion=0.0.13.17
 #AutoIt3Wrapper_Res_ProductName=Автобот
 #AutoIt3Wrapper_Res_ProductVersion=0.13
 #AutoIt3Wrapper_Res_LegalCopyright=2020 © by mysettlers.ru & Jemxx
@@ -436,6 +436,11 @@ Func komanda($delaem)
 			WEnd
 			Return atakgenapxpnoini($userDIR & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9])
 
+		Case "ЖдемПобеду"
+			$parametr = StringSplit($komanda[2], ",")
+			$generalData = getGeneralData($parametr[1])
+				Return sleepwhile2($generalData[0], $parametr[2], $parametr[3])
+
 		Case "ЖдемГенерала"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
@@ -740,13 +745,13 @@ Func komanda($delaem)
 			Return 1
 		Case "Геологи"
 			$parametr = StringSplit($komanda[2], ",")
-			
+
 			If UBound($parametr) = 4 Then
 				$kakih = 0
 			Else
 				$kakih = getSpecialistData($parametr[4], "geologists")
 				If ($kakih = "") Then
-					MsgBox(0, "Внимание!", "Не правильный параметр типа Геолога")
+					MsgBox(0, "Внимание!", "Неправильный параметр типа Геолога")
 					Return 0
 				EndIf
 			EndIf
@@ -758,7 +763,7 @@ Func komanda($delaem)
 			ElseIf $parametr[1] = 1 Then
 				Return 1
 			Else
-				MsgBox(0, "!!!", "Не правильный параметр флага")
+				MsgBox(0, "!!!", "Неправильный параметр флага")
 				Return 0
 			EndIf
 		Case "СобратьПочту"
@@ -769,13 +774,13 @@ Func komanda($delaem)
 			EndIf
 	    Case "Разведчики"
 			$parametr = StringSplit($komanda[2], ",")
-			
+
 			If UBound($parametr) = 6 Then
 				$kakih = 0
 			Else
 				$kakih = getSpecialistData($parametr[6], "scouts")
 				If ($kakih = "") Then
-					MsgBox(0, "Внимание!", "Не правильный параметр типа Разведчика")
+					MsgBox(0, "Внимание!", "Неправильный параметр типа Разведчика")
 					Return 0
 				EndIf
 			EndIf
@@ -787,7 +792,7 @@ Func komanda($delaem)
 			ElseIf $parametr[1] = 1 Then
 				Return 1
 			Else
-				MsgBox(0, "!!!", "Не правильный параметр флага")
+				MsgBox(0, "!!!", "Неправильный параметр флага")
 				Return 0
 			EndIf
 		Case "ПОВТОРИТЬ"
