@@ -1233,7 +1233,13 @@ Func okclosegena($yes)
 				Return 1
 			EndIf
 			$gluksnaboromarmii = $gluksnaboromarmii + 1
-			zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+			If $yes = 1 Then
+				zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+			EndIf
+			If $yes = 2 Then
+				zmemsmennuyukartinku("media\gohome.bmp", 30, "media\gohome_.bmp", 30)
+				zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
+			EndIf
 			writelog(" Успешно ")
 			Return 1
 		Else
@@ -1893,6 +1899,7 @@ EndFunc
 ;~ 	Return 0
 ;~ EndFunc
 
+
 ; Vasuta - Попытка переписать функцию ожидания генералов
 Func ozidanierasstanovki2($image, $yes)
 ; Ждем одного генерала
@@ -2215,7 +2222,13 @@ Func okclose_elitnoy_gena($yes)
 				Return 1
 			EndIf
 			$gluksnaboromarmii = $gluksnaboromarmii + 1
-			zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+			If $yes = 1 Then
+				zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+			EndIf
+			If $yes = 2 Then
+				zmemsmennuyukartinku("media\gohome.bmp", 30, "media\gohome_.bmp", 30)
+				zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
+			EndIf
 			writelog(" Успешно ")
 			Return 1
 		Else
@@ -2516,7 +2529,7 @@ EndFunc
 
 Func rungeolog($kuda, $skolko, $kakih)
    	Local $i = 0, $ii = 0, $tx, $ty
-	   
+
 	Local $vidgeologov[0]
 	Local $allGeologistsJson = getDataGroupSpecialists("geologists")
 	Local $count = UBound($allGeologistsJson) - 1

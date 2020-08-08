@@ -410,11 +410,11 @@ Func openzvezdaP()
 
 	setstatistik()
 	;Register()
-	
+
 	$search =  _imagesearch("media\zvezda_is_displayed.bmp", 1, $tx, $ty, 70)
 	While ($search <> 1) AND (TimerDiff($htimer) < 60000)
 		$search = _imagesearcharea("media\zvezda.bmp", 1, (@DesktopWidth/2 - 100), (@DesktopHeight/2), (@DesktopWidth/2 + 100), (@DesktopHeight), $tx, $ty, 80)
-		
+
 		If $search = 1 Then
 			MouseMove($tx, $ty, 10 * $tormoza)
 			Sleep(1000 * $tormoza)
@@ -427,7 +427,7 @@ Func openzvezdaP()
 		sleepwhile("media\zvezda_is_displayed.bmp", 80, 10)
 		$search = _imagesearch("media\zvezda_is_displayed.bmp", 1, $tx, $ty, 70)
 	WEnd
-	
+
 	If $search = 1 Then
 		Global $Zvezda_area[4] = [$tx - 520, $ty, $tx, $ty + 340]
 		Return 1
@@ -946,6 +946,20 @@ func sleepwhile($img, $tolerance, $time)
 		Return 0
 	endif
 endfunc
+
+func sleepwhile2($img, $time, $flag)
+	local $i = 0, $tolerance = 20
+	while (haveimage($img, $tolerance) = 0) or (haveimage("media\Gen_win.bmp", $tolerance) = 0) and ($i < ($time * 2))
+		sleep (500 * $tormoza)
+		$i = $i + 1
+	wend
+	if ($i < ($time * 2)) or ($flag = 1) then
+		Return 1
+	else
+		Return 0
+	endif
+endfunc
+
 func sleepNOwhile($img, $tolerance, $time)
 	local $i = 0
 	while (haveimage($img, $tolerance) = 1) and ($i < ($time * 2))
@@ -1090,7 +1104,7 @@ Func getDataGroupSpecialists($type)
 		EndIf
 	Else
 		MsgBox(0 + 16, "Ошибка!", "Не найден файл " & @ScriptDir & "\specialists.json")
-		Exit	
+		Exit
 	EndIf
 EndFunc
 
@@ -1111,7 +1125,7 @@ Func getSpecialistData($name, $type)
 		$i += 1
 	WEnd
 
-	Return $itemData	
+	Return $itemData
 EndFunc
 
 Func getGeneralData($general)
@@ -1137,13 +1151,13 @@ Func getGeneralData($general)
 		MsgBox(0, "Внимание!", "Не правильный параметр типа Генерала")
 		Return 0
 	Else
-		Return $generalData	
+		Return $generalData
 	EndIf
 EndFunc
 
 Func getFullGeneralImg($max)
 	Local $fullGenaImg = 0
-	
+
 	If FileExists("media\army_values\" & $max & ".bmp") Then
 		$fullGenaImg = "media\army_values\" & $max & ".bmp"
 	EndIf
