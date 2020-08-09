@@ -1,11 +1,11 @@
 #Region ;**** Directives created by AutoIt3Wrapper_GUI ****
 #AutoIt3Wrapper_Icon=media\icon.ico
-#AutoIt3Wrapper_Outfile=Autobot.exe
+#AutoIt3Wrapper_Outfile=Autobot_test.exe
 #AutoIt3Wrapper_Outfile_x64=Autobot_test_x64.exe
 #AutoIt3Wrapper_Res_Description=Автобот для The Settlers
-#AutoIt3Wrapper_Res_Fileversion=0.0.13.17
+#AutoIt3Wrapper_Res_Fileversion=0.0.18.14
 #AutoIt3Wrapper_Res_ProductName=Автобот
-#AutoIt3Wrapper_Res_ProductVersion=0.13
+#AutoIt3Wrapper_Res_ProductVersion=0.18
 #AutoIt3Wrapper_Res_LegalCopyright=2020 © by mysettlers.ru & Jemxx
 #AutoIt3Wrapper_Res_Language=1049
 #AutoIt3Wrapper_Run_AU3Check=n
@@ -439,13 +439,12 @@ Func komanda($delaem)
 		Case "ЖдемПобеду"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
-				Return sleepwhile2($generalData[0], $parametr[2], $parametr[3])
-
+			Return sleepwhile2($generalData[0], $parametr[2], $parametr[3])
+	
 		Case "ЖдемГенерала"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
 					Return ozidanierasstanovki2($generalData[0], $parametr[2])
-
 
 		Case "ЖдемВсехГенералов"
 			$parametr = StringSplit($komanda[2], ",")
@@ -745,7 +744,7 @@ Func komanda($delaem)
 			Return 1
 		Case "Геологи"
 			$parametr = StringSplit($komanda[2], ",")
-
+			
 			If UBound($parametr) = 4 Then
 				$kakih = 0
 			Else
@@ -774,7 +773,7 @@ Func komanda($delaem)
 			EndIf
 	    Case "Разведчики"
 			$parametr = StringSplit($komanda[2], ",")
-
+			
 			If UBound($parametr) = 6 Then
 				$kakih = 0
 			Else
