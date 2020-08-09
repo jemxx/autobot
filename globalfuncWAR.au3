@@ -1914,17 +1914,15 @@ Func ozidanierasstanovki2($image, $yes)
 		while 1
 			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) Then
 				$fl = 1
-				ExitLoop
+				ExitLoop 2
 			Else
 				If (zvezdamovepolzunokdown(1) = 0) then
-					; zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 					ExitLoop
 				EndIf
 			EndIf
 		WEnd
-		If ($fl = 1) Then ExitLoop
 		$i = $i + 1
-		Sleep(30000 * $tormoza)
+		Sleep(3000)
 	Wend
 	If ($fl = 1) and ($yes = 1) Then
 		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
@@ -1942,25 +1940,23 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
     writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
 	Local $tx = 0, $ty = 0, $i = 0, $fl = 0
 	Sleep(500 * $tormoza)
-	while 1 AND ($i < 300)
+	while ($i < 300)
 		If openzvezdap() = 0 Then
 			Return 0
 		EndIf
 		selecttabatzvezda("specialisti", 0)
 		while 1
-			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) AND (_imagesearcharea($image_NA, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 0)  Then
+			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) Then
 				$fl = 1
-				ExitLoop
+				ExitLoop 2
 			Else
 				If (zvezdamovepolzunokdown(1) = 0) then
-					; zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 					ExitLoop
 				EndIf
 			EndIf
 		WEnd
-		If ($fl = 1) Then ExitLoop
 		$i = $i + 1
-		Sleep(30000 * $tormoza)
+		Sleep(3000)
 	Wend
 	If ($fl = 1) and ($yes = 1) Then
 		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
