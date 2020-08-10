@@ -1899,7 +1899,6 @@ EndFunc
 ;~ 	Return 0
 ;~ EndFunc
 
-
 ; Vasuta - Попытка переписать функцию ожидания генералов
 Func ozidanierasstanovki2($image, $yes)
 ; Ждем одного генерала
@@ -1916,7 +1915,7 @@ Func ozidanierasstanovki2($image, $yes)
 				$fl = 1
 				ExitLoop 2
 			Else
-				If (zvezdamovepolzunokdown(1) = 0) then
+				If (zvezdamovepolzunokdown(0) = 0) then
 					ExitLoop
 				EndIf
 			EndIf
@@ -1946,11 +1945,11 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
 		EndIf
 		selecttabatzvezda("specialisti", 0)
 		while 1
-			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) Then
+			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) AND (_imagesearcharea($image_NA, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 0) Then
 				$fl = 1
 				ExitLoop 2
 			Else
-				If (zvezdamovepolzunokdown(1) = 0) then
+				If (zvezdamovepolzunokdown(0) = 0) Then
 					ExitLoop
 				EndIf
 			EndIf
