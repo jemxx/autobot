@@ -2888,3 +2888,41 @@ Func clickOnCoordinates($img, $k_x, $k_y, $else_x, $else_y, $kudax, $kuday)
 
 	Return 1
 EndFunc
+
+Func perenosotkritimgenoynoini($kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
+	Local $tx = 0, $ty = 0, $search = 0, $i = 0
+	zmemsmennuyukartinku("media\truba.bmp", 50, "media\truba_.bmp", 50)
+	$i = 0
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+		If (200 < ($tochka_sektora_x + $kudax)) AND (($tochka_sektora_x + $kudax) < (@DesktopWidth - 200)) Then
+			If (200 < ($tochka_sektora_y + $kuday)) AND (($tochka_sektora_y + $kuday) < (@DesktopHeight - 200)) Then
+				$centrovat = 1
+			Else
+				$centrovat = 1
+				If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+			EndIf
+		Else
+			$centrovat = 1
+			If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+		EndIf
+	Else
+		$centrovat = 1
+		If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+	EndIf
+	sleepwhile("media\Otmena.bmp", 30, 10)
+	$kudax = $tochka_sektora_x + $kudax
+	$kuday = $tochka_sektora_y + $kuday
+	While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 6)
+		MouseMove($kudax, $kuday, 10 * $tormoza)
+		Sleep(700 * $tormoza)
+		MouseClick("left", $kudax, $kuday, 1)
+		Sleep(300 * $tormoza)
+		go5()
+		$i = $i + 1
+	WEnd
+	If $i = 6 Then
+		Return 0
+	Else
+		Return 1
+	EndIf
+EndFunc

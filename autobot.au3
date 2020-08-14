@@ -398,6 +398,66 @@ Func komanda($delaem)
 				EndIf
 			EndIf
 
+		Case "НабратьИперенести"
+			$centrovat = 1
+			Local $perebor = 1
+			$parametr = StringSplit($komanda[2], ",")
+			$komand_na_massiv = UBound($parametr)
+			While $perebor < $komand_na_massiv
+				If $parametr[$perebor] = "НеЦентровать" Then
+					$centrovat = 0
+					ExitLoop
+				EndIf
+				$perebor = $perebor + 1
+			WEnd
+
+			$generalData = getGeneralData($parametr[1])
+			$gena = $generalData[0]
+			$full = $generalData[1]
+
+			If openzvezdap() = 1 Then
+				If selecttabatzvezda("specialisti", 1) = 1 Then
+					If generali($gena, $parametr[2]) = 1 Then
+						If $parametr[3] = "Э" Then
+							While apply_elitnoy_army($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $full, 0) <> 1
+								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+								openzvezdap()
+								selecttabatzvezda("specialisti", 1)
+								generali($gena, $parametr[2])
+							WEnd
+							$gluksnaboromarmii = 0
+							Return perenosotkritimgenoynoini($parametr[11], $parametr[12], $userDIR & $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17])
+						EndIf
+						If $parametr[3] = "1" Then
+							If haveimage("media\1.bmp", 20) = 1 Then
+								Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
+							Else
+								While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
+									zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+									openzvezdap()
+									selecttabatzvezda("specialisti", 1)
+									generali($gena, $parametr[2])
+								WEnd
+								$gluksnaboromarmii = 0
+								Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
+							EndIf
+						EndIf
+						If $parametr[3] = "П" Then
+							While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
+								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+								openzvezdap()
+								selecttabatzvezda("specialisti", 1)
+								generali($gena, $parametr[2])
+							WEnd
+							$gluksnaboromarmii = 0
+							Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
+						Else
+							Return 0
+						EndIf
+					EndIf
+				EndIf
+			EndIf	
+
 		Case "Атаковать"
 			$centrovat = 1
 			Local $perebor = 1
