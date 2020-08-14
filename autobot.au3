@@ -1,11 +1,11 @@
 #Region ;**** Directives created by AutoIt3Wrapper_GUI ****
 #AutoIt3Wrapper_Icon=media\icon.ico
 #AutoIt3Wrapper_Outfile=Autobot.exe
-#AutoIt3Wrapper_Outfile_x64=Autobot_test_x64.exe
+#AutoIt3Wrapper_Outfile_x64=Autobot_x64.exe
 #AutoIt3Wrapper_Res_Description=Автобот для The Settlers
-#AutoIt3Wrapper_Res_Fileversion=0.0.13.17
+#AutoIt3Wrapper_Res_Fileversion=0.0.18.14
 #AutoIt3Wrapper_Res_ProductName=Автобот
-#AutoIt3Wrapper_Res_ProductVersion=0.13
+#AutoIt3Wrapper_Res_ProductVersion=0.18
 #AutoIt3Wrapper_Res_LegalCopyright=2020 © by mysettlers.ru & Jemxx
 #AutoIt3Wrapper_Res_Language=1049
 #AutoIt3Wrapper_Run_AU3Check=n
@@ -47,8 +47,8 @@ $stroka = getAllPassages($passagesDir)
 	Global $level = GUICreate("Автобот", 225, 360, @DesktopWidth - 245, 20)
 	GUISetBkColor(16777088)
 	GUICtrlCreateLabel("Проходим по файлу", 5, 10)
-	Global $file_gui = GUICtrlCreateCombo("", 5, 30, 215, 20,  BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL, $WS_VSCROLL))
-	_GUICtrlComboBox_SetMinVisible($file_gui,15)
+	Global $file_gui = GUICtrlCreateCombo("", 5, 30, 215, 20, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL, $WS_VSCROLL)) 
+	_GUICtrlComboBox_SetMinVisible($file_gui, 23)
 	GUICtrlSetData(-1, $stroka, read_ini(3))
 	GUICtrlCreateLabel("Начинаем со строки", 5, 60)
 	Global $file_gui2 = GUICtrlCreateInput("1", 5, 80, 215, 20)
@@ -264,7 +264,7 @@ Func startflag($stroka)
 				$pass_count_flag = 1
 			Else
 				TrayTip("", "Флаг Количество указан повторно - значение проигнорировано", 0)
-			EndIf
+			EndIf	
 	EndSwitch
 EndFunc
 
@@ -349,66 +349,6 @@ Func komanda($delaem)
 				EndIf
 			EndIf
 
-		Case "НабратьИперенести"
-			$centrovat = 1
-			Local $perebor = 1
-			$parametr = StringSplit($komanda[2], ",")
-			$komand_na_massiv = UBound($parametr)
-			While $perebor < $komand_na_massiv
-				If $parametr[$perebor] = "НеЦентровать" Then
-					$centrovat = 0
-					ExitLoop
-				EndIf
-				$perebor = $perebor + 1
-			WEnd
-
-			$generalData = getGeneralData($parametr[1])
-			$gena = $generalData[0]
-			$full = $generalData[1]
-
-			If openzvezdap() = 1 Then
-				If selecttabatzvezda("specialisti", 1) = 1 Then
-					If generali($gena, $parametr[2]) = 1 Then
-						If $parametr[3] = "Э" Then
-							While apply_elitnoy_army($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $full, 0) <> 1
-								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
-								openzvezdap()
-								selecttabatzvezda("specialisti", 1)
-								generali($gena, $parametr[2])
-							WEnd
-							$gluksnaboromarmii = 0
-							Return perenosotkritimgenoynoini($parametr[11], $parametr[12], $userDIR & $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17])
-						EndIf
-						If $parametr[3] = "1" Then
-							If haveimage("media\1.bmp", 20) = 1 Then
-								Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
-							Else
-								While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
-									zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
-									openzvezdap()
-									selecttabatzvezda("specialisti", 1)
-									generali($gena, $parametr[2])
-								WEnd
-								$gluksnaboromarmii = 0
-								Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
-							EndIf
-						EndIf
-						If $parametr[3] = "П" Then
-							While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
-								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
-								openzvezdap()
-								selecttabatzvezda("specialisti", 1)
-								generali($gena, $parametr[2])
-							WEnd
-							$gluksnaboromarmii = 0
-							Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
-						Else
-							Return 0
-						EndIf
-					EndIf
-				EndIf
-			EndIf
-
 		Case "НабратьИатаковать"
 			$centrovat = 1
 			Local $perebor = 1
@@ -469,6 +409,66 @@ Func komanda($delaem)
 				EndIf
 			EndIf
 
+		Case "НабратьИперенести"
+			$centrovat = 1
+			Local $perebor = 1
+			$parametr = StringSplit($komanda[2], ",")
+			$komand_na_massiv = UBound($parametr)
+			While $perebor < $komand_na_massiv
+				If $parametr[$perebor] = "НеЦентровать" Then
+					$centrovat = 0
+					ExitLoop
+				EndIf
+				$perebor = $perebor + 1
+			WEnd
+
+			$generalData = getGeneralData($parametr[1])
+			$gena = $generalData[0]
+			$full = $generalData[1]
+
+			If openzvezdap() = 1 Then
+				If selecttabatzvezda("specialisti", 1) = 1 Then
+					If generali($gena, $parametr[2]) = 1 Then
+						If $parametr[3] = "Э" Then
+							While apply_elitnoy_army($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $full, 0) <> 1
+								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+								openzvezdap()
+								selecttabatzvezda("specialisti", 1)
+								generali($gena, $parametr[2])
+							WEnd
+							$gluksnaboromarmii = 0
+							Return perenosotkritimgenoynoini($parametr[11], $parametr[12], $userDIR & $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17])
+						EndIf
+						If $parametr[3] = "1" Then
+							If haveimage("media\1.bmp", 20) = 1 Then
+								Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
+							Else
+								While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
+									zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+									openzvezdap()
+									selecttabatzvezda("specialisti", 1)
+									generali($gena, $parametr[2])
+								WEnd
+								$gluksnaboromarmii = 0
+								Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
+							EndIf
+						EndIf
+						If $parametr[3] = "П" Then
+							While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
+								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+								openzvezdap()
+								selecttabatzvezda("specialisti", 1)
+								generali($gena, $parametr[2])
+							WEnd
+							$gluksnaboromarmii = 0
+							Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
+						Else
+							Return 0
+						EndIf
+					EndIf
+				EndIf
+			EndIf	
+
 		Case "Атаковать"
 			$centrovat = 1
 			Local $perebor = 1
@@ -511,21 +511,20 @@ Func komanda($delaem)
 		Case "ЖдемПобеду"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
-				Return sleepwhile2($generalData[0], $parametr[2], $parametr[3])
-
+			Return sleepwhile2($generalData[0], $parametr[2], $parametr[3])
+	
 		Case "ЖдемГенерала"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
-					Return ozidanierasstanovki2($generalData[0], $parametr[2])
-
+			Return ozidanierasstanovki2($generalData[0], $parametr[2])
 
 		Case "ЖдемВсехГенералов"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
-					Return ozidanierasstanovki($generalData[0], $generalData[2], $parametr[2])
+			Return ozidanierasstanovki($generalData[0], $generalData[2], $parametr[2])
 
 		Case "ПеренестиГенерала"
-				$centrovat = 1
+			$centrovat = 1
 			Local $perebor = 1
 			$parametr = StringSplit($komanda[2], ",")
 			$komand_na_massiv = UBound($parametr)
@@ -633,7 +632,7 @@ Func komanda($delaem)
 		Case "Сообщение"
 			MsgBox(0, "Сообщение", $komanda[2])
 			Return 1
-
+			
 		Case "Стрельнуть"
 			If $komanda[2] = "Бронзоподкова" Then
 				If open_usilok("usiliteli", "media\br_podkova.bmp", 0) = 1 Then
@@ -818,7 +817,7 @@ Func komanda($delaem)
 			Return 1
 		Case "Геологи"
 			$parametr = StringSplit($komanda[2], ",")
-
+			
 			If UBound($parametr) = 4 Then
 				$kakih = 0
 			Else
@@ -847,7 +846,7 @@ Func komanda($delaem)
 			EndIf
 	    Case "Разведчики"
 			$parametr = StringSplit($komanda[2], ",")
-
+			
 			If UBound($parametr) = 6 Then
 				$kakih = 0
 			Else
@@ -878,8 +877,7 @@ Func komanda($delaem)
 				MsgBox(0, "Пройдено нужное количество", $pass_all)
 				Return 1
 			EndIf
-
-
+			
 		Case "СборКоллекций"
 			collectwarikiatprikl()
 			Return 1
