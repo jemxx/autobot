@@ -534,6 +534,44 @@ Func atakalageraotkritimgenoynoini($kudax, $kuday, $img, $k_x, $k_y, $else_x, $e
 	EndIf
 EndFunc
 
+Func perenosotkritimgenoynoini($kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
+	Local $tx = 0, $ty = 0, $search = 0, $i = 0
+	zmemsmennuyukartinku("media\truba.bmp", 50, "media\truba_.bmp", 50)
+	$i = 0
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+		If (200 < ($tochka_sektora_x + $kudax)) AND (($tochka_sektora_x + $kudax) < (@DesktopWidth - 200)) Then
+			If (200 < ($tochka_sektora_y + $kuday)) AND (($tochka_sektora_y + $kuday) < (@DesktopHeight - 200)) Then
+				$centrovat = 1
+			Else
+				$centrovat = 1
+				If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+			EndIf
+		Else
+			$centrovat = 1
+			If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+		EndIf
+	Else
+		$centrovat = 1
+		If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+	EndIf
+	sleepwhile("media\Otmena.bmp", 30, 10)
+	$kudax = $tochka_sektora_x + $kudax
+	$kuday = $tochka_sektora_y + $kuday
+	While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 6)
+		MouseMove($kudax, $kuday, 10 * $tormoza)
+		Sleep(700 * $tormoza)
+		MouseClick("left", $kudax, $kuday, 1)
+		Sleep(300 * $tormoza)
+		go5()
+		$i = $i + 1
+	WEnd
+	If $i = 6 Then
+		Return 0
+	Else
+		Return 1
+	EndIf
+EndFunc
+
 Func atakgenapxpnoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $kudax, $kuday)
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
 	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
@@ -1899,6 +1937,7 @@ EndFunc
 ;~ 	Return 0
 ;~ EndFunc
 
+
 ; Vasuta - Попытка переписать функцию ожидания генералов
 Func ozidanierasstanovki2($image, $yes)
 ; Ждем одного генерала
@@ -1913,15 +1952,17 @@ Func ozidanierasstanovki2($image, $yes)
 		while 1
 			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) Then
 				$fl = 1
-				ExitLoop 2
+				ExitLoop
 			Else
-				If (zvezdamovepolzunokdown(0) = 0) then
+				If (zvezdamovepolzunokdown(1) = 0) then
+					; zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 					ExitLoop
 				EndIf
 			EndIf
 		WEnd
+		If ($fl = 1) Then ExitLoop
 		$i = $i + 1
-		Sleep(3000)
+		Sleep(30000 * $tormoza)
 	Wend
 	If ($fl = 1) and ($yes = 1) Then
 		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
@@ -1939,23 +1980,25 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
     writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
 	Local $tx = 0, $ty = 0, $i = 0, $fl = 0
 	Sleep(500 * $tormoza)
-	while ($i < 300)
+	while 1 AND ($i < 300)
 		If openzvezdap() = 0 Then
 			Return 0
 		EndIf
 		selecttabatzvezda("specialisti", 0)
 		while 1
-			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) AND (_imagesearcharea($image_NA, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 0) Then
+			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) AND (_imagesearcharea($image_NA, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 0)  Then
 				$fl = 1
-				ExitLoop 2
+				ExitLoop
 			Else
-				If (zvezdamovepolzunokdown(0) = 0) Then
+				If (zvezdamovepolzunokdown(0) = 0) then
+					; zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 					ExitLoop
 				EndIf
 			EndIf
 		WEnd
+		If ($fl = 1) Then ExitLoop
 		$i = $i + 1
-		Sleep(3000)
+		Sleep(30000 * $tormoza)
 	Wend
 	If ($fl = 1) and ($yes = 1) Then
 		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
@@ -2329,6 +2372,8 @@ Func sborostatkovarmii($army_type)
 	EndIf
 EndFunc
 
+
+; Исходная функция отправки ген в прикл
 Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 	Local $tx = 0, $ty = 0, $i = 0, $generalov = 0, $ax = 0, $ay = 0, $search = 0, $error_otpravka = 0
 	chatoff()
@@ -2556,7 +2601,7 @@ Func rungeolog($kuda, $skolko, $kakih)
 							zvezdamovepolzunokdown(1)
 							Sleep(Random(500, 1000, 1))
 							If $ii > 8 Then
-								If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
+								If Then
 									Return 0
 								EndIf
 							EndIf
