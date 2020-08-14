@@ -1,7 +1,7 @@
 #Region ;**** Directives created by AutoIt3Wrapper_GUI ****
 #AutoIt3Wrapper_Icon=media\icon.ico
-#AutoIt3Wrapper_Outfile=Autobot_test.exe
-#AutoIt3Wrapper_Outfile_x64=Autobot_test_x64.exe
+#AutoIt3Wrapper_Outfile=Autobot.exe
+#AutoIt3Wrapper_Outfile_x64=Autobot_x64.exe
 #AutoIt3Wrapper_Res_Description=Автобот для The Settlers
 #AutoIt3Wrapper_Res_Fileversion=0.0.18.14
 #AutoIt3Wrapper_Res_ProductName=Автобот
