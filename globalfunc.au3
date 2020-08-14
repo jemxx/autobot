@@ -934,10 +934,28 @@ func Read_ini($stroka)
 	Return $sText
 endfunc
 
+func sleepwhile2($img, $time, $flag)
+	local $i = 0, $tolerance = 30, $fl_win = 0
+	while ($i < ($time * 2))
+		If ((haveimage($img, $tolerance) = 1) and (haveimage("media\Gen_win.bmp", $tolerance) = 1)) Then
+			$fl_win = 1
+			TrayTip("", "Генерал победил", 0)
+			Exitloop
+		EndIf
+		sleep (500)
+		$i = $i + 1
+	wend
+	if ($fl_win = 1) or ($flag = 1) then
+		Return 1
+	else
+		Return 0
+	endif
+endfunc
+
 func sleepwhile($img, $tolerance, $time)
 	local $i = 0
 	while (haveimage($img, $tolerance) = 0) and ($i < ($time * 2))
-		sleep (500 * $tormoza)
+		sleep (500)
 		$i = $i + 1
 	wend
 	if $i < ($time * 2) then
@@ -947,23 +965,10 @@ func sleepwhile($img, $tolerance, $time)
 	endif
 endfunc
 
-func sleepwhile2($img, $time, $flag)
-	local $i = 0, $tolerance = 20
-	while (haveimage($img, $tolerance) = 0) or (haveimage("media\Gen_win.bmp", $tolerance) = 0) and ($i < ($time * 2))
-		sleep (500 * $tormoza)
-		$i = $i + 1
-	wend
-	if ($i < ($time * 2)) or ($flag = 1) then
-		Return 1
-	else
-		Return 0
-	endif
-endfunc
-
 func sleepNOwhile($img, $tolerance, $time)
 	local $i = 0
 	while (haveimage($img, $tolerance) = 1) and ($i < ($time * 2))
-		sleep (500 * $tormoza)
+		sleep (500)
 		$i = $i + 1
 	wend
 	if $i < ($time * 2) then

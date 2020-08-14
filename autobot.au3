@@ -28,6 +28,7 @@ Global $komand_na_massiv = 0
 Global $strokadlaperehoda = 0
 Global $centrovat = 1, $currentbuf = 0
 Global $stroka
+Global $pass_count, $pass_all, $pass_count_flag = 0
 
 #include "globalfunc.au3"
 #include "globalfuncWAR.au3"
@@ -181,6 +182,8 @@ EndFunc
 
 Func gogogogo()
 ;Основной цикл построчного чтения команд
+	$pass_count = -1
+	$pass_count_flag = 0
 	Local $ttt = _filecountlines($abot)
 	If $ttt = 1 Then $i = 0
 	While $i <= _filecountlines($abot)
@@ -254,6 +257,14 @@ Func startflag($stroka)
 			$tormoza = $parametr[2]
 		Case "/Тревога"
 			$alarm = $parametr[2]
+		Case "/Количество"
+			If $pass_count_flag = 0 Then
+				$pass_all = $parametr[2]
+				$pass_count = $pass_all
+				$pass_count_flag = 1
+			Else
+				TrayTip("", "Флаг Количество указан повторно - значение проигнорировано", 0)
+			EndIf	
 	EndSwitch
 EndFunc
 
@@ -505,15 +516,15 @@ Func komanda($delaem)
 		Case "ЖдемГенерала"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
-					Return ozidanierasstanovki2($generalData[0], $parametr[2])
+			Return ozidanierasstanovki2($generalData[0], $parametr[2])
 
 		Case "ЖдемВсехГенералов"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
-					Return ozidanierasstanovki($generalData[0], $generalData[2], $parametr[2])
+			Return ozidanierasstanovki($generalData[0], $generalData[2], $parametr[2])
 
 		Case "ПеренестиГенерала"
-				$centrovat = 1
+			$centrovat = 1
 			Local $perebor = 1
 			$parametr = StringSplit($komanda[2], ",")
 			$komand_na_massiv = UBound($parametr)
@@ -621,6 +632,7 @@ Func komanda($delaem)
 		Case "Сообщение"
 			MsgBox(0, "Сообщение", $komanda[2])
 			Return 1
+			
 		Case "Стрельнуть"
 			If $komanda[2] = "Бронзоподкова" Then
 				If open_usilok("usiliteli", "media\br_podkova.bmp", 0) = 1 Then
@@ -855,9 +867,17 @@ Func komanda($delaem)
 				MsgBox(0, "!!!", "Неправильный параметр флага")
 				Return 0
 			EndIf
+
 		Case "ПОВТОРИТЬ"
-			$strokadlaperehoda = $komanda[2]
-			Return 1
+			$pass_count = $pass_count - 1
+			If ($pass_count <> 0) Then ; или проходоим бесконечно ($pass_count < 0) или еще не все прошли ($pass_count > 0)
+				$strokadlaperehoda = $komanda[2]
+				Return 1
+			Else
+				MsgBox(0, "Пройдено нужное количество", $pass_all)
+				Return 1
+			EndIf
+			
 		Case "СборКоллекций"
 			collectwarikiatprikl()
 			Return 1
