@@ -28,7 +28,7 @@ Global $komand_na_massiv = 0
 Global $strokadlaperehoda = 0
 Global $centrovat = 1, $currentbuf = 0
 Global $stroka
-Global $pass_count, $pass_all, $pass_count_flag = 0
+Global $pass_count = -1, $pass_all, $pass_count_flag = 0
 
 #include "globalfunc.au3"
 #include "globalfuncWAR.au3"
@@ -47,7 +47,7 @@ $stroka = getAllPassages($passagesDir)
 	Global $level = GUICreate("Автобот", 225, 360, @DesktopWidth - 245, 20)
 	GUISetBkColor(16777088)
 	GUICtrlCreateLabel("Проходим по файлу", 5, 10)
-	Global $file_gui = GUICtrlCreateCombo("", 5, 30, 215, 20, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL, $WS_VSCROLL)) 
+	Global $file_gui = GUICtrlCreateCombo("", 5, 30, 215, 20, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL, $WS_VSCROLL))
 	_GUICtrlComboBox_SetMinVisible($file_gui, 23)
 	GUICtrlSetData(-1, $stroka, read_ini(3))
 	GUICtrlCreateLabel("Начинаем со строки", 5, 60)
@@ -107,6 +107,8 @@ $stroka = getAllPassages($passagesDir)
 			Case $gui_event_close
 				Exit
 			Case $no1_1
+				$pass_count = -1
+				$pass_count_flag = 0
 				tormoza()
 				TrayTip("", "Мы запустились...", 0)
 
@@ -182,8 +184,6 @@ EndFunc
 
 Func gogogogo()
 ;Основной цикл построчного чтения команд
-	$pass_count = -1
-	$pass_count_flag = 0
 	Local $ttt = _filecountlines($abot)
 	If $ttt = 1 Then $i = 0
 	While $i <= _filecountlines($abot)
@@ -191,7 +191,13 @@ Func gogogogo()
 		If $ttt = 1 Then $i = 1
 		register()
 		If FileReadLine($abot, $i) = "ПОВТОРИТЬ" Then
-			$i = 1
+			$pass_count = $pass_count - 1
+			If ($pass_count <> 0) Then ; или проходим бесконечно ($pass_count < 0) или еще не все прошли ($pass_count > 0)
+				$i = 1
+			Else
+				MsgBox(0, "", "Прошли нужное количество")
+				ExitLoop
+			EndIf
 			;setstatistik()
 		EndIf
 		If $i > 20 Then
@@ -264,7 +270,7 @@ Func startflag($stroka)
 				$pass_count_flag = 1
 			Else
 				TrayTip("", "Флаг Количество указан повторно - значение проигнорировано", 0)
-			EndIf	
+			EndIf
 	EndSwitch
 EndFunc
 
@@ -467,7 +473,7 @@ Func komanda($delaem)
 						EndIf
 					EndIf
 				EndIf
-			EndIf	
+			EndIf
 
 		Case "Атаковать"
 			$centrovat = 1
@@ -512,7 +518,7 @@ Func komanda($delaem)
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
 			Return sleepwhile2($generalData[0], $parametr[2], $parametr[3])
-	
+
 		Case "ЖдемГенерала"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
@@ -632,7 +638,7 @@ Func komanda($delaem)
 		Case "Сообщение"
 			MsgBox(0, "Сообщение", $komanda[2])
 			Return 1
-			
+
 		Case "Стрельнуть"
 			If $komanda[2] = "Бронзоподкова" Then
 				If open_usilok("usiliteli", "media\br_podkova.bmp", 0) = 1 Then
@@ -817,7 +823,7 @@ Func komanda($delaem)
 			Return 1
 		Case "Геологи"
 			$parametr = StringSplit($komanda[2], ",")
-			
+
 			If UBound($parametr) = 4 Then
 				$kakih = 0
 			Else
@@ -846,7 +852,7 @@ Func komanda($delaem)
 			EndIf
 	    Case "Разведчики"
 			$parametr = StringSplit($komanda[2], ",")
-			
+
 			If UBound($parametr) = 6 Then
 				$kakih = 0
 			Else
@@ -870,14 +876,15 @@ Func komanda($delaem)
 
 		Case "ПОВТОРИТЬ"
 			$pass_count = $pass_count - 1
-			If ($pass_count <> 0) Then ; или проходоим бесконечно ($pass_count < 0) или еще не все прошли ($pass_count > 0)
-				$strokadlaperehoda = $komanda[2]
+			If ($pass_count = 0) Then ; или проходим бесконечно ($pass_count < 0) или еще не все прошли ($pass_count > 0)
+				MsgBox(0, '', "Пройдено нужное количество")
 				Return 1
 			Else
-				MsgBox(0, "Пройдено нужное количество", $pass_all)
+				$strokadlaperehoda = $komanda[2]
 				Return 1
 			EndIf
-			
+
+
 		Case "СборКоллекций"
 			collectwarikiatprikl()
 			Return 1
