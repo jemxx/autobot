@@ -192,13 +192,12 @@ Func gogogogo()
 		register()
 		If FileReadLine($abot, $i) = "ПОВТОРИТЬ" Then
 			$pass_count = $pass_count - 1
-			If ($pass_count <> 0) Then ; или проходим бесконечно ($pass_count < 0) или еще не все прошли ($pass_count > 0)
-				$i = 1
-			Else
+			$i = 1
+			;setstatistik()
+		EndIf
+		If ($pass_count = 0) Then ; кончились прохождения
 				MsgBox(0, "", "Прошли нужное количество")
 				ExitLoop
-			EndIf
-			;setstatistik()
 		EndIf
 		If $i > 20 Then
 			If $register = 0 Then ExitLoop
@@ -876,14 +875,8 @@ Func komanda($delaem)
 
 		Case "ПОВТОРИТЬ"
 			$pass_count = $pass_count - 1
-			If ($pass_count = 0) Then ; или проходим бесконечно ($pass_count < 0) или еще не все прошли ($pass_count > 0)
-				MsgBox(0, '', "Пройдено нужное количество")
-				Return 1
-			Else
-				$strokadlaperehoda = $komanda[2]
-				Return 1
-			EndIf
-
+			$strokadlaperehoda = $komanda[2]
+			Return 1
 
 		Case "СборКоллекций"
 			collectwarikiatprikl()
