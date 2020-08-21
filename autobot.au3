@@ -28,7 +28,7 @@ Global $komand_na_massiv = 0
 Global $strokadlaperehoda = 0
 Global $centrovat = 1, $currentbuf = 0
 Global $stroka
-Global $pass_count, $pass_all, $pass_count_flag = 0
+Global $pass_unlim_yes = 0, $pass_count
 
 #include "globalfunc.au3"
 #include "globalfuncWAR.au3"
@@ -44,19 +44,24 @@ $stroka = getAllPassages($passagesDir)
 
 ;Рисуем окно бота
 #Region ### START Koda GUI section ### Form=
-	Global $level = GUICreate("Автобот", 225, 360, @DesktopWidth - 245, 20)
+	Global $level = GUICreate("Автобот", 225, 400, @DesktopWidth - 245, 20)
 	GUISetBkColor(16777088)
 	GUICtrlCreateLabel("Проходим по файлу", 5, 10)
-	Global $file_gui = GUICtrlCreateCombo("", 5, 30, 215, 20, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL, $WS_VSCROLL)) 
+	Global $file_gui = GUICtrlCreateCombo("", 5, 30, 215, 20, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL, $WS_VSCROLL))
 	_GUICtrlComboBox_SetMinVisible($file_gui, 23)
 	GUICtrlSetData(-1, $stroka, read_ini(3))
 	GUICtrlCreateLabel("Начинаем со строки", 5, 60)
 	Global $file_gui2 = GUICtrlCreateInput("1", 5, 80, 215, 20)
-	Global $obnova = GUICtrlCreateCheckbox("Проверять обновления", 5, 105, 180, 25)
+	GUICtrlCreateLabel("Количество повторов", 5, 110)
+	Global $pass_cnt = GUICtrlCreateInput("1", 5, 130, 215, 20)
+
+	Global $pass_unlim = GUICtrlCreateCheckbox("Повторять бесконечно", 5, 160, 180, 25)
+	GUICtrlSetState($pass_unlim, $GUI_CHECKED)
+	Global $obnova = GUICtrlCreateCheckbox("Проверять обновления", 5, 180, 180, 25)
 	GUICtrlSetState($obnova, $GUI_UNCHECKED)
-	Global $osibki = GUICtrlCreateCheckbox("Выводить предупреждения", 5, 130, 180, 25)
+	Global $osibki = GUICtrlCreateCheckbox("Выводить предупреждения", 5, 200, 180, 25)
 	GUICtrlSetState($osibki, $GUI_UNCHECKED)
-	Global $alarmCheckBox = GUICtrlCreateCheckbox("Включить Тревогу", 5, 155, 180, 25)
+	Global $alarmCheckBox = GUICtrlCreateCheckbox("Включить Тревогу", 5, 220, 180, 25)
 	GUICtrlSetState($alarmCheckBox, $GUI_CHECKED)
 
 	;Проверяем состояние чата
@@ -87,11 +92,11 @@ $stroka = getAllPassages($passagesDir)
 		EndIf
 	EndIf
 
-	Global $no1_1 = GUICtrlCreateButton("ЗАПУСК", 5, 200, 215, 30)
-	Global $pr8 = GUICtrlCreateButton("Поддержать проект", 5, 265, 215, 20)
-	Global $pr9 = GUICtrlCreateButton("Справка", 5, 290, 215, 20)
-	GUICtrlCreateLabel("F7 - пауза до слива", 5, 320)
-	GUICtrlCreateLabel("F9 - пауза, F11 - прервать", 5, 340)
+	Global $no1_1 = GUICtrlCreateButton("ЗАПУСК", 5, 260, 215, 30)
+	Global $pr8 = GUICtrlCreateButton("Поддержать проект", 5, 300, 215, 20)
+	Global $pr9 = GUICtrlCreateButton("Справка", 5, 330, 215, 20)
+	GUICtrlCreateLabel("F7 - пауза до слива", 5, 360)
+	GUICtrlCreateLabel("F9 - пауза, F11 - прервать", 5, 380)
 	$haccelinterupt = GUICtrlCreateDummy()
 	Dim $accelkeys[1][2] = [["z", $haccelinterupt]]
 	GUISetAccelerators($accelkeys)
@@ -113,6 +118,8 @@ $stroka = getAllPassages($passagesDir)
 				Global $abot = $passagesDir & "\" & GUICtrlRead($file_gui)
 				If FileExists($abot) Then
 					$i = GUICtrlRead($file_gui2)
+					$pass_count = GUICtrlRead($pass_cnt)
+
 					setstatistik()
 					$register = 0
 
@@ -120,7 +127,10 @@ $stroka = getAllPassages($passagesDir)
 						obnova()
 					EndIf
 					If GUICtrlRead($alarmCheckBox) == $GUI_CHECKED Then
-						$alarm = 1;
+						$alarm = 1
+					EndIf
+					If GUICtrlRead($pass_unlim) == $GUI_CHECKED Then
+						$pass_unlim_yes = 1
 					EndIf
 					If ProcessExists("proverkasliva.exe") Then
 						ProcessClose("proverkasliva.exe")
@@ -182,8 +192,6 @@ EndFunc
 
 Func gogogogo()
 ;Основной цикл построчного чтения команд
-	$pass_count = -1
-	$pass_count_flag = 0
 	Local $ttt = _filecountlines($abot)
 	If $ttt = 1 Then $i = 0
 	While $i <= _filecountlines($abot)
@@ -191,8 +199,16 @@ Func gogogogo()
 		If $ttt = 1 Then $i = 1
 		register()
 		If FileReadLine($abot, $i) = "ПОВТОРИТЬ" Then
+			If $pass_unlim_yes = 0 Then
+				$pass_count = $pass_count - 1
+				GUICtrlSetData($pass_cnt, $pass_count)
+			EndIf
 			$i = 1
 			;setstatistik()
+		EndIf
+		If ($pass_unlim_yes = 0) AND (GUICtrlRead($pass_cnt) = 0) Then ; кончились прохождения
+				MsgBox(0, "", "Прошли нужное количество")
+				ExitLoop
 		EndIf
 		If $i > 20 Then
 			If $register = 0 Then ExitLoop
@@ -257,14 +273,14 @@ Func startflag($stroka)
 			$tormoza = $parametr[2]
 		Case "/Тревога"
 			$alarm = $parametr[2]
-		Case "/Количество"
-			If $pass_count_flag = 0 Then
-				$pass_all = $parametr[2]
-				$pass_count = $pass_all
-				$pass_count_flag = 1
-			Else
-				TrayTip("", "Флаг Количество указан повторно - значение проигнорировано", 0)
-			EndIf	
+;~ 		Case "/Количество"
+;~ 			If $pass_count_flag = 0 Then
+;~ 				$pass_all = $parametr[2]
+;~ 				$pass_count = $pass_all
+;~ 				$pass_count_flag = 1
+;~ 			Else
+;~ 				TrayTip("", "Флаг Количество указан повторно - значение проигнорировано", 0)
+;~ 			EndIf
 	EndSwitch
 EndFunc
 
@@ -467,7 +483,7 @@ Func komanda($delaem)
 						EndIf
 					EndIf
 				EndIf
-			EndIf	
+			EndIf
 
 		Case "Атаковать"
 			$centrovat = 1
@@ -512,7 +528,7 @@ Func komanda($delaem)
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
 			Return sleepwhile2($generalData[0], $parametr[2], $parametr[3])
-	
+
 		Case "ЖдемГенерала"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
@@ -632,7 +648,7 @@ Func komanda($delaem)
 		Case "Сообщение"
 			MsgBox(0, "Сообщение", $komanda[2])
 			Return 1
-			
+
 		Case "Стрельнуть"
 			If $komanda[2] = "Бронзоподкова" Then
 				If open_usilok("usiliteli", "media\br_podkova.bmp", 0) = 1 Then
@@ -817,7 +833,7 @@ Func komanda($delaem)
 			Return 1
 		Case "Геологи"
 			$parametr = StringSplit($komanda[2], ",")
-			
+
 			If UBound($parametr) = 4 Then
 				$kakih = 0
 			Else
@@ -846,7 +862,7 @@ Func komanda($delaem)
 			EndIf
 	    Case "Разведчики"
 			$parametr = StringSplit($komanda[2], ",")
-			
+
 			If UBound($parametr) = 6 Then
 				$kakih = 0
 			Else
@@ -869,15 +885,13 @@ Func komanda($delaem)
 			EndIf
 
 		Case "ПОВТОРИТЬ"
-			$pass_count = $pass_count - 1
-			If ($pass_count <> 0) Then ; или проходоим бесконечно ($pass_count < 0) или еще не все прошли ($pass_count > 0)
-				$strokadlaperehoda = $komanda[2]
-				Return 1
-			Else
-				MsgBox(0, "Пройдено нужное количество", $pass_all)
-				Return 1
+			If $pass_unlim_yes = 0 Then
+				$pass_count = $pass_count - 1
+				GUICtrlSetData($pass_cnt, $pass_count)
 			EndIf
-			
+			$strokadlaperehoda = $komanda[2]
+			Return 1
+
 		Case "СборКоллекций"
 			collectwarikiatprikl()
 			Return 1
