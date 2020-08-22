@@ -2600,7 +2600,7 @@ Func rungeolog($kuda, $skolko, $kakih)
 							zvezdamovepolzunokdown(1)
 							Sleep(Random(500, 1000, 1))
 							If $ii > 8 Then
-								If Then
+								If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
 									Return 0
 								EndIf
 							EndIf
