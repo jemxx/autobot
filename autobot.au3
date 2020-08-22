@@ -49,11 +49,14 @@ $stroka = getAllPassages($passagesDir)
 	GUICtrlCreateLabel("Проходим по файлу", 5, 10)
 	Global $file_gui = GUICtrlCreateCombo("", 5, 30, 215, 20, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL, $WS_VSCROLL))
 	_GUICtrlComboBox_SetMinVisible($file_gui, 23)
-	GUICtrlSetData(-1, $stroka, read_ini(3))
+	GUICtrlSetData(-1, $stroka, Read_ini(3))
 	GUICtrlCreateLabel("Начинаем со строки", 5, 60)
 	Global $file_gui2 = GUICtrlCreateInput("1", 5, 80, 215, 20)
+
+	Local $max_repeat = Read_ini(12)
+	If $max_repeat < 1 Then $max_repeat = 99
 	GUICtrlCreateLabel("Количество повторов", 5, 110)
-	Global $pass_cnt = GUICtrlCreateInput("1", 5, 130, 215, 20)
+	Global $pass_cnt = GUICtrlCreateInput($max_repeat, 5, 130, 215, 20)
 
 	Global $pass_unlim = GUICtrlCreateCheckbox("Повторять бесконечно", 5, 160, 180, 25)
 	GUICtrlSetState($pass_unlim, $GUI_CHECKED)
@@ -65,12 +68,12 @@ $stroka = getAllPassages($passagesDir)
 	GUICtrlSetState($alarmCheckBox, $GUI_CHECKED)
 
 	;Проверяем состояние чата
-	If read_ini(8) = "" Then
+	If Read_ini(8) = "" Then
 		If ProcessExists("Чат.exe") Then
 		Else
 			Run("Чат.exe")
 		EndIf
-	ElseIf read_ini(8) = 0 Then
+	ElseIf Read_ini(8) = 0 Then
 	Else
 		If ProcessExists("Чат.exe") Then
 		Else
@@ -78,12 +81,12 @@ $stroka = getAllPassages($passagesDir)
 		EndIf
 	EndIf
 	;Проверяем флаг разрыва соединения
-	If read_ini(10) = "" Then
+	If Read_ini(10) = "" Then
 		If ProcessExists("serverOFF.exe") Then
 		Else
 			Run("media\serverOFF.exe")
 		EndIf
-	ElseIf read_ini(10) = 0 Then
+	ElseIf Read_ini(10) = 0 Then
 		If ProcessExists("serverOFF.exe") Then ProcessClose("serverOFF.exe")
 	Else
 		If ProcessExists("serverOFF.exe") Then
@@ -102,7 +105,7 @@ $stroka = getAllPassages($passagesDir)
 	GUISetAccelerators($accelkeys)
 	GUIRegisterMsg($wm_command, "_WM_COMMAND")
 	GUISetState(@SW_SHOW)
-	If read_ini(7) = "" Then
+	If Read_ini(7) = "" Then
 		MsgBox(0, "Непорядок", "Вы не заполнили поле Ник_в_чате в файле настроек autobot.ini")
 		Exit
 	EndIf
