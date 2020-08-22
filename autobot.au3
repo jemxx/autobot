@@ -59,7 +59,7 @@ $stroka = getAllPassages($passagesDir)
 	Global $pass_cnt = GUICtrlCreateInput($max_repeat, 5, 130, 215, 20)
 
 	Global $pass_unlim = GUICtrlCreateCheckbox("Повторять бесконечно", 5, 160, 180, 25)
-	GUICtrlSetState($pass_unlim, $GUI_CHECKED)
+	GUICtrlSetState($pass_unlim, $GUI_UNCHECKED)
 	Global $obnova = GUICtrlCreateCheckbox("Проверять обновления", 5, 180, 180, 25)
 	GUICtrlSetState($obnova, $GUI_UNCHECKED)
 	Global $osibki = GUICtrlCreateCheckbox("Выводить предупреждения", 5, 200, 180, 25)
