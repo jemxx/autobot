@@ -2372,7 +2372,6 @@ Func sborostatkovarmii($army_type)
 	EndIf
 EndFunc
 
-
 ; Исходная функция отправки ген в прикл
 Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 	Local $tx = 0, $ty = 0, $i = 0, $generalov = 0, $ax = 0, $ay = 0, $search = 0, $error_otpravka = 0

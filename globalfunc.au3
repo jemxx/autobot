@@ -936,13 +936,12 @@ endfunc
 
 func sleepwhile2($img, $time, $flag)
 	local $i = 0, $tolerance = 30, $fl_win = 0
-	while ($i < ($time * 2))
+	while ($i < $time)
 		If ((haveimage($img, $tolerance) = 1) and (haveimage("media\Gen_win.bmp", $tolerance) = 1)) Then
 			$fl_win = 1
-			TrayTip("", "Генерал победил", 0)
 			Exitloop
 		EndIf
-		sleep (500)
+		sleep(1000)
 		$i = $i + 1
 	wend
 	if ($fl_win = 1) or ($flag = 1) then
@@ -1135,7 +1134,7 @@ EndFunc
 
 Func getGeneralData($general)
 	Local $i = 0
-	Local $generalData[3]
+	Local $generalData[4]
 	Local $specialists = getDataGroupSpecialists("generals")
 
 	While 1
@@ -1146,6 +1145,7 @@ Func getGeneralData($general)
 			$generalData[0] = "media\" & Json_Get($specialists, '[' & $i & '].img_active')
 			$generalData[1] = Json_Get($specialists, '[' & $i & '].max_capacity')
 			$generalData[2] = "media\" & Json_Get($specialists, '[' & $i & '].img_noactive')
+			$generalData[3] = "media\" & Json_Get($specialists, '[' & $i & '].img_sp')
 			ExitLoop
 		EndIf
 
@@ -1153,7 +1153,7 @@ Func getGeneralData($general)
 	WEnd
 
 	if ($generalData[0] = "") Then
-		MsgBox(0, "Внимание!", "Не правильный параметр типа Генерала")
+		MsgBox(0, "Внимание!", "Неправильный параметр типа Генерала")
 		Return 0
 	Else
 		Return $generalData
