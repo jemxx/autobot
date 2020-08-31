@@ -391,7 +391,7 @@ Func atakagenoyizzvezdi_1n($general, $nomergenerala, $nubi, $menti, $soldati, $e
 				generali($general, $nomergenerala)
 				sleepwhile("media\zadacha_geni.bmp", 30, 10)
 			WEnd
-			If haveimage("media\1.bmp", 20) = 1 Then
+			If haveimage("media\army_values\1.bmp", 20) = 1 Then
 				$gluksnaboromarmii = 0
 				Return atakalageraotkritimgenoy($kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
 			ElseIf applyarmy($nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena, 0) = 1 Then
@@ -465,7 +465,7 @@ Func viborgenipodataku_1n($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday
 	WEnd
 	If $i = 10 Then
 		Return 0
-	ElseIf haveimage("media\1.bmp", 20) = 1 Then
+	ElseIf haveimage("media\army_values\1.bmp", 20) = 1 Then
 		zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 		Return 1
 	Else
@@ -812,7 +812,7 @@ Func viborgenipodataku_1nnoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $ot
 	WEnd
 	If $i = 10 Then
 		Return 0
-	ElseIf haveimage("media\1.bmp", 20) = 1 Then
+	ElseIf haveimage("media\army_values\1.bmp", 20) = 1 Then
 		zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 		Return 1
 	Else

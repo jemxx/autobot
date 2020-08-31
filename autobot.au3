@@ -341,7 +341,7 @@ Func komanda($delaem)
 							Return 1
 						EndIf
 						If $parametr[3] = "1" Then
-							If haveimage("media\1.bmp", 20) = 1 Then
+							If haveimage("media\army_values\1.bmp", 20) = 1 Then
 								Return 1
 							Else
 								While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, $parametr[13]) <> 1
@@ -399,7 +399,7 @@ Func komanda($delaem)
 							Return atakalageraotkritimgenoynoini($parametr[11], $parametr[12], $userDIR & $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17])
 						EndIf
 						If $parametr[3] = "1" Then
-							If haveimage("media\1.bmp", 20) = 1 Then
+							If haveimage("media\army_values\1.bmp", 20) = 1 Then
 								Return atakalageraotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
 							Else
 								While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
@@ -459,7 +459,7 @@ Func komanda($delaem)
 							Return perenosotkritimgenoynoini($parametr[11], $parametr[12], $userDIR & $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17])
 						EndIf
 						If $parametr[3] = "1" Then
-							If haveimage("media\1.bmp", 20) = 1 Then
+							If haveimage("media\army_values\1.bmp", 20) = 1 Then
 								Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
 							Else
 								While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
