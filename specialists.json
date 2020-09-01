@@ -24,7 +24,8 @@
     {"name": "Сильвана", "max_capacity": 195, "img_active": "silvana.bmp", "img_noactive": "NOsilvana.bmp", "img_sp": "spsilvana.bmp"},
     {"name": "Стойкая", "max_capacity": 235, "img_active": "stoikii.bmp", "img_noactive": "NOstoikii.bmp", "img_sp": "spstoikii.bmp"},
     {"name": "Скрытный", "max_capacity": 215, "img_active": "skrytnyj.bmp", "img_noactive": "NOskrytnyj.bmp", "img_sp": "spskrytnyj.bmp"},
-    {"name": "ЗолотойИнтендант", "max_capacity": 3000, "img_active": "bigavtobus.bmp", "img_noactive": "NObigavtobus.bmp", "img_sp": ""}
+    {"name": "ЗолотойИнтендант", "max_capacity": 3000, "img_active": "bigavtobus.bmp", "img_noactive": "NObigavtobus.bmp", "img_sp": ""},
+    {"name": "Бородотряс", "max_capacity": 175, "img_active": "boroda.bmp", "img_noactive": "NOboroda.bmp", "img_sp": "spBoroda.bmp"}
   ],
   "geologists": [
     {"name": "Золотой", "img_active": "vesel_geolog.bmp"},
