@@ -53,6 +53,7 @@
     {"name": "Зачарованный", "img_active": "scout11.bmp"},
     {"name": "Милый", "img_active": "scout12.bmp"},
     {"name": "Настойчивый", "img_active": "scout13.bmp"},
-    {"name": "Безудержный", "img_active": "scout14.bmp"}
+    {"name": "Безудержный", "img_active": "scout14.bmp"},
+    {"name": "Дерзкий", "img_active": "scout15.bmp"}
   ]
 }

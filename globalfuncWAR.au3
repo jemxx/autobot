@@ -2809,7 +2809,8 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 						If $tetki = 1 Then $seychactetka = 1
 						ExitLoop
 					EndIf
-
+					If _imagesearcharea($vidrazvedov[14], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+					
 					$ii = $ii + 1
 					zvezdamovepolzunokdown(0)
 					zvezdamovepolzunokdown(0)
