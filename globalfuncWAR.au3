@@ -1870,74 +1870,6 @@ Func endpricla($sekund)
 	Return 0
 EndFunc
 
-;~ Исходный код
-;~ Func ozidanierasstanovki2($image, $yes)
-;~ ; Ждем генерала
-;~     writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
-;~ 	Local $tx = 0, $ty = 0, $i = 0
-;~ 	Sleep(500 * $tormoza)
-;~ 	If openzvezdap() = 1 Then
-;~ 		selecttabatzvezda("specialisti", 0)
-;~ 		While (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 0) AND ($i < 300)
-;~ 			Sleep(3000 * $tormoza)
-;~ 			If mod($i, 30) = 0 Then
-;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-;~ 				If openzvezdap() = 1 Then
-;~ 					selecttabatzvezda("specialisti", 0)
-;~ 				Else
-;~ 						Return 0
-;~ 				EndIf
-;~ 				Sleep(500 * $tormoza)
-;~ 			EndIf
-;~ 			$i = $i + 1
-;~ 		WEnd
-;~ 		If $yes = 1 Then
-;~ 			zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-;~ 		EndIf
-;~ 		If $i = 300 Then
-;~ 			writelog("=====ОШИБКА " & $i & @CRLF)
-;~ 			Return 0
-;~ 		EndIf
-;~ 		writelog("=====УСПЕХ " & $i & @CRLF)
-;~ 		Return 1
-;~ 	EndIf
-;~ 	writelog("=====ОШИБКА " & $i & @CRLF)
-;~ 	Return 0
-;~ EndFunc
-
-;~ Func ozidanierasstanovki($image, $yes)
-;~ ; Ждем всех генералов
-;~ 	writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКУ " & $yes & @CRLF)
-;~ 	Local $tx = 0, $ty = 0, $i = 0
-;~ 	Sleep(500 * $tormoza)
-;~ 	If openzvezdap() = 1 Then
-;~ 		selecttabatzvezda("specialisti", 0)
-;~ 		While (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) AND ($i < 300)
-;~ 			Sleep(3000 * $tormoza)
-;~ 			If mod($i, 30) = 0 Then
-;~ 				zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-;~ 				If openzvezdap() = 0 Then
-;~ 					Return 0
-;~ 				EndIf
-;~ 				Sleep(500 * $tormoza)
-;~ 			EndIf
-;~ 			$i = $i + 1
-;~ 		WEnd
-;~ 		If $yes = 1 Then
-;~ 			zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-;~ 		EndIf
-;~ 		If $i = 300 Then
-;~ 			writelog("=====ОШИБКА " & $i & @CRLF)
-;~ 			Return 0
-;~ 		EndIf
-;~ 		writelog("=====УСПЕХ " & $i & @CRLF)
-;~ 		Return 1
-;~ 	EndIf
-;~ 	writelog("=====ОШИБКА " & $i & @CRLF)
-;~ 	Return 0
-;~ EndFunc
-
-
 ; Vasuta - Попытка переписать функцию ожидания генералов
 Func ozidanierasstanovki2($image, $yes)
 ; Ждем одного генерала
@@ -2582,81 +2514,81 @@ Func rungeolog($kuda, $skolko, $kakih)
 	If openzvezda() = 0 Then Return 0
 	If selecttabatzvezda("specialisti", 0) = 0 Then Return 0
 	If $kakih == 0 Then
-			While $i < $skolko
-				If openzvezda() = 1 Then
-					If selecttabatzvezda("specialisti", 1) = 1 Then
-						While 1
-							If _imagesearcharea($vidgeologov[0], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-							If _imagesearcharea($vidgeologov[1], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-							If _imagesearcharea($vidgeologov[2], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-							If _imagesearcharea($vidgeologov[3], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-							If _imagesearcharea($vidgeologov[4], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-							If _imagesearcharea($vidgeologov[5], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-							If _imagesearcharea($vidgeologov[6], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-							If _imagesearcharea($vidgeologov[7], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-							If _imagesearcharea($vidgeologov[8], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-							If _imagesearcharea($vidgeologov[9], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-							If _imagesearcharea($vidgeologov[10], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-							$ii = $ii + 1
-							zvezdamovepolzunokdown(1)
-							Sleep(Random(500, 1000, 1))
-							If $ii > 8 Then
-								If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
-									Return 0
-								EndIf
+		While $i < $skolko
+			If openzvezda() = 1 Then
+				If selecttabatzvezda("specialisti", 1) = 1 Then
+					While 1
+						If _imagesearcharea($vidgeologov[0], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+						If _imagesearcharea($vidgeologov[1], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+						If _imagesearcharea($vidgeologov[2], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+						If _imagesearcharea($vidgeologov[3], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+						If _imagesearcharea($vidgeologov[4], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+						If _imagesearcharea($vidgeologov[5], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+						If _imagesearcharea($vidgeologov[6], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+						If _imagesearcharea($vidgeologov[7], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+						If _imagesearcharea($vidgeologov[8], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+						If _imagesearcharea($vidgeologov[9], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+						If _imagesearcharea($vidgeologov[10], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+						$ii = $ii + 1
+						zvezdamovepolzunokdown(1)
+						Sleep(Random(500, 1000, 1))
+						If $ii > 8 Then
+							If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
+								Return 0
 							EndIf
-						WEnd
-						$ii = 0
-						While $ii < 6
-							MouseMove($tx, $ty, 10 * $tormoza)
-							Sleep(300 * $tormoza)
-							MouseClick("left", $tx + Random(-2, 2, 1), $ty + Random(-2, 2, 1), 1)
-							removemouse(543, 0, 100)
-							sleepwhile("media\search_treasure_menu.bmp", 20, 10)
-							If haveimage("media\search_treasure_menu.bmp", 20) = 1 Then ExitLoop
-							$ii = $ii + 1
-							If $ii = 6 Then Return 0
-						WEnd
-						selecttabatgeolog($kuda, 1)
-						$i = $i + 1
-					EndIf
+						EndIf
+					WEnd
+					$ii = 0
+					While $ii < 6
+						MouseMove($tx, $ty, 10 * $tormoza)
+						Sleep(300 * $tormoza)
+						MouseClick("left", $tx + Random(-2, 2, 1), $ty + Random(-2, 2, 1), 1)
+						removemouse(543, 0, 100)
+						sleepwhile("media\search_treasure_menu.bmp", 20, 10)
+						If haveimage("media\search_treasure_menu.bmp", 20) = 1 Then ExitLoop
+						$ii = $ii + 1
+						If $ii = 6 Then Return 0
+					WEnd
+					selecttabatgeolog($kuda, 1)
+					$i = $i + 1
 				EndIf
-			WEnd
-			Return 1
-		Else
-			While $i < $skolko
-				If openzvezda() = 1 Then
-					If selecttabatzvezda("specialisti", 1) = 1 Then
-						While 1
-							If _imagesearcharea($kakih, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-							$ii = $ii + 1
-							zvezdamovepolzunokdown(1)
-							Sleep(Random(500, 1000, 1))
-							If $ii > 8 Then
-								If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
-									Return 0
-								EndIf
+			EndIf
+		WEnd
+		Return 1
+	Else
+		While $i < $skolko
+			If openzvezda() = 1 Then
+				If selecttabatzvezda("specialisti", 1) = 1 Then
+					While 1
+						If _imagesearcharea($kakih, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
+						$ii = $ii + 1
+						zvezdamovepolzunokdown(1)
+						Sleep(Random(500, 1000, 1))
+						If $ii > 8 Then
+							If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
+								Return 0
 							EndIf
-						WEnd
-						$ii = 0
-						While $ii < 6
-							MouseMove($tx, $ty, 10 * $tormoza)
-							Sleep(300 * $tormoza)
-							MouseClick("left", $tx + Random(-2, 2, 1), $ty + Random(-2, 2, 1), 1)
-							sleepwhile("media\search_treasure_menu.bmp", 20, 10)
-							If haveimage("media\search_treasure_menu.bmp", 20) = 1 Then ExitLoop
-							$ii = $ii + 1
-							If $ii = 6 Then Return 0
-						WEnd
-						selecttabatgeolog($kuda, 1)
-						$i = $i + 1
-					EndIf
+						EndIf
+					WEnd
+					$ii = 0
+					While $ii < 6
+						MouseMove($tx, $ty, 10 * $tormoza)
+						Sleep(300 * $tormoza)
+						MouseClick("left", $tx + Random(-2, 2, 1), $ty + Random(-2, 2, 1), 1)
+						sleepwhile("media\search_treasure_menu.bmp", 20, 10)
+						If haveimage("media\search_treasure_menu.bmp", 20) = 1 Then ExitLoop
+						$ii = $ii + 1
+						If $ii = 6 Then Return 0
+					WEnd
+					selecttabatgeolog($kuda, 1)
+					$i = $i + 1
 				EndIf
-			WEnd
-			Return 1
-		EndIf
-		Return 0
-	EndFunc
+			EndIf
+		WEnd
+		Return 1
+	EndIf
+	Return 0
+EndFunc
 
 Global $gx, $gy, $finterrupt = 0, $gpx = 0, $gpy = 0, $vidpoiska = 0, $tippoiska = 0, $kartinkatippoiska = 0, $kartinkavidpoiska = 0, $kartinkatippoiska2 = 0, $kartinkavidpoiska2 = 0, $schet = 0
 #Region Запуск Почты
@@ -2789,38 +2721,22 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 		While 1
 			If openzvezda() = 1 Then
 				While 1
-					If _imagesearcharea($vidrazvedov[0], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[1], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[2], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[3], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[4], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[5], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then
-						If $tetki = 1 Then $seychactetka = 1
-						ExitLoop
-					EndIf
-					If _imagesearcharea($vidrazvedov[6], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[7], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[8], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[9], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[10], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[11], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[12], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					If _imagesearcharea($vidrazvedov[13], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then
-						If $tetki = 1 Then $seychactetka = 1
-						ExitLoop
-					EndIf
-					If _imagesearcharea($vidrazvedov[14], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-					
-					$ii = $ii + 1
-					zvezdamovepolzunokdown(0)
-					zvezdamovepolzunokdown(0)
-					Sleep(Random(500, 1000, 1) * $tormoza)
-					If $ii > 5 Then
-						If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
-							Return 1
+					For $j = 0 To $count  Step + 1
+						If _imagesearcharea($vidrazvedov[$j], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then
+							If (($j = 5) Or ($j = 13)) And ($tetki = 1) Then $seychactetka = 1
+							ExitLoop 2
 						EndIf
+					Next
+				
+					If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 1 Then
+						zvezdamovepolzunokdown(1)
+						Sleep(Random(500, 1000, 1) * $tormoza)
+					Else
+						zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+						Return 1
 					EndIf
 				WEnd
+				
 				$ii = 0
 				While $ii < 6
 					MouseMove($tx, $ty, 10 * $tormoza)
@@ -2833,7 +2749,7 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 					If $ii = 6 Then Return 0
 				WEnd
 				If $seychactetka = 1 Then
-					zmemsmennuyukartinku("media\poisk_prikla.bmp", 30, "media\poisk_prikla.bmp_", 30)
+					zmemsmennuyukartinku("media\poisk_prikla.bmp", 30, "media\poisk_prikla_.bmp", 30)
 					go5()
 					$seychactetka = 0
 					If $kartinkatippoiska = "media\search_treasure_super_long.bmp" Then
@@ -2844,8 +2760,11 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 					zmemsmennuyukartinku($kartinkavidpoiska, 30, $kartinkavidpoiska2, 30)
 					go5()
 					removemouse(500, 0, 500)
-					zmemsmennuyukartinkuizdem($kartinkatippoiska, 30, $kartinkatippoiska2, 30, "media\search_button_OK_enabled.bmp", 20)
-					If $arti = 1 Then zmemsmennuyukartinkuizdem("media\search_artifact.bmp", 30, "media\search_artifact_.bmp", 30, "media\search_button_OK_enabled.bmp", 20)
+					If ($arti = 1) and (haveimage("media\search_artifact.bmp", 20) = 1) Then
+						zmemsmennuyukartinkuizdem("media\search_artifact.bmp", 30, "media\search_artifact_.bmp", 30, "media\search_button_OK_enabled.bmp", 20)
+					Else
+						zmemsmennuyukartinkuizdem($kartinkatippoiska, 30, $kartinkatippoiska2, 30, "media\search_button_OK_enabled.bmp", 20)
+					EndIf
 					zmemsmennuyukartinku("media\search_button_OK_enabled.bmp", 20, "media\search_button_OK_enabled_.bmp", 20)
 				EndIf
 			EndIf
@@ -2860,14 +2779,12 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 						EndIf
 						ExitLoop
 					EndIf
-					$ii = $ii + 1
-					zvezdamovepolzunokdown(0)
-					zvezdamovepolzunokdown(0)
-					Sleep(Random(500, 1000, 1) * $tormoza)
-					If $ii > 5 Then
-						If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
-							Return 1
-						EndIf
+					If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 1 Then
+						zvezdamovepolzunokdown(1)
+						Sleep(Random(500, 1000, 1) * $tormoza)
+					Else
+						zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+						Return 1
 					EndIf
 				WEnd
 				$ii = 0
@@ -2892,14 +2809,17 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 				Else
 					zmemsmennuyukartinku($kartinkavidpoiska, 30, $kartinkavidpoiska2, 30)
 					go5()
-					zmemsmennuyukartinkuizdem($kartinkatippoiska, 30, $kartinkatippoiska2, 30, "media\search_button_OK_enabled.bmp", 20)
-					If $arti = 1 Then zmemsmennuyukartinkuizdem("media\search_artifact.bmp", 30, "media\search_artifact_.bmp", 30, "media\search_button_OK_enabled.bmp", 20)
+					If ($arti = 1) and (haveimage("media\search_artifact.bmp", 20) = 1) Then
+						zmemsmennuyukartinkuizdem("media\search_artifact.bmp", 30, "media\search_artifact_.bmp", 30, "media\search_button_OK_enabled.bmp", 20)
+					Else
+						zmemsmennuyukartinkuizdem($kartinkatippoiska, 30, $kartinkatippoiska2, 30, "media\search_button_OK_enabled.bmp", 20)
+					EndIf
 					zmemsmennuyukartinku("media\search_button_OK_enabled.bmp", 20, "media\search_button_OK_enabled_.bmp", 20)
 				EndIf
 			EndIf
 		WEnd
 	EndIf
- EndFunc
+EndFunc
 
 Func clickOnCoordinates($img, $k_x, $k_y, $else_x, $else_y, $kudax, $kuday)
 	Local $tx = 0, $ty = 0, $i = 0
