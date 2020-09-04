@@ -2518,24 +2518,18 @@ Func rungeolog($kuda, $skolko, $kakih)
 			If openzvezda() = 1 Then
 				If selecttabatzvezda("specialisti", 1) = 1 Then
 					While 1
-						If _imagesearcharea($vidgeologov[0], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[1], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[2], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[3], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[4], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[5], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[6], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[7], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[8], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[9], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						If _imagesearcharea($vidgeologov[10], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-						$ii = $ii + 1
-						zvezdamovepolzunokdown(1)
-						Sleep(Random(500, 1000, 1))
-						If $ii > 8 Then
-							If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
-								Return 0
+						For $j = 0 To $count  Step + 1
+							If _imagesearcharea($vidgeologov[$j], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then
+								ExitLoop 2
 							EndIf
+						Next
+					
+						If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 1 Then
+							zvezdamovepolzunokdown(1)
+							Sleep(Random(500, 1000, 1) * $tormoza)
+						Else
+							zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+							Return 1
 						EndIf
 					WEnd
 					$ii = 0
