@@ -342,6 +342,13 @@ Func komanda($delaem)
 						EndIf
 						If $parametr[3] = "1" Then
 							If haveimage("media\army_values\1.bmp", 20) = 1 Then
+								If $parametr[13] = 1 Then
+									zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+								EndIf
+								If $parametr[13] = 2 Then
+									zmemsmennuyukartinku("media\gohome.bmp", 30, "media\gohome_.bmp", 30)
+									zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
+								EndIf
 								Return 1
 							Else
 								While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, $parametr[13]) <> 1
