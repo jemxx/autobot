@@ -870,20 +870,17 @@ Func komanda($delaem)
 			Else
 				Return runpo4ta("media\to_sklad.bmp")
 			EndIf
-	    Case "Разведчики"
+		Case "Разведчики"
 			$parametr = StringSplit($komanda[2], ",")
 
-			If UBound($parametr) = 6 Then
-				$kakih = 0
-			Else
-				$kakih = getSpecialistData($parametr[6], "scouts")
-				If ($kakih = "") Then
-					MsgBox(0, "Внимание!", "Неправильный параметр типа Разведчика")
-					Return 0
-				EndIf
-			EndIf
+			Local $count_kakih = UBound($parametr) - 6
+			Local $Arr_kakih[$count_kakih]
 
-			Local $status = runrazved($parametr[2], $parametr[3], $parametr[4], $parametr[5], $kakih)
+			For $j = 0 To $count_kakih - 1 Step + 1
+				$Arr_kakih[$j] = $parametr[6 + $j]
+			Next
+
+  			Local $status = runrazved($parametr[2], $parametr[3], $parametr[4], $parametr[5], $count_kakih, $Arr_kakih)
 
 			If $parametr[1] = 0 Then
 				Return $status

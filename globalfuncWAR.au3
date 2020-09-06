@@ -2670,15 +2670,19 @@ Global $gx, $gy, $finterrupt = 0, $gpx = 0, $gpy = 0, $vidpoiska = 0, $tippoiska
 
 #EndRegion
 
-Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
-	Local $seychactetka = 0
-	Local $i = 0, $ii = 0, $tx, $ty
+Func runrazved($adv_srch, $arti, $vidpoiska, $tippoiska, $count_kakih, $Arr_kakih)
+	Local $adv_search_yes = 0
+	Local $curr_i, $j = 0, $i = 0, $ii = 0, $tx, $ty
 
-	Local $vidrazvedov[0]
+	Local $name_razvedov[0], $vidrazvedov[0], $flag_adv_search[0], $slat_yes[0]
 	Local $allScoutsJson = getDataGroupSpecialists("scouts")
 	Local $count = UBound($allScoutsJson) - 1
-	For $j = 0 To $count  Step + 1
+
+	For $j = 0 To $count Step + 1
+		_ArrayAdd($name_razvedov, Json_Get($allScoutsJson, '[' & $j & '].name'))
 		_ArrayAdd($vidrazvedov, "media\" & Json_Get($allScoutsJson, '[' & $j & '].img_active'))
+		_ArrayAdd($flag_adv_search, Json_Get($allScoutsJson, '[' & $j & '].adv_search'))
+		_ArrayAdd($slat_yes, 0)
 	Next
 
 	WinActivate("The Settlers Онлайн")
@@ -2711,109 +2715,78 @@ Func runrazved($tetki, $arti, $vidpoiska, $tippoiska, $kakih)
 	drugioff()
 	If openzvezda() = 0 Then Return 0
 	If selecttabatzvezda("specialisti", 0) = 0 Then Return 0
-	If $kakih == 0 Then
-		While 1
-			If openzvezda() = 1 Then
-				While 1
-					For $j = 0 To $count  Step + 1
+
+	If $count_kakih = 0 Then
+		; шлем всех
+		For $j = 0 To $count Step + 1
+			$slat_yes[$j] = 1
+		Next
+	Else
+		; выбираем кого слать
+		For $i = 0 To $count ; цикл по всем разведам
+			For $j = 0 To $count_kakih - 1 ; цикл по разведам, кого нужно отправить
+				If $Arr_kakih[$j] = $name_razvedov[$i] Then
+					$slat_yes[$i] = 1
+					Exitloop
+				EndIf
+			Next
+		Next
+	EndIf
+
+	; Отправка
+	While 1
+		If openzvezda() = 1 Then
+			While 1
+				For $j = 0 To $count Step + 1
+					If $slat_yes[$j] = 1 Then
 						If _imagesearcharea($vidrazvedov[$j], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then
-							If (($j = 5) Or ($j = 13)) And ($tetki = 1) Then $seychactetka = 1
+							If ($adv_srch = 1) and ($flag_adv_search[$j] = 1) Then $adv_search_yes = 1
 							ExitLoop 2
 						EndIf
-					Next
-				
-					If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 1 Then
-						zvezdamovepolzunokdown(1)
-						Sleep(Random(500, 1000, 1) * $tormoza)
-					Else
-						zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-						Return 1
 					EndIf
-				WEnd
-				
-				$ii = 0
-				While $ii < 6
-					MouseMove($tx, $ty, 10 * $tormoza)
-					Sleep(300 * $tormoza)
-					MouseClick("left", $tx + Random(-2, 2, 1), $ty + Random(-2, 2, 1), 1)
-					removemouse(543, 0, 100)
-					sleepwhile("media\search_treasure_menu.bmp", 20, 10)
-					If haveimage("media\search_treasure_menu.bmp", 20) = 1 Then ExitLoop
-					$ii = $ii + 1
-					If $ii = 6 Then Return 0
-				WEnd
-				If $seychactetka = 1 Then
-					zmemsmennuyukartinku("media\poisk_prikla.bmp", 30, "media\poisk_prikla_.bmp", 30)
-					go5()
-					$seychactetka = 0
-					If $kartinkatippoiska = "media\search_treasure_super_long.bmp" Then
-						zmemsmennuyukartinkuizdem("media\search_treasure_very_long.bmp", 30, "media\search_treasure_very_long_.bmp", 30, "media\search_button_OK_enabled.bmp", 20)
-						zmemsmennuyukartinku("media\search_button_OK_enabled.bmp", 20, "media\search_button_OK_enabled_.bmp", 20)
-					EndIf
+				Next
+				If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 1 Then
+					zvezdamovepolzunokdown(1)
+					Sleep(Random(500, 1000, 1) * $tormoza)
 				Else
-					zmemsmennuyukartinku($kartinkavidpoiska, 30, $kartinkavidpoiska2, 30)
-					go5()
-					removemouse(500, 0, 500)
-					If ($arti = 1) and (haveimage("media\search_artifact.bmp", 20) = 1) Then
-						zmemsmennuyukartinkuizdem("media\search_artifact.bmp", 30, "media\search_artifact_.bmp", 30, "media\search_button_OK_enabled.bmp", 20)
-					Else
-						zmemsmennuyukartinkuizdem($kartinkatippoiska, 30, $kartinkatippoiska2, 30, "media\search_button_OK_enabled.bmp", 20)
-					EndIf
+					zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+					Return 1
+				EndIf
+			WEnd
+
+			$ii = 0
+			While $ii < 6
+				MouseMove($tx, $ty, 10 * $tormoza)
+				Sleep(300 * $tormoza)
+				MouseClick("left", $tx + Random(-2, 2, 1), $ty + Random(-2, 2, 1), 1)
+				removemouse(543, 0, 100)
+				sleepwhile("media\search_treasure_menu.bmp", 20, 10)
+				If haveimage("media\search_treasure_menu.bmp", 20) = 1 Then ExitLoop
+				$ii = $ii + 1
+				If $ii = 6 Then Return 0
+			WEnd
+			If $adv_search_yes = 1 Then
+				zmemsmennuyukartinku("media\poisk_prikla.bmp", 30, "media\poisk_prikla_.bmp", 30)
+				go5()
+				$adv_search_yes = 0
+				If $kartinkatippoiska = "media\search_treasure_super_long.bmp" Then
+					zmemsmennuyukartinkuizdem("media\search_treasure_very_long.bmp", 30, "media\search_treasure_very_long_.bmp", 30, "media\search_button_OK_enabled.bmp", 20)
 					zmemsmennuyukartinku("media\search_button_OK_enabled.bmp", 20, "media\search_button_OK_enabled_.bmp", 20)
 				EndIf
-			EndIf
-		WEnd
-	Else
-		While 1
-			If openzvezda() = 1 Then
-				While 1
-					If _imagesearcharea($kakih, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then
-						If ($kakih = $vidrazvedov[5] Or $kakih = $vidrazvedov[13]) Then
-							If $tetki = 1 Then $seychactetka = 1
-						EndIf
-						ExitLoop
-					EndIf
-					If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 1 Then
-						zvezdamovepolzunokdown(1)
-						Sleep(Random(500, 1000, 1) * $tormoza)
-					Else
-						zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-						Return 1
-					EndIf
-				WEnd
-				$ii = 0
-				While $ii < 6
-					MouseMove($tx, $ty, 10 * $tormoza)
-					Sleep(300 * $tormoza)
-					MouseClick("left", $tx + Random(-2, 2, 1), $ty + Random(-2, 2, 1), 1)
-					removemouse(543, 0, 100)
-					sleepwhile("media\search_treasure_menu.bmp", 20, 10)
-					If haveimage("media\search_treasure_menu.bmp", 20) = 1 Then ExitLoop
-					$ii = $ii + 1
-					If $ii = 6 Then Return 0
-				WEnd
-				If $seychactetka = 1 Then
-					zmemsmennuyukartinku("media\poisk_prikla.bmp", 30, "media\poisk_prikla.bmp_", 30)
-					go5()
-					$seychactetka = 0
-					If $kartinkatippoiska = "media\search_treasure_super_long.bmp" Then
-						zmemsmennuyukartinkuizdem("media\search_treasure_very_long.bmp", 30, "media\search_treasure_very_long_.bmp", 30, "media\search_button_OK_enabled.bmp", 20)
-						zmemsmennuyukartinku("media\search_button_OK_enabled.bmp", 20, "media\search_button_OK_enabled_.bmp", 20)
-					EndIf
+			Else
+				zmemsmennuyukartinku($kartinkavidpoiska, 30, $kartinkavidpoiska2, 30)
+				go5()
+				removemouse(500, 0, 500)
+				If ($arti = 1) and (haveimage("media\search_artifact.bmp", 20) = 1) Then
+					zmemsmennuyukartinkuizdem("media\search_artifact.bmp", 30, "media\search_artifact_.bmp", 30, "media\search_button_OK_enabled.bmp", 20)
 				Else
-					zmemsmennuyukartinku($kartinkavidpoiska, 30, $kartinkavidpoiska2, 30)
-					go5()
-					If ($arti = 1) and (haveimage("media\search_artifact.bmp", 20) = 1) Then
-						zmemsmennuyukartinkuizdem("media\search_artifact.bmp", 30, "media\search_artifact_.bmp", 30, "media\search_button_OK_enabled.bmp", 20)
-					Else
-						zmemsmennuyukartinkuizdem($kartinkatippoiska, 30, $kartinkatippoiska2, 30, "media\search_button_OK_enabled.bmp", 20)
-					EndIf
-					zmemsmennuyukartinku("media\search_button_OK_enabled.bmp", 20, "media\search_button_OK_enabled_.bmp", 20)
+					zmemsmennuyukartinkuizdem($kartinkatippoiska, 30, $kartinkatippoiska2, 30, "media\search_button_OK_enabled.bmp", 20)
 				EndIf
+				zmemsmennuyukartinku("media\search_button_OK_enabled.bmp", 20, "media\search_button_OK_enabled_.bmp", 20)
 			EndIf
-		WEnd
-	EndIf
-EndFunc
+		EndIf
+	WEnd
+ EndFunc
 
 Func clickOnCoordinates($img, $k_x, $k_y, $else_x, $else_y, $kudax, $kuday)
 	Local $tx = 0, $ty = 0, $i = 0

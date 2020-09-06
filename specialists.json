@@ -41,20 +41,20 @@
     {"name": "Прилежный", "img_active": "prilezhniy_geolog.bmp"}
   ],
   "scouts": [
-    {"name": "Следопыт", "img_active": "scout1.bmp"},
-    {"name": "Опытный", "img_active": "scout2.bmp"},
-    {"name": "Везучий", "img_active": "scout3.bmp"},
-    {"name": "Простой", "img_active": "scout4.bmp"},
-    {"name": "Храбрый", "img_active": "scout5.bmp"},
-    {"name": "Бесстрашный", "img_active": "scout6.bmp"},
-    {"name": "Авантюрист", "img_active": "scout7.bmp"},
-    {"name": "Зои", "img_active": "scout8.bmp"},
-    {"name": "Искренний", "img_active": "scout9.bmp"},
-    {"name": "Скромный", "img_active": "scout10.bmp"},
-    {"name": "Зачарованный", "img_active": "scout11.bmp"},
-    {"name": "Милый", "img_active": "scout12.bmp"},
-    {"name": "Настойчивый", "img_active": "scout13.bmp"},
-    {"name": "Безудержный", "img_active": "scout14.bmp"},
-    {"name": "Дерзкий", "img_active": "scout15.bmp"}
+    {"name": "Следопыт", "img_active": "scout1.bmp", "adv_search": 0},
+    {"name": "Опытный", "img_active": "scout2.bmp", "adv_search": 0},
+    {"name": "Везучий", "img_active": "scout3.bmp", "adv_search": 0},
+    {"name": "Простой", "img_active": "scout4.bmp", "adv_search": 0},
+    {"name": "Храбрый", "img_active": "scout5.bmp", "adv_search": 0},
+    {"name": "Бесстрашный", "img_active": "scout6.bmp", "adv_search": 1},
+    {"name": "Авантюрист", "img_active": "scout7.bmp", "adv_search": 0},
+    {"name": "Зои", "img_active": "scout8.bmp", "adv_search": 0},
+    {"name": "Искренний", "img_active": "scout9.bmp", "adv_search": 0},
+    {"name": "Скромный", "img_active": "scout10.bmp", "adv_search": 0},
+    {"name": "Зачарованный", "img_active": "scout11.bmp", "adv_search": 0},
+    {"name": "Милый", "img_active": "scout12.bmp", "adv_search": 0},
+    {"name": "Настойчивый", "img_active": "scout13.bmp", "adv_search": 0},
+    {"name": "Безудержный", "img_active": "scout14.bmp", "adv_search": 1},
+    {"name": "Дерзкий", "img_active": "scout15.bmp", "adv_search": 0}
   ]
 }
