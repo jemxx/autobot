@@ -1746,6 +1746,7 @@ Func openprikla($kartinka, $kartinka2)
 	Return 0
 EndFunc
 
+#comments-start
 Func openotpravkagen($kartinka)
 	WinActivate("The Settlers Онлайн")
 	writelog("=====ОТПРАВКА ГЕНЕРАЛОВ " & $kartinka & @CRLF)
@@ -1775,6 +1776,44 @@ Func openotpravkagen($kartinka)
 			$area5_top_y = $ty - 144
 			$area5_bottom_x = $tx - 46
 			$area5_bottom_y = $ty - 80
+			Return 1
+		Else
+			$search = 0
+		EndIf
+	EndIf
+	Return 0
+EndFunc
+#comments-end
+
+Func openotpravkagen($kartinka)
+	WinActivate("The Settlers Онлайн")
+	;writelog("=====ОТПРАВКА ГЕНЕРАЛОВ " & $kartinka & @CRLF)
+	Local $search = 0, $i = 0, $tx = 0, $ty = 0
+	If findclickoncenterandwaitresult($kartinka, "media\otpravit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+		If findclickoncenterandwaitresult("media\otpravit.bmp", "media\otpravka_no.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+			Sleep(2000 * $tormoza)
+			sleepwhile("media\otppravka_vniz.bmp", 100, 5)
+			If _imagesearcharea("media\otpravka_no.bmp", 1, 500, 100, @DesktopWidth - 200, @DesktopHeight, $tx, $ty, 40) = 0 Then Return 0
+			$area0_top_x = $tx - 305
+			$area0_top_y = $ty - 144
+			$area0_bottom_x = $tx - 46
+			$area0_bottom_y = $ty - 80
+			$area1_top_x = $tx - 305
+			$area1_top_y = $ty - 316
+			$area1_bottom_x = $tx - 46
+			$area1_bottom_y = $ty - 228
+			$area2_top_x = $tx - 46
+			$area2_top_y = $ty - 305
+			$area2_bottom_x = $tx + 216
+			$area2_bottom_y = $ty - 228
+			$area3_top_x = $tx - 305
+			$area3_top_y = $ty - 228
+			$area3_bottom_x = $tx - 46
+			$area3_bottom_y = $ty - 144
+			$area4_top_x = $tx - 46
+			$area4_top_y = $ty - 228
+			$area4_bottom_x = $tx + 216
+			$area4_bottom_y = $ty - 144
 			Return 1
 		Else
 			$search = 0
@@ -1872,7 +1911,7 @@ EndFunc
 
 ; Vasuta - Попытка переписать функцию ожидания генералов
 Func ozidanierasstanovki2($image, $yes)
-; Ждем одного генерала
+	; Ждем одного генерала
     writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
 	Local $tx = 0, $ty = 0, $i = 0, $fl = 0
 	Sleep(500 * $tormoza)
@@ -1908,7 +1947,7 @@ Func ozidanierasstanovki2($image, $yes)
 EndFunc
 
 Func ozidanierasstanovki($image, $image_NA, $yes)
-; Ждем всех генералов
+	; Ждем всех генералов
     writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
 	Local $tx = 0, $ty = 0, $i = 0, $fl = 0
 	Sleep(500 * $tormoza)
@@ -2305,6 +2344,7 @@ Func sborostatkovarmii($army_type)
 EndFunc
 
 ; Исходная функция отправки ген в прикл
+#comments-start
 Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 	Local $tx = 0, $ty = 0, $i = 0, $generalov = 0, $ax = 0, $ay = 0, $search = 0, $error_otpravka = 0
 	chatoff()
@@ -2443,6 +2483,103 @@ Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 				$search = _imagesearcharea("media\otppravka_vniz.bmp", 1, 500, 100, @DesktopWidth - 200, @DesktopHeight, $tx, $ty, 90)
 				MouseMove($tx, $ty, 10 * $tormoza)
 				Sleep(100 * $tormoza)
+				MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
+				Sleep(500 * $tormoza)
+				removemouse(300, 0, 300)
+				$i = $i + 1
+			WEnd
+			If $generalov = $shtuk Then
+				zmemsmennuyukartinku("media\otpravka_ok.bmp", 30, "media\otpravka_ok_.bmp", 30)
+				Return 1
+			EndIf
+			zmemsmennuyukartinku("media\closegena.bmp", 90, "media\closegena_.bmp", 90)
+			$generalov = 0
+			$error_otpravka = 0
+			$i = 0
+		EndIf
+	WEnd
+EndFunc
+#comments-end
+
+; Новая функция отправки ген в прикл
+Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
+	Local $tx = 0, $ty = 0, $i = 0, $generalov = 0, $ax = 0, $ay = 0, $search = 0, $error_otpravka = 0
+	Local $for_i, $area_tmp_top_x, $area_tmp_top_y, $area_tmp_bottom_x, $area_tmp_bottom_y
+	chatoff()
+	drugioff()
+	While 1
+		If openotpravkagen($userDIR & $prikl) = 1 Then
+			While ($generalov <> $shtuk) AND ($i < (read_ini(4) / 2))
+				If haveimagearea("media\error_otpravka.bmp", 40, $area0_top_x, $area0_top_y, $area0_bottom_x, $area0_bottom_y) = 1 Then
+					$error_otpravka = $error_otpravka + 1
+					If $error_otpravka = 5 Then ExitLoop
+				EndIf
+				; цикл по области поиска генералов
+				For $for_i = 1 To 4 Step 1
+					; задаем площадь для поиска иконки гены
+					Switch $for_i
+						Case 1
+							$area_tmp_top_x = $area1_top_x
+							$area_tmp_top_y = $area1_top_y
+							$area_tmp_bottom_x = $area1_bottom_x
+							$area_tmp_bottom_y = $area1_bottom_y
+						Case 2
+							$area_tmp_top_x = $area2_top_x
+							$area_tmp_top_y = $area2_top_y
+							$area_tmp_bottom_x = $area2_bottom_x
+							$area_tmp_bottom_y = $area2_bottom_y
+						Case 3
+							$area_tmp_top_x = $area3_top_x
+							$area_tmp_top_y = $area3_top_y
+							$area_tmp_bottom_x = $area3_bottom_x
+							$area_tmp_bottom_y = $area3_bottom_y
+						Case 4
+							$area_tmp_top_x = $area4_top_x
+							$area_tmp_top_y = $area4_top_y
+							$area_tmp_bottom_x = $area4_bottom_x
+							$area_tmp_bottom_y = $area4_bottom_y
+					EndSwitch
+					; ищем гену
+					If _imagesearcharea($gena, 1, $area_tmp_top_x, $area_tmp_top_y, $area_tmp_bottom_x, $area_tmp_bottom_y, $tx, $ty, 20) = 1 Then
+						If _imagesearcharea("media\Gena_plus.bmp", 1, $area_tmp_top_x, $area_tmp_top_y, $area_tmp_bottom_x, $area_tmp_bottom_y, $tx, $ty, 20) = 1 Then
+							While _imagesearcharea("media\Gena_plus_yes.bmp", 1, $area_tmp_top_x, $area_tmp_top_y, $area_tmp_bottom_x, $area_tmp_bottom_y, $ax, $ay, 20) <> 1
+								If haveimagearea("media\error_otpravka.bmp", 40, $area0_top_x, $area0_top_y, $area0_bottom_x, $area0_bottom_y) = 1 Then
+									$error_otpravka = $error_otpravka + 1
+									If $error_otpravka = 5 Then ExitLoop 3
+								EndIf
+								If $imya = "-" Then
+									; листаем 1й раз отправку
+									MouseMove($tx, $ty, 10 * $tormoza)
+									Sleep(100 * $tormoza)
+									MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
+									Sleep(100 * $tormoza)
+									removemouse(300, 0, 300)
+								Else
+									If skolko_voisk_v_gene($imya, $area_tmp_top_x, $area_tmp_top_y, $area_tmp_bottom_x, $area_tmp_bottom_y) = 0 Then
+										$generalov = $generalov - 1
+										ExitLoop
+									Else
+										MouseMove($tx, $ty, 10 * $tormoza)
+										Sleep(100 * $tormoza)
+										MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
+										Sleep(100 * $tormoza)
+										removemouse(300, 0, 300)
+									EndIf
+								EndIf
+							WEnd
+							go5()
+							$generalov = $generalov + 1
+							If $generalov = $shtuk Then ExitLoop 2
+						EndIf
+					EndIf
+				Next
+				$search = _imagesearcharea("media\otppravka_vniz.bmp", 1, 500, 100, @DesktopWidth - 200, @DesktopHeight, $tx, $ty, 90)
+				MouseMove($tx, $ty, 10 * $tormoza)
+				Sleep(100 * $tormoza)
+				; листаем окно отправки 1й раз
+				MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
+				Sleep(1000 * $tormoza)
+				; листаем окно отправки 2й раз
 				MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
 				Sleep(500 * $tormoza)
 				removemouse(300, 0, 300)
