@@ -1064,6 +1064,7 @@ Global $gluksnaboromarmii = 0, $polezifrx = 0, $polezifry = 0, $skolkokartinka =
 Global $general_1_x, $general_1_y, $general_2_x, $general_2_y, $general_1_temp_x, $general_1_temp_y
 Global $gluksnaboromarmii = 0, $1sektorx, $1sektory, $skoko_voln_puskaem = 2
 Global $search_treasure_menu_x, $search_treasure_menu_y
+Global $area0_top_x, $area0_top_y, $area0_bottom_x, $area0_bottom_y
 Global $area1_top_x, $area1_top_y, $area1_bottom_x, $area1_bottom_y
 Global $area2_top_x, $area2_top_y, $area2_bottom_x, $area2_bottom_y
 Global $area3_top_x, $area3_top_y, $area3_bottom_x, $area3_bottom_y
@@ -2871,26 +2872,33 @@ Func runrazved($adv_srch, $arti, $vidpoiska, $tippoiska, $count_kakih, $Arr_kaki
 	EndIf
 
 	; Отправка
+	$ii = 0
 	While 1
 		If openzvezda() = 1 Then
 			While 1
+				MouseMove($zvezda_area[0] + + Random(-2, 2, 1), $zvezda_area[3] + + Random(-2, 2, 1), 10 * $tormoza)
 				For $j = 0 To $count Step + 1
 					If $slat_yes[$j] = 1 Then
 						If _imagesearcharea($vidrazvedov[$j], 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then
-							If ($adv_srch = 1) and ($flag_adv_search[$j] = 1) Then $adv_search_yes = 1
+							If ($adv_srch = 1) And ($flag_adv_search[$j] = 1) Then $adv_search_yes = 1
 							ExitLoop 2
 						EndIf
 					EndIf
 				Next
-				If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 1 Then
-					zvezdamovepolzunokdown(1)
-					Sleep(Random(500, 1000, 1) * $tormoza)
-				Else
-					zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-					Return 1
-				EndIf
+				$ii = $ii + 1
+				MouseMove($zvezda_area[0] + + Random(-2, 2, 1), $zvezda_area[3] + + Random(-2, 2, 1), 10 * $tormoza)
+				
+				; если 5 раз подергали мышь и не нашли, кого отправить - то листаем звезду 
+				If $ii > 5 Then
+					If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 1 Then
+						zvezdamovepolzunokdown(1)
+						Sleep(Random(500, 1000, 1) * $tormoza)
+					Else
+						zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+						Return 1
+					EndIf
+				EndIf	
 			WEnd
-
 			$ii = 0
 			While $ii < 6
 				MouseMove($tx, $ty, 10 * $tormoza)
@@ -2923,7 +2931,7 @@ Func runrazved($adv_srch, $arti, $vidpoiska, $tippoiska, $count_kakih, $Arr_kaki
 			EndIf
 		EndIf
 	WEnd
- EndFunc
+EndFunc
 
 Func clickOnCoordinates($img, $k_x, $k_y, $else_x, $else_y, $kudax, $kuday)
 	Local $tx = 0, $ty = 0, $i = 0
