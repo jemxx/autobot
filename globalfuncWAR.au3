@@ -882,7 +882,7 @@ Func proverkasliva()
 	$proverkasliva = NOT $proverkasliva
 	TrayTip("", "Проверка слива запущена", 0)
 	While $proverkasliva
-		If _imagesearcharea("media\friend_atak.bmp", 1, $ax, 0, $ax + 300, $ay + 700, $tx, $ty, 30) = 1 Then
+		If (_imagesearcharea("media\friend_atak.bmp", 1, $ax, 0, $ax + 300, $ay + 700, $tx, $ty, 30) = 1) or (_imagesearcharea("media\razgromili.bmp", 1, $ax, 0, $ax + 300, $ay + 700, $tx, $ty, 30) = 1) Then
 			TrayTip("", "Друг сливается...", 0)
 			Sleep(12000 * $tormoza)
 			$proverkasliva = NOT $proverkasliva
