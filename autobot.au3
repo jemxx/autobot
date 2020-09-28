@@ -916,6 +916,30 @@ Func komanda($delaem)
 			WEnd
 
 			Return clickOnCoordinates($userDIR & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7])
+		Case "НажатьКлавишу"
+			Local $tmp_symbol
+			$tmp_symbol = $komanda[2]
+			WinActivate("The Settlers Онлайн")
+			If (StringInStr("0123456789", $tmp_symbol) <> 0) Then
+				Sleep(500 * $tormoza)
+				Send($tmp_symbol)
+				Return 1
+			Else
+				If ($tmp_symbol = "+") Then
+					Sleep(500 * $tormoza)
+					Send("{NUMPADADD}", 0)
+					Return 1
+				Else
+					If ($tmp_symbol = "-") Then
+						Sleep(500 * $tormoza)
+						Send("{NUMPADSUB}", 0)
+						Return 1
+					Else
+						MsgBox(0, "!!!", "Неправильный параметр команды НажатьКлавишу")
+						Return 0
+					EndIf
+				EndIf
+			EndIf
 		Case "Нажать"
 			If $komanda[2] = "0" Then
 			   MouseMove(@DesktopWidth / 2, @DesktopHeight / 2, 10 * $tormoza)
