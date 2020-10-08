@@ -21,6 +21,7 @@ If ProcessExists("Универсальный_бот.exe") Then ProcessClose ("У
 
 Global $alarm = 0, $passagesDir
 Global $userDIR = "media\users\"
+Global $windowTitle = "The Settlers Онлайн"
 
 Global $k_x, $k_y, $tochka_sektora_x=0, $tochka_sektora_y=0
 Global $shtuk, $i = 1, $register = 0
@@ -919,7 +920,7 @@ Func komanda($delaem)
 		Case "НажатьКлавишу"
 			Local $tmp_symbol
 			$tmp_symbol = $komanda[2]
-			WinActivate("The Settlers Онлайн")
+			WinActivate($windowTitle)
 			If (StringInStr("0123456789", $tmp_symbol) <> 0) Then
 				Sleep(500 * $tormoza)
 				Send($tmp_symbol)

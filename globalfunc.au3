@@ -157,7 +157,7 @@ EndFunc
 
 Func openmashtab()
 Sleep(100 * $tormoza)
-WinActivate("The Settlers Онлайн")
+WinActivate($windowTitle)
 writelog("openmashtab" & @CRLF)
 	MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
 	MouseDown("left")
@@ -389,7 +389,7 @@ EndFunc
 Func collectwarikiatprikl()
 	Local $ciklov = 0
 	;TrayTip("", "Собираем шарики ... ", 0)
-	WinActivate("The Settlers Онлайн")
+	WinActivate($windowTitle)
 	;Return 1
 	While (haveimage("media\warik.bmp", 50) = 1) AND ($ciklov < 50)
 		findclickoncenterandwaitresult("media\warik.bmp", "media\warik_label_collected.bmp", 50, 10, 2, 10, 0, 50, 50)
@@ -403,7 +403,7 @@ Func openzvezda()
 EndFunc
 Func openzvezdaP()
 	;writelog("openzvezda | ")
-	WinActivate("The Settlers Онлайн")
+	WinActivate($windowTitle)
 
 	Local $ty = 0, $tx = 0, $search = 0
 	Local $htimer = TimerInit()
@@ -629,7 +629,7 @@ endfunc
 
 func opensvadba()
 	Local $i=0
-	WinActivate("The Settlers Онлайн")
+	WinActivate($windowTitle)
 	MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
 	MouseDown("left")
 	MouseMove(@DesktopWidth/2+100, @DesktopHeight/2, 10 * $tormoza)
@@ -711,7 +711,7 @@ endfunc
 
 func openpanda()
 	Local $i=0
-	WinActivate("The Settlers Онлайн")
+	WinActivate($windowTitle)
 	MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
 	MouseDown("left")
 	MouseMove(@DesktopWidth/2+100, @DesktopHeight/2, 10 * $tormoza)
@@ -829,7 +829,7 @@ endfunc
 
 func opentitka($yes)
 Local $i=0
-WinActivate("The Settlers Онлайн")
+WinActivate($windowTitle)
 	MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
 	MouseDown("left")
 	MouseMove(@DesktopWidth/2+100, @DesktopHeight/2, 10 * $tormoza)
@@ -906,7 +906,7 @@ endif
 endfunc
 
 func CloseTitka()
-   WinActivate("The Settlers Онлайн")
+   WinActivate($windowTitle)
    Sleep(5000 * $tormoza)
    ZmemSmennuyuKartinkuIZdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
    ZmemSmennuyuKartinku("media\KN_Z.bmp", 30, "media\KN_Z_.bmp", 30)
@@ -1007,7 +1007,7 @@ if Read_ini(7) <> "" then
 else
 	Local $User=_Encoding_URLToHex(@UserProfileDir)
 endif
-WinActivate("The Settlers Онлайн")
+WinActivate($windowTitle)
 if _imagesearcharea("media\pismo.bmp", 1, 50, 50, 300, 400, $ax, $ay, 30) = 0 then Return 0
 $ax = $ax - 115
 $ay = $ay + 3 + Random(0, 5, 1)
@@ -1050,7 +1050,7 @@ if Read_ini(7) <> "" then
 else
 	Local $User=_Encoding_URLToHex(@UserProfileDir)
 endif
-WinActivate("The Settlers Онлайн")
+WinActivate($windowTitle)
 if StringLen($Zapros) = 545 then
 	_INetGetSource("http://mysettlers.ru/statistik.php?key="&$Zapros&"&user="&$User)
 	$Zapros=""
