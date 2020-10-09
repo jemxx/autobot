@@ -19,9 +19,8 @@ AutoItWinSetTitle(@ScriptName)
 
 If ProcessExists("Универсальный_бот.exe") Then ProcessClose ("Универсальный_бот.exe")
 
-Global $alarm = 0, $passagesDir
+Global $alarm = 0, $passagesDir, $windowTitle
 Global $userDIR = "media\users\"
-Global $windowTitle = "The Settlers Онлайн"
 
 Global $k_x, $k_y, $tochka_sektora_x=0, $tochka_sektora_y=0
 Global $shtuk, $i = 1, $register = 0
@@ -42,6 +41,8 @@ HotKeySet("{F11}", "terminater")
 
 $passagesDir = getPassagesDir()
 $stroka = getAllPassages($passagesDir)
+$windowTitle = Read_ini(13)
+if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 
 ;Рисуем окно бота
 #Region ### START Koda GUI section ### Form=
