@@ -39,7 +39,8 @@
     {"name": "Археолог", "img_active": "arheolog_geolog.bmp"},
     {"name": "Прелестный", "img_active": "prelestnyj_geolog.bmp"},
     {"name": "Скрупулезный", "img_active": "skrupuleznyj_geolog.bmp"},
-    {"name": "Прилежный", "img_active": "prilezhniy_geolog.bmp"}
+    {"name": "Прилежный", "img_active": "prilezhniy_geolog.bmp"},
+    {"name": "Дружелюбный", "img_active": "druzhelubnii_geolog.bmp"}
   ],
   "scouts": [
     {"name": "Следопыт", "img_active": "scout1.bmp", "adv_search": 0},
