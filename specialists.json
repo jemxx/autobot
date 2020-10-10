@@ -59,5 +59,10 @@
     {"name": "Безудержный", "img_active": "scout14.bmp", "adv_search": 1},
     {"name": "Дерзкий", "img_active": "scout15.bmp", "adv_search": 0},
     {"name": "Трусливый", "img_active": "scout16.bmp", "adv_search": 0}
+  ],
+  "horseshoes": [
+    {"name": "Бронзоподкова", "img_active": "br_podkova.bmp", "tab_name": "usiliteli"},
+    {"name": "Платиноподкова", "img_active": "pl_podkova.bmp", "tab_name": "usiliteli"},
+    {"name": "Обсидиановая", "img_active": "obsid_podkova.bmp", "tab_name": "usiliteli"}
   ]
 }

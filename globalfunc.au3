@@ -1133,6 +1133,27 @@ Func getSpecialistData($name, $type)
 	Return $itemData
 EndFunc
 
+Func getBuffsData($name, $type)
+	Local $i = 0
+	Local $itemData[2]
+	Local $buffs = getDataGroupSpecialists($type)
+
+	While 1
+		$itemName = Json_Get($buffs, '[' & $i & '].name')
+
+		If @error Then ExitLoop
+		If $name = $itemName Then
+			$itemData[0] = "media\" & Json_Get($buffs, '[' & $i & '].img_active')
+			$itemData[1] = Json_Get($buffs, '[' & $i & '].tab_name')
+			ExitLoop
+		EndIf
+
+		$i += 1
+	WEnd
+
+	Return $itemData
+EndFunc
+
 Func getGeneralData($general)
 	Local $i = 0
 	Local $generalData[4]

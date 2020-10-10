@@ -662,77 +662,74 @@ Func komanda($delaem)
 			Return 1
 
 		Case "Стрельнуть"
-			If $komanda[2] = "Бронзоподкова" Then
-				If open_usilok("usiliteli", "media\br_podkova.bmp", 0) = 1 Then
-					zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook.bmp", 30)
-					Return 1
-				EndIf
-			ElseIf $komanda[2] = "Платиноподкова" Then
-				If open_usilok("usiliteli", "media\pl_podkova.bmp", 0) = 1 Then
-					zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook.bmp", 30)
-					Return 1
-				EndIf
-			ElseIf $komanda[2] = "Обсидиановая" Then
-				If open_usilok("usiliteli", "media\obsid_podkova.bmp", 0) = 1 Then
-					zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook.bmp", 30)
-					Return 1
-				EndIf
-			EndIf
-			$centrovat = 1
 			$parametr = StringSplit($komanda[2], ",")
 			$komand_na_massiv = UBound($parametr)
-			Local $perebor = 1
-			While $perebor < $komand_na_massiv
-				If $parametr[$perebor] = "НеЦентровать" Then
-					$centrovat = 0
-					ExitLoop
+
+			if $komand_na_massiv == 2 Then
+				Local $buff = getBuffsData($parametr[1], "horseshoes")
+
+				If open_usilok($buff[1], $buff[0], 0) = 1 Then
+					zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook.bmp", 30)
+					Return 1
+				Else
+					Return 0
 				EndIf
-				$perebor = $perebor + 1
-			WEnd
-			$currentbuf = 0
-			$perebor = 1
-			While $perebor < $komand_na_massiv
-				If $parametr[$perebor] = "ТекущийБаф" Then
-					$currentbuf = 1
-					ExitLoop
+			Else
+				$centrovat = 1
+				Local $perebor = 1
+				While $perebor < $komand_na_massiv
+					If $parametr[$perebor] = "НеЦентровать" Then
+						$centrovat = 0
+						ExitLoop
+					EndIf
+					$perebor = $perebor + 1
+				WEnd
+
+				$currentbuf = 0
+				$perebor = 1
+				While $perebor < $komand_na_massiv
+					If $parametr[$perebor] = "ТекущийБаф" Then
+						$currentbuf = 1
+						ExitLoop
+					EndIf
+					$perebor = $perebor + 1
+				WEnd
+
+				If $parametr[1] = "Стрела" Then
+					$img_usilka = "media\strela.bmp"
+					$tb_name = "usiliteli"
+				ElseIf $parametr[1] = "ГорящаяСтрела" Then
+					$img_usilka = "media\gor_strela.bmp"
+					$tb_name = "usiliteli"
+				ElseIf $parametr[1] = "ШокоСтрела" Then
+					$img_usilka = "media\shoko_strela.bmp"
+					$tb_name = "usiliteli"
+				ElseIf $parametr[1] = "Баллиста" Then
+					$img_usilka = "media\balista.bmp"
+					$tb_name = "usiliteli"
+				ElseIf $parametr[1] = "БольшаяКатапульта" Then
+					$img_usilka = "media\bolshaja_katapulta.bmp"
+					$tb_name = "usiliteli"
+				ElseIf $parametr[1] = "МаленькаяКатапульта" Then
+					$img_usilka = "media\malenkaja_katapulta.bmp"
+					$tb_name = "usiliteli"
+				ElseIf $parametr[1] = "Убийца" Then
+					$img_usilka = "media\boshka.bmp"
+					$tb_name = "usiliteli"
+				ElseIf $parametr[1] = "Стейк" Then
+					$img_usilka = "media\steik.bmp"
+					$tb_name = "usiliteli"
+				ElseIf $parametr[1] = "Наноирма" Then
+					$img_usilka = "media\nanoirma.bmp"
+					$tb_name = "usiliteli"
+				ElseIf $parametr[1] = "Ирма" Then
+					$img_usilka = "media\irma.bmp"
+					$tb_name = "usiliteli"
+				ElseIf $parametr[1] = "Нубы" Then
+					$img_usilka = "media\nubi_in_zvezda.bmp"
+					$tb_name = "raznoe"
 				EndIf
-				$perebor = $perebor + 1
-			WEnd
-			If $parametr[1] = "Стрела" Then
-			   $img_usilka = "media\strela.bmp"
-			   $tb_name = "usiliteli"
-			ElseIf $parametr[1] = "ГорящаяСтрела" Then
-			   $img_usilka = "media\gor_strela.bmp"
-			   $tb_name = "usiliteli"
-			ElseIf $parametr[1] = "ШокоСтрела" Then
-			   $img_usilka = "media\shoko_strela.bmp"
-			   $tb_name = "usiliteli"
-			ElseIf $parametr[1] = "Баллиста" Then
-			   $img_usilka = "media\balista.bmp"
-			   $tb_name = "usiliteli"
-			ElseIf $parametr[1] = "БольшаяКатапульта" Then
-			   $img_usilka = "media\bolshaja_katapulta.bmp"
-			   $tb_name = "usiliteli"
-			ElseIf $parametr[1] = "МаленькаяКатапульта" Then
-			   $img_usilka = "media\malenkaja_katapulta.bmp"
-			   $tb_name = "usiliteli"
-			ElseIf $parametr[1] = "Убийца" Then
-			   $img_usilka = "media\boshka.bmp"
-			   $tb_name = "usiliteli"
-			ElseIf $parametr[1] = "Стейк" Then
-			   $img_usilka = "media\steik.bmp"
-			   $tb_name = "usiliteli"
-			ElseIf $parametr[1] = "Наноирма" Then
-			   $img_usilka = "media\nanoirma.bmp"
-			   $tb_name = "usiliteli"
-			ElseIf $parametr[1] = "Ирма" Then
-			   $img_usilka = "media\irma.bmp"
-			   $tb_name = "usiliteli"
-			ElseIf $parametr[1] = "Нубы" Then
-			   $img_usilka = "media\nubi_in_zvezda.bmp"
-			   $tb_name = "raznoe"
 			EndIf
-			Return plunusilok_koordinati($tb_name, $img_usilka, $parametr[2], $parametr[3], $userDIR & $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $currentbuf)
 		Case "СборОстатковАрмии"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
