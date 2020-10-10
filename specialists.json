@@ -57,6 +57,7 @@
     {"name": "Милый", "img_active": "scout12.bmp", "adv_search": 0},
     {"name": "Настойчивый", "img_active": "scout13.bmp", "adv_search": 0},
     {"name": "Безудержный", "img_active": "scout14.bmp", "adv_search": 1},
-    {"name": "Дерзкий", "img_active": "scout15.bmp", "adv_search": 0}
+    {"name": "Дерзкий", "img_active": "scout15.bmp", "adv_search": 0},
+    {"name": "Трусливый", "img_active": "scout16.bmp", "adv_search": 0}
   ]
 }
