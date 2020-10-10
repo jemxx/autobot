@@ -1133,7 +1133,7 @@ Func getSpecialistData($name, $type)
 	Return $itemData
 EndFunc
 
-Func getBuffsData($name, $type)
+Func getBuffData($name, $type)
 	Local $i = 0
 	Local $itemData[2]
 	Local $buffs = getDataGroupSpecialists($type)

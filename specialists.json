@@ -64,5 +64,18 @@
     {"name": "Бронзоподкова", "img_active": "br_podkova.bmp", "tab_name": "usiliteli"},
     {"name": "Платиноподкова", "img_active": "pl_podkova.bmp", "tab_name": "usiliteli"},
     {"name": "Обсидиановая", "img_active": "obsid_podkova.bmp", "tab_name": "usiliteli"}
+  ],
+  "buffs": [
+    {"name": "Стрела", "img_active": "strela.bmp", "tab_name": "usiliteli"},
+    {"name": "ГорящаяСтрела", "img_active": "gor_strela.bmp", "tab_name": "usiliteli"},
+    {"name": "ШокоСтрела", "img_active": "shoko_strela.bmp", "tab_name": "usiliteli"},
+    {"name": "Баллиста", "img_active": "balista.bmp", "tab_name": "usiliteli"},
+    {"name": "БольшаяКатапульта", "img_active": "bolshaja_katapulta.bmp", "tab_name": "usiliteli"},
+    {"name": "МаленькаяКатапульта", "img_active": "malenkaja_katapulta.bmp", "tab_name": "usiliteli"},
+    {"name": "Убийца", "img_active": "boshka.bmp", "tab_name": "usiliteli"},
+    {"name": "Стейк", "img_active": "steik.bmp", "tab_name": "usiliteli"},
+    {"name": "Наноирма", "img_active": "nanoirma.bmp", "tab_name": "usiliteli"},
+    {"name": "Ирма", "img_active": "irma.bmp", "tab_name": "usiliteli"},
+    {"name": "Нубы", "img_active": "nubi_in_zvezda.bmp", "tab_name": "raznoe"}
   ]
 }

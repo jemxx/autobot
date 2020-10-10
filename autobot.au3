@@ -105,7 +105,7 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 	$haccelinterupt = GUICtrlCreateDummy()
 	Dim $accelkeys[1][2] = [["z", $haccelinterupt]]
 	GUISetAccelerators($accelkeys)
-	GUIRegisterMsg($wm_command, "_WM_COMMAND")
+	;GUIRegisterMsg($wm_command, "_WM_COMMAND")
 	GUISetState(@SW_SHOW)
 	If Read_ini(7) = "" Then
 		MsgBox(0, "Непорядок", "Вы не заполнили поле Ник_в_чате в файле настроек autobot.ini")
@@ -662,11 +662,12 @@ Func komanda($delaem)
 			Return 1
 
 		Case "Стрельнуть"
+			Local $buff
 			$parametr = StringSplit($komanda[2], ",")
 			$komand_na_massiv = UBound($parametr)
 
 			if $komand_na_massiv == 2 Then
-				Local $buff = getBuffsData($parametr[1], "horseshoes")
+				$buff = getBuffData($parametr[1], "horseshoes")
 
 				If open_usilok($buff[1], $buff[0], 0) = 1 Then
 					zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook.bmp", 30)
@@ -695,40 +696,8 @@ Func komanda($delaem)
 					$perebor = $perebor + 1
 				WEnd
 
-				If $parametr[1] = "Стрела" Then
-					$img_usilka = "media\strela.bmp"
-					$tb_name = "usiliteli"
-				ElseIf $parametr[1] = "ГорящаяСтрела" Then
-					$img_usilka = "media\gor_strela.bmp"
-					$tb_name = "usiliteli"
-				ElseIf $parametr[1] = "ШокоСтрела" Then
-					$img_usilka = "media\shoko_strela.bmp"
-					$tb_name = "usiliteli"
-				ElseIf $parametr[1] = "Баллиста" Then
-					$img_usilka = "media\balista.bmp"
-					$tb_name = "usiliteli"
-				ElseIf $parametr[1] = "БольшаяКатапульта" Then
-					$img_usilka = "media\bolshaja_katapulta.bmp"
-					$tb_name = "usiliteli"
-				ElseIf $parametr[1] = "МаленькаяКатапульта" Then
-					$img_usilka = "media\malenkaja_katapulta.bmp"
-					$tb_name = "usiliteli"
-				ElseIf $parametr[1] = "Убийца" Then
-					$img_usilka = "media\boshka.bmp"
-					$tb_name = "usiliteli"
-				ElseIf $parametr[1] = "Стейк" Then
-					$img_usilka = "media\steik.bmp"
-					$tb_name = "usiliteli"
-				ElseIf $parametr[1] = "Наноирма" Then
-					$img_usilka = "media\nanoirma.bmp"
-					$tb_name = "usiliteli"
-				ElseIf $parametr[1] = "Ирма" Then
-					$img_usilka = "media\irma.bmp"
-					$tb_name = "usiliteli"
-				ElseIf $parametr[1] = "Нубы" Then
-					$img_usilka = "media\nubi_in_zvezda.bmp"
-					$tb_name = "raznoe"
-				EndIf
+				$buff = getBuffData($parametr[1], "buffs")
+				Return plunusilok_koordinati($buff[1], $buff[0], $parametr[2], $parametr[3], $userDIR & $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $currentbuf)
 			EndIf
 		Case "СборОстатковАрмии"
 			$parametr = StringSplit($komanda[2], ",")
