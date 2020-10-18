@@ -1910,40 +1910,38 @@ Func endpricla($sekund)
 	Return 0
 EndFunc
 
-; Vasuta - Попытка переписать функцию ожидания генералов
 Func ozidanierasstanovki2($image, $yes)
-	; Ждем одного генерала
-    writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
-	Local $tx = 0, $ty = 0, $i = 0, $fl = 0
+; Ждем одного генерала
+	Local $tx = 0, $ty = 0, $ii = 1, $i = 0, $fl = 0, $count_list = 5, $count_line = 4, $count_gen_in_line = 9
+	
+	$count_list = int(read_ini(4)/($count_line * $count_gen_in_line)) ;задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране звезды (4 видимых строки по 9 ген в строке)
 	Sleep(500 * $tormoza)
-	while ($i < 300)
+	while ($i < 900) ; макисмальное время ожидания в секундах (15 минут)
 		If openzvezdap() = 0 Then
 			Return 0
 		EndIf
+		$ii = 1
 		selecttabatzvezda("specialisti", 0)
 		while 1
 			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) Then
 				$fl = 1
 				ExitLoop
 			Else
-				If (zvezdamovepolzunokdown(1) = 0) then
-					; zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-					ExitLoop
-				EndIf
+				zvezdamovepolzunokdown(1)
+				$ii = $ii + 1
+				If $ii > $count_list Then ExitLoop
 			EndIf
 		WEnd
 		If ($fl = 1) Then ExitLoop
 		$i = $i + 1
-		Sleep(30000 * $tormoza)
+		Sleep(1000)
 	Wend
 	If ($fl = 1) and ($yes = 1) Then
 		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 	EndIf
-	If $i = 300 Then
-		writelog("=====ОШИБКА " & $i & @CRLF)
+	If $i = 900 Then
 		Return 0
 	EndIf
-	writelog("=====УСПЕХ " & $i & @CRLF)
 	Return 1
 EndFunc
 
