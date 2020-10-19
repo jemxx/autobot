@@ -991,6 +991,58 @@ Func komanda($delaem)
 				Else
 					Return 0
 			EndIf
+		Case "НаборИпереносПоКоординатам"
+			$centrovat = 1
+			Local $perebor = 1
+			$parametr = StringSplit($komanda[2], ",")
+			$komand_na_massiv = UBound($parametr)
+			While $perebor < $komand_na_massiv
+				If $parametr[$perebor] = "НеЦентровать" Then
+					$centrovat = 0
+					ExitLoop
+				EndIf
+				$perebor = $perebor + 1
+			WEnd
+			$generalData = getGeneralData($parametr[1])
+			$gena = $generalData[0]
+			$full = $generalData[1]
+			If $parametr[2] = "Э" Then
+				If stoitligena($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], 1) = 1 Then
+					While apply_elitnoy_army($parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $full, 0) <> 1
+						zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+						stoitligena($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], 1)
+					WEnd
+					$gluksnaboromarmii = 0
+					Return perenosotkritimgenoynoini($parametr[17], $parametr[18], $userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14])
+				Else
+					Return 0
+				EndIf
+			EndIf
+			If $parametr[2] = "1" Then
+				If stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1) = 1 Then
+					If haveimage("media\army_values\1.bmp", 20) = 0 Then
+						While applyarmy(1, 0, 0, 0, 0, 0, 0, 0, 0, $full, 0) <> 1
+							zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+							stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1)
+						WEnd
+						Return perenosotkritimgenoynoini($parametr[19], $parametr[20], $userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16])
+					EndIf
+				Else
+					Return 0
+				EndIf
+			EndIf
+			If $parametr[2] = "П" Then
+				If stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1) = 1 Then
+					While applyarmy($parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $full, 0) <> 1
+						zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+						stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1)
+					WEnd
+				EndIf
+					$gluksnaboromarmii = 0
+					Return perenosotkritimgenoynoini($parametr[19], $parametr[20], $userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16])
+				Else
+					Return 0
+			EndIf
 
 		Case "Нажать"
 			If $komanda[2] = "0" Then
