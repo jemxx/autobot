@@ -958,7 +958,7 @@ Func komanda($delaem)
 				If stoitligena($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], 1) = 1 Then
 					While apply_elitnoy_army($parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $full, 0) <> 1
 						zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
-						stoitligenao($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], 1)
+						stoitligena($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], 1)
 					WEnd
 					$gluksnaboromarmii = 0
 					Return atakalageraotkritimgenoynoini($parametr[17], $parametr[18], $userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14])
@@ -1043,7 +1043,6 @@ Func komanda($delaem)
 				Else
 					Return 0
 			EndIf
-
 		Case "Нажать"
 			If $komanda[2] = "0" Then
 			   MouseMove(@DesktopWidth / 2, @DesktopHeight / 2, 10 * $tormoza)
