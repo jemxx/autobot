@@ -908,6 +908,38 @@ Func komanda($delaem)
 					EndIf
 				EndIf
 			EndIf
+		Case "НаборПоКоординатам"
+			$centrovat = 1
+			$parametr = StringSplit($komanda[2], ",")
+			$komand_na_massiv = UBound($parametr)
+			Local $perebor = 1
+			While $perebor < $komand_na_massiv
+				If $parametr[$perebor] = "НеЦентровать" Then
+					$centrovat = 0
+					ExitLoop
+				EndIf
+				$perebor = $perebor + 1
+			WEnd
+			$generalData = getGeneralData($parametr[1])
+			$gena = $generalData[0]
+			$full = $generalData[1]
+			If $parametr[2] = "Э" Then
+				While viborgenipodataku_elitanoini($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $full) <> 1
+					zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+				WEnd
+			EndIf
+			If $parametr[2] = "П" Then
+				While viborgenipodatakunoini($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $full) <> 1
+					zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+				WEnd
+			EndIf
+			If $parametr[2] = "1" Then
+				While viborgenipodataku_1nnoini($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1, 0, 0, 0, 0, 0, 0, 0, 0, $full) <> 1
+					zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+				WEnd
+			EndIf
+			Return 1
+
 		Case "Нажать"
 			If $komanda[2] = "0" Then
 			   MouseMove(@DesktopWidth / 2, @DesktopHeight / 2, 10 * $tormoza)
