@@ -1024,7 +1024,7 @@ EndFunc
 Func priglosdruga($prikl, $imya)
 EndFunc
 
-Func stoitligena($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday)
+Func stoitligena($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $fl_active)
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
 	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
 		If (200 < ($tochka_sektora_x + $otkudax)) AND (($tochka_sektora_x + $otkudax) < (@DesktopWidth - 200)) Then
@@ -1044,16 +1044,20 @@ Func stoitligena($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday)
 	EndIf
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
-	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 20)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(500 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
-		sleepwhile("media\zadacha_geni.bmp", 30, 5)
+		if $fl_active = 1 Then
+			sleepwhile("media\ataka.bmp", 30, 10)
+		Else
+			sleepwhile("media\zadacha_geni.bmp", 30, 10)
+		EndIf
 		go5()
 		$i = $i + 1
 	WEnd
-	If $i < 10 Then
-		zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+	If $i < 20 Then
+		If $fl_active = 0 Then zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 		Return 1
 	EndIf
 	Return 0

@@ -601,7 +601,7 @@ Func komanda($delaem)
 				EndIf
 				$perebor = $perebor + 1
 			WEnd
-			Return stoitligena($userDIR & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7])
+			Return stoitligena($userDIR & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], 0)	
 		Case "НаборГеныПодАтаку"
 			$centrovat = 1
 			$parametr = StringSplit($komanda[2], ",")
