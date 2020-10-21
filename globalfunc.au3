@@ -1096,8 +1096,8 @@ $ay = $ay + 3
 Func getDataGroupSpecialists($type)
 	Local $specJson, $specTmp, $specialists
 
-	If FileExists(@ScriptDir & "\specialists.json") Then
-		$specJson = FileRead(@ScriptDir & "\specialists.json")
+	If FileExists(@ScriptDir & "\config.json") Then
+		$specJson = FileRead(@ScriptDir & "\config.json")
 		$specTmp = Json_Decode($specJson)
 		$specialists = Json_Get($specTmp, "." & $type)
 
@@ -1108,7 +1108,7 @@ Func getDataGroupSpecialists($type)
 			Exit
 		EndIf
 	Else
-		MsgBox(0 + 16, "Ошибка!", "Не найден файл " & @ScriptDir & "\specialists.json")
+		MsgBox(0 + 16, "Ошибка!", "Не найден файл " & @ScriptDir & "\config.json")
 		Exit
 	EndIf
 EndFunc
