@@ -1043,6 +1043,35 @@ Func komanda($delaem)
 				Else
 					Return 0
 			EndIf
+		Case "ВыбратьПоКоординатамИотступить"
+			$centrovat = 1
+			Local $perebor = 1, $i = 0
+			$parametr = StringSplit($komanda[2], ",")
+			$komand_na_massiv = UBound($parametr)
+			While $perebor < $komand_na_massiv
+				If $parametr[$perebor] = "НеЦентровать" Then
+					$centrovat = 0
+					ExitLoop
+				EndIf
+				$perebor = $perebor + 1
+			WEnd
+			
+			If clickOnCoordinates($userDIR & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7]) = 1 Then
+				Sleep(600 * $tormoza)
+				While (haveimage("media\zadacha_geni.bmp", 20) = 0) AND ($i < 3)
+					sleepwhile("media\othod.bmp", 30, 2)
+					zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+					clickOnCoordinates($userDIR & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7])
+					$i = $i + 1
+				WEnd
+				If $i = 3 Then
+					Return 0
+				EndIf
+				zmemsmennuyukartinku("media\othod.bmp", 30, "media\othod_.bmp", 30)
+			Else
+				Return 0	
+			EndIf
+			Return 1
 		Case "Нажать"
 			If $komanda[2] = "0" Then
 			   MouseMove(@DesktopWidth / 2, @DesktopHeight / 2, 10 * $tormoza)
