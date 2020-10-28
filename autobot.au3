@@ -212,8 +212,9 @@ Func gogogogo()
 			;setstatistik()
 		EndIf
 		If ($pass_unlim_yes = 0) AND (GUICtrlRead($pass_cnt) = 0) Then ; кончились прохождения
-				MsgBox(0, "", "Прошли нужное количество")
-				ExitLoop
+			If $alarm = 1 Then alarmBeep()
+			MsgBox(0, "", "Прошли нужное количество")
+			ExitLoop
 		EndIf
 		If $i > 20 Then
 			If $register = 0 Then ExitLoop
