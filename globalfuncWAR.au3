@@ -1953,7 +1953,7 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
 ; Ждем всех генералов
 	Local $tx = 0, $ty = 0, $ii = 1, $i = 0, $fl = 0, $count_list = 5, $count_line = 4, $count_gen_in_line = 9
 	
-	$count_list = int(read_ini(4)/($count_line * $count_gen_in_line)) ;задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране звезды (4 видимых строки по 9 ген в строке)
+	$count_list = int(read_ini(4)/($count_line * $count_gen_in_line)) ;задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране при листании звезды (3 видимых строки по 9 ген в строке)
 	Sleep(500 * $tormoza)
 	while 1 AND ($i < 900) ; макисмальное время ожидания в секундах (15 минут)
 		If openzvezdap() = 0 Then
@@ -1966,7 +1966,12 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
 				$fl = 1
 				ExitLoop
 			Else
-				zvezdamovepolzunokdown(1)
+				sleep(500*tormoza)
+				zvezdamovepolzunokdown(0)
+				sleep(500*tormoza)
+				zvezdamovepolzunokdown(0)
+				sleep(500*tormoza)
+				zvezdamovepolzunokdown(0)
 				$ii = $ii + 1
 				If $ii > $count_list Then ExitLoop
 			EndIf
@@ -1979,8 +1984,10 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
 		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 	EndIf
 	If $i = 900 Then
-		Return 0
+		writelog("=====ОШИБКА " & $i & @CRLF)
+			Return 0
 	EndIf
+	writelog("=====УСПЕХ " & $i & @CRLF)
 	Return 1
 EndFunc
 
