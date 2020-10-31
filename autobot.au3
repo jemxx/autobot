@@ -1073,6 +1073,55 @@ Func komanda($delaem)
 				Return 0	
 			EndIf
 			Return 1
+		
+		Case "НаборИотправкаПоКоординатам"
+			$centrovat = 1
+			Local $perebor = 1
+			$parametr = StringSplit($komanda[2], ",")
+			$komand_na_massiv = UBound($parametr)
+			While $perebor < $komand_na_massiv
+				If $parametr[$perebor] = "НеЦентровать" Then
+					$centrovat = 0
+					ExitLoop
+				EndIf
+				$perebor = $perebor + 1
+			WEnd
+			
+			$generalData = getGeneralData($parametr[1])
+			$gena = $generalData[0]
+			$full = $generalData[1]
+			Select
+				Case $parametr[2] = "Э" AND openGenaOnpxp($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16]) = 1
+					While apply_elitnoy_army($parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $full, 2) <> 1
+						zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+						openGenaOnpxp($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16])
+					WEnd
+					$gluksnaboromarmii = 0
+					Return 1
+				Case $parametr[2] = "1" AND openGenaOnpxp($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18]) = 1	
+					If haveimage("media\army_values\1.bmp", 20) = 1 Then
+					zmemsmennuyukartinku("media\gohome.bmp", 30, "media\gohome_.bmp", 30)
+					zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
+						Return 1
+					Else	
+						While applyarmy($parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $full, 2) <> 1
+							zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+							openGenaOnpxp($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18])
+						WEnd
+						$gluksnaboromarmii = 0
+						Return 1
+					EndIf
+				Case $parametr[2] = "П"	AND openGenaOnpxp($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18]) = 1
+					While applyarmy($parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $full, 2) <> 1
+						zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+						openGenaOnpxp($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18])
+					WEnd
+					$gluksnaboromarmii = 0
+					Return 1
+				Case Else	
+					Return 0
+			EndSelect
+
 		Case "Нажать"
 			If $komanda[2] = "0" Then
 			   MouseMove(@DesktopWidth / 2, @DesktopHeight / 2, 10 * $tormoza)
