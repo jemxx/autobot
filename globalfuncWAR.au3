@@ -2976,3 +2976,43 @@ Func clickOnCoordinates($img, $k_x, $k_y, $else_x, $else_y, $kudax, $kuday)
 
 	Return 1
 EndFunc
+
+Func openGenaOnpxp($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday)
+	Local $tx = 0, $ty = 0, $i = 0
+
+	Sleep(500 * $tormoza)
+
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+		If (200 < ($tochka_sektora_x + $otkudax)) AND (($tochka_sektora_x + $otkudax) < (@DesktopWidth - 200)) Then
+			If (200 < ($tochka_sektora_y + $otkuday)) AND (($tochka_sektora_y + $otkuday) < (@DesktopHeight - 200)) Then
+				$centrovat = 1
+			Else
+				$centrovat = 1
+				If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+			EndIf
+		Else
+			$centrovat = 1
+			If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+		EndIf
+	Else
+		$centrovat = 1
+		If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+	EndIf
+
+	$otkudax = $tochka_sektora_x + $otkudax
+	$otkuday = $tochka_sektora_y + $otkuday
+
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 20)
+		MouseMove($otkudax, $otkuday, 10 * $tormoza)
+		Sleep(200 * $tormoza)
+		MouseClick("left", $otkudax, $otkuday, 1)
+		go5()
+		sleepwhile("media\Truba.bmp", 30, 6)
+		$i = $i + 1
+	WEnd
+	If $i = 20 Then
+		Return 0
+	EndIf
+	
+	Return 1
+EndFunc
