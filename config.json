@@ -71,6 +71,7 @@
     {"name": "Стрела", "img_active": "strela.bmp", "tab_name": "usiliteli"},
     {"name": "ГорящаяСтрела", "img_active": "gor_strela.bmp", "tab_name": "usiliteli"},
     {"name": "ШокоСтрела", "img_active": "shoko_strela.bmp", "tab_name": "usiliteli"},
+    {"name": "ЧернаяСтрела", "img_active": "chernayastrela.bmp", "tab_name": "usiliteli"},
     {"name": "Баллиста", "img_active": "balista.bmp", "tab_name": "usiliteli"},
     {"name": "БольшаяКатапульта", "img_active": "bolshaja_katapulta.bmp", "tab_name": "usiliteli"},
     {"name": "МаленькаяКатапульта", "img_active": "malenkaja_katapulta.bmp", "tab_name": "usiliteli"},
