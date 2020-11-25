@@ -540,7 +540,7 @@ Func komanda($delaem)
 		Case "ЖдемПобеду"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
-			Return sleepwhile2($generalData[0], $parametr[2], $parametr[3])
+			Return sleepwhile2($generalData[3], $parametr[2], $parametr[3])
 
 		Case "ЖдемГенерала"
 			$parametr = StringSplit($komanda[2], ",")
