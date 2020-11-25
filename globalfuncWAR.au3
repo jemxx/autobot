@@ -2408,13 +2408,13 @@ Func sborostatkovarmii($army_type)
 	If $army_type = 1 Then
 		If smena_armii($army_type) = 1 Then
 			_imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20)
-			MouseClick("left", $tx + 83, $ty + 24, 1)
-			MouseClick("left", $tx + 83, $ty + 78, 1)
-			MouseClick("left", $tx + 83, $ty + 131, 1)
-			MouseClick("left", $tx + 208, $ty + 24, 1)
-			MouseClick("left", $tx + 208, $ty + 78, 1)
-			MouseClick("left", $tx + 332, $ty + 24, 1)
-			MouseClick("left", $tx + 332, $ty + 78, 1)
+			MouseClick("left", $tx + 83, $ty + 131, 1) ; мастера осады
+			MouseClick("left", $tx + 332, $ty + 78, 1) ; конные стрелки
+			MouseClick("left", $tx + 208, $ty + 78, 1) ; стрелки в броне
+			MouseClick("left", $tx + 83, $ty + 78, 1)  ; стрелки
+			MouseClick("left", $tx + 332, $ty + 24, 1) ; рыцари
+			MouseClick("left", $tx + 208, $ty + 24, 1) ; конные мечники
+			MouseClick("left", $tx + 83, $ty + 24, 1)  ; мечники
 			Sleep(500 * $tormoza)
 			Return okclose_elitnoy_gena(1)
 		EndIf
