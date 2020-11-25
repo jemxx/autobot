@@ -116,6 +116,9 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 		Switch $nmsg
 			Case $gui_event_close
 				Exit
+			Case $file_gui
+				GUICtrlSetData($file_gui2, "1")
+				GUICtrlSetData($pass_cnt, $max_repeat)
 			Case $no1_1
 				tormoza()
 				TrayTip("", "Мы запустились...", 0)
