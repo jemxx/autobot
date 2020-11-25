@@ -869,6 +869,7 @@ Func komanda($delaem)
 			Return 1
 
 		Case "СборКоллекций"
+			openmashtab()
 			collectwarikiatprikl()
 			Return 1
 		Case "ЖмемПоКоординатам"

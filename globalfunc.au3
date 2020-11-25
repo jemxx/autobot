@@ -156,9 +156,9 @@ Func terminate()
 EndFunc
 
 Func openmashtab()
-Sleep(100 * $tormoza)
-WinActivate($windowTitle)
-writelog("openmashtab" & @CRLF)
+	Sleep(100 * $tormoza)
+	WinActivate($windowTitle)
+	writelog("openmashtab" & @CRLF)
 	MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
 	MouseDown("left")
 	MouseMove(@DesktopWidth/2+100, @DesktopHeight/2, 10 * $tormoza)
@@ -170,7 +170,7 @@ writelog("openmashtab" & @CRLF)
 	Sleep(1000 * $tormoza)
 	MouseWheel("down", 45)
 	Sleep(1000 * $tormoza)
-Return 1
+	Return 1
 EndFunc
 
 Func interrupt()
