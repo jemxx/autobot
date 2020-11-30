@@ -1002,11 +1002,8 @@ if _INetGetSource("http://mysettlers.ru/registerbot.htm") <> "88005553535" then
 endif
 Local $ax=0
 Local $ay=0, $temp="", $i=0, $rezult
-if ReadINI("main", "nick_in_chat", "Guest") <> "" then
-	Local $User=_Encoding_URLToHex(ReadINI("main", "nick_in_chat", "Guest"))
-else
-	Local $User=_Encoding_URLToHex(@UserProfileDir)
-endif
+Local $User=_Encoding_URLToHex(@UserProfileDir)
+
 WinActivate($windowTitle)
 if _imagesearcharea("media\pismo.bmp", 1, 50, 50, 300, 400, $ax, $ay, 30) = 0 then Return 0
 $ax = $ax - 115
@@ -1045,11 +1042,8 @@ func setstatistik()
 Return 1
 Local $ax=0
 Local $ay=0, $temp=0
-if ReadINI("main", "nick_in_chat", "Guest") <> "" then
-	Local $User=_Encoding_URLToHex(ReadINI("main", "nick_in_chat", "Guest"))
-else
-	Local $User=_Encoding_URLToHex(@UserProfileDir)
-endif
+Local $User=_Encoding_URLToHex(@UserProfileDir)
+
 WinActivate($windowTitle)
 if StringLen($Zapros) = 545 then
 	_INetGetSource("http://mysettlers.ru/statistik.php?key="&$Zapros&"&user="&$User)

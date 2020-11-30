@@ -94,10 +94,6 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 	GUISetAccelerators($accelkeys)
 	;GUIRegisterMsg($wm_command, "_WM_COMMAND")
 	GUISetState(@SW_SHOW)
-	If ReadINI("main", "nick_in_chat", "Guest") = "" Then
-		MsgBox(0, "Непорядок", "Вы не заполнили поле Ник_в_чате в файле настроек autobot.ini")
-		Exit
-	EndIf
 	While 1
 		$nmsg = GUIGetMsg()
 		Switch $nmsg
