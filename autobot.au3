@@ -69,19 +69,6 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 	Global $alarmCheckBox = GUICtrlCreateCheckbox("Включить Тревогу", 5, 220, 180, 25)
 	GUICtrlSetState($alarmCheckBox, $GUI_CHECKED)
 
-	;Проверяем состояние чата
-	If ReadINI("main", "enable_chat", "0") = "" Then
-		If ProcessExists("Чат.exe") Then
-		Else
-			Run("Чат.exe")
-		EndIf
-	ElseIf ReadINI("main", "enable_chat", "0") = 0 Then
-	Else
-		If ProcessExists("Чат.exe") Then
-		Else
-			Run("Чат.exe")
-		EndIf
-	EndIf
 	;Проверяем флаг разрыва соединения
 	If ReadINI("main", "check_connection", "0") = "" Then
 		If ProcessExists("serverOFF.exe") Then
