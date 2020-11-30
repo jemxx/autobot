@@ -13,7 +13,7 @@
 Global $sfile = "autobot.ini"
 Global $hfile = FileOpen($sfile)
 Global $zalezi = 12
-Global $tormoza = Read_ini(9), $soblaliWariki = 0
+Global $tormoza = ReadINI("main", "speed", "1"), $soblaliWariki = 0
 Global $Consol_a_ne_Client = 0
 Global $razmer_okna_igri = 162
 Local $Stroka = 0, $Stolbec = 0, $Zapros=""
@@ -73,7 +73,7 @@ func ZmemSmennuyuKartinkuIZdem($Kartinka1, $Tolerance1, $Kartinka2, $Tolerance2,
 	;writelog(@CRLF)
 endfunc
 Func tormoza()
-   $tormoza = Read_ini(9)
+   $tormoza = ReadINI("main", "speed", "1")
 EndFunc
 
 Func nuzniekoordinatidlabafa()
@@ -927,6 +927,10 @@ func MyTimer()
    Sleep(1000 * $taimer)
 endfunc
 
+Func ReadINI($section, $key, $default)
+	Return IniRead("autobot.ini", $section, $key, $default)
+EndFunc
+
 func Read_ini($stroka)
 	$itog = FileReadLine($hfile, $stroka)
 	$sResult = StringInStr($itog, "=")
@@ -998,8 +1002,8 @@ if _INetGetSource("http://mysettlers.ru/registerbot.htm") <> "88005553535" then
 endif
 Local $ax=0
 Local $ay=0, $temp="", $i=0, $rezult
-if Read_ini(7) <> "" then
-	Local $User=_Encoding_URLToHex(Read_ini(7))
+if ReadINI("main", "nick_in_chat", "Guest") <> "" then
+	Local $User=_Encoding_URLToHex(ReadINI("main", "nick_in_chat", "Guest"))
 else
 	Local $User=_Encoding_URLToHex(@UserProfileDir)
 endif
@@ -1041,8 +1045,8 @@ func setstatistik()
 Return 1
 Local $ax=0
 Local $ay=0, $temp=0
-if Read_ini(7) <> "" then
-	Local $User=_Encoding_URLToHex(Read_ini(7))
+if ReadINI("main", "nick_in_chat", "Guest") <> "" then
+	Local $User=_Encoding_URLToHex(ReadINI("main", "nick_in_chat", "Guest"))
 else
 	Local $User=_Encoding_URLToHex(@UserProfileDir)
 endif
@@ -1205,9 +1209,10 @@ EndFunc
 
 Func getPassagesDir()
 	Local $txtDir = @ScriptDir
+	Local $folder = ReadINI("main", "passages_folder", "")
 
-	If read_ini(11) <> "" Then
-		$txtDir = @ScriptDir & "\" & read_ini(11)
+	If $folder <> "" Then
+		$txtDir = @ScriptDir & "\" & $folder
 	EndIf
 
 	Return $txtDir

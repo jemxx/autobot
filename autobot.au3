@@ -41,7 +41,7 @@ HotKeySet("{F11}", "terminater")
 
 $passagesDir = getPassagesDir()
 $stroka = getAllPassages($passagesDir)
-$windowTitle = Read_ini(13)
+$windowTitle = ReadINI("main", "window_title", "The Settlers Онлайн")
 if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 
 ;Рисуем окно бота
@@ -51,11 +51,11 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 	GUICtrlCreateLabel("Проходим по файлу", 5, 10)
 	Global $file_gui = GUICtrlCreateCombo("", 5, 30, 215, 20, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL, $WS_VSCROLL))
 	_GUICtrlComboBox_SetMinVisible($file_gui, 23)
-	GUICtrlSetData(-1, $stroka, Read_ini(3))
+	GUICtrlSetData(-1, $stroka, ReadINI("main", "favorite_file", ""))
 	GUICtrlCreateLabel("Начинаем со строки", 5, 60)
 	Global $file_gui2 = GUICtrlCreateInput("1", 5, 80, 215, 20)
 
-	Local $max_repeat = Read_ini(12)
+	Local $max_repeat = ReadINI("main", "total_cycles", "99")
 	If $max_repeat < 1 Then $max_repeat = 99
 	GUICtrlCreateLabel("Количество повторов", 5, 110)
 	Global $pass_cnt = GUICtrlCreateInput($max_repeat, 5, 130, 215, 20)
@@ -70,12 +70,12 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 	GUICtrlSetState($alarmCheckBox, $GUI_CHECKED)
 
 	;Проверяем состояние чата
-	If Read_ini(8) = "" Then
+	If ReadINI("main", "enable_chat", "0") = "" Then
 		If ProcessExists("Чат.exe") Then
 		Else
 			Run("Чат.exe")
 		EndIf
-	ElseIf Read_ini(8) = 0 Then
+	ElseIf ReadINI("main", "enable_chat", "0") = 0 Then
 	Else
 		If ProcessExists("Чат.exe") Then
 		Else
@@ -83,12 +83,12 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 		EndIf
 	EndIf
 	;Проверяем флаг разрыва соединения
-	If Read_ini(10) = "" Then
+	If ReadINI("main", "check_connection", "0") = "" Then
 		If ProcessExists("serverOFF.exe") Then
 		Else
 			Run("media\serverOFF.exe")
 		EndIf
-	ElseIf Read_ini(10) = 0 Then
+	ElseIf ReadINI("main", "check_connection", "0") = 0 Then
 		If ProcessExists("serverOFF.exe") Then ProcessClose("serverOFF.exe")
 	Else
 		If ProcessExists("serverOFF.exe") Then
@@ -107,7 +107,7 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 	GUISetAccelerators($accelkeys)
 	;GUIRegisterMsg($wm_command, "_WM_COMMAND")
 	GUISetState(@SW_SHOW)
-	If Read_ini(7) = "" Then
+	If ReadINI("main", "nick_in_chat", "Guest") = "" Then
 		MsgBox(0, "Непорядок", "Вы не заполнили поле Ник_в_чате в файле настроек autobot.ini")
 		Exit
 	EndIf

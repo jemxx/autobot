@@ -1,4 +1,5 @@
 Dim $proverkasliva
+Global $sectorGraph =  ReadINI("main", "sector_graphics", "70")
 
 Func podgotovka()
 	chatoff()
@@ -24,13 +25,13 @@ Func find_sektor($img, $k_x, $k_y, $else_x, $else_y)
 	$search2 = _imagesearch("media\pismo.bmp", 1, $ax, $ay, 50)
 	$k_x = $ax + $k_x
 	$k_y = $ay + $k_y
-	If _imagesearcharea($img, 1, $k_x - 30, $k_y - 30, $k_x + 30, $k_y + 30, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1 Then
+	If _imagesearcharea($img, 1, $k_x - 30, $k_y - 30, $k_x + 30, $k_y + 30, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1 Then
 		writelog("Карта изначально привязана X:" & $tochka_sektora_x & " Y:" & $tochka_sektora_y)
 		Return 1
 	EndIf
-	While (_imagesearcharea($img, 1, $k_x - 30, $k_y - 30, $k_x + 30, $k_y + 30, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) <> 1) AND ($i < 10)
+	While (_imagesearcharea($img, 1, $k_x - 30, $k_y - 30, $k_x + 30, $k_y + 30, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) <> 1) AND ($i < 10)
 		go5()
-		$search = _imagesearch($img, 1, $tx, $ty, read_ini(1))
+		$search = _imagesearch($img, 1, $tx, $ty, $sectorGraph)
 		If $search = 1 Then
 			If $ttx = $tx Then
 				If $tty = $ty Then
@@ -145,12 +146,12 @@ Func find_sektor($img, $k_x, $k_y, $else_x, $else_y)
 			MouseUp("left")
 			MouseUp("left")
 			removemouse(1000, -10, 500)
-			$search = _imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1))
+			$search = _imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph)
 			writelog("Переместили карту X:" & $tochka_sektora_x & " Y:" & $tochka_sektora_y)
-			If _imagesearcharea($img, 1, $k_x - 30, $k_y - 30, $k_x + 30, $k_y + 30, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1 Then
+			If _imagesearcharea($img, 1, $k_x - 30, $k_y - 30, $k_x + 30, $k_y + 30, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1 Then
 				Return 1
 			EndIf
-			If _imagesearcharea($img, 1, $k_x - 50, $k_y - 50, $k_x + 50, $k_y + 50, $tochka_sektora_x, $tochka_sektora_y, read_ini(1) + 30) = 1 Then
+			If _imagesearcharea($img, 1, $k_x - 50, $k_y - 50, $k_x + 50, $k_y + 50, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph + 30) = 1 Then
 				Return 1
 			EndIf
 		Else
@@ -500,7 +501,7 @@ Func atakalageraotkritimgenoynoini($kudax, $kuday, $img, $k_x, $k_y, $else_x, $e
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
 	zmemsmennuyukartinku("media\Ataka.bmp", 30, "media\Ataka_.bmp", 30)
 	$i = 0
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $kudax)) AND (($tochka_sektora_x + $kudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $kuday)) AND (($tochka_sektora_y + $kuday) < (@DesktopHeight - 200)) Then
 				$centrovat = 1
@@ -538,7 +539,7 @@ Func perenosotkritimgenoynoini($kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
 	zmemsmennuyukartinku("media\truba.bmp", 50, "media\truba_.bmp", 50)
 	$i = 0
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $kudax)) AND (($tochka_sektora_x + $kudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $kuday)) AND (($tochka_sektora_y + $kuday) < (@DesktopHeight - 200)) Then
 				$centrovat = 1
@@ -574,7 +575,7 @@ EndFunc
 
 Func atakgenapxpnoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $kudax, $kuday)
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $otkudax)) AND (($tochka_sektora_x + $otkudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $otkuday)) AND (($tochka_sektora_y + $otkuday) < (@DesktopHeight - 200)) Then
 			Else
@@ -602,7 +603,7 @@ Func atakgenapxpnoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $k
 	EndIf
 	zmemsmennuyukartinku("media\Ataka.bmp", 30, "media\Ataka_.bmp", 30)
 	$i = 0
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $kudax)) AND (($tochka_sektora_x + $kudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $kuday)) AND (($tochka_sektora_y + $kuday) < (@DesktopHeight - 200)) Then
 				$centrovat = 1
@@ -673,7 +674,7 @@ Func perestanovka_geni_iz_zvezdinoini($general, $nomergenerala, $voisko, $tip_vo
 	$gluksnaboromarmii = 0
 	zmemsmennuyukartinku("media\truba.bmp", 50, "media\truba_.bmp", 50)
 	sleepwhile("media\Otmena.bmp", 30, 10)
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $kudax)) AND (($tochka_sektora_x + $kudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $kuday)) AND (($tochka_sektora_y + $kuday) < (@DesktopHeight - 200)) Then
 				$centrovat = 1
@@ -709,7 +710,7 @@ EndFunc
 
 Func viborgenipodatakunoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena)
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $otkudax)) AND (($tochka_sektora_x + $otkudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $otkuday)) AND (($tochka_sektora_y + $otkuday) < (@DesktopHeight - 200)) Then
 				$centrovat = 1
@@ -746,7 +747,7 @@ EndFunc
 
 Func viborgenipodataku_elitanoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $mo, $ks, $strelki, $sb, $rizari, $km, $mechniki, $gena)
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $otkudax)) AND (($tochka_sektora_x + $otkudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $otkuday)) AND (($tochka_sektora_y + $otkuday) < (@DesktopHeight - 200)) Then
 				$centrovat = 1
@@ -783,7 +784,7 @@ EndFunc
 
 Func viborgenipodataku_1nnoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena)
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $otkudax)) AND (($tochka_sektora_x + $otkudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $otkuday)) AND (($tochka_sektora_y + $otkuday) < (@DesktopHeight - 200)) Then
 				$centrovat = 1
@@ -841,7 +842,7 @@ EndFunc
 
 Func plunusilok_koordinati($tb_name, $img_usilka, $kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y, $currentbuf)
 	If open_usilok($tb_name, $img_usilka, $currentbuf) = 0 Then Return 0
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $kudax)) AND (($tochka_sektora_x + $kudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $kuday)) AND (($tochka_sektora_y + $kuday) < (@DesktopHeight - 200)) Then
 				$centrovat = 1
@@ -921,7 +922,7 @@ EndFunc
 
 Func movegenapxpnoini($otkudax, $otkuday, $img, $k_x, $k_y, $else_x, $else_y, $kudax, $kuday, $img2, $k_x2, $k_y2, $else_x2, $else_y2)
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $otkudax)) AND (($tochka_sektora_x + $otkudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $otkuday)) AND (($tochka_sektora_y + $otkuday) < (@DesktopHeight - 200)) Then
 				$centrovat = 1
@@ -952,7 +953,7 @@ Func movegenapxpnoini($otkudax, $otkuday, $img, $k_x, $k_y, $else_x, $else_y, $k
 	EndIf
 	zmemsmennuyukartinku("media\truba.bmp", 50, "media\truba_.bmp", 50)
 	$i = 0
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $kudax)) AND (($tochka_sektora_x + $kudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $kuday)) AND (($tochka_sektora_y + $kuday) < (@DesktopHeight - 200)) Then
 				$centrovat = 1
@@ -1026,7 +1027,7 @@ EndFunc
 
 Func stoitligena($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $fl_active)
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $otkudax)) AND (($tochka_sektora_x + $otkudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $otkuday)) AND (($tochka_sektora_y + $otkuday) < (@DesktopHeight - 200)) Then
 				$centrovat = 1
@@ -1216,7 +1217,7 @@ Func vvodzifr($skolko)
 
 	$i = 0
 	$error = 0
-	If read_ini(5) = 1 Then
+	If ReadINI("main", "rolling_back", "0") = 1 Then
 		While StringInStr($skolko, "0") <> 0
 			$skolko = $skolko - 1
 			$i = $i + 1
@@ -1918,7 +1919,7 @@ Func ozidanierasstanovki2($image, $yes)
 ; Ждем одного генерала
 	Local $tx = 0, $ty = 0, $ii = 1, $i = 0, $fl = 0, $count_list = 5, $count_line = 4, $count_gen_in_line = 9
 	
-	$count_list = int(read_ini(4)/($count_line * $count_gen_in_line)) ;задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране звезды (4 видимых строки по 9 ген в строке)
+	$count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line)) ;задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране звезды (4 видимых строки по 9 ген в строке)
 	Sleep(500 * $tormoza)
 	while ($i < 900) ; макисмальное время ожидания в секундах (15 минут)
 		If openzvezdap() = 0 Then
@@ -1953,7 +1954,7 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
 	; Ждём всех генералов от LEKALA (ака Андрей)
 	Local $tx = 0, $ty = 0, $i = 1, $ii = 0, $count_list = 5, $count_line = 3, $count_gen_in_line = 9
 	; $count_list - задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране звезды (3 верхних строки по 9 ген в строке) Идея и реализация от Marsik-A.
-	$count_list = int(read_ini(4)/($count_line * $count_gen_in_line))
+	$count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line))
 	Sleep(500 * $tormoza)
 	openzvezdap()
 	while ($ii < 2)
@@ -2038,7 +2039,7 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
 ; Ждем всех генералов
 	Local $tx = 0, $ty = 0, $ii = 1, $i = 0, $fl = 0, $count_list = 5, $count_line = 4, $count_gen_in_line = 9
 	
-	$count_list = int(read_ini(4)/($count_line * $count_gen_in_line)) ;задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране при листании звезды (3 видимых строки по 9 ген в строке)
+	$count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line)) ;задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране при листании звезды (3 видимых строки по 9 ген в строке)
 	Sleep(500 * $tormoza)
 	while 1 AND ($i < 900) ; макисмальное время ожидания в секундах (15 минут)
 		If openzvezdap() = 0 Then
@@ -2446,7 +2447,7 @@ Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 	drugioff()
 	While 1
 		If openotpravkagen($userDIR & $prikl) = 1 Then
-			While ($generalov <> $shtuk) AND ($i < (read_ini(4) / 2))
+			While ($generalov <> $shtuk) AND ($i < (ReadINI("main", "total_generals", "50") / 2))
 				If haveimagearea("media\error_otpravka.bmp", 40, $area5_top_x, $area5_top_y, $area5_bottom_x, $area5_bottom_y) = 1 Then
 					$error_otpravka = $error_otpravka + 1
 					If $error_otpravka = 5 Then ExitLoop
@@ -2604,7 +2605,7 @@ Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 	drugioff()
 	While 1
 		If openotpravkagen($userDIR & $prikl) = 1 Then
-			While ($generalov <> $shtuk) AND ($i < (read_ini(4) / 2))
+			While ($generalov <> $shtuk) AND ($i < (ReadINI("main", "total_generals", "50") / 2))
 				If haveimagearea("media\error_otpravka.bmp", 40, $area0_top_x, $area0_top_y, $area0_bottom_x, $area0_bottom_y) = 1 Then
 					$error_otpravka = $error_otpravka + 1
 					If $error_otpravka = 5 Then ExitLoop
@@ -2702,7 +2703,7 @@ Func skolko_voisk_v_gene($imya, $area_top_x, $area_top_y, $area_bottom_x, $area_
 		MouseMove($tx, $ty, 10 * $tormoza)
 		Sleep(100 * $tormoza)
 		Sleep(900 * $tormoza)
-		If (haveimage("media\otpravkingena2.bmp", read_ini(2)) = 0) AND (haveimage("media\otpravkingena.bmp", read_ini(2)) = 0) Then
+		If (haveimage("media\otpravkingena2.bmp", ReadINI("main", "general_name_graphics", "100")) = 0) AND (haveimage("media\otpravkingena.bmp", ReadINI("main", "general_name_graphics", "100")) = 0) Then
 			go5()
 			Return 0
 		Else
@@ -3034,7 +3035,7 @@ Func clickOnCoordinates($img, $k_x, $k_y, $else_x, $else_y, $kudax, $kuday)
 
 	Sleep(1000 * $tormoza)
 
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $kudax)) AND (($tochka_sektora_x + $kudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $kuday)) AND (($tochka_sektora_y + $kuday) < (@DesktopHeight - 200)) Then
 				$centrovat = 1
@@ -3068,7 +3069,7 @@ Func openGenaOnpxp($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday)
 
 	Sleep(500 * $tormoza)
 
-	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, read_ini(1)) = 1) Then
+	If ($centrovat = 0) AND (_imagesearch($img, 1, $tochka_sektora_x, $tochka_sektora_y, $sectorGraph) = 1) Then
 		If (200 < ($tochka_sektora_x + $otkudax)) AND (($tochka_sektora_x + $otkudax) < (@DesktopWidth - 200)) Then
 			If (200 < ($tochka_sektora_y + $otkuday)) AND (($tochka_sektora_y + $otkuday) < (@DesktopHeight - 200)) Then
 				$centrovat = 1
