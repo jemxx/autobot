@@ -10,14 +10,13 @@
 #include <Inet.au3>
 #include <Encoding.au3>
 
-Global $sfile = "autobot.ini"
-Global $hfile = FileOpen($sfile)
+;Global $sfile = "autobot.ini"
+;Global $hfile = FileOpen($sfile)
 Global $zalezi = 12
-Global $tormoza = Read_ini(9), $soblaliWariki = 0
+Global $tormoza = ReadINI("main", "speed", "1"), $soblaliWariki = 0
 Global $Consol_a_ne_Client = 0
 Global $razmer_okna_igri = 162
 Local $Stroka = 0, $Stolbec = 0, $Zapros=""
-;Global $Zvezda_area[4]
 Global $chasi_gui
 Global $minuti_gui
 Global $sekundi_gui
@@ -73,7 +72,7 @@ func ZmemSmennuyuKartinkuIZdem($Kartinka1, $Tolerance1, $Kartinka2, $Tolerance2,
 	;writelog(@CRLF)
 endfunc
 Func tormoza()
-   $tormoza = Read_ini(9)
+   $tormoza = ReadINI("main", "speed", "1")
 EndFunc
 
 Func nuzniekoordinatidlabafa()
@@ -927,12 +926,18 @@ func MyTimer()
    Sleep(1000 * $taimer)
 endfunc
 
+Func ReadINI($section, $key, $default)
+	Return IniRead("autobot.ini", $section, $key, $default)
+EndFunc
+
+#comments-start
 func Read_ini($stroka)
 	$itog = FileReadLine($hfile, $stroka)
 	$sResult = StringInStr($itog, "=")
 		$sText = StringMid($itog, $sResult + 1)
 	Return $sText
 endfunc
+#comments-end
 
 Func sleepwhile2($img, $time, $flag)
 	Local $i = 0, $tolerance = 30, $fl_win = 0
@@ -998,11 +1003,8 @@ if _INetGetSource("http://mysettlers.ru/registerbot.htm") <> "88005553535" then
 endif
 Local $ax=0
 Local $ay=0, $temp="", $i=0, $rezult
-if Read_ini(7) <> "" then
-	Local $User=_Encoding_URLToHex(Read_ini(7))
-else
-	Local $User=_Encoding_URLToHex(@UserProfileDir)
-endif
+Local $User=_Encoding_URLToHex(@UserProfileDir)
+
 WinActivate($windowTitle)
 if _imagesearcharea("media\pismo.bmp", 1, 50, 50, 300, 400, $ax, $ay, 30) = 0 then Return 0
 $ax = $ax - 115
@@ -1041,11 +1043,8 @@ func setstatistik()
 Return 1
 Local $ax=0
 Local $ay=0, $temp=0
-if Read_ini(7) <> "" then
-	Local $User=_Encoding_URLToHex(Read_ini(7))
-else
-	Local $User=_Encoding_URLToHex(@UserProfileDir)
-endif
+Local $User=_Encoding_URLToHex(@UserProfileDir)
+
 WinActivate($windowTitle)
 if StringLen($Zapros) = 545 then
 	_INetGetSource("http://mysettlers.ru/statistik.php?key="&$Zapros&"&user="&$User)
@@ -1205,9 +1204,10 @@ EndFunc
 
 Func getPassagesDir()
 	Local $txtDir = @ScriptDir
+	Local $folder = ReadINI("main", "passages_folder", "")
 
-	If read_ini(11) <> "" Then
-		$txtDir = @ScriptDir & "\" & read_ini(11)
+	If $folder <> "" Then
+		$txtDir = @ScriptDir & "\" & $folder
 	EndIf
 
 	Return $txtDir
