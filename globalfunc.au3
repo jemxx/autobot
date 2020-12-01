@@ -10,8 +10,8 @@
 #include <Inet.au3>
 #include <Encoding.au3>
 
-Global $sfile = "autobot.ini"
-Global $hfile = FileOpen($sfile)
+;Global $sfile = "autobot.ini"
+;Global $hfile = FileOpen($sfile)
 Global $zalezi = 12
 Global $tormoza = ReadINI("main", "speed", "1"), $soblaliWariki = 0
 Global $Consol_a_ne_Client = 0
@@ -931,12 +931,14 @@ Func ReadINI($section, $key, $default)
 	Return IniRead("autobot.ini", $section, $key, $default)
 EndFunc
 
+#comments-start
 func Read_ini($stroka)
 	$itog = FileReadLine($hfile, $stroka)
 	$sResult = StringInStr($itog, "=")
 		$sText = StringMid($itog, $sResult + 1)
 	Return $sText
 endfunc
+#comments-end
 
 Func sleepwhile2($img, $time, $flag)
 	Local $i = 0, $tolerance = 30, $fl_win = 0

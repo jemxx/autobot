@@ -188,6 +188,7 @@ Func find_sektor($img, $k_x, $k_y, $else_x, $else_y)
 	Return 0
 EndFunc
 
+#comments-start
 Func perestanovka_geni_iz_zvezdi($general, $nomergenerala, $voisko, $tip_voiska, $img, $k_x, $k_y, $else_x, $else_y, $kudax, $kuday)
 	Local $tx = 0, $ty = 0, $i = 0
 	$gluksnaboromarmii = 0
@@ -496,6 +497,7 @@ Func proverka_1n($img, $yes)
 	EndIf
 	Return 0
 EndFunc
+#comments-end
 
 Func atakalageraotkritimgenoynoini($kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
