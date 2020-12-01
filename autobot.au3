@@ -92,7 +92,6 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 	$haccelinterupt = GUICtrlCreateDummy()
 	Dim $accelkeys[1][2] = [["z", $haccelinterupt]]
 	GUISetAccelerators($accelkeys)
-	;GUIRegisterMsg($wm_command, "_WM_COMMAND")
 	GUISetState(@SW_SHOW)
 	While 1
 		$nmsg = GUIGetMsg()
@@ -265,14 +264,6 @@ Func startflag($stroka)
 			$tormoza = $parametr[2]
 		Case "/Тревога"
 			$alarm = $parametr[2]
-;~ 		Case "/Количество"
-;~ 			If $pass_count_flag = 0 Then
-;~ 				$pass_all = $parametr[2]
-;~ 				$pass_count = $pass_all
-;~ 				$pass_count_flag = 1
-;~ 			Else
-;~ 				TrayTip("", "Флаг Количество указан повторно - значение проигнорировано", 0)
-;~ 			EndIf
 	EndSwitch
 EndFunc
 

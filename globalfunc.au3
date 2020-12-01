@@ -17,7 +17,6 @@ Global $tormoza = ReadINI("main", "speed", "1"), $soblaliWariki = 0
 Global $Consol_a_ne_Client = 0
 Global $razmer_okna_igri = 162
 Local $Stroka = 0, $Stolbec = 0, $Zapros=""
-;Global $Zvezda_area[4]
 Global $chasi_gui
 Global $minuti_gui
 Global $sekundi_gui
