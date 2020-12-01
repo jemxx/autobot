@@ -85,7 +85,7 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 	EndIf
 
 	Global $no1_1 = GUICtrlCreateButton("ЗАПУСК", 5, 260, 215, 30)
-	Global $pr8 = GUICtrlCreateButton("Поддержать проект", 5, 300, 215, 20)
+	Global $pr8 = GUICtrlCreateButton("Дискорд", 5, 300, 215, 20)
 	Global $pr9 = GUICtrlCreateButton("Справка", 5, 330, 215, 20)
 	GUICtrlCreateLabel("F7 - пауза до слива", 5, 360)
 	GUICtrlCreateLabel("F9 - пауза, F11 - прервать", 5, 380)
@@ -133,7 +133,7 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 					Exit
 				EndIf
 			Case $pr8
-				ShellExecute("media\help.html")
+				ShellExecute("https://discord.gg/mb7vj4238V")
 			Case $pr9
 				ShellExecute("Команды_Автобота.html")
 		EndSwitch
