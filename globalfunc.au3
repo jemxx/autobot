@@ -1087,7 +1087,6 @@ $ay = $ay + 3
 	Wend
  endfunc
 
-;Add Jemxx
 Func getDataGroupSpecialists($type)
 	Local $specJson, $specTmp, $specialists
 
@@ -1229,5 +1228,33 @@ Func getAllPassages($passagesDir)
 	ElseIf @error = 4 Then
 		MsgBox(0, "Внимание!!!", "Файлы с прохождением не найдены!")
 		Return 0
+	EndIf
+EndFunc
+
+Func _URIEncode($sData) ; https://www.autoitscript.com/forum/topic/95850-url-encoding/
+    ; Prog@ndy
+    Local $aData = StringSplit(BinaryToString(StringToBinary($sData,4),1),"")
+    Local $nChar
+    $sData=""
+    For $i = 1 To $aData[0]
+        $nChar = Asc($aData[$i])
+        Switch $nChar
+            Case 45, 46, 48 To 57, 65 To 90, 95, 97 To 122, 126
+                $sData &= $aData[$i]
+            Case 32
+                $sData &= "+"
+            Case Else
+                $sData &= "%" & Hex($nChar,2)
+        EndSwitch
+    Next
+    Return $sData
+EndFunc
+
+Func Telegram_bot($Message)
+	Local $bot_token = ReadINI("telegram", "telegram_bot_token", "")
+	Local $chat_id = ReadINI("telegram", "telegram_chat_id", "")
+
+	If $chat_id <> "" And $bot_token <> "" Then
+		ConsoleWrite(InetRead('https://api.telegram.org/' & $bot_token & '/sendMessage?chat_id=' & $chat_id & '&text=' & _URIEncode($Message), 0))
 	EndIf
 EndFunc

@@ -19,7 +19,7 @@ AutoItWinSetTitle(@ScriptName)
 
 If ProcessExists("Универсальный_бот.exe") Then ProcessClose ("Универсальный_бот.exe")
 
-Global $alarm = 0, $passagesDir, $windowTitle
+Global $alarm = 0, $passagesDir, $windowTitle, $sreport = 0
 Global $userDIR = "media\users\"
 
 Global $k_x, $k_y, $tochka_sektora_x=0, $tochka_sektora_y=0
@@ -118,6 +118,9 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 					EndIf
 					If GUICtrlRead($alarmCheckBox) == $GUI_CHECKED Then
 						$alarm = 1
+						If ReadINI("telegram", "telegram_bot", "0") <> 0 Then
+							$sreport = 1						
+						EndIf
 					EndIf
 					If GUICtrlRead($pass_unlim) == $GUI_CHECKED Then
 						$pass_unlim_yes = 1
@@ -198,6 +201,7 @@ Func gogogogo()
 		EndIf
 		If ($pass_unlim_yes = 0) AND (GUICtrlRead($pass_cnt) = 0) Then ; кончились прохождения
 			If $alarm = 1 Then alarmBeep()
+			If $sreport = 1 Then Telegram_bot("Прошли нужное количество")	
 			MsgBox(0, "", "Прошли нужное количество")
 			ExitLoop
 		EndIf
@@ -225,6 +229,7 @@ Func gogogogo()
 			printerror("Команда из " & $i & " строки." & @CR & @CR & "Делаем: " & $delaem & @CR & "С параметром: " & $komanda[2] & @CR & @CR & "ВЫПОЛНЕНА УСПЕШНО")
 		Else
 			If $alarm = 1 Then alarmBeep()
+			If $sreport = 1 Then Telegram_bot("СТОП! Из строки " & $i &  " мы не смогли сделать " & $stroka)	
 			printerror("Команда из " & $i & " строки." & @CR & @CR & "Делаем: " & $delaem & @CR & "С параметром: " & $komanda[2] & @CR & @CR & "НЕ ВЫПОЛНЕНА. ОСТАНАВЛИВАЕМСЯ")
 			MsgBox(0, "ВНИМАНИЕ!!!", "Из строки " & $i & @CR & "Мы не смогли сделать" & @CR & @CR & $stroka & @CR & @CR & "поэтому и остановились(((")
 			GUICtrlSetData($file_gui2, $i)
