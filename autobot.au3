@@ -952,8 +952,8 @@ Func komanda($delaem)
 							zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 							stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1)
 						WEnd
-						Return atakalageraotkritimgenoynoini($parametr[19], $parametr[20], $userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16])
-					EndIf
+					EndIf	
+					Return atakalageraotkritimgenoynoini($parametr[19], $parametr[20], $userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16])
 				Else
 					Return 0
 				EndIf
@@ -1004,8 +1004,8 @@ Func komanda($delaem)
 							zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 							stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1)
 						WEnd
-						Return perenosotkritimgenoynoini($parametr[19], $parametr[20], $userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16])
-					EndIf
+					EndIf	
+					Return perenosotkritimgenoynoini($parametr[19], $parametr[20], $userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16])
 				Else
 					Return 0
 				EndIf
