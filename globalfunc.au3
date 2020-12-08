@@ -1256,5 +1256,7 @@ Func Telegram_bot($Message)
 
 	If $chat_id <> "" And $bot_token <> "" Then
 		ConsoleWrite(InetRead('https://api.telegram.org/' & $bot_token & '/sendMessage?chat_id=' & $chat_id & '&text=' & _URIEncode($Message), 0))
+	Else
+		TrayTip("", "Выбран режим трансляции ошибок телеграмм-боту, но не указан Token и/или Chat_ID!", 0)
 	EndIf
 EndFunc
