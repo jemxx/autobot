@@ -527,7 +527,7 @@ Func komanda($delaem)
 		Case "ЖдемГенерала"
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
-			Return ozidanierasstanovki2($generalData[0], $parametr[2])
+			Return ozidanierasstanovki2($generalData[0], $generalData[2], $parametr[2])
 
 		Case "ЖдемВсехГенералов"
 			$parametr = StringSplit($komanda[2], ",")

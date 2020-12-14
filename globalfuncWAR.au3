@@ -1872,38 +1872,77 @@ Func endpricla($sekund)
 	Return 0
 EndFunc
 
-Func ozidanierasstanovki2($image, $yes)
-; Ждем одного генерала
-	Local $tx = 0, $ty = 0, $ii = 1, $i = 0, $fl = 0, $count_list = 5, $count_line = 4, $count_gen_in_line = 9
-	
-	$count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line)) ;задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране звезды (4 видимых строки по 9 ген в строке)
+Func ozidanierasstanovki2($image, $image_NA, $yes)
+	; Ждём генерала от LEKALA (ака Андрей)
+	Local $tx = 0, $ty = 0, $i = 1, $ii = 0, $count_list = 5, $count_line = 3, $count_gen_in_line = 9
+	; $count_list - задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране звезды (3 верхних строки по 9 ген в строке) Идея и реализация от Marsik-A.
+	$count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line))
 	Sleep(500 * $tormoza)
-	while ($i < 900) ; макисмальное время ожидания в секундах (15 минут)
-		If openzvezdap() = 0 Then
-			Return 0
-		EndIf
-		$ii = 1
+	openzvezdap()
+	While ($ii < 2)
 		selecttabatzvezda("specialisti", 0)
-		while 1
-			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) Then
-				$fl = 1
-				ExitLoop
-			Else
-				zvezdamovepolzunokdown(1)
-				$ii = $ii + 1
-				If $ii > $count_list Then ExitLoop
-			EndIf
-		WEnd
-		If ($fl = 1) Then ExitLoop
-		$i = $i + 1
-		Sleep(1000)
+		$i = 1
+		While ($i < $count_list)
+			Select
+				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 0	
+					;Если условие выполняется на первом экране, то ждём появления хотя бы одного активного.
+					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) = 0 Then
+						;TrayTip("Отсутствует ползунок", "Нашли только пассивных на одном экране, ждём появления одного активного.", 5)
+						sleepwhile($image, 30, 900/$count_list)
+					EndIf					
+					;Если условие выполняется на 4 строки, то проверяем выполнение условия в первой строке.
+					while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) <> 0
+						;TrayTip("Видим только пассивных", "Нашли только пассивных, листаем по 1 строке до первой и ждём появления одного активного.", 5)
+						If (haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 1) AND (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 0) Then
+							sleepwhile($image, 30, 900/$count_list)
+							ExitLoop
+						Else
+							zvezdamovepolzunokdown(0)
+						EndIf
+					Wend
+					$i = $i + 1
+				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 82) = 0 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 82) = 0
+					;Если условие выполняется на 3 верхних строки, то листаем 3 строки и добавляем счётчик экранов.
+					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) = 0 Then
+						;TrayTip("Отсутствует ползунок", "Не нашли ни активных, ни пассивных на одном экране. Надо куда-то выйти", 5)
+						ExitLoop
+ 					EndIf					
+					;TrayTip("Не видим никого", "Не нашли ни активных, ни пассивных, листаем 3 строки", 5)
+					zvezdamovepolzunokdown(0)
+					zvezdamovepolzunokdown(0)
+					zvezdamovepolzunokdown(0)
+					sleep(500*tormoza)
+					$i = $i + 1
+				Case Else
+				;Если оба предыдущих условия не являются истинными, то проверяем отсутствие активных в 3 верхних строках. 
+					If (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 82) = 0) Then
+						While (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) <> 0
+							;Если активные в 3 верхних строках отсутствуют, то, листая построчно, проверяем наличие пассивных ИЛИ активных в первой строке.
+							If (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 1) Or (haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 1) Then
+								ExitLoop
+							Else
+								zvezdamovepolzunokdown(0)
+							EndIf
+						Wend
+					;Если отсутствие активных в 3 верхних строках становится не истинным, то без лишнего листания выходим на закрытие функции УСПЕХОМ.
+					;Листание по 1 строке до верхней можно добавить, если тестеры пожелают, но я пока не вижу в этом необходимости.
+					ElseIf (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 82) = 1) Then
+						;TrayTip("Видим одного активного", "Нашли хотя бы одного активного, выходим", 5)
+						ExitLoop 2
+					EndIf
+			EndSelect		
+		Wend
+		$ii = $ii + 1
+		If $i > $count_list Then ExitLoop	
 	Wend
-	If ($fl = 1) and ($yes = 1) Then
-		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
-	EndIf
-	If $i = 900 Then
+	If $ii = 2 Then
+		;TrayTip("ОШИБКА", "Не нашли ни одного из выбранных ген!", 5)
 		Return 0
 	EndIf
+	If ($yes = 1) Then
+		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+	EndIf
+	;TrayTip("УСПЕХ", "Нашли хотя бы одного активного из выбранных ген!", 5)
 	Return 1
 EndFunc
 
@@ -1992,6 +2031,41 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
 EndFunc
 
 #comments-start
+Func ozidanierasstanovki2($image, $yes)
+; Ждем одного генерала
+	Local $tx = 0, $ty = 0, $ii = 1, $i = 0, $fl = 0, $count_list = 5, $count_line = 4, $count_gen_in_line = 9
+	
+	$count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line)) ;задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране звезды (4 видимых строки по 9 ген в строке)
+	Sleep(500 * $tormoza)
+	while ($i < 900) ; макисмальное время ожидания в секундах (15 минут)
+		If openzvezdap() = 0 Then
+			Return 0
+		EndIf
+		$ii = 1
+		selecttabatzvezda("specialisti", 0)
+		while 1
+			If (_imagesearcharea($image, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 20) = 1) Then
+				$fl = 1
+				ExitLoop
+			Else
+				zvezdamovepolzunokdown(1)
+				$ii = $ii + 1
+				If $ii > $count_list Then ExitLoop
+			EndIf
+		WEnd
+		If ($fl = 1) Then ExitLoop
+		$i = $i + 1
+		Sleep(1000)
+	Wend
+	If ($fl = 1) and ($yes = 1) Then
+		zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+	EndIf
+	If $i = 900 Then
+		Return 0
+	EndIf
+	Return 1
+EndFunc
+
 Func ozidanierasstanovki($image, $image_NA, $yes)
 ; Ждем всех генералов
 	Local $tx = 0, $ty = 0, $ii = 1, $i = 0, $fl = 0, $count_list = 5, $count_line = 4, $count_gen_in_line = 9
