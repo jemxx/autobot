@@ -118,9 +118,9 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
 					EndIf
 					If GUICtrlRead($alarmCheckBox) == $GUI_CHECKED Then
 						$alarm = 1
-						If ReadINI("telegram", "telegram_bot", "0") <> 0 Then
-							$sreport = 1						
-						EndIf
+					EndIf
+					If ReadINI("telegram", "telegram_bot", "0") <> 0 Then
+						$sreport = 1						
 					EndIf
 					If GUICtrlRead($pass_unlim) == $GUI_CHECKED Then
 						$pass_unlim_yes = 1
