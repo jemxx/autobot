@@ -994,14 +994,15 @@ Func otpravitgenu($general, $nomergenerala)
 	openzvezdap()
 	While haveimage("media\zadacha_geni.bmp", 30) = 0
 		If openzvezdap() = 1 Then
-			If selecttabatzvezda("specialisti", 0) = 1 Then
+			If selecttabatzvezda("specialisti", 1) = 1 Then
 				generali($general, $nomergenerala)
-				Sleep(1000 * $tormoza)
+				Sleep(500 * $tormoza)
 				sleepwhile("media\zadacha_geni.bmp", 30, 10)
 			EndIf
 		EndIf
 	WEnd
 	zmemsmennuyukartinku("media\gohome.bmp", 30, "media\gohome_.bmp", 30)
+	sleepwhile("media\nubook.bmp", 30, 10)
 	zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
 	Return 1
 EndFunc
