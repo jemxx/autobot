@@ -314,7 +314,7 @@ Func komanda($delaem)
 			$full = $generalData[1]
 
 			If openzvezdap() = 1 Then
-				If selecttabatzvezda("specialisti", 0) = 1 Then
+				If selecttabatzvezda("specialisti", 1) = 1 Then
 					If generali($gena, $parametr[2]) = 1 Then
 						If $parametr[3] = "Э" Then
 							While apply_elitnoy_army($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $full, $parametr[11]) <> 1
@@ -332,6 +332,7 @@ Func komanda($delaem)
 								EndIf
 								If $parametr[13] = 2 Then
 									zmemsmennuyukartinku("media\gohome.bmp", 30, "media\gohome_.bmp", 30)
+									sleepwhile("media\nubook.bmp", 30, 10)
 									zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
 								EndIf
 								Return 1

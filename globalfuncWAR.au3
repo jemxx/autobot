@@ -1535,23 +1535,30 @@ Func generalixxx($general, $nomergenerala)
 EndFunc
 
 Func generali($general, $nomergenerala)
-	Sleep(1000 * $tormoza)
-	Local $ty = 0, $tx = 0, $search = 0, $i = 0, $t = 0, $ii = 0
+	Sleep(500 * $tormoza)
+	Local $ty = 0, $tx = 0, $search = 0, $i = 0, $t = 0, $ii = 0, $count_list = 1, $count_line = 1, $count_gen_in_line = 9
 	Local $general1x = 0, $general1y = 0, $general2x = 0, $general2y = 0
-
-	;If _imagesearch($general, 1, $tx, $ty, 20) = 0 Then Return 0
+	$count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line)) - 4
+	;Если на открывщемся экране нет гены, то нажимаем вкладку "специалисты", и если снова гены нет, то листаем по 1 строке
+	;Листаем пока не найдём гену или до последнего экрана с генералами пока есть ползунок. Если не нашли гену, выходим с ошибкой.
+	;Если нашли гену на экране в 4 строки, то поднимаем первую картинку гены во вторую строку сверху.
 	While 1
-		If _imagesearcharea($general, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then ExitLoop
-
-		$ii = $ii + 1
-		zvezdamovepolzunokdown(0)
-		zvezdamovepolzunokdown(0)
-
-		Sleep(Random(500, 1000, 1) * $tormoza)
-		If $ii > 5 Then
-			If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 0 Then
-				Return 1
+		If (haveimageAREA($general, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 0) Then
+			selecttabatzvezda("specialisti", 0)
+			while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) <> 0 AND ($ii < $count_list)
+				If (haveimageAREA($general, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 165) = 1) Then
+					ExitLoop
+				Else
+					zvezdamovepolzunokdown(0)
+					$ii = $ii + 1
+				EndIf
+			Wend
+			If $ii >= $count_list Then 
+				;TrayTip("ОШИБКА", "Не нашли ни одного из выбранных ген!", 5)
+				Return 0
 			EndIf
+		ElseIf _imagesearcharea($general, 1, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3], $tx, $ty, 30) = 1 Then
+			ExitLoop
 		EndIf
 	WEnd
 
