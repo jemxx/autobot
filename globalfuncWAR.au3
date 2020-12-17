@@ -2443,7 +2443,7 @@ Func openpriklaxxx($kartinka, $kartinka2)
 	Return 0
 EndFunc
 
-Func sborostatkovarmii($army_type)
+Func sborostatkovarmii($army_type, $fl_otpravka)
 	Local $tx = 0, $ty = 0
 	If $army_type = 1 Then
 		If smena_armii($army_type) = 1 Then
@@ -2456,7 +2456,7 @@ Func sborostatkovarmii($army_type)
 			MouseClick("left", $tx + 208, $ty + 24, 1) ; конные мечники
 			MouseClick("left", $tx + 83, $ty + 24, 1)  ; мечники
 			Sleep(500 * $tormoza)
-			Return okclose_elitnoy_gena(1)
+			Return okclose_elitnoy_gena($fl_otpravka)
 		EndIf
 	ElseIf $army_type = 0 Then
 		If smena_armii($army_type) = 1 Then
@@ -2471,7 +2471,7 @@ Func sborostatkovarmii($army_type)
 			MouseClick("left", $tx + 208, $ty + 24, 1)
 			MouseClick("left", $tx + 83, $ty + 24, 1)
 			Sleep(500 * $tormoza)
-			Return okclosegena(1)
+			Return okclosegena($fl_otpravka)
 		EndIf
 	Else
 		Return 0

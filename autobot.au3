@@ -683,18 +683,29 @@ Func komanda($delaem)
 				$buff = getBuffData($parametr[1], "buffs")
 				Return plunusilok_koordinati($buff[1], $buff[0], $parametr[2], $parametr[3], $userDIR & $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $currentbuf)
 			EndIf
+
 		Case "СборОстатковАрмии"
+			Local $perebor = 1, $flag_otpravka = 1
 			$parametr = StringSplit($komanda[2], ",")
+			$komand_na_massiv = UBound($parametr)
+			While $perebor < $komand_na_massiv
+				If $parametr[$perebor] = "Отправить" Then
+					$flag_otpravka = 2
+					ExitLoop
+				EndIf
+				$perebor = $perebor + 1
+			WEnd
+
+			; $parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
 			$gena = $generalData[0]
 			$full = $generalData[1]
-
 			While 1
 				If openzvezdap() = 1 Then
 					If selecttabatzvezda("specialisti", 0) = 1 Then
 						If generali($gena, $parametr[2]) = 1 Then
 							If $parametr[3] = "Э" Then
-								While sborostatkovarmii(1) <> 1
+								While sborostatkovarmii(1, $flag_otpravka) <> 1
 									openzvezdap()
 									selecttabatzvezda("specialisti", 1)
 									generali($gena, $parametr[2])
@@ -702,7 +713,7 @@ Func komanda($delaem)
 								Return 1
 							EndIf
 							If $parametr[3] = "П" Then
-								While sborostatkovarmii(0) <> 1
+								While sborostatkovarmii(0, $flag_otpravka) <> 1
 									openzvezdap()
 									selecttabatzvezda("specialisti", 1)
 									generali($gena, $parametr[2])
@@ -713,6 +724,7 @@ Func komanda($delaem)
 					EndIf
 				EndIf
 			WEnd
+			
 		Case "ЖдемСлив"
 			If $komanda[2] = "1" Then
 				If ProcessExists("proverkasliva.exe") Then
