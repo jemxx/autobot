@@ -472,7 +472,7 @@ EndFunc
 Func zvezdamovepolzunokdown($move_quickly)
 	Local $ty = 0, $tx = 0, $search = 0
 	writelog("         ZMPD=" & $move_quickly & " | ")
-	If _imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45) = 0 Then
+	If _imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45) = 0 Then
 		writelog("Ползунок в самом низу" & @CRLF)
 		Return 0
 	EndIf
@@ -483,7 +483,7 @@ Func zvezdamovepolzunokdown($move_quickly)
 		MouseClick("left", $tx + Random(1, 2, 1) - 2, $ty - 10, 1)
 		Sleep(500 * $tormoza)
 	Else
-		$search = _imagesearcharea("media\zvezda_polzunok_button_vniz.bmp", 1, 200, 200, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 50)
+		$search = _imagesearcharea("media\zvezda_polzunok_button_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 50)
 		If $search = 1 Then
 			MouseMove($tx, $ty, 10 * $tormoza)
 			MouseClick("left", $tx + Random(1, 2, 1) - 2, $ty + Random(1, 2, 1) - 2, 1)

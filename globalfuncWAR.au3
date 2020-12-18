@@ -1546,7 +1546,7 @@ Func generali($general, $nomergenerala)
 	While 1
 		If (haveimageAREA($general, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 0) Then
 			selecttabatzvezda("specialisti", 0)
-			while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) <> 0 AND ($ii < $count_list)
+			while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) <> 0 AND ($ii < $count_list)
 				If (haveimageAREA($general, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 165) = 1) Then
 					ExitLoop
 				Else
@@ -1894,12 +1894,12 @@ Func ozidanierasstanovki2($image, $image_NA, $yes)
 			Select
 				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 0	
 					;Если условие выполняется на первом экране, то ждём появления хотя бы одного активного.
-					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) = 0 Then
+					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) = 0 Then
 						;TrayTip("Отсутствует ползунок", "Нашли только пассивных на одном экране, ждём появления одного активного.", 5)
 						sleepwhile($image, 30, 900/$count_list)
 					EndIf					
 					;Если условие выполняется на 4 строки, то проверяем выполнение условия в первой строке.
-					while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) <> 0
+					while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) <> 0
 						;TrayTip("Видим только пассивных", "Нашли только пассивных, листаем по 1 строке до первой и ждём появления одного активного.", 5)
 						If (haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 1) AND (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 0) Then
 							sleepwhile($image, 30, 900/$count_list)
@@ -1911,7 +1911,7 @@ Func ozidanierasstanovki2($image, $image_NA, $yes)
 					$i = $i + 1
 				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 82) = 0 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 82) = 0
 					;Если условие выполняется на 3 верхних строки, то листаем 3 строки и добавляем счётчик экранов.
-					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) = 0 Then
+					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) = 0 Then
 						;TrayTip("Отсутствует ползунок", "Не нашли ни активных, ни пассивных на одном экране. Надо куда-то выйти", 5)
 						ExitLoop
  					EndIf					
@@ -1924,7 +1924,7 @@ Func ozidanierasstanovki2($image, $image_NA, $yes)
 				Case Else
 				;Если оба предыдущих условия не являются истинными, то проверяем отсутствие активных в 3 верхних строках. 
 					If (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 82) = 0) Then
-						While (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) <> 0
+						While (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) <> 0
 							;Если активные в 3 верхних строках отсутствуют, то, листая построчно, проверяем наличие пассивных ИЛИ активных в первой строке.
 							If (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 1) Or (haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 1) Then
 								ExitLoop
@@ -1968,12 +1968,12 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
 		while ($i < $count_list)
 			Select
 				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1	
-					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) = 0 Then
+					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) = 0 Then
 						;TrayTip("Отсутствует ползунок", "Нашли и активных, и пассивных на одном экране, ждём пропадания пассивных до 5 мин.", 5)
 						sleepNOwhile($image_NA, 30, 300)
 					EndIf					
 					;Если условие выполняется на 4 строки, то проверяем выполнение условия в первой строке.
-					while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) <> 0
+					while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) <> 0
 						;TrayTip("Видим разных", "Нашли и активных, и пассивных, листаем по 1 строке до первой и ждём пропадания пассивных до 5 мин", 5)
 						If (haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 1) OR (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 1) Then
 							sleepNOwhile($image_NA, 30, 300)
@@ -1984,12 +1984,12 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
 					Wend
 					$i = $i + 1
 				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 0	
-					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) = 0 Then
+					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) = 0 Then
 						;TrayTip("Отсутствует ползунок", "Нашли только пассивных на одном экране, ждём пропадания пассивных до 5 мин.", 5)
 						sleepNOwhile($image_NA, 30, 300)
 					EndIf					
 					;Если условие выполняется на 4 строки, то проверяем выполнение условия в первой строке.
-					while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) <> 0
+					while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) <> 0
 						;TrayTip("Видим только пассивных", "Нашли только пассивных, листаем по 1 строке до первой и ждём пропадания пассивных до 5 мин", 5)
 						If (haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 1) AND (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 0) Then
 							sleepNOwhile($image_NA, 30, 300)
@@ -2000,7 +2000,7 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
 					Wend
 					$i = $i + 1
 				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 82) = 0 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 82) = 0
-					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) = 0 Then
+					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) = 0 Then
 						;TrayTip("Отсутствует ползунок", "Не нашли ни активных, ни пассивных на одном экране. Надо куда-то выйти", 5)
 						ExitLoop
  					EndIf					
@@ -2012,7 +2012,7 @@ Func ozidanierasstanovki($image, $image_NA, $yes)
 					$i = $i + 1
 				Case Else
 					If (haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 82) = 0) AND (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 82) = 1) Then
-						while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, 300, 300, @DesktopWidth-200, @DesktopHeight, $tx, $ty, 45)) <> 0
+						while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) <> 0
 							If (haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 0) AND (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 1) Then
 								ExitLoop
 							Else
