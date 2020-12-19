@@ -317,11 +317,14 @@ Func komanda($delaem)
 				If selecttabatzvezda("specialisti", 1) = 1 Then
 					If generali($gena, $parametr[2]) = 1 Then
 						If $parametr[3] = "Э" Then
+							$ii = 0
 							While apply_elitnoy_army($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $full, $parametr[11]) <> 1
 								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 								openzvezdap()
 								selecttabatzvezda("specialisti", 1)
 								generali($gena, $parametr[2])
+								$ii = $ii + 1 
+      							If $ii > 5 Then Return 0
 							WEnd
 							Return 1
 						EndIf
@@ -337,21 +340,27 @@ Func komanda($delaem)
 								EndIf
 								Return 1
 							Else
+								$ii = 0
 								While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, $parametr[13]) <> 1
 									zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 									openzvezdap()
 									selecttabatzvezda("specialisti", 1)
 									generali($gena, $parametr[2])
+									$ii = $ii + 1 
+      								If $ii > 5 Then Return 0
 								WEnd
 								Return 1
 							EndIf
 						EndIf
 						If $parametr[3] = "П" Then
+							$ii = 0
 							While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, $parametr[13]) <> 1
 								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 								openzvezdap()
 								selecttabatzvezda("specialisti", 1)
 								generali($gena, $parametr[2])
+								$ii = $ii + 1 
+      							If $ii > 5 Then Return 0
 							WEnd
 							Return 1
 						Else
@@ -382,11 +391,14 @@ Func komanda($delaem)
 				If selecttabatzvezda("specialisti", 1) = 1 Then
 					If generali($gena, $parametr[2]) = 1 Then
 						If $parametr[3] = "Э" Then
+							$ii = 0
 							While apply_elitnoy_army($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $full, 0) <> 1
 								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 								openzvezdap()
 								selecttabatzvezda("specialisti", 1)
 								generali($gena, $parametr[2])
+								$ii = $ii + 1 
+      							If $ii > 5 Then Return 0
 							WEnd
 							$gluksnaboromarmii = 0
 							Return atakalageraotkritimgenoynoini($parametr[11], $parametr[12], $userDIR & $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17])
@@ -395,22 +407,28 @@ Func komanda($delaem)
 							If haveimage("media\army_values\1.bmp", 20) = 1 Then
 								Return atakalageraotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
 							Else
+								$ii = 0
 								While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
 									zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 									openzvezdap()
 									selecttabatzvezda("specialisti", 1)
 									generali($gena, $parametr[2])
+									$ii = $ii + 1 
+      								If $ii > 5 Then Return 0
 								WEnd
 								$gluksnaboromarmii = 0
 								Return atakalageraotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
 							EndIf
 						EndIf
 						If $parametr[3] = "П" Then
+							$ii = 0
 							While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
 								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 								openzvezdap()
 								selecttabatzvezda("specialisti", 1)
 								generali($gena, $parametr[2])
+								$ii = $ii + 1 
+      							If $ii > 5 Then Return 0
 							WEnd
 							$gluksnaboromarmii = 0
 							Return atakalageraotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
@@ -442,11 +460,14 @@ Func komanda($delaem)
 				If selecttabatzvezda("specialisti", 1) = 1 Then
 					If generali($gena, $parametr[2]) = 1 Then
 						If $parametr[3] = "Э" Then
+							$ii = 0
 							While apply_elitnoy_army($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $full, 0) <> 1
 								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 								openzvezdap()
 								selecttabatzvezda("specialisti", 1)
 								generali($gena, $parametr[2])
+								$ii = $ii + 1 
+      							If $ii > 5 Then Return 0
 							WEnd
 							$gluksnaboromarmii = 0
 							Return perenosotkritimgenoynoini($parametr[11], $parametr[12], $userDIR & $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17])
@@ -455,22 +476,28 @@ Func komanda($delaem)
 							If haveimage("media\army_values\1.bmp", 20) = 1 Then
 								Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
 							Else
+								$ii = 0
 								While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
 									zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 									openzvezdap()
 									selecttabatzvezda("specialisti", 1)
 									generali($gena, $parametr[2])
+									$ii = $ii + 1 
+      								If $ii > 5 Then Return 0
 								WEnd
 								$gluksnaboromarmii = 0
 								Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
 							EndIf
 						EndIf
 						If $parametr[3] = "П" Then
+							$ii = 0
 							While applyarmy($parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $parametr[12], $full, 0) <> 1
 								zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 								openzvezdap()
 								selecttabatzvezda("specialisti", 1)
 								generali($gena, $parametr[2])
+								$ii = $ii + 1 
+      							If $ii > 5 Then Return 0
 							WEnd
 							$gluksnaboromarmii = 0
 							Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
@@ -953,9 +980,12 @@ Func komanda($delaem)
 			$full = $generalData[1]
 			If $parametr[2] = "Э" Then
 				If stoitligena($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], 1) = 1 Then
+					$ii = 0
 					While apply_elitnoy_army($parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $full, 0) <> 1
 						zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 						stoitligena($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], 1)
+						$ii = $ii + 1 
+      					If $ii > 5 Then Return 0
 					WEnd
 					$gluksnaboromarmii = 0
 					Return atakalageraotkritimgenoynoini($parametr[17], $parametr[18], $userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14])
@@ -966,9 +996,12 @@ Func komanda($delaem)
 			If $parametr[2] = "1" Then
 				If stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1) = 1 Then
 					If haveimage("media\army_values\1.bmp", 20) = 0 Then
+						$ii = 0
 						While applyarmy(1, 0, 0, 0, 0, 0, 0, 0, 0, $full, 0) <> 1
 							zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 							stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1)
+							$ii = $ii + 1 
+      						If $ii > 5 Then Return 0
 						WEnd
 					EndIf	
 					Return atakalageraotkritimgenoynoini($parametr[19], $parametr[20], $userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16])
@@ -978,9 +1011,12 @@ Func komanda($delaem)
 			EndIf
 			If $parametr[2] = "П" Then
 				If stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1) = 1 Then
+					$ii = 0
 					While applyarmy($parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $full, 0) <> 1
 						zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 						stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1)
+						$ii = $ii + 1 
+      					If $ii > 5 Then Return 0
 					WEnd
 				EndIf
 					$gluksnaboromarmii = 0
@@ -1005,9 +1041,12 @@ Func komanda($delaem)
 			$full = $generalData[1]
 			If $parametr[2] = "Э" Then
 				If stoitligena($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], 1) = 1 Then
+					$ii  = 0
 					While apply_elitnoy_army($parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $full, 0) <> 1
 						zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 						stoitligena($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], 1)
+						$ii = $ii + 1 
+      					If $ii > 5 Then Return 0
 					WEnd
 					$gluksnaboromarmii = 0
 					Return perenosotkritimgenoynoini($parametr[17], $parametr[18], $userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14])
@@ -1018,9 +1057,12 @@ Func komanda($delaem)
 			If $parametr[2] = "1" Then
 				If stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1) = 1 Then
 					If haveimage("media\army_values\1.bmp", 20) = 0 Then
+						$ii  = 0
 						While applyarmy(1, 0, 0, 0, 0, 0, 0, 0, 0, $full, 0) <> 1
 							zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 							stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1)
+							$ii = $ii + 1 
+      						If $ii > 5 Then Return 0
 						WEnd
 					EndIf	
 					Return perenosotkritimgenoynoini($parametr[19], $parametr[20], $userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16])
@@ -1030,9 +1072,12 @@ Func komanda($delaem)
 			EndIf
 			If $parametr[2] = "П" Then
 				If stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1) = 1 Then
+					$ii  = 0
 					While applyarmy($parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $full, 0) <> 1
 						zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 						stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1)
+						$ii = $ii + 1 
+      					If $ii > 5 Then Return 0
 					WEnd
 				EndIf
 					$gluksnaboromarmii = 0
@@ -1088,9 +1133,12 @@ Func komanda($delaem)
 			$full = $generalData[1]
 			Select
 				Case $parametr[2] = "Э" AND openGenaOnpxp($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16]) = 1
+					$ii  = 0
 					While apply_elitnoy_army($parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $full, 2) <> 1
 						zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 						openGenaOnpxp($userDIR & $parametr[10], $parametr[11], $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16])
+						$ii = $ii + 1 
+      					If $ii > 5 Then Return 0
 					WEnd
 					$gluksnaboromarmii = 0
 					Return 1
@@ -1100,17 +1148,23 @@ Func komanda($delaem)
 						zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
 						Return 1
 					Else	
+						$ii  = 0
 						While applyarmy($parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $full, 2) <> 1
 							zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 							openGenaOnpxp($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18])
+							$ii = $ii + 1 
+      						If $ii > 5 Then Return 0
 						WEnd
 						$gluksnaboromarmii = 0
 						Return 1
 					EndIf
 				Case $parametr[2] = "П"	AND openGenaOnpxp($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18]) = 1
+					$ii  = 0
 					While applyarmy($parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7], $parametr[8], $parametr[9], $parametr[10], $parametr[11], $full, 2) <> 1
 						zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 						openGenaOnpxp($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18])
+						$ii = $ii + 1 
+      					If $ii > 5 Then Return 0
 					WEnd
 					$gluksnaboromarmii = 0
 					Return 1

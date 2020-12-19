@@ -1143,15 +1143,13 @@ EndFunc
 
 Func setarmy($kogo, $skolko, $gena)
 	Local $ty = 0, $tx = 0, $search = 0, $fullGenaImg = 0, $i = 0
-	writelog("| SA " & $kogo & "," & $skolko & "," & $gena & " | ")
+	;writelog("| SA " & $kogo & "," & $skolko & "," & $gena & " | ")
 	If $skolko = 0 Then
-		writelog("0" & @CRLF)
+		;writelog("0" & @CRLF)
 		Return 1
 	EndIf
-
 	$fullGenaImg = getFullGeneralImg($gena)
-
-	If $skolko = 3000 Then
+	If $skolko = 3000 Then ; добиваем до максимума
 		viborarmii($kogo)
 		$i = 0
 		$search = 0
@@ -1163,48 +1161,36 @@ Func setarmy($kogo, $skolko, $gena)
 			$i = $i + 1
 		WEnd
 		If $i < 9 Then
-			$i = 0
-			$search = 0
 			Return 1
-			If findclickoncenterandwaitresult1("media\search_button_OK_enabled.bmp", "media\zdem.bmp", 30, 20, 3, 5, 1, -100, 1) = 1 Then
-				While ($i < 30 * $tormoza) AND ($search = 0)
-					Sleep(1000 * $tormoza)
-					$i = $i + 1
-					$search = _imagesearch("media\nub_gena.bmp", 1, $tx, $ty, 20)
-				WEnd
-				If $i < 20 Then
-					Return 1
-				EndIf
-			Else
-				TrayTip("", "Ошибка: Не нажали Ок", 0)
-				Return 0
-			EndIf
 		Else
 			TrayTip("", "Ошибка: Не набрали войска", 0)
 			Return 0
 		EndIf
-	Else
+	Else ; ввод обычных значений
 		viborarmii($kogo)
 		$skolkokartinka = "media\army_values\" & $diffarmy & ".bmp"
+		$i = 0
 		While vvodzifr($skolko) <> 1
+			;writelog("+" & $skolko)
 			MouseMove($minx, $miny, 10 * $tormoza)
 			MouseClick("left", $minx, $miny, 2)
+			$i = $i + 1
+			if vvodzifr($skolko) = 2 Then Return 2
+            if $i > 5 Then Return 0
 		WEnd
 		Return 1
 	EndIf
-	Return 0
+	;writelog("Ошибка " & @CRLF)
+;	Return 0
 EndFunc
 
 Func vvodzifr($skolko)
 	If naborgenarea() = 0 Then Return 0
-
 	If $skolko = "" Then
 		MsgBox(0, "ОШИБКА", "Количество армии пустое")
 		Return 0
 	EndIf
-
 	Local $i = 0, $error = 0, $symbol
-
 	While $i < StringLen($skolko)
 		$symbol = StringMid($skolko, $i + 1, 1)
 		If StringInStr("0123456789", $symbol) <> 0 Then
@@ -1212,16 +1198,12 @@ Func vvodzifr($skolko)
 		EndIf
 		$i = $i + 1
 	WEnd
-
 	If $error <> StringLen($skolko) Then
 		MsgBox(0, "ОШИБКА", "Недопустимые символы в количестве войск")
 		Return 0
 	EndIf
-
 	$i = 0
-	$error = 0
-	
-	If $i = 0 Then
+	While ($i < 5)
 		MouseMove($polezifrx, $polezifry, 10 * $tormoza)
 		MouseClick("left", $polezifrx, $polezifry, 2)
 		Sleep(300 * $tormoza)
@@ -1230,25 +1212,10 @@ Func vvodzifr($skolko)
 		If haveimagearea($skolkokartinka, 20, $zifri_area[0], $zifri_area[1], $zifri_area[2], $zifri_area[3]) = 1 Then
 			Return 1
 		EndIf
-	Else
-		$i = $i + 5
-		MouseMove($polezifrx, $polezifry, 10 * $tormoza)
-		MouseClick("left", $polezifrx, $polezifry, 2)
-		Sleep(300 * $tormoza)
-		Send($skolko)
-		Sleep(1000 * $tormoza)
-		While (haveimagearea($skolkokartinka, 20, $zifri_area[0], $zifri_area[1], $zifri_area[2], $zifri_area[3]) <> 1) AND ($i > 0)
-			MouseMove($strelkax, $strelkay, 10 * $tormoza)
-			MouseClick("left", $strelkax, $strelkay, 1)
-			Sleep(2000 * $tormoza)
-			MouseMove($strelkax, $strelkay - 15, 1 * $tormoza)
-			MouseClick("left", $strelkax, $strelkay - 15, 1)
-			$i = $i - 1
-		WEnd
-		If haveimagearea($skolkokartinka, 20, $zifri_area[0], $zifri_area[1], $zifri_area[2], $zifri_area[3]) = 1 Then
-			Return 1
-		EndIf
-	EndIf
+		$i = $i + 1
+	WEnd
+;	TrayTip("", "Недостаточно юнитов для набора", 0)
+	Return 2
 EndFunc
 
 Func okclosegena($yes)
@@ -1262,7 +1229,7 @@ Func okclosegena($yes)
 		$i = 0
 		$search = 0
 		zmemsmennuyukartinku("media\search_button_OK_enabled.bmp", 20, "media\search_button_OK_enabled_.bmp", 20)
-		While ($i < 6 * $tormoza) AND ($search = 0)
+		While ($i < 6) AND ($search = 0)
 			Sleep(1000 * $tormoza)
 			$i = $i + 1
 			sleepwhile("media\nub_gena.bmp", 20, 10)
@@ -2285,14 +2252,12 @@ EndFunc
 
 Func set_elitnoy_army($kogo, $skolko, $gena)
 	Local $ty = 0, $tx = 0, $search = 0, $fullGenaImg = 0, $i = 0
-	writelog("| SEA " & $kogo & "," & $skolko & "," & $gena & " | ")
+	;writelog("| SEA " & $kogo & "," & $skolko & "," & $gena & " | ")
 	If $skolko = 0 Then
-		writelog("0" & @CRLF)
+		;writelog("0" & @CRLF)
 		Return 1
 	EndIf
-
 	$fullGenaImg = getFullGeneralImg($gena)
-
 	If $skolko = 3000 Then
 		vibor_elitnoy_armii($kogo)
 		$i = 0
@@ -2305,41 +2270,29 @@ Func set_elitnoy_army($kogo, $skolko, $gena)
 			$i = $i + 1
 		WEnd
 		If $i < 9 Then
-			$i = 0
-			$search = 0
-			writelog("Успех " & $i & @CRLF)
 			Return 1
-			If findclickoncenterandwaitresult1("media\search_button_OK_enabled.bmp", "media\zdem.bmp", 30, 20, 3, 5, 1, -100, 1) = 1 Then
-				While ($i < 30 * $tormoza) AND ($search = 0)
-					Sleep(1000 * $tormoza)
-					$i = $i + 1
-					$search = _imagesearch("media\mechnik.bmp", 1, $tx, $ty, 20)
-				WEnd
-				If $i < 20 Then
-					Return 1
-				EndIf
-			Else
-				TrayTip("", "Ошибка: Не нажали Ок", 0)
-				Return 0
-			EndIf
 		Else
-			writelog("Ошибка " & $i & @CRLF)
+			;writelog("Ошибка " & $i & @CRLF)
 			TrayTip("", "Ошибка: Не набрали войска", 0)
 			Return 0
 		EndIf
 	Else
 		vibor_elitnoy_armii($kogo)
 		$skolkokartinka = "media\army_values\" & $diffarmy & ".bmp"
-		writelog("+" & $skolko)
+		;writelog("+" & $skolko)
+		$i = 0
 		While vvodzifr($skolko) <> 1
-			writelog("+" & $skolko)
+			;writelog("+" & $skolko)
 			MouseMove($minx, $miny, 10 * $tormoza)
 			MouseClick("left", $minx, $miny, 2)
+			$i = $i + 1
+			if vvodzifr($skolko) = 2 Then Return 2
+            if $i > 5 Then Return 0
 		WEnd
-		writelog(" Успех " & $diffarmy & @CRLF)
+		;writelog(" Успех " & $diffarmy & @CRLF)
 		Return 1
 	EndIf
-	writelog("Ошибка " & @CRLF)
+	;writelog("Ошибка " & @CRLF)
 	Return 0
 EndFunc
 
@@ -2354,7 +2307,7 @@ Func okclose_elitnoy_gena($yes)
 		$i = 0
 		$search = 0
 		zmemsmennuyukartinku("media\search_button_OK_enabled.bmp", 20, "media\search_button_OK_enabled_.bmp", 20)
-		While ($i < 6 * $tormoza) AND ($search = 0)
+		While ($i < 6) AND ($search = 0)
 			Sleep(1000 * $tormoza)
 			$i = $i + 1
 			sleepwhile("media\mechnik.bmp", 20, 10)
