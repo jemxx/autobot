@@ -68,7 +68,7 @@
     {"name": "Обсидианподкова", "img_active": "obsid_podkova.bmp", "tab_name": "usiliteli"},
     {"name": "Титаноподкова", "img_active": "titan_podkova.bmp", "tab_name": "usiliteli"},
     {"name": "Мистикподкова", "img_active": "mist_podkova.bmp", "tab_name": "usiliteli"},
-    {"name": "ЧернаяВоронка", "img_active": "mist_podkova.bmp", "tab_name": "usiliteli"}
+    {"name": "ЧернаяВоронка", "img_active": "voronka.bmp", "tab_name": "usiliteli"}
   ],
   "buffs": [
     {"name": "Стрела", "img_active": "strela.bmp", "tab_name": "usiliteli"},
