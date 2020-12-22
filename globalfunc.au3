@@ -927,7 +927,7 @@ func MyTimer()
 endfunc
 
 Func ReadINI($section, $key, $default)
-	Return IniRead("autobot.ini", $section, $key, $default)
+	Return BinaryToString(IniRead("autobot.ini", $section, $key, $default), 4)
 EndFunc
 
 #comments-start
