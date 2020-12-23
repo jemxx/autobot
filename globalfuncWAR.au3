@@ -7,7 +7,7 @@ Func podgotovka()
 	zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
 	zmemsmennuyukartinku("media\Close.bmp", 30, "media\Close_.bmp", 30)
 	openmashtab()
-	collectwarikiatprikl()
+	collectwarikiatprikl(1)
 	zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
 	zmemsmennuyukartinku("media\Close.bmp", 30, "media\Close_.bmp", 30)
 	If openzvezdap() = 1 Then
@@ -1774,7 +1774,7 @@ Func gotopricla($kartinka)
 			If $i > 98 Then
 				Return 0
 			EndIf
-			collectwarikiatprikl()
+			collectwarikiatprikl(1)
 			TrayTip("", "Ждём прибытия генералов", 0)
 			Sleep(960000 - 6000 * $i)
 			writelog("=====Успех " & $i * 6 & @CRLF)
@@ -1797,7 +1797,7 @@ Func gotopriclanosleep($kartinka)
 			If $i = 100 Then
 				Return 0
 			EndIf
-			collectwarikiatprikl()
+			collectwarikiatprikl(1)
 			Return 1
 		EndIf
 	EndIf

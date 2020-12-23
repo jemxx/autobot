@@ -892,7 +892,7 @@ Func komanda($delaem)
 
 		Case "СборКоллекций"
 			openmashtab()
-			collectwarikiatprikl()
+			collectwarikiatprikl(0)
 			Return 1
 		Case "ЖмемПоКоординатам"
 			$centrovat = 1

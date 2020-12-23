@@ -386,14 +386,18 @@ Func findclickoncenterandwaitwhenwillremoved($img2click, $imgofresult, $toleranc
 	EndIf
 EndFunc
 
-Func collectwarikiatprikl()
+Func collectwarikiatprikl($gde)
 	Local $ciklov = 0
 	;TrayTip("", "Собираем шарики ... ", 0)
 	Opt("WinTitleMatchMode",2)
 	WinActivate(WinWait($windowTitle))
 	;Return 1
 	While (haveimage("media\warik.bmp", 50) = 1) AND ($ciklov < 50)
-		findclickoncenterandwaitresult("media\warik.bmp", "media\warik_label_collected.bmp", 50, 10, 2, 10, 0, 50, 50)
+		If $gde = 0 Then
+			findclickoncenterandwaitresult("media\warik.bmp", "media\warik_label_collected_doma.bmp", 50, 10, 2, 10, 0, 50, 50)
+		Else
+			findclickoncenterandwaitresult("media\warik.bmp", "media\warik_label_collected_prikl.bmp", 50, 10, 2, 10, 0, 50, 50)
+		EndIf
 		Sleep(3000 * $tormoza)
 		$ciklov = $ciklov + 1
 	WEnd
