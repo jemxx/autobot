@@ -911,7 +911,8 @@ Func komanda($delaem)
 		Case "НажатьКлавишу"
 			Local $tmp_symbol
 			$tmp_symbol = $komanda[2]
-			WinActivate($windowTitle)
+			Opt("WinTitleMatchMode",2)
+			WinActivate(WinWait($windowTitle))
 			If (StringInStr("0123456789", $tmp_symbol) <> 0) Then
 				Sleep(500 * $tormoza)
 				Send($tmp_symbol)
@@ -1172,6 +1173,10 @@ Func komanda($delaem)
 					Return 0
 			EndSelect
 
+		Case "Клиент"
+			If ($komanda[2] <> "Браузер") Then $windowTitle = $komanda[2]
+			Return 1
+		  
 		Case "Нажать"
 			If $komanda[2] = "0" Then
 			   MouseMove(@DesktopWidth / 2, @DesktopHeight / 2, 10 * $tormoza)

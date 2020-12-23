@@ -20,7 +20,8 @@ Func podgotovka()
 EndFunc
 
 Func find_sektor($img, $k_x, $k_y, $else_x, $else_y)
-	WinActivate($windowTitle)
+	Opt("WinTitleMatchMode",2)
+	WinActivate(WinWait($windowTitle))
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0, $ax = 0, $ay = 0, $search2 = 0, $ttx = 0, $tty = 0
 	$search2 = _imagesearch("media\pismo.bmp", 1, $ax, $ay, 50)
 	$k_x = $ax + $k_x
@@ -1724,7 +1725,8 @@ Func openprikla($kartinka, $kartinka2)
 EndFunc
 
 Func openotpravkagen($kartinka)
-	WinActivate($windowTitle)
+	Opt("WinTitleMatchMode",2)
+	WinActivate(WinWait($windowTitle))
 	;writelog("=====ОТПРАВКА ГЕНЕРАЛОВ " & $kartinka & @CRLF)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
 	If findclickoncenterandwaitresult($kartinka, "media\otpravit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
@@ -2575,7 +2577,9 @@ Func rungeolog($kuda, $skolko, $kakih)
 		_ArrayAdd($vidgeologov, "media\" & Json_Get($allGeologistsJson, '[' & $j & '].img_active'))
 	Next
 
-	WinActivate($windowTitle)
+	Opt("WinTitleMatchMode",2)
+	WinActivate(WinWait($windowTitle))
+
 	chatoff()
 	drugioff()
 	If openzvezda() = 0 Then Return 0
@@ -2718,7 +2722,9 @@ Global $gx, $gy, $finterrupt = 0, $gpx = 0, $gpy = 0, $vidpoiska = 0, $tippoiska
 	EndFunc
 
 	Func runpo4ta($kuda)
-		WinActivate($windowTitle)
+		Opt("WinTitleMatchMode",2)
+		WinActivate(WinWait($windowTitle))
+
 		Local $x = 0, $y = 0
 		TrayTip("", "Почитаем почту...", 0)
 		If openpo4ta() = 0 Then
@@ -2754,7 +2760,9 @@ Func runrazved($adv_srch, $arti, $vidpoiska, $tippoiska, $count_kakih, $Arr_kaki
 		_ArrayAdd($slat_yes, 0)
 	Next
 
-	WinActivate($windowTitle)
+	Opt("WinTitleMatchMode",2)
+	WinActivate(WinWait($windowTitle))
+
 	Switch $tippoiska
 		Case "Быстрый"
 			$kartinkatippoiska = "media\search_treasure_fast.bmp"
