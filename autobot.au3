@@ -41,8 +41,8 @@ HotKeySet("{F11}", "terminater")
 
 $passagesDir = getPassagesDir()
 $stroka = getAllPassages($passagesDir)
-$windowTitle = ReadINI("main", "window_title", "The Settlers Онлайн")
-if $windowTitle == "" Then $windowTitle = "The Settlers Онлайн"
+$windowTitle = ReadINI("main", "window_title", "The Settlers Online")
+if $windowTitle == "" Then $windowTitle = "The Settlers Online"
 
 ;Рисуем окно бота
 #Region ### START Koda GUI section ### Form=
