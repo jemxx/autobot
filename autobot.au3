@@ -19,7 +19,7 @@ AutoItWinSetTitle(@ScriptName)
 
 If ProcessExists("Универсальный_бот.exe") Then ProcessClose ("Универсальный_бот.exe")
 
-Global $alarm = 0, $passagesDir, $windowTitle, $sreport = 0
+Global $alarm, $passagesDir, $windowTitle, $sreport = 0
 Global $userDIR = "media\users\"
 
 Global $k_x, $k_y, $tochka_sektora_x=0, $tochka_sektora_y=0
@@ -118,6 +118,8 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Online"
 					EndIf
 					If GUICtrlRead($alarmCheckBox) == $GUI_CHECKED Then
 						$alarm = 1
+					Else
+						$alarm = 0
 					EndIf
 					If ReadINI("telegram", "telegram_bot", "0") <> 0 Then
 						$sreport = 1						
