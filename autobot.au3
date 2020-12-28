@@ -671,7 +671,16 @@ Func komanda($delaem)
 			$parametr = StringSplit($komanda[2], ",")
 			Return zmemsmennuyukartinkuizdem($userDIR & $parametr[1], $parametr[2], $userDIR & $parametr[3], $parametr[4], $userDIR & $parametr[5], $parametr[6])
 		Case "Сообщение"
-			MsgBox(0, "Сообщение", $komanda[2])
+			$parametr = StringSplit($komanda[2], ",")
+
+			If $parametr[2] = 1 Then
+				MsgBox(0, "Сообщение", $parametr[1])
+			ElseIf $parametr[2] = 2 Then
+				TrayTip("Сообщение", $parametr[1], 5, 1)
+			Else
+				MsgBox(0, "Сообщение", $parametr[1])
+			EndIf
+		
 			Return 1
 
 		Case "Стрельнуть"
