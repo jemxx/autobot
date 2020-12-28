@@ -175,7 +175,7 @@ EndFunc
 Func printerror($text)
 ;Вывод ошибки
    If GUICtrlRead($osibki) == $GUI_UNCHECKED Then Return 1
-   MsgBox(0, "!!!", $text)
+   TrayTip("", $text, 2, 1)
 EndFunc
 
 Func terminater()
