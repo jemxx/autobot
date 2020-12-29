@@ -19,7 +19,7 @@ AutoItWinSetTitle(@ScriptName)
 
 If ProcessExists("Универсальный_бот.exe") Then ProcessClose ("Универсальный_бот.exe")
 
-Global $alarm, $passagesDir, $windowTitle, $sreport = 0
+Global $alarm, $passagesDir, $pass_count, $windowTitle, $sreport = 0
 Global $userDIR = "media\users\"
 
 Global $k_x, $k_y, $tochka_sektora_x=0, $tochka_sektora_y=0
@@ -28,7 +28,6 @@ Global $komand_na_massiv = 0
 Global $strokadlaperehoda = 0
 Global $centrovat = 1, $currentbuf = 0
 Global $stroka
-Global $pass_unlim_yes = 0, $pass_count
 
 #include "globalfunc.au3"
 #include "globalfuncWAR.au3"
@@ -60,13 +59,11 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Online"
 	GUICtrlCreateLabel("Количество повторов", 5, 110)
 	Global $pass_cnt = GUICtrlCreateInput($max_repeat, 5, 130, 215, 20)
 
-	Global $pass_unlim = GUICtrlCreateCheckbox("Повторять бесконечно", 5, 160, 180, 25)
-	GUICtrlSetState($pass_unlim, $GUI_UNCHECKED)
-	Global $obnova = GUICtrlCreateCheckbox("Проверять обновления", 5, 180, 180, 25)
+	Global $obnova = GUICtrlCreateCheckbox("Проверять обновления", 5, 160, 180, 25)
 	GUICtrlSetState($obnova, $GUI_UNCHECKED)
-	Global $osibki = GUICtrlCreateCheckbox("Выводить предупреждения", 5, 200, 180, 25)
+	Global $osibki = GUICtrlCreateCheckbox("Выводить предупреждения", 5, 180, 180, 25)
 	GUICtrlSetState($osibki, $GUI_UNCHECKED)
-	Global $alarmCheckBox = GUICtrlCreateCheckbox("Включить Тревогу", 5, 220, 180, 25)
+	Global $alarmCheckBox = GUICtrlCreateCheckbox("Включить Тревогу", 5, 200, 180, 25)
 	GUICtrlSetState($alarmCheckBox, $GUI_CHECKED)
 
 	;Проверяем флаг разрыва соединения
@@ -123,9 +120,6 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Online"
 					EndIf
 					If ReadINI("telegram", "telegram_bot", "0") <> 0 Then
 						$sreport = 1						
-					EndIf
-					If GUICtrlRead($pass_unlim) == $GUI_CHECKED Then
-						$pass_unlim_yes = 1
 					EndIf
 					If ProcessExists("proverkasliva.exe") Then
 						ProcessClose("proverkasliva.exe")
@@ -186,7 +180,6 @@ Func terminater()
 EndFunc
 
 Func gogogogo()
-;Основной цикл построчного чтения команд
 	Local $ttt = _filecountlines($abot)
 	If $ttt = 1 Then $i = 0
 	While $i <= _filecountlines($abot)
@@ -194,14 +187,11 @@ Func gogogogo()
 		If $ttt = 1 Then $i = 1
 		register()
 		If FileReadLine($abot, $i) = "ПОВТОРИТЬ" Then
-			If $pass_unlim_yes = 0 Then
-				$pass_count = $pass_count - 1
-				GUICtrlSetData($pass_cnt, $pass_count)
-			EndIf
 			$i = 1
-			;setstatistik()
+			$pass_count = $pass_count - 1
+			GUICtrlSetData($pass_cnt, $pass_count)				
 		EndIf
-		If ($pass_unlim_yes = 0) AND (GUICtrlRead($pass_cnt) = 0) Then ; кончились прохождения
+		If GUICtrlRead($pass_cnt) = 0 Then ; кончились прохождения
 			If $alarm = 1 Then alarmBeep()
 			If $sreport = 1 Then Telegram_bot("Прошли нужное количество")	
 			MsgBox(0, "", "Прошли нужное количество")
@@ -894,10 +884,8 @@ Func komanda($delaem)
 			EndIf
 
 		Case "ПОВТОРИТЬ"
-			If $pass_unlim_yes = 0 Then
-				$pass_count = $pass_count - 1
-				GUICtrlSetData($pass_cnt, $pass_count)
-			EndIf
+			$pass_count = $pass_count - 1
+			GUICtrlSetData($pass_cnt, $pass_count)			
 			$strokadlaperehoda = $komanda[2]
 			Return 1
 
