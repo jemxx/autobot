@@ -1504,13 +1504,14 @@ Func generalixxx($general, $nomergenerala)
 EndFunc
 
 Func generali($general, $nomergenerala)
-	Sleep(500 * $tormoza)
-	Local $ty = 0, $tx = 0, $search = 0, $i = 0, $t = 0, $ii = 0, $count_list = 1, $count_line = 1, $count_gen_in_line = 9
+	Local $ty = 0, $tx = 0, $search = 0, $i = 0, $t = 0, $ii = 0, $count_line = 1, $count_gen_in_line = 9
 	Local $general1x = 0, $general1y = 0, $general2x = 0, $general2y = 0
-	$count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line)) - 4
+	Local $total_generals = int(ReadINI("main", "total_generals", "50")) + 27
+	Local $count_list = int($total_generals / ($count_line * $count_gen_in_line)) - 4
 	;Если на открывщемся экране нет гены, то нажимаем вкладку "специалисты", и если снова гены нет, то листаем по 1 строке
 	;Листаем пока не найдём гену или до последнего экрана с генералами пока есть ползунок. Если не нашли гену, выходим с ошибкой.
 	;Если нашли гену на экране в 4 строки, то поднимаем первую картинку гены во вторую строку сверху.
+	Sleep(500 * $tormoza)
 	While 1
 		If (haveimageAREA($general, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 0) Then
 			selecttabatzvezda("specialisti", 0)
