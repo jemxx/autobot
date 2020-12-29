@@ -1851,14 +1851,15 @@ EndFunc
 
 Func ozidanierasstanovki2($image, $image_NA, $yes)
 	; Ждём генерала от LEKALA (ака Андрей)
-	Local $tx = 0, $ty = 0, $i = 1, $ii = 0, $count_list = 5, $count_line = 3, $count_gen_in_line = 9
+	Local $tx = 0, $ty = 0, $i = 0, $ii = 0, $count_line = 3, $count_gen_in_line = 9
+	Local $total_generals = int(ReadINI("main", "total_generals", "50")) + 27
 	; $count_list - задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране звезды (3 верхних строки по 9 ген в строке) Идея и реализация от Marsik-A.
-	$count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line))
+	Local $count_list = int($total_generals / ($count_line * $count_gen_in_line))
 	Sleep(500 * $tormoza)
 	openzvezdap()
 	While ($ii < 2)
 		selecttabatzvezda("specialisti", 0)
-		$i = 1
+		$i = 0
 		While ($i < $count_list)
 			Select
 				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 0	
@@ -1891,7 +1892,7 @@ Func ozidanierasstanovki2($image, $image_NA, $yes)
 					sleep(500*tormoza)
 					$i = $i + 1
 				Case Else
-				;Если оба предыдущих условия не являются истинными, то проверяем отсутствие активных в 3 верхних строках. 
+					;Если оба предыдущих условия не являются истинными, то проверяем отсутствие активных в 3 верхних строках. 
 					If (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 82) = 0) Then
 						While (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) <> 0
 							;Если активные в 3 верхних строках отсутствуют, то, листая построчно, проверяем наличие пассивных ИЛИ активных в первой строке.
