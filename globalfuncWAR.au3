@@ -1926,14 +1926,15 @@ EndFunc
 
 Func ozidanierasstanovki($image, $image_NA, $yes)
 	; Ждём всех генералов от LEKALA (ака Андрей)
-	Local $tx = 0, $ty = 0, $i = 1, $ii = 0, $count_list = 5, $count_line = 3, $count_gen_in_line = 9
+	Local $tx = 0, $ty = 0, $i = 0, $ii = 0, $count_line = 3, $count_gen_in_line = 9
+	Local $total_generals = int(ReadINI("main", "total_generals", "50")) + 27
 	; $count_list - задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране звезды (3 верхних строки по 9 ген в строке) Идея и реализация от Marsik-A.
-	$count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line))
+	Local $count_list = int($total_generals / ($count_line * $count_gen_in_line))
 	Sleep(500 * $tormoza)
 	openzvezdap()
 	while ($ii < 2)
 		selecttabatzvezda("specialisti", 0)
-		$i = 1
+		$i = 0
 		sleep(500*tormoza)
 		while ($i < $count_list)
 			Select
