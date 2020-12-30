@@ -140,7 +140,6 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Online"
 #EndRegion ### END Koda GUI section ###
 
 Func obnova()
-;Проверяем обновления
 	Local $file = FileGetSize("update")
 	Local $text, $fulltext
 	Local $i = 0
@@ -167,13 +166,11 @@ Func obnova()
 EndFunc
 
 Func printerror($text)
-;Вывод ошибки
    If GUICtrlRead($osibki) == $GUI_UNCHECKED Then Return 1
    TrayTip("", $text, 2, 1)
 EndFunc
 
 Func terminater()
-;Закрыть Автобота
 	TrayTip("", "Закрываемся...", 0)
 	Sleep(1000)
 	Exit
@@ -545,14 +542,26 @@ Func komanda($delaem)
 			Return sleepwhile2($generalData[3], $parametr[2], $parametr[3])
 
 		Case "ЖдемГенерала"
+			Local $type_wait_general = ReadINI("main", "type_wait_generals", "1")
+
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
-			Return ozidanierasstanovki2($generalData[0], $generalData[2], $parametr[2])
+			If $type_wait_general == 2 Then
+				Return ozidanierasstanovki2_L($generalData[0], $generalData[2], $parametr[2])
+			Else
+				Return ozidanierasstanovki2_M($generalData[0], $parametr[2])
+			EndIf
 
 		Case "ЖдемВсехГенералов"
+			Local $type_wait_generals = ReadINI("main", "type_wait_generals", "1")
+
 			$parametr = StringSplit($komanda[2], ",")
 			$generalData = getGeneralData($parametr[1])
-			Return ozidanierasstanovki($generalData[0], $generalData[2], $parametr[2])
+			If $type_wait_generals == 2 Then
+				Return ozidanierasstanovki_L($generalData[0], $generalData[2], $parametr[2])
+			Else
+				Return ozidanierasstanovki_M($generalData[0], $generalData[2], $parametr[2])
+			EndIf	
 
 		Case "ПеренестиГенерала"
 			$centrovat = 1
