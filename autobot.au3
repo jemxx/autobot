@@ -40,8 +40,6 @@ HotKeySet("{F11}", "terminater")
 
 $passagesDir = getPassagesDir()
 $stroka = getAllPassages($passagesDir)
-$windowTitle = ReadINI("main", "window_title", "The Settlers Online")
-if $windowTitle == "" Then $windowTitle = "The Settlers Online"
 
 ;Рисуем окно бота
 #Region ### START Koda GUI section ### Form=
@@ -65,6 +63,8 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Online"
 	GUICtrlSetState($osibki, $GUI_UNCHECKED)
 	Global $alarmCheckBox = GUICtrlCreateCheckbox("Включить Тревогу", 5, 200, 180, 25)
 	GUICtrlSetState($alarmCheckBox, $GUI_CHECKED)
+	Global $client = GUICtrlCreateCheckbox("Клиент SirriS", 5, 220, 180, 25)
+	GUICtrlSetState($client, $GUI_UNCHECKED)
 
 	;Проверяем флаг разрыва соединения
 	If ReadINI("main", "check_connection", "0") = "" Then
@@ -110,6 +110,12 @@ if $windowTitle == "" Then $windowTitle = "The Settlers Online"
 					setstatistik()
 					$register = 0
 
+					If GUICtrlRead($client) == $GUI_CHECKED Then
+						$windowTitle = "TSO Game"
+					Else
+						$windowTitle = ReadINI("main", "window_title", "The Settlers Online")
+						If $windowTitle == "" Then $windowTitle = "The Settlers Online"
+					EndIf
 					If GUICtrlRead($obnova) == $GUI_CHECKED Then
 						obnova()
 					EndIf
@@ -233,7 +239,6 @@ Func gogogogo()
 EndFunc
 
 Func startflag($stroka)
-;функция исполнения флагов
 	If StringInStr($stroka, "=") Then
 		$parametr = StringSplit($stroka, "=")
 		$stroka = $parametr[1]
