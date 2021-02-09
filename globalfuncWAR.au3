@@ -1765,6 +1765,10 @@ EndFunc
 
 Func gotopricla($kartinka)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
+
+	Opt("WinTitleMatchMode",2)
+	WinActivate(WinWait($windowTitle))
+
 	writelog("=====ПЕРЕХОД В ПРИКЛЮЧЕНИЕ " & $kartinka & @CRLF)
 	If findclickoncenterandwaitresult($kartinka, "media\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
 		If findclickoncenterandwaitresult("media\posetit.bmp", "media\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
@@ -1807,6 +1811,9 @@ EndFunc
 
 Func gotohome($kartinka)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
+	Opt("WinTitleMatchMode",2)
+	WinActivate(WinWait($windowTitle))
+
 	If findclickoncenterandwaitresult($kartinka, "media\gotohome.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
 		If findclickoncenterandwaitresult("media\gotohome.bmp", "media\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
 			While (_imagesearch("media\perehod_v_zonu.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 100)
@@ -2438,6 +2445,10 @@ EndFunc
 Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 	Local $tx = 0, $ty = 0, $i = 0, $generalov = 0, $ax = 0, $ay = 0, $search = 0, $error_otpravka = 0
 	Local $for_i, $area_tmp_top_x, $area_tmp_top_y, $area_tmp_bottom_x, $area_tmp_bottom_y
+
+	Opt("WinTitleMatchMode",2)
+	WinActivate(WinWait($windowTitle))
+
 	chatoff()
 	drugioff()
 	While 1
