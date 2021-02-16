@@ -1202,6 +1202,9 @@ Func komanda($delaem)
 				; передаем два параметра: картинка_прикла, картинка_гостя
 				Return otpravkapriglasa_L($userDIR & $parametr[1], $userDIR & $parametr[2], "_")
 			EndIf
+		
+		Case "ПринятьПриглашение"
+			Return prinatpriglas()
 
 		Case "Нажать"
 			If $komanda[2] = "0" Then

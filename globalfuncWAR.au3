@@ -3069,3 +3069,38 @@ Func otpravkapriglasa_L($kartinka, $nik_kartinka, $letter) ; c вводом 1й 
 	EndIf
 	Return 0
 EndFunc
+
+Func prinatpriglas()
+	Local  $ii = 0, $gpx, $gpy, $ax, $ay, $tx, $ty, $search
+	Opt("WinTitleMatchMode",2)
+	WinActivate(WinWait($windowTitle))
+	If openpo4ta() = 0 Then
+		TrayTip("", "Не удалось открыть почту! Отменяем!", 0)
+		Return 0
+	EndIf
+	If (_imagesearcharea("media\po4ta_prig.bmp", 1, 200, 50, @DesktopWidth - 200, @DesktopHeight - 50, $gpx, $gpy, 5) = 1) OR (_imagesearcharea("media\po4ta_prig1.bmp", 1, 200, 50, (@DesktopWidth / 2), (@DesktopHeight / 3 * 2), $gpx, $gpy, 5) = 1) Then
+ 		MouseMove($gpx, $gpy, 10 * $tormoza)
+ 		MouseClick("left", $gpx + Random(1, 2, 1), $gpy + Random(1, 2, 1), 1)
+ 		Sleep(2000 * $tormoza)
+		; листаем письмо до кнопки Ок
+		$ii = 0
+		While ($ii < 10)
+			If _imagesearch("media\OK_po4ta.bmp", 1, $ax, $ay, 5) = 1 Then
+				MouseMove($ax, $ay, 5 * $tormoza)
+				MouseClick("left", $ax + Random(1, 2, 1), $ay + Random(1, 2, 1), 1)
+				Sleep(2000 * $tormoza)
+				; закрываем окно почты
+ 				zmemsmennuyukartinku("media\close_po4ta.bmp", 90, "media\close_po4ta_.bmp", 90)
+				Return 1
+			EndIf
+			$search = _imagesearcharea("media\vniz_po4ta.bmp", 1, (@DesktopWidth / 3 * 2), (@DesktopHeight / 2), @DesktopWidth, (@DesktopHeight - 50), $tx, $ty, 20)
+			MouseMove($tx, $ty, 10 * $tormoza)
+			Sleep(2000 * $tormoza)
+			; листаем окно почты
+			MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
+			Sleep(2000 * $tormoza)
+			$ii = $ii + 1
+		WEnd
+	EndIf
+	Return 0
+EndFunc
