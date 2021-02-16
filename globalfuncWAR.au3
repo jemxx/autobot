@@ -2957,3 +2957,115 @@ Func openGenaOnpxp($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday)
 	
 	Return 1
 EndFunc
+
+Func otpravkapriglasa($kartinka, $nik_kartinka)
+	; отправка приглашения c листанием друзей, входные параметры  $kartinka - иконка прикла, $nik_kartinka - картинка с ником
+	Local $ii, $search, $tx, $ty, $ar1_top_x, $ar1_top_y, $ar2_bottom_x, $ar2_bottom_y ; координаты окна списка друзей
+	Opt("WinTitleMatchMode",2)
+	WinActivate(WinWait($windowTitle))
+	;writelog("=====ОТПРАВКА ГЕНЕРАЛОВ " & $kartinka & @CRLF)
+	If findclickoncenterandwaitresult($kartinka, "media\priglos.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+		If findclickoncenterandwaitresult("media\priglos.bmp", "media\plus_igrok.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+			If findclickoncenterandwaitresult("media\plus_igrok.bmp", "media\otpravka_no.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+				If _imagesearcharea("media\otpravka_no.bmp", 1, 500, 100, @DesktopWidth - 200, @DesktopHeight, $tx, $ty, 40) = 0 Then Return 0
+				$ar1_top_x = $tx - 250
+				$ar1_top_y = $ty - 130
+				$ar2_bottom_x = $tx - 130
+				$ar2_bottom_y = $ty + 10
+				; ищем друга
+				While $ii < 250 ; значение взято из расчета 1000 друзей (250 * листание на 4 строки)
+					If _imagesearcharea($nik_kartinka, 1, $ar1_top_x, $ar1_top_y, $ar2_bottom_x, $ar2_bottom_y, $tx, $ty, 20) = 1 Then
+						If findclickoncenterandwaitresult($nik_kartinka, "media\open_prikla2.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+							; Приглашаем друга
+							go5()
+							sleep(2000*$tormoza)
+							zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
+							; Закрываем окно приглашения
+							go5()
+							sleep(2000*$tormoza)
+							zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
+							Return 1
+						EndIf
+					EndIf
+					$search = _imagesearcharea("media\otppravka_vniz.bmp", 1, $ar1_top_x, $ar1_top_y, $ar2_bottom_x + 50, $ar2_bottom_y + 50, $tx, $ty, 90)
+					MouseMove($tx, $ty, 10 * $tormoza)
+					Sleep(1000 * $tormoza)
+					; листаем окно отправки
+					MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
+					Sleep(1000 * $tormoza)
+					MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
+					Sleep(1000 * $tormoza)
+					MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
+					Sleep(1000 * $tormoza)
+					MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
+					Sleep(1000 * $tormoza)
+					$ii = $ii + 1
+				WEnd
+			EndIf
+		EndIf
+	EndIf
+	Return 0
+EndFunc
+
+Func otpravkapriglasa_L($kartinka, $nik_kartinka, $letter) ; c вводом 1й буквы ника
+; отправка приглашения c листанием друзей, входные параметры  $kartinka - иконка прикла, $nik_kartinka - картинка с ником
+	Local $def_layout, $hWnd, $ii, $search, $tx, $ty, $ar1_top_x, $ar1_top_y, $ar2_bottom_x, $ar2_bottom_y ; координаты окна списка друзей
+	Opt("WinTitleMatchMode",2)
+	$hWnd = WinWait($windowTitle)
+	WinActivate($hWnd)
+	;writelog("=====ОТПРАВКА ГЕНЕРАЛОВ " & $kartinka & @CRLF)
+	$def_layout = _WinAPI_GetKeyboardLayout($hWnd) ; запомнили раскладку
+	If findclickoncenterandwaitresult($kartinka, "media\priglos.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+		If findclickoncenterandwaitresult("media\priglos.bmp", "media\plus_igrok.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+			If findclickoncenterandwaitresult("media\plus_igrok.bmp", "media\otpravka_no.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+				If $letter <> "_" Then
+					If (StringRegExp($Letter,"[a-z]") = 1) and ($def_layout = 0x04190419) Then ; буква латинская, а раскладка RU
+						_WinAPI_SetKeyboardLayout($hWnd,0x0409)
+					ElseIf (StringRegExp($Letter,"[а-яё]") = 1) and ($def_layout = 0x04090409) Then ; буква русская, а раскладка EN
+						_WinAPI_SetKeyboardLayout($hWnd,0x0419)
+					EndIf
+					Send($Letter)
+					sleep(1000 * $tormoza)
+				EndIf
+				If _imagesearcharea("media\otpravka_no.bmp", 1, 500, 100, @DesktopWidth - 200, @DesktopHeight, $tx, $ty, 40) = 0 Then Return 0
+				$ar1_top_x = $tx - 250
+				$ar1_top_y = $ty - 130
+				$ar2_bottom_x = $tx - 130
+				$ar2_bottom_y = $ty + 10
+				; ищем друга
+				While $ii < 250 ; значение взято из расчета 1000 друзей (250 * листание на 4 строки)
+					If _imagesearcharea($nik_kartinka, 1, $ar1_top_x, $ar1_top_y, $ar2_bottom_x, $ar2_bottom_y, $tx, $ty, 20) = 1 Then
+						If findclickoncenterandwaitresult($nik_kartinka, "media\open_prikla2.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+							; Приглашаем друга
+							go5()
+							sleep(2000*$tormoza)
+							zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
+							; Закрываем окно приглашения
+							go5()
+							sleep(2000*$tormoza)
+							zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
+							Return 1
+						EndIf
+					EndIf
+					if _imagesearcharea("media\otppravka_vniz.bmp", 1, $ar1_top_x, $ar1_top_y, $ar2_bottom_x + 50, $ar2_bottom_y + 50, $tx, $ty, 90) = 1 Then
+						MouseMove($tx, $ty, 10 * $tormoza)
+						Sleep(1000 * $tormoza)
+						; листаем окно отправки
+						MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
+						Sleep(1000 * $tormoza)
+						MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
+						Sleep(1000 * $tormoza)
+						MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
+						Sleep(1000 * $tormoza)
+						MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
+						Sleep(1000 * $tormoza)
+						$ii = $ii + 1
+					Else
+						Return 0
+					EndIf
+				WEnd
+			EndIf
+		EndIf
+	EndIf
+	Return 0
+EndFunc

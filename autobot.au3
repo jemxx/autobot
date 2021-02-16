@@ -1192,6 +1192,17 @@ Func komanda($delaem)
 			If ($komanda[2] <> "Браузер") Then $windowTitle = $komanda[2]
 			Return 1
 		  
+		Case "ОтправитьПриглашение"
+			$parametr = StringSplit($komanda[2], ",")
+			If  UBound($parametr) = 4 Then
+				; передаем три параметра: картинка_прикла, картинка_гостя, первая буква ника_гостя
+				local $letter = StringLower(StringMid($parametr[3], 1, 1)) ; выбираем 1ю букву ника и переводим в нижний регистр (игра не различает регистры)
+				Return otpravkapriglasa_L($userDIR & $parametr[1], $userDIR & $parametr[2], $letter)
+			Else
+				; передаем два параметра: картинка_прикла, картинка_гостя
+				Return otpravkapriglasa_L($userDIR & $parametr[1], $userDIR & $parametr[2], "_")
+			EndIf
+
 		Case "Нажать"
 			If $komanda[2] = "0" Then
 			   MouseMove(@DesktopWidth / 2, @DesktopHeight / 2, 10 * $tormoza)
