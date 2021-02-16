@@ -1792,6 +1792,9 @@ EndFunc
 
 Func gotopriclanosleep($kartinka)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
+	Opt("WinTitleMatchMode",2)
+	WinActivate(WinWait($windowTitle))
+
 	writelog("=====ПЕРЕХОД В ПРИКЛЮЧЕНИЕ " & $kartinka & @CRLF)
 	If findclickoncenterandwaitresult($kartinka, "media\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
 		If findclickoncenterandwaitresult("media\posetit.bmp", "media\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
@@ -1836,6 +1839,9 @@ Func gotohome($kartinka)
 EndFunc
 
 Func endpricla($sekund)
+	Opt("WinTitleMatchMode",2)
+	WinActivate(WinWait($windowTitle))
+
 	Sleep($sekund * 1000)
 	writelog("=====ЗАКОНЧИМ ПРИКЛЮЧЕНИЕ " & $sekund & @CRLF)
 	zmemsmennuyukartinkuizdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\KNZOK.bmp", 30)
