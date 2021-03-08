@@ -2881,6 +2881,8 @@ Func runrazved($adv_srch, $arti, $vidpoiska, $tippoiska, $count_kakih, $Arr_kaki
 				removemouse(500, 0, 500)
 				If ($arti = 1) and (haveimage("media\search_artifact.bmp", 20) = 1) Then
 					zmemsmennuyukartinkuizdem("media\search_artifact.bmp", 30, "media\search_artifact_.bmp", 30, "media\search_button_OK_enabled.bmp", 20)
+				ElseIf ($arti = 1) and (haveimage("media\search_Rarity.bmp", 20) = 1) Then
+					zmemsmennuyukartinkuizdem("media\search_Rarity.bmp", 30, "media\search_Rarity_.bmp", 30, "media\search_button_OK_enabled.bmp", 20)
 				Else
 					zmemsmennuyukartinkuizdem($kartinkatippoiska, 30, $kartinkatippoiska2, 30, "media\search_button_OK_enabled.bmp", 20)
 				EndIf
