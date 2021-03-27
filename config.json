@@ -28,7 +28,7 @@
     {"name": "Бородотряс", "max_capacity": 175, "img_active": "boroda.bmp", "img_noactive": "NOboroda.bmp", "img_sp": "spBoroda.bmp"},
     {"name": "Призрак", "max_capacity": 230, "img_active": "prizrachnii.bmp", "img_noactive": "NOprizrachnii.bmp", "img_sp": "spprizrachnii.bmp"},
     {"name": "Мороз", "max_capacity": 205, "img_active": "Frosty.bmp", "img_noactive": "NoFrosty.bmp", "img_sp": "spFrosty.bmp"},
-    {"name": "Одиночка", "max_capacity": 205, "img_active": "odinochka.bmp", "img_noactive": "Noodinochka.bmp", "img_sp": "spodinochka.bmp"}
+    {"name": "Одиночка", "max_capacity": 245, "img_active": "odinochka.bmp", "img_noactive": "Noodinochka.bmp", "img_sp": "spodinochka.bmp"}
   ],
   "geologists": [
     {"name": "Золотой", "img_active": "vesel_geolog.bmp"},
