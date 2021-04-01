@@ -6,7 +6,7 @@
 #AutoIt3Wrapper_Res_Fileversion=0.0.23.1
 #AutoIt3Wrapper_Res_ProductName=Автобот
 #AutoIt3Wrapper_Res_ProductVersion=0.23
-#AutoIt3Wrapper_Res_LegalCopyright=2020 © by mysettlers.ru & Jemxx
+#AutoIt3Wrapper_Res_LegalCopyright=2021 © by github.com/jemxx/autobot
 #AutoIt3Wrapper_Res_Language=1049
 #AutoIt3Wrapper_Run_AU3Check=n
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
