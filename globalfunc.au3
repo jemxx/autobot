@@ -568,6 +568,7 @@ writelog("Почта ")
 	Return 0
 EndFunc
 
+#comments-start
 func ProverkaKlienta()
    local $tx = 0, $ty = 0, $var = 0, $search = 0, $i = 0
    $search = _imagesearch("media\bik.bmp", 1, $tx, $ty, 80)
@@ -631,6 +632,7 @@ func RoditelskayaKategoriya()
    ;MsgBox(0, "Отлично", $PutKRoditelskoyKategorii)
    Return $PutKRoditelskoyKategorii
 endfunc
+#comments-end
 #EndRegion
 
 func opensvadba()
@@ -929,6 +931,7 @@ func CloseTitka()
    Return 1
 endfunc
 
+#comments-start
 func MyTimer()
    $chasi = GUICtrlRead($chasi_gui)
    $minuti = GUICtrlRead($minuti_gui)
@@ -936,6 +939,7 @@ func MyTimer()
    $taimer = $sekundi + $minuti * 60 + $chasi * 3600
    Sleep(1000 * $taimer)
 endfunc
+#comments-end
 
 Func ReadINI($section, $key, $default)
 	Return BinaryToString(IniRead("autobot.ini", $section, $key, $default), 4)
@@ -995,11 +999,13 @@ func writelog($sms)
    FileWrite($sfile2, $sms)
 endfunc
 
+#comments-start
 func deleteX()
    while 1
 	   ZmemSmennuyuKartinku("media\x.bmp", 30, "media\x_.bmp", 30)
    wend
 endfunc
+#comments-end
 
 Func Register()
 if $register = 1 then Return 1

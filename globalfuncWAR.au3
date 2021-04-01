@@ -1008,6 +1008,7 @@ Func otpravitgenu($general, $nomergenerala)
 	Return 1
 EndFunc
 
+#comments-start
 Func openpriglosdruga($prikl, $imya)
 	While 1
 		If findclickoncenterandwaitresult($userDIR & $prikl, "media\priglos.bmp", 30, 30, 5, 10, 1, -300, -300) = 1 Then
@@ -1028,6 +1029,7 @@ EndFunc
 
 Func priglosdruga($prikl, $imya)
 EndFunc
+#comments-end
 
 Func stoitligena($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $fl_active)
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
@@ -1414,6 +1416,7 @@ Func viborarmii($tabname)
 	Return 0
 EndFunc
 
+#comments-start
 Func generalixxx($general, $nomergenerala)
 	writelog(" ГЕНЕРАЛЫ ")
 	Local $ty = 0, $tx = 0, $search = 0
@@ -1502,6 +1505,7 @@ Func generalixxx($general, $nomergenerala)
 	EndIf
 	Return 0
 EndFunc
+#comments-end
 
 Func generali($general, $nomergenerala)
 	Local $ty = 0, $tx = 0, $search = 0, $i = 0, $t = 0, $ii = 0, $count_line = 1, $count_gen_in_line = 9
@@ -1606,6 +1610,7 @@ Func generali($general, $nomergenerala)
 	Return 0
 EndFunc
 
+#comments-start
 Func generaliproverka($general, $nomergenerala)
 	writelog(" ГЕНЕРАЛЫ ПРОВЕРКА ")
 	Local $ty = 0, $tx = 0, $search = 0, $i = 0, $skoka_gen_nashli = 0
@@ -1724,6 +1729,7 @@ Func openprikla($kartinka, $kartinka2)
 	EndIf
 	Return 0
 EndFunc
+#comments-end
 
 Func openotpravkagen($kartinka)
 	Opt("WinTitleMatchMode",2)
@@ -1763,6 +1769,7 @@ Func openotpravkagen($kartinka)
 	Return 0
 EndFunc
 
+#comments-start
 Func gotopricla($kartinka)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
 
@@ -1789,6 +1796,7 @@ Func gotopricla($kartinka)
 	writelog("=====Ошибка " & $i * 6 & @CRLF)
 	Return 0
 EndFunc
+#comments-end
 
 Func gotopriclanosleep($kartinka)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
