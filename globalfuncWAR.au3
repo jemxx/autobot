@@ -1,3 +1,5 @@
+#include <math.au3>
+
 Dim $proverkasliva
 Global $sectorGraph =  ReadINI("main", "sector_graphics", "70")
 
@@ -2398,6 +2400,7 @@ Func smena_armii($kakaya)
 	Return 0
 EndFunc
 
+#comments-start
 Func openpriklaxxx($kartinka, $kartinka2)
 	Local $tx = 0, $ty = 0
 	If haveimage($userDIR & $kartinka2, 30) = 1 Then
@@ -2417,6 +2420,42 @@ Func openpriklaxxx($kartinka, $kartinka2)
 			EndIf
 		EndIf
 	EndIf
+	Return 0
+EndFunc
+#comments-end
+
+Func openpriklaxxx($kartinka, $kartinka2)
+	Local $tx = 0, $ty = 0, $cnt = 0
+	If haveimage($userDIR & $kartinka2, 30) = 1 Then
+		Return 1
+	EndIf
+	While ($cnt < 3)
+		If openzvezda() = 1 Then
+			If selecttabatzvezda("prikli", 0) = 1 Then
+				While (_imagesearch($userDIR & $kartinka, 1, $tx, $ty, 20) = 0)
+					MouseMove($zvezda_area[2] + Random(-2, 2, 1), $zvezda_area[3] + Random(-2, 2, 1), 10 * $tormoza)
+					If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 30, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 1 Then
+						If (_MathCheckDiv($cnt, 2) = 2) Then
+							zvezdamovepolzunokdown(1)
+						Else
+							zvezdamovepolzunokdown(0)
+						EndIf
+						Sleep(500 * $tormoza)
+					Else
+						; долистали донизу и не нашли прикла
+						$cnt = $cnt + 1
+						ExitLoop
+					EndIf
+				WEnd
+				If findclickoncenterandwaitresult($userDIR & $kartinka, "media\open_prikla2.bmp", 20, 20, 5, 5, 1, 300, 5) = 1 Then
+					zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
+					Sleep(2000 * $tormoza)
+					zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
+					Return 1
+				EndIf
+			EndIf
+		EndIf
+	WEnd
 	Return 0
 EndFunc
 
