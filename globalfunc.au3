@@ -10,8 +10,6 @@
 #include <Inet.au3>
 #include <Encoding.au3>
 
-;Global $sfile = "autobot.ini"
-;Global $hfile = FileOpen($sfile)
 Global $zalezi = 12
 Global $tormoza = ReadINI("main", "speed", "1"), $soblaliWariki = 0
 Global $Consol_a_ne_Client = 0
@@ -21,7 +19,6 @@ Global $chasi_gui
 Global $minuti_gui
 Global $sekundi_gui
 Global $sfile2 = "log.txt"
-;Global $hfile2 = FileOpen($sfile2)
 Dim $iPause
 
 #Region общие
@@ -567,72 +564,6 @@ writelog("Почта ")
 	writelog("Неудачно " & $tcount & @CRLF)
 	Return 0
 EndFunc
-
-#comments-start
-func ProverkaKlienta()
-   local $tx = 0, $ty = 0, $var = 0, $search = 0, $i = 0
-   $search = _imagesearch("media\bik.bmp", 1, $tx, $ty, 80)
-   $var = PixelGetColor($tx + 50, $ty + 175)
-   if $search = 1 then
-	   if $var = 16763904 then
-		   $Consol_a_ne_Client = 0
-		   Return 1
-	   elseif $var = 16574876 then
-		   $Consol_a_ne_Client = 0
-		   Return 1
-	   else
-		   if registerALL("ALL") = 1 then
-			   Return 1
-		   endif
-		   Return 0
-	   endif
-   endif
-   $search = _imagesearch("media\seliterka.bmp", 1, $tx, $ty, 20)
-   $var = PixelGetColor($tx, $ty + 229)
-
-   if $search = 1 then
-	   if $var = 16763904 then
-		   $Consol_a_ne_Client = 1
-		   Return 1
-	   elseif $var = 16574876 then
-		   $Consol_a_ne_Client = 1
-		   Return 1
-	   else
-		   PodobtatRazmer(72)
-		   if registerALL("ALL") = 1 then
-			   Return 1
-		   endif
-		   Return 0
-	   endif
-   else
-	   PodobtatRazmer(72)
-	   if registerALL("ALL") = 1 then
-		   Return 1
-	   endif
-	   Return 0
-	endif
-
-   PodobtatRazmer(72)
-   if registerALL("ALL") = 1 then
-	   Return 1
-	endif
-
-   Return 0
-endfunc
-
-func RoditelskayaKategoriya()
-   local $PutKSkriptu = 0, $DelimSleshi = 0, $KolwoSleshey = 0, $PutKRoditelskoyKategorii = "", $i = 1
-   $PutKSkriptu = @ScriptFullPath
-   $DelimSleshi = StringSplit($PutKSkriptu, "\")
-   $KolwoSleshey = UBound($DelimSleshi, 1)
-   while $i < $KolwoSleshey - 2
-	   $PutKRoditelskoyKategorii = $PutKRoditelskoyKategorii & $DelimSleshi[$i] & "/"
-	   $i = $i + 1
-   wend
-   ;MsgBox(0, "Отлично", $PutKRoditelskoyKategorii)
-   Return $PutKRoditelskoyKategorii
-endfunc
-#comments-end
 #EndRegion
 
 func opensvadba()
@@ -931,28 +862,9 @@ func CloseTitka()
    Return 1
 endfunc
 
-#comments-start
-func MyTimer()
-   $chasi = GUICtrlRead($chasi_gui)
-   $minuti = GUICtrlRead($minuti_gui)
-   $sekundi = GUICtrlRead($sekundi_gui)
-   $taimer = $sekundi + $minuti * 60 + $chasi * 3600
-   Sleep(1000 * $taimer)
-endfunc
-#comments-end
-
 Func ReadINI($section, $key, $default)
 	Return BinaryToString(IniRead("autobot.ini", $section, $key, $default), 4)
 EndFunc
-
-#comments-start
-func Read_ini($stroka)
-	$itog = FileReadLine($hfile, $stroka)
-	$sResult = StringInStr($itog, "=")
-		$sText = StringMid($itog, $sResult + 1)
-	Return $sText
-endfunc
-#comments-end
 
 Func sleepwhile2($img, $time, $flag)
 	Local $i = 0, $tolerance = 30, $fl_win = 0
@@ -998,14 +910,6 @@ func writelog($sms)
    Return 1
    FileWrite($sfile2, $sms)
 endfunc
-
-#comments-start
-func deleteX()
-   while 1
-	   ZmemSmennuyuKartinku("media\x.bmp", 30, "media\x_.bmp", 30)
-   wend
-endfunc
-#comments-end
 
 Func Register()
 if $register = 1 then Return 1
