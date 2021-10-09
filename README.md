@@ -8,4 +8,4 @@ The bot still works, but only when using an alternative client.
 Instructions on how to use an alternative client https://mytso.ru/tools/client/port-client/
 
 
-The Unity version is still delayed because nothing is working fine. Please use an alternative client.
+The Unity version is still delayed because nothing is working fine. Please use the alternative client.
