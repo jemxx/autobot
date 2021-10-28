@@ -43,7 +43,7 @@ $stroka = getAllPassages($passagesDir)
 
 ;Рисуем окно бота
 #Region ### START Koda GUI section ### Form=
-	Global $level = GUICreate("Автобот", 225, 400, @DesktopWidth - 245, 20)
+	Global $level = GUICreate("Автобот", 225, 380, @DesktopWidth - 245, 20)
 	GUISetBkColor(16777088)
 	GUICtrlCreateLabel("Проходим по файлу", 5, 10)
 	Global $file_gui = GUICtrlCreateCombo("", 5, 30, 215, 20, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL, $WS_VSCROLL))
@@ -63,8 +63,6 @@ $stroka = getAllPassages($passagesDir)
 	GUICtrlSetState($osibki, $GUI_UNCHECKED)
 	Global $alarmCheckBox = GUICtrlCreateCheckbox("Включить Тревогу", 5, 200, 180, 25)
 	GUICtrlSetState($alarmCheckBox, $GUI_CHECKED)
-	Global $client = GUICtrlCreateCheckbox("Клиент SirriS", 5, 220, 180, 25)
-	GUICtrlSetState($client, $GUI_UNCHECKED)
 
 	;Проверяем флаг разрыва соединения
 	If ReadINI("main", "check_connection", "0") = "" Then
@@ -81,11 +79,11 @@ $stroka = getAllPassages($passagesDir)
 		EndIf
 	EndIf
 
-	Global $no1_1 = GUICtrlCreateButton("ЗАПУСК", 5, 260, 215, 30)
-	Global $pr8 = GUICtrlCreateButton("Дискорд", 5, 300, 215, 20)
-	Global $pr9 = GUICtrlCreateButton("Справка", 5, 330, 215, 20)
-	GUICtrlCreateLabel("F7 - пауза до слива", 5, 360)
-	GUICtrlCreateLabel("F9 - пауза, F11 - прервать", 5, 380)
+	Global $no1_1 = GUICtrlCreateButton("ЗАПУСК", 5, 240, 215, 30)
+	Global $pr8 = GUICtrlCreateButton("Дискорд", 5, 280, 215, 20)
+	Global $pr9 = GUICtrlCreateButton("Справка", 5, 310, 215, 20)
+	GUICtrlCreateLabel("F7 - пауза до слива", 5, 340)
+	GUICtrlCreateLabel("F9 - пауза, F11 - прервать", 5, 360)
 	$haccelinterupt = GUICtrlCreateDummy()
 	Dim $accelkeys[1][2] = [["z", $haccelinterupt]]
 	GUISetAccelerators($accelkeys)
@@ -110,12 +108,9 @@ $stroka = getAllPassages($passagesDir)
 					setstatistik()
 					$register = 0
 
-					If GUICtrlRead($client) == $GUI_CHECKED Then
-						$windowTitle = "TSO Game"
-					Else
-						$windowTitle = ReadINI("main", "window_title", "The Settlers Online")
-						If $windowTitle == "" Then $windowTitle = "The Settlers Online"
-					EndIf
+					$windowTitle = ReadINI("main", "window_title", "The Settlers Online")
+					If $windowTitle == "" Then $windowTitle = "The Settlers Online"
+
 					If GUICtrlRead($obnova) == $GUI_CHECKED Then
 						obnova()
 					EndIf
