@@ -1122,7 +1122,7 @@ Func komanda($delaem)
 			
 			If clickOnCoordinates($userDIR & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7]) = 1 Then
 				Sleep(600 * $tormoza)
-				While (haveimage("media\zadacha_geni.bmp", 20) = 0) AND ($i < 3)
+				While (haveimage("media\" & $lang & "\zadacha_geni.bmp", 20) = 0) AND ($i < 3)
 					sleepwhile("media\othod.bmp", 30, 2)
 					zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 					clickOnCoordinates($userDIR & $parametr[1], $parametr[2], $parametr[3], $parametr[4], $parametr[5], $parametr[6], $parametr[7])
