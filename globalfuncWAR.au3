@@ -756,7 +756,7 @@ Func naborgenarea()
 		If _imagesearcharea("media\search_treasure_menu.bmp", 1, $search_treasure_menu_x - 20, $search_treasure_menu_y - 20, $search_treasure_menu_x + 20, $search_treasure_menu_y + 20, $tx, $ty, 20) = 1 Then Return 1
 	EndIf
 	If _imagesearch("media\search_treasure_menu.bmp", 1, $search_treasure_menu_x, $search_treasure_menu_y, 20) = 1 Then
-		Global $zifri_area[4] = [$search_treasure_menu_x - 20, $search_treasure_menu_y + 70, $search_treasure_menu_x + 50, $search_treasure_menu_y + 110]
+		Global $zifri_area[4] = [$search_treasure_menu_x - 70, $search_treasure_menu_y + 70, $search_treasure_menu_x + 50, $search_treasure_menu_y + 110]
 		Return 1
 	EndIf
 	Return 0
