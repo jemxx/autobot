@@ -21,6 +21,7 @@ If ProcessExists("Универсальный_бот.exe") Then ProcessClose ("У
 
 Global $alarm, $passagesDir, $pass_count, $windowTitle, $sreport = 0
 Global $userDIR = "media\users\"
+Global $lang = ReadINI("main", "language", "ru")
 
 Global $k_x, $k_y, $tochka_sektora_x=0, $tochka_sektora_y=0
 Global $shtuk, $i = 1, $register = 0
@@ -318,7 +319,7 @@ Func komanda($delaem)
 							Return 1
 						EndIf
 						If $parametr[3] = "1" Then
-							If haveimage("media\army_values\1.bmp", 20) = 1 Then
+							If haveimage("media\" & $lang & "\army_values\1.bmp", 20) = 1 Then
 								If $parametr[13] = 1 Then
 									zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 								EndIf
@@ -395,7 +396,7 @@ Func komanda($delaem)
 							Return atakalageraotkritimgenoynoini($parametr[11], $parametr[12], $userDIR & $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17])
 						EndIf
 						If $parametr[3] = "1" Then
-							If haveimage("media\army_values\1.bmp", 20) = 1 Then
+							If haveimage("media\" & $lang & "\army_values\1.bmp", 20) = 1 Then
 								Return atakalageraotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
 							Else
 								$ii = 0
@@ -466,7 +467,7 @@ Func komanda($delaem)
 							Return perenosotkritimgenoynoini($parametr[11], $parametr[12], $userDIR & $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17])
 						EndIf
 						If $parametr[3] = "1" Then
-							If haveimage("media\army_values\1.bmp", 20) = 1 Then
+							If haveimage("media\" & $lang & "\army_values\1.bmp", 20) = 1 Then
 								Return perenosotkritimgenoynoini($parametr[13], $parametr[14], $userDIR & $parametr[15], $parametr[16], $parametr[17], $parametr[18], $parametr[19])
 							Else
 								$ii = 0
@@ -1016,7 +1017,7 @@ Func komanda($delaem)
 			EndIf
 			If $parametr[2] = "1" Then
 				If stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1) = 1 Then
-					If haveimage("media\army_values\1.bmp", 20) = 0 Then
+					If haveimage("media\" & $lang & "\army_values\1.bmp", 20) = 0 Then
 						$ii = 0
 						While applyarmy(1, 0, 0, 0, 0, 0, 0, 0, 0, $full, 0) <> 1
 							zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
@@ -1077,7 +1078,7 @@ Func komanda($delaem)
 			EndIf
 			If $parametr[2] = "1" Then
 				If stoitligena($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18], 1) = 1 Then
-					If haveimage("media\army_values\1.bmp", 20) = 0 Then
+					If haveimage("media\" & $lang & "\army_values\1.bmp", 20) = 0 Then
 						$ii  = 0
 						While applyarmy(1, 0, 0, 0, 0, 0, 0, 0, 0, $full, 0) <> 1
 							zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
@@ -1164,7 +1165,7 @@ Func komanda($delaem)
 					$gluksnaboromarmii = 0
 					Return 1
 				Case $parametr[2] = "1" AND openGenaOnpxp($userDIR & $parametr[12], $parametr[13], $parametr[14], $parametr[15], $parametr[16], $parametr[17], $parametr[18]) = 1	
-					If haveimage("media\army_values\1.bmp", 20) = 1 Then
+					If haveimage("media\" & $lang & "\army_values\1.bmp", 20) = 1 Then
 						zmemsmennuyukartinku("media\gohome.bmp", 30, "media\gohome_.bmp", 30)
 						zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
 						Return 1

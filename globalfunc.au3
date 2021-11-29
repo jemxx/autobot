@@ -1102,8 +1102,8 @@ EndFunc
 Func getFullGeneralImg($max)
 	Local $fullGenaImg = 0
 
-	If FileExists("media\army_values\" & $max & ".bmp") Then
-		$fullGenaImg = "media\army_values\" & $max & ".bmp"
+	If FileExists("media\" & $lang & "\army_values\" & $max & ".bmp") Then
+		$fullGenaImg = "media\" & $lang & "\army_values\" & $max & ".bmp"
 	EndIf
 
 	Return $fullGenaImg

@@ -507,7 +507,7 @@ Func viborgenipodataku_1nnoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $ot
 	WEnd
 	If $i = 10 Then
 		Return 0
-	ElseIf haveimage("media\army_values\1.bmp", 20) = 1 Then
+	ElseIf haveimage("media\" & $lang & "\army_values\1.bmp", 20) = 1 Then
 		zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 		Return 1
 	Else
@@ -839,7 +839,7 @@ Func setarmy($kogo, $skolko, $gena)
 		EndIf
 	Else ; ввод обычных значений
 		viborarmii($kogo)
-		$skolkokartinka = "media\army_values\" & $diffarmy & ".bmp"
+		$skolkokartinka = "media\" & $lang & "\army_values\" & $diffarmy & ".bmp"
 		$i = 0
 		While vvodzifr($skolko) <> 1
 			;writelog("+" & $skolko)
@@ -1729,7 +1729,7 @@ Func set_elitnoy_army($kogo, $skolko, $gena)
 		EndIf
 	Else
 		vibor_elitnoy_armii($kogo)
-		$skolkokartinka = "media\army_values\" & $diffarmy & ".bmp"
+		$skolkokartinka = "media\" & $lang & "\army_values\" & $diffarmy & ".bmp"
 		;writelog("+" & $skolko)
 		$i = 0
 		While vvodzifr($skolko) <> 1
