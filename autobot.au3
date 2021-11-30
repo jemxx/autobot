@@ -1212,18 +1212,6 @@ Func komanda($delaem)
 		Case "ПринятьПриглашение"
 			Return prinatpriglas()
 
-		Case "Нажать"
-			If $komanda[2] = "0" Then
-			   MouseMove(@DesktopWidth / 2, @DesktopHeight / 2, 10 * $tormoza)
-			   MouseDown("left")
-			   MouseMove(@DesktopWidth / 2 + 100, @DesktopHeight / 2, 10 * $tormoza)
-			   Sleep(500 * $tormoza)
-			   MouseUp("left")
-			   Sleep(500 * $tormoza)
-			   MouseUp("left")
-			EndIf
-			Send($komanda[2])
-			Return 1
 	EndSwitch
 EndFunc
 
