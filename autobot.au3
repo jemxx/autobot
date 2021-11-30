@@ -1193,11 +1193,7 @@ Func komanda($delaem)
 				Case Else	
 					Return 0
 			EndSelect
-
-		Case "Клиент"
-			If ($komanda[2] <> "Браузер") Then $windowTitle = $komanda[2]
-			Return 1
-		  
+			
 		Case "ОтправитьПриглашение"
 			$parametr = StringSplit($komanda[2], ",")
 			If  UBound($parametr) = 4 Then
