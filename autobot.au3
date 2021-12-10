@@ -27,6 +27,7 @@ Global $k_x, $k_y, $tochka_sektora_x=0, $tochka_sektora_y=0
 Global $shtuk, $i = 1, $register = 0
 Global $komand_na_massiv = 0
 Global $strokadlaperehoda = 0
+Global $current_stroka = 1
 Global $centrovat = 1, $currentbuf = 0
 Global $stroka
 
@@ -173,7 +174,7 @@ Func printerror($text)
 EndFunc
 
 Func terminater()
-	TrayTip("", "Закрываемся...", 0)
+	TrayTip("", "Закрываемся. Строка " & $current_stroka, 0)
 	Sleep(1000)
 	Exit
 EndFunc
@@ -212,6 +213,8 @@ Func gogogogo()
 		WEnd
 		;считываем строку
 		$stroka = FileReadLine($abot, $i)
+		; запоминаем номер текущей строки
+		$current_stroka = $i
 		If $stroka = "" Then ExitLoop
 		Global $komanda = StringSplit($stroka, "=")
 		$delaem = $komanda[1]

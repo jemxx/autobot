@@ -138,7 +138,7 @@ EndFunc
 Func _pause()
 	writelog("===============pause" & @CRLF)
 	$ipause = NOT $ipause
-	TrayTip("", "пауза...", 0)
+	TrayTip("", "Пауза. Строка " & $current_stroka, 0)
 	While $ipause
 		Sleep(250 * $tormoza)
 	WEnd
