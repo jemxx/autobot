@@ -22,6 +22,7 @@ If ProcessExists("Универсальный_бот.exe") Then ProcessClose ("У
 Global $alarm, $passagesDir, $pass_count, $windowTitle, $sreport = 0
 Global $userDIR = "media\users\"
 Global $lang = ReadINI("main", "language", "ru")
+Global $sectorGraph = ReadINI("main", "sector_graphics", "70")
 
 Global $k_x, $k_y, $tochka_sektora_x=0, $tochka_sektora_y=0
 Global $shtuk, $i = 1, $register = 0
@@ -262,6 +263,8 @@ Func startflag($stroka)
 			$tormoza = $parametr[2]
 		Case "/Тревога"
 			$alarm = $parametr[2]
+		Case "/Графика"
+			$sectorGraph = $parametr[2]
 	EndSwitch
 EndFunc
 

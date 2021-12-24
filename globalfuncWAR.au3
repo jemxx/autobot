@@ -1,7 +1,6 @@
 #include <math.au3>
 
 Dim $proverkasliva
-Global $sectorGraph =  ReadINI("main", "sector_graphics", "70")
 
 Func podgotovka()
 	chatoff()
