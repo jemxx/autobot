@@ -2549,10 +2549,14 @@ Func otpravkapriglasa_L($kartinka, $nik_kartinka, $letter) ; c вводом 1й 
 	Return 0
 EndFunc
 
-Func prinatpriglas()
-	Local  $ii = 0, $gpx, $gpy, $ax, $ay, $tx, $ty, $search
+Func prinatpriglas($kartinka)
+	Local $hWnd, $ii = 0, $gpx, $gpy, $ax, $ay, $tx, $ty, $search
 	Opt("WinTitleMatchMode",2)
-	WinActivate(WinWait($windowTitle))
+	$hWnd = WinWait($WinTitle)
+	WinActivate($hWnd)
+;   Проверяем не остался ли открытым предыдущий прикл и если да, закрываем его
+    If close_pricla($kartinka) = 0 Then Return 0
+	Sleep(2000 * $tormoza)
 	If openpo4ta() = 0 Then
 		TrayTip("", "Не удалось открыть почту! Отменяем!", 0)
 		Return 0
@@ -2580,6 +2584,26 @@ Func prinatpriglas()
 			Sleep(2000 * $tormoza)
 			$ii = $ii + 1
 		WEnd
+	EndIf
+	Return 0
+EndFunc
+
+Func close_pricla($kartinka)
+	Local $hWnd
+	Opt("WinTitleMatchMode",2)
+	$hWnd = WinWait($WinTitle)
+ 	WinActivate($hWnd)
+	If haveimage($kartinka, 30) = 0 Then
+		Return 1
+	Else
+		If findclickoncenterandwaitresult($kartinka, "media\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+			If findclickoncenterandwaitresult("media\posetit.bmp", "media\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+				sleepwhile("media\prikl_error.bmp", 30, 30)
+				sleep(500 * $tormoza)
+				zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
+				Return 1
+			EndIf
+		EndIf
 	EndIf
 	Return 0
 EndFunc

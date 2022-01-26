@@ -1212,7 +1212,7 @@ Func komanda($delaem)
 			EndIf
 		
 		Case "ПринятьПриглашение"
-			Return prinatpriglas()
+			Return prinatpriglas($userDIR & $komanda[2])
 
 	EndSwitch
 EndFunc
