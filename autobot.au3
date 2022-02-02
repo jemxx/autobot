@@ -46,25 +46,25 @@ $stroka = getAllPassages($passagesDir)
 
 ;Рисуем окно бота
 #Region ### START Koda GUI section ### Form=
-	Global $level = GUICreate("Автобот", 225, 380, @DesktopWidth - 245, 20)
+	Global $level = GUICreate(getLangPhrase("val_001"), 225, 380, @DesktopWidth - 245, 20)
 	GUISetBkColor(16777088)
-	GUICtrlCreateLabel("Проходим по файлу", 5, 10)
+	GUICtrlCreateLabel(getLangPhrase("val_002"), 5, 10)
 	Global $file_gui = GUICtrlCreateCombo("", 5, 30, 215, 20, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL, $WS_VSCROLL))
 	_GUICtrlComboBox_SetMinVisible($file_gui, 23)
 	GUICtrlSetData(-1, $stroka, ReadINI("main", "favorite_file", ""))
-	GUICtrlCreateLabel("Начинаем со строки", 5, 60)
+	GUICtrlCreateLabel(getLangPhrase("val_003"), 5, 60)
 	Global $file_gui2 = GUICtrlCreateInput("1", 5, 80, 215, 20)
 
 	Local $max_repeat = ReadINI("main", "total_cycles", "99")
 	If $max_repeat < 1 Then $max_repeat = 99
-	GUICtrlCreateLabel("Количество повторов", 5, 110)
+	GUICtrlCreateLabel(getLangPhrase("val_004"), 5, 110)
 	Global $pass_cnt = GUICtrlCreateInput($max_repeat, 5, 130, 215, 20)
 
-	Global $obnova = GUICtrlCreateCheckbox("Проверять обновления", 5, 160, 180, 25)
+	Global $obnova = GUICtrlCreateCheckbox(getLangPhrase("val_005"), 5, 160, 180, 25)
 	GUICtrlSetState($obnova, $GUI_UNCHECKED)
-	Global $osibki = GUICtrlCreateCheckbox("Выводить предупреждения", 5, 180, 180, 25)
+	Global $osibki = GUICtrlCreateCheckbox(getLangPhrase("val_006"), 5, 180, 180, 25)
 	GUICtrlSetState($osibki, $GUI_UNCHECKED)
-	Global $alarmCheckBox = GUICtrlCreateCheckbox("Включить Тревогу", 5, 200, 180, 25)
+	Global $alarmCheckBox = GUICtrlCreateCheckbox(getLangPhrase("val_007"), 5, 200, 180, 25)
 	GUICtrlSetState($alarmCheckBox, $GUI_CHECKED)
 
 	;Проверяем флаг разрыва соединения
@@ -82,11 +82,11 @@ $stroka = getAllPassages($passagesDir)
 		EndIf
 	EndIf
 
-	Global $no1_1 = GUICtrlCreateButton("ЗАПУСК", 5, 240, 215, 30)
-	Global $pr8 = GUICtrlCreateButton("Дискорд", 5, 280, 215, 20)
-	Global $pr9 = GUICtrlCreateButton("Справка", 5, 310, 215, 20)
-	GUICtrlCreateLabel("F7 - пауза до слива", 5, 340)
-	GUICtrlCreateLabel("F9 - пауза, F11 - прервать", 5, 360)
+	Global $no1_1 = GUICtrlCreateButton(getLangPhrase("val_008"), 5, 240, 215, 30)
+	Global $pr8 = GUICtrlCreateButton(getLangPhrase("val_009"), 5, 280, 215, 20)
+	Global $pr9 = GUICtrlCreateButton(getLangPhrase("val_010"), 5, 310, 215, 20)
+	GUICtrlCreateLabel(getLangPhrase("val_011"), 5, 340)
+	GUICtrlCreateLabel(getLangPhrase("val_012"), 5, 360)
 	$haccelinterupt = GUICtrlCreateDummy()
 	Dim $accelkeys[1][2] = [["z", $haccelinterupt]]
 	GUISetAccelerators($accelkeys)
@@ -101,7 +101,7 @@ $stroka = getAllPassages($passagesDir)
 				GUICtrlSetData($pass_cnt, $max_repeat)
 			Case $no1_1
 				tormoza()
-				TrayTip("", "Мы запустились...", 0)
+				TrayTip("", getLangPhrase("val_012"), 0)
 
 				Global $abot = $passagesDir & "\" & GUICtrlRead($file_gui)
 				If FileExists($abot) Then
@@ -132,7 +132,7 @@ $stroka = getAllPassages($passagesDir)
 					register()
 					gogogogo()
 				Else
-					MsgBox(0, "Внимание!!!", "Выбранный файл с прохождением не найден!")
+					MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_015"))
 					Exit
 				EndIf
 			Case $pr8
@@ -161,7 +161,7 @@ Func obnova()
 			$i = $i + 1
 			If $i = 10 Then ExitLoop
 		WEnd
-		If MsgBox(4, "Внимание!!!", "Доступна новая версия программы." & @CR & @CR & $fulltext & @CR & @CR & @CR & @CR & "Скачать сейчас?") = 6 Then
+		If MsgBox(4, getLangPhrase("val_014"), getLangPhrase("val_015") & @CR & @CR & $fulltext & @CR & @CR & @CR & @CR & getLangPhrase("val_017")) = 6 Then
 			ShellExecute("http://mysettlers.ru/instrumenty/boty/item/121-sozdajom-bota-dlya-sebya")
 			Sleep(3000)
 			Exit
@@ -175,7 +175,7 @@ Func printerror($text)
 EndFunc
 
 Func terminater()
-	TrayTip("", "Закрываемся. Строка " & $current_stroka, 0)
+	TrayTip("", getLangPhrase("val_018") & $current_stroka, 0)
 	Sleep(1000)
 	Exit
 EndFunc
@@ -194,8 +194,8 @@ Func gogogogo()
 		EndIf
 		If GUICtrlRead($pass_cnt) = 0 Then ; кончились прохождения
 			If $alarm = 1 Then alarmBeep()
-			If $sreport = 1 Then Telegram_bot("Прошли нужное количество")	
-			MsgBox(0, "", "Прошли нужное количество")
+			If $sreport = 1 Then Telegram_bot(getLangPhrase("val_019"))	
+			MsgBox(0, "", getLangPhrase("val_019"))
 			ExitLoop
 		EndIf
 		If $i > 20 Then
@@ -219,14 +219,14 @@ Func gogogogo()
 		If $stroka = "" Then ExitLoop
 		Global $komanda = StringSplit($stroka, "=")
 		$delaem = $komanda[1]
-		printerror("Начинаем выполнять команду из " & $i & " строки." & @CR & @CR & "Делаем: " & $delaem & @CR & "С параметром: " & $komanda[2])
+		printerror(getLangPhrase("val_020") & $i & getLangPhrase("val_021") & @CR & @CR & getLangPhrase("val_022") & $delaem & @CR & getLangPhrase("val_023") & $komanda[2])
 		If komanda($delaem) = 1 Then
-			printerror("Команда из " & $i & " строки." & @CR & @CR & "Делаем: " & $delaem & @CR & "С параметром: " & $komanda[2] & @CR & @CR & "ВЫПОЛНЕНА УСПЕШНО")
+			printerror(getLangPhrase("val_024") & $i & getLangPhrase("val_021") & @CR & @CR & getLangPhrase("val_022") & $delaem & @CR & getLangPhrase("val_023") & $komanda[2] & @CR & @CR & getLangPhrase("val_025"))
 		Else
 			If $alarm = 1 Then alarmBeep()
-			If $sreport = 1 Then Telegram_bot("СТОП! Из строки " & $i &  " мы не смогли сделать " & $stroka)	
-			printerror("Команда из " & $i & " строки." & @CR & @CR & "Делаем: " & $delaem & @CR & "С параметром: " & $komanda[2] & @CR & @CR & "НЕ ВЫПОЛНЕНА. ОСТАНАВЛИВАЕМСЯ")
-			MsgBox(0, "ВНИМАНИЕ!!!", "Из строки " & $i & @CR & "Мы не смогли сделать" & @CR & @CR & $stroka & @CR & @CR & "поэтому и остановились(((")
+			If $sreport = 1 Then Telegram_bot("СТОП!" & getLangPhrase("val_026") & $i & getLangPhrase("val_027") & $stroka)	
+			printerror(getLangPhrase("val_024") & $i & getLangPhrase("val_021") & @CR & @CR & getLangPhrase("val_022") & $delaem & @CR & getLangPhrase("val_023") & $komanda[2] & @CR & @CR & getLangPhrase("val_028"))
+			MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_026") & $i & @CR & getLangPhrase("val_027") & @CR & @CR & $stroka & @CR & @CR & getLangPhrase("val_029"))
 			GUICtrlSetData($file_gui2, $i)
 			ExitLoop
 		EndIf
@@ -689,12 +689,12 @@ Func komanda($delaem)
 			
 			If UBound($parametr) = 3 Then
 				If $parametr[2] = 2 Then
-					TrayTip("Сообщение", $parametr[1], 5, 1)
+					TrayTip(getLangPhrase("val_030"), $parametr[1], 5, 1)
 				Else
-					MsgBox(0, "Сообщение", $parametr[1])
+					MsgBox(0, getLangPhrase("val_030"), $parametr[1])
 				EndIf
 			Else
-				MsgBox(0, "Сообщение", $parametr[1])
+				MsgBox(0, getLangPhrase("val_030"), $parametr[1])
 			EndIf
 		
 			Return 1
@@ -869,7 +869,7 @@ Func komanda($delaem)
 			Else
 				$kakih = getSpecialistData($parametr[4], "geologists")
 				If ($kakih = "") Then
-					MsgBox(0, "Внимание!", "Неправильный параметр типа Геолога")
+					MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_031"))
 					Return 0
 				EndIf
 			EndIf
@@ -881,7 +881,7 @@ Func komanda($delaem)
 			ElseIf $parametr[1] = 1 Then
 				Return 1
 			Else
-				MsgBox(0, "!!!", "Неправильный параметр флага")
+				MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_032"))
 				Return 0
 			EndIf
 		Case "СобратьПочту"
@@ -907,7 +907,7 @@ Func komanda($delaem)
 			ElseIf $parametr[1] = 1 Then
 				Return 1
 			Else
-				MsgBox(0, "!!!", "Неправильный параметр флага")
+				MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_032"))
 				Return 0
 			EndIf
 
@@ -955,7 +955,7 @@ Func komanda($delaem)
 						Send("{NUMPADSUB}", 0)
 						Return 1
 					Else
-						MsgBox(0, "!!!", "Неправильный параметр команды НажатьКлавишу")
+						MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_033"))
 						Return 0
 					EndIf
 				EndIf

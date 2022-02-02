@@ -138,14 +138,14 @@ EndFunc
 Func _pause()
 	writelog("===============pause" & @CRLF)
 	$ipause = NOT $ipause
-	TrayTip("", "Пауза. Строка " & $current_stroka, 0)
+	TrayTip("", getLangPhrase("val_034") & $current_stroka, 0)
 	While $ipause
 		Sleep(250 * $tormoza)
 	WEnd
-	TrayTip("", "убрали паузу...", 0)
+	TrayTip("", getLangPhrase("val_035"), 0)
 EndFunc
 Func terminate()
-	TrayTip("", "Закрываемся...", 0)
+	TrayTip("", getLangPhrase("val_036"), 0)
 	Sleep(1000 * $tormoza)
 	Run('Универсальный_бот.exe')
 	exit
@@ -172,7 +172,7 @@ EndFunc
 
 Func interrupt()
 	$finterrupt = 1
-	TrayTip("", "Прерываем все запущенные процессы", 0)
+	TrayTip("", getLangPhrase("val_037"), 0)
 EndFunc
 
 Func haveimage($img, $tolerance)
@@ -1021,11 +1021,11 @@ Func getDataGroupSpecialists($type)
 		If IsArray($specialists) Then
 			Return $specialists
 		Else
-			MsgBox(0 + 16, "Ошибка!", "Не удалось получить данные специалистов!")
+			MsgBox(0 + 16, getLangPhrase("val_038"), getLangPhrase("val_039"))
 			Exit
 		EndIf
 	Else
-		MsgBox(0 + 16, "Ошибка!", "Не найден файл " & @ScriptDir & "\config.json")
+		MsgBox(0 + 16, getLangPhrase("val_038"), getLangPhrase("val_040") & @ScriptDir & "\config.json")
 		Exit
 	EndIf
 EndFunc
@@ -1092,7 +1092,7 @@ Func getGeneralData($general)
 	WEnd
 
 	if ($generalData[0] = "") Then
-		MsgBox(0, "Внимание!", "Неправильный параметр типа Генерала")
+		MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_041"))
 		Return 0
 	Else
 		Return $generalData
@@ -1146,10 +1146,10 @@ Func getAllPassages($passagesDir)
 		Next
 		Return $str
 	ElseIf @error = 1 Then
-		MsgBox(0, "Внимание!!!", "Папка с прохождениями не найдена!")
+		MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_042"))
 		Return 0
 	ElseIf @error = 4 Then
-		MsgBox(0, "Внимание!!!", "Файлы с прохождением не найдены!")
+		MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_043"))
 		Return 0
 	EndIf
 EndFunc
@@ -1180,6 +1180,20 @@ Func Telegram_bot($Message)
 	If $chat_id <> "" And $bot_token <> "" Then
 		ConsoleWrite(InetRead('https://api.telegram.org/bot' & $bot_token & '/sendMessage?chat_id=' & $chat_id & '&text=' & _URIEncode($Message), 0))
 	Else
-		TrayTip("", "Выбран режим трансляции ошибок телеграмм-боту, но не указан Token и/или Chat_ID!", 0)
+		TrayTip("", getLangPhrase("val_044"), 0)
+	EndIf
+EndFunc
+
+Func getLangPhrase($val)
+	Local $langJson, $langValue
+
+	If FileExists(@ScriptDir & "\lang\" & $lang & ".json") Then
+		$langJson = FileRead(@ScriptDir & "\lang\" & $lang & ".json")
+		$langValue = Json_Get(Json_Decode($langJson), ".main[0]." & $val)
+
+		Return $langValue
+	Else
+		MsgBox(0 + 16, getLangPhrase("val_038"), getLangPhrase("val_040") & @ScriptDir & "\lang\" & $lang & ".json")
+		Exit
 	EndIf
 EndFunc

@@ -574,21 +574,21 @@ Func proverkasliva()
 	Local $i = 0, $tx, $ty, $ax, $ay
 	If _imagesearch("media\pismo.bmp", 1, $ax, $ay, 50) = 0 Then Return 0
 	$proverkasliva = NOT $proverkasliva
-	TrayTip("", "Проверка слива запущена", 0)
+	TrayTip("", getLangPhrase("val_045"), 0)
 	While $proverkasliva
 		If (_imagesearcharea("media\friend_atak.bmp", 1, $ax, 0, $ax + 300, $ay + 700, $tx, $ty, 30) = 1) or (_imagesearcharea("media\razgromili.bmp", 1, $ax, 0, $ax + 300, $ay + 700, $tx, $ty, 30) = 1) Then
-			TrayTip("", "Друг сливается...", 0)
+			TrayTip("", getLangPhrase("val_046"), 0)
 			Sleep(12000 * $tormoza)
 			$proverkasliva = NOT $proverkasliva
 		EndIf
 		$i = $i + 2
 		Sleep(2000 * $tormoza)
 		If $i > 6000 Then
-			MsgBox(0, "Внимание!!!", "Мы не смогли обнаружить слив и вышли по таймеру." & @CR & @CR & "После нажатия кнопки ОК бот продолжит работу.")
+			MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_047") & @CR & @CR & getLangPhrase("val_048"))
 			$proverkasliva = NOT $proverkasliva
 		EndIf
 	WEnd
-	TrayTip("", "Проверка слива завершена", 0)
+	TrayTip("", getLangPhrase("val_049"), 0)
 EndFunc
 
 Func proverkasliva2($time, $okclose)
@@ -833,7 +833,7 @@ Func setarmy($kogo, $skolko, $gena)
 		If $i < 9 Then
 			Return 1
 		Else
-			TrayTip("", "Ошибка: Не набрали войска", 0)
+			TrayTip("", getLangPhrase("val_050"), 0)
 			Return 0
 		EndIf
 	Else ; ввод обычных значений
@@ -857,7 +857,7 @@ EndFunc
 Func vvodzifr($skolko)
 	If naborgenarea() = 0 Then Return 0
 	If $skolko = "" Then
-		MsgBox(0, "ОШИБКА", "Количество армии пустое")
+		MsgBox(0, getLangPhrase("val_038"), getLangPhrase("val_051"))
 		Return 0
 	EndIf
 	Local $i = 0, $error = 0, $symbol
@@ -869,7 +869,7 @@ Func vvodzifr($skolko)
 		$i = $i + 1
 	WEnd
 	If $error <> StringLen($skolko) Then
-		MsgBox(0, "ОШИБКА", "Недопустимые символы в количестве войск")
+		MsgBox(0, getLangPhrase("val_038"), getLangPhrase("val_052"))
 		Return 0
 	EndIf
 	$i = 0
@@ -922,7 +922,7 @@ Func okclosegena($yes)
 			Return 1
 		Else
 			zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
-			TrayTip("", "Ошибка: Не назначили войска", 0)
+			TrayTip("", getLangPhrase("val_053"), 0)
 			writelog(" ОШИБКА ")
 			Return 0
 		EndIf
@@ -1723,7 +1723,7 @@ Func set_elitnoy_army($kogo, $skolko, $gena)
 			Return 1
 		Else
 			;writelog("Ошибка " & $i & @CRLF)
-			TrayTip("", "Ошибка: Не набрали войска", 0)
+			TrayTip("", getLangPhrase("val_050"), 0)
 			Return 0
 		EndIf
 	Else
@@ -1780,7 +1780,7 @@ Func okclose_elitnoy_gena($yes)
 			Return 1
 		Else
 			zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
-			TrayTip("", "Ошибка: Не назначили войска", 0)
+			TrayTip("", getLangPhrase("val_053"), 0)
 			writelog(" ОШИБКА ")
 			Return 0
 		EndIf
@@ -2215,9 +2215,9 @@ Global $gx, $gy, $finterrupt = 0, $gpx = 0, $gpy = 0, $vidpoiska = 0, $tippoiska
 		WinActivate(WinWait($windowTitle))
 
 		Local $x = 0, $y = 0
-		TrayTip("", "Почитаем почту...", 0)
+		TrayTip("", getLangPhrase("val_054"), 0)
 		If openpo4ta() = 0 Then
-			TrayTip("", "Не удалось открыть почту! Отменяем!", 0)
+			TrayTip("", getLangPhrase("val_055"), 0)
 			Return 0
 		EndIf
 		While viborpisma($kuda) = 1
@@ -2226,7 +2226,7 @@ Global $gx, $gy, $finterrupt = 0, $gpx = 0, $gpy = 0, $vidpoiska = 0, $tippoiska
 		If _imagesearch("media\close.bmp", 1, $x, $y, 70) = 1 Then
 			MouseMove($x, $y, 10 * $tormoza)
 			MouseClick("left", $x + Random(1, 5, 1), $y + Random(1, 4, 1), 1)
-			TrayTip("", "Мы обработали " & $schet & " писем", 0)
+			TrayTip("", getLangPhrase("val_056") & $schet & getLangPhrase("val_057"), 0)
 			Return 1
 		EndIf
 		Return 0
@@ -2558,7 +2558,7 @@ Func prinatpriglas($kartinka)
     If close_pricla($kartinka) = 0 Then Return 0
 	Sleep(2000 * $tormoza)
 	If openpo4ta() = 0 Then
-		TrayTip("", "Не удалось открыть почту! Отменяем!", 0)
+		TrayTip("", getLangPhrase("val_059"), 0)
 		Return 0
 	EndIf
 	If (_imagesearcharea("media\po4ta_prig.bmp", 1, 200, 50, @DesktopWidth - 200, @DesktopHeight - 50, $gpx, $gpy, 5) = 1) OR (_imagesearcharea("media\po4ta_prig1.bmp", 1, 200, 50, (@DesktopWidth / 2), (@DesktopHeight / 3 * 2), $gpx, $gpy, 5) = 1) Then
