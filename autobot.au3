@@ -17,8 +17,6 @@ If WinExists('[CLASS:AutoIt v3;TITLE:' & @ScriptName & ']') Then
 EndIf
 AutoItWinSetTitle(@ScriptName)
 
-If ProcessExists("Универсальный_бот.exe") Then ProcessClose ("Универсальный_бот.exe")
-
 Global $alarm, $passagesDir, $pass_count, $windowTitle, $sreport = 0
 Global $userDIR = "media\users\"
 Global $lang = ReadINI("main", "language", "ru")

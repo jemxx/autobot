@@ -147,7 +147,6 @@ EndFunc
 Func terminate()
 	TrayTip("", getLangPhrase("val_036"), 0)
 	Sleep(1000 * $tormoza)
-	Run('Универсальный_бот.exe')
 	exit
 EndFunc
 
