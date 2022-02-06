@@ -2550,10 +2550,9 @@ Func otpravkapriglasa_L($kartinka, $nik_kartinka, $letter) ; c вводом 1й 
 EndFunc
 
 Func prinatpriglas($kartinka)
-	Local $hWnd, $ii = 0, $gpx, $gpy, $ax, $ay, $tx, $ty, $search
+	Local $ii = 0, $gpx, $gpy, $ax, $ay, $tx, $ty, $search
 	Opt("WinTitleMatchMode",2)
-	$hWnd = WinWait($WinTitle)
-	WinActivate($hWnd)
+	WinActivate(WinWait($windowTitle))
 ;   Проверяем не остался ли открытым предыдущий прикл и если да, закрываем его
     If close_pricla($kartinka) = 0 Then Return 0
 	Sleep(2000 * $tormoza)
@@ -2589,10 +2588,8 @@ Func prinatpriglas($kartinka)
 EndFunc
 
 Func close_pricla($kartinka)
-	Local $hWnd
 	Opt("WinTitleMatchMode",2)
-	$hWnd = WinWait($WinTitle)
- 	WinActivate($hWnd)
+	WinActivate(WinWait($windowTitle))
 	If haveimage($kartinka, 30) = 0 Then
 		Return 1
 	Else
