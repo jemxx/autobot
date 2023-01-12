@@ -29,7 +29,8 @@
     {"name": "Призрак", "max_capacity": 230, "img_active": "prizrachnii.bmp", "img_noactive": "NOprizrachnii.bmp", "img_sp": "spprizrachnii.bmp"},
     {"name": "Мороз", "max_capacity": 205, "img_active": "Frosty.bmp", "img_noactive": "NoFrosty.bmp", "img_sp": "spFrosty.bmp"},
     {"name": "Одиночка", "max_capacity": 245, "img_active": "odinochka.bmp", "img_noactive": "Noodinochka.bmp", "img_sp": "spodinochka.bmp"},
-    {"name": "Громогласка", "max_capacity": 185, "img_active": "gromoglaska.bmp", "img_noactive": "Nogromoglaska.bmp", "img_sp": "spgromoglaska.bmp"}
+    {"name": "Громогласка", "max_capacity": 185, "img_active": "gromoglaska.bmp", "img_noactive": "Nogromoglaska.bmp", "img_sp": "spgromoglaska.bmp"},
+	{"name": "Чудесная", "max_capacity": 215, "img_active": "Miraculous.bmp", "img_noactive": "NoMiraculous.bmp", "img_sp": "spMiraculous.bmp"}
   ],
   "geologists": [
     {"name": "Золотой", "img_active": "vesel_geolog.bmp"},
@@ -70,7 +71,8 @@
     {"name": "Заботливая", "img_active": "scout19.bmp", "adv_search": 0},
     {"name": "Добродушный", "img_active": "scout20.bmp", "adv_search": 0},
     {"name": "Королевский", "img_active": "scout21.bmp", "adv_search": 0},
-    {"name": "Пират", "img_active": "scout22.bmp", "adv_search": 0}
+    {"name": "Пират", "img_active": "scout22.bmp", "adv_search": 0},
+	{"name": "Пушистый", "img_active": "scout23.bmp", "adv_search": 0}
   ],
   "horseshoes": [
     {"name": "Бронзоподкова", "img_active": "br_podkova.bmp", "tab_name": "usiliteli"},
