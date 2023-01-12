@@ -3,10 +3,10 @@
 #AutoIt3Wrapper_Outfile=Autobot.exe
 #AutoIt3Wrapper_Outfile_x64=Autobot_x64.exe
 #AutoIt3Wrapper_Res_Description=Автобот для The Settlers
-#AutoIt3Wrapper_Res_Fileversion=0.0.24.1
+#AutoIt3Wrapper_Res_Fileversion=0.0.25.0
 #AutoIt3Wrapper_Res_ProductName=Автобот
-#AutoIt3Wrapper_Res_ProductVersion=0.24
-#AutoIt3Wrapper_Res_LegalCopyright=2021 © by github.com/jemxx/autobot
+#AutoIt3Wrapper_Res_ProductVersion=0.25
+#AutoIt3Wrapper_Res_LegalCopyright=2023 © by github.com/jemxx/autobot
 #AutoIt3Wrapper_Res_Language=1049
 #AutoIt3Wrapper_Run_AU3Check=n
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
