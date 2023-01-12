@@ -2560,7 +2560,7 @@ Func prinatpriglas($kartinka)
 		TrayTip("", getLangPhrase("val_059"), 0)
 		Return 0
 	EndIf
-	If (_imagesearcharea("media\po4ta_prig.bmp", 1, 200, 50, @DesktopWidth - 200, @DesktopHeight - 50, $gpx, $gpy, 5) = 1) OR (_imagesearcharea("media\po4ta_prig1.bmp", 1, 200, 50, (@DesktopWidth / 2), (@DesktopHeight / 3 * 2), $gpx, $gpy, 5) = 1) Then
+	If (_imagesearcharea("media\" & $lang & "\po4ta_prig.bmp", 1, 200, 50, @DesktopWidth - 200, @DesktopHeight - 50, $gpx, $gpy, 5) = 1) OR (_imagesearcharea("media\" & $lang & "\po4ta_prig1.bmp", 1, 200, 50, (@DesktopWidth / 2), (@DesktopHeight / 3 * 2), $gpx, $gpy, 5) = 1) Then
  		MouseMove($gpx, $gpy, 10 * $tormoza)
  		MouseClick("left", $gpx + Random(1, 2, 1), $gpy + Random(1, 2, 1), 1)
  		Sleep(2000 * $tormoza)
@@ -2593,9 +2593,8 @@ Func close_pricla($kartinka)
 	If haveimage($kartinka, 30) = 0 Then
 		Return 1
 	Else
-		If findclickoncenterandwaitresult($kartinka, "media\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
-			If findclickoncenterandwaitresult("media\posetit.bmp", "media\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
-				sleepwhile("media\prikl_error.bmp", 30, 30)
+		If findclickoncenterandwaitresult($kartinka, "media\" & $lang & "\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+			If findclickoncenterandwaitresult("media\" & $lang & "\posetit.bmp","media\" & $lang & "\prikl_error.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
 				sleep(500 * $tormoza)
 				zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
 				Return 1
@@ -2603,4 +2602,4 @@ Func close_pricla($kartinka)
 		EndIf
 	EndIf
 	Return 0
-EndFunc
+EndFunc 
