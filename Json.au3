@@ -1,5 +1,5 @@
 ; ============================================================================================================================
-; File		: Json.au3 (2021.11.20)
+; File		: Json.au3 (2018.12.29)
 ; Purpose	: A Non-Strict JavaScript Object Notation (JSON) Parser UDF
 ; Author	: Ward
 ; Dependency: BinaryCall.au3
@@ -384,42 +384,19 @@ EndFunc   ;==>Json_ObjClear
 
 ; Both dot notation and square bracket notation can be supported
 Func Json_Put(ByRef $Var, $Notation, $Data, $CheckExists = False)
-	;Dot-notation and bracket-notation regular expressions
-	Const $REGEX_DOT_WITH_STRING      = '^\.("[^"]+")', _
-	      $REGEX_DOT_WITH_LITERAL     = '^\.([^.[]+)', _
-	      $REGEX_BRACKET_WITH_STRING  = '^\[("[^"]+")]', _
-	      $REGEX_BRACKET_WITH_LITERAL = '^\[([^]]+)]'
-
 	Local $Ret = 0, $Item = "", $Error = 0
 	Local $Match = ""
 
-	;Set regular expression based on identified notation type.
-	;Note: The order below matters. Check "string" notations
-	;before their "literal" counterpart.
-	Local $Regex = ""
-	Select
-		Case StringRegExp($Notation, $REGEX_DOT_WITH_STRING)
-			$Regex = $REGEX_DOT_WITH_STRING
-		Case StringRegExp($Notation, $REGEX_DOT_WITH_LITERAL)
-			$Regex = $REGEX_DOT_WITH_LITERAL
-		Case StringRegExp($Notation, $REGEX_BRACKET_WITH_STRING)
-			$Regex = $REGEX_BRACKET_WITH_STRING
-		Case StringRegExp($Notation, $REGEX_BRACKET_WITH_LITERAL)
-			$Regex = $REGEX_BRACKET_WITH_LITERAL
-		Case Else
-			Return SetError(2, 0, "") ; invalid notation
-	EndSelect
-
-	;Parse leading notation
-	$Match = StringRegExp($Notation, $Regex, 2)
+	$Match = StringRegExp($Notation, "(^\[([^\]]+)\])|(^\.([^\.\[]+))", 3)
 	If IsArray($Match) Then
 		Local $Index
-		If StringLeft($Match[0], 1) = "." Then
-			$Index = String(Json_Decode($Match[1])) ;only string using dot-notation
+		If UBound($Match) = 4 Then
+			$Index = String(Json_Decode($Match[3])) ; only string using dot notation
+			$Notation = StringTrimLeft($Notation, StringLen($Match[2]))
 		Else
 			$Index = Json_Decode($Match[1])
+			$Notation = StringTrimLeft($Notation, StringLen($Match[0]))
 		EndIf
-		$Notation = StringTrimLeft($Notation, StringLen($Match[0])) ;trim leading notation
 
 		If IsString($Index) Then
 			If $CheckExists And (Not Json_IsObject($Var) Or Not Json_ObjExists($Var, $Index)) Then
@@ -464,39 +441,16 @@ EndFunc   ;==>Json_Put
 
 ; Both dot notation and square bracket notation can be supported
 Func Json_Get(ByRef $Var, $Notation)
-	;Dot-notation and bracket-notation regular expressions
-	Const $REGEX_DOT_WITH_STRING      = '^\.("[^"]+")', _
-	      $REGEX_DOT_WITH_LITERAL     = '^\.([^.[]+)', _
-	      $REGEX_BRACKET_WITH_STRING  = '^\[("[^"]+")]', _
-	      $REGEX_BRACKET_WITH_LITERAL = '^\[([^]]+)]'
-
-	;Set regular expression based on identified notation type.
-	;Note: The order below matters. Check "string" notations
-	;before their "literal" counterpart.
-	Local $Regex = ""
-	Select
-		Case StringRegExp($Notation, $REGEX_DOT_WITH_STRING)
-			$Regex = $REGEX_DOT_WITH_STRING
-		Case StringRegExp($Notation, $REGEX_DOT_WITH_LITERAL)
-			$Regex = $REGEX_DOT_WITH_LITERAL
-		Case StringRegExp($Notation, $REGEX_BRACKET_WITH_STRING)
-			$Regex = $REGEX_BRACKET_WITH_STRING
-		Case StringRegExp($Notation, $REGEX_BRACKET_WITH_LITERAL)
-			$Regex = $REGEX_BRACKET_WITH_LITERAL
-		Case Else
-			Return SetError(2, 0, "") ; invalid notation
-	EndSelect
-
-	;Parse leading notation
-	Local $Match = StringRegExp($Notation, $Regex, 2)
+	Local $Match = StringRegExp($Notation, "(^\[([^\]]+)\])|(^\.([^\.\[]+))", 3)
 	If IsArray($Match) Then
 		Local $Index
-		If StringLeft($Match[0], 1) = "." Then
-			$Index = String(Json_Decode($Match[1])) ;only string using dot-notation
+		If UBound($Match) = 4 Then
+			$Index = String(Json_Decode($Match[3])) ; only string using dot notation
+			$Notation = StringTrimLeft($Notation, StringLen($Match[2]))
 		Else
 			$Index = Json_Decode($Match[1])
+			$Notation = StringTrimLeft($Notation, StringLen($Match[0]))
 		EndIf
-		$Notation = StringTrimLeft($Notation, StringLen($Match[0])) ;trim leading notation
 
 		Local $Item
 		If IsString($Index) And Json_IsObject($Var) And Json_ObjExists($Var, $Index) Then
@@ -508,10 +462,10 @@ Func Json_Get(ByRef $Var, $Notation)
 		EndIf
 
 		If Not $Notation Then Return $Item
-
 		Local $Ret = Json_Get($Item, $Notation)
 		Return SetError(@error, 0, $Ret)
 	EndIf
+	Return SetError(2, 0, "") ; invalid notation
 EndFunc   ;==>Json_Get
 
 ; List all JSON keys and their value to the Console
