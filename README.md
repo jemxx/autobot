@@ -9,10 +9,3 @@ Instructions on how to use an alternative client https://mytso.ru/tools/client/p
 
 
 The Unity version is still delayed because nothing is working fine. Please use the alternative client.
-
-
-UPD: 2023 Feb 24
-
-It still works...
-This alternative client should be taken here https://github.com/fedorovvl/tso_client/release
-We put likes there, he does cool things... 
