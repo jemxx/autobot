@@ -10,6 +10,8 @@
 #include <Inet.au3>
 #include <Encoding.au3>
 
+;Global $sfile = "autobot.ini"
+;Global $hfile = FileOpen($sfile)
 Global $zalezi = 12
 Global $tormoza = ReadINI("main", "speed", "1"), $soblaliWariki = 0
 Global $Consol_a_ne_Client = 0
@@ -19,6 +21,7 @@ Global $chasi_gui
 Global $minuti_gui
 Global $sekundi_gui
 Global $sfile2 = "log.txt"
+;Global $hfile2 = FileOpen($sfile2)
 Dim $iPause
 
 #Region общие
@@ -131,28 +134,35 @@ Func drugioff()
 		Return 0
 	EndIf
 EndFunc
+
 Func go5()
-	MouseMove(5, 5, 1 * $tormoza)
+	MouseMove(50, 50, 1 * $tormoza)
 	Sleep(100 * $tormoza)
 EndFunc
+
 Func _pause()
 	writelog("===============pause" & @CRLF)
 	$ipause = NOT $ipause
-	TrayTip("", getLangPhrase("val_034") & $current_stroka, 0)
+	GUICtrlSetData($lbl_wait, "Пауза. Строка " & $current_stroka)
+	If $ipause Then
+		TrayTip("", "Пауза. Строка " & $current_stroka, 0)
+	Else
+		TrayTip("", "Убрали паузу...", 0)
+	EndIf
 	While $ipause
 		Sleep(250 * $tormoza)
 	WEnd
-	TrayTip("", getLangPhrase("val_035"), 0)
 EndFunc
+
 Func terminate()
-	TrayTip("", getLangPhrase("val_036"), 0)
+	TrayTip("", "Закрываемся...", 0)
 	Sleep(1000 * $tormoza)
+	Run('Универсальный_бот.exe')
 	exit
 EndFunc
 
 Func openmashtab()
 	Sleep(100 * $tormoza)
-	Opt("WinTitleMatchMode",2)
 	WinActivate(WinWait($windowTitle))
 	writelog("openmashtab" & @CRLF)
 	MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
@@ -171,7 +181,7 @@ EndFunc
 
 Func interrupt()
 	$finterrupt = 1
-	TrayTip("", getLangPhrase("val_037"), 0)
+	TrayTip("", "Прерываем все запущенные процессы", 0)
 EndFunc
 
 Func haveimage($img, $tolerance)
@@ -385,7 +395,6 @@ EndFunc
 Func collectwarikiatprikl($gde)
 	Local $ciklov = 0
 	;TrayTip("", "Собираем шарики ... ", 0)
-	Opt("WinTitleMatchMode",2)
 	WinActivate(WinWait($windowTitle))
 	;Return 1
 	While (haveimage("media\warik.bmp", 50) = 1) AND ($ciklov < 50)
@@ -402,9 +411,9 @@ EndFunc
 Func openzvezda()
 	Return openzvezdaP()
 EndFunc
+
 Func openzvezdaP()
 	;writelog("openzvezda | ")
-	Opt("WinTitleMatchMode",2)
 	WinActivate(WinWait($windowTitle))
 
 	Local $ty = 0, $tx = 0, $search = 0
@@ -435,6 +444,73 @@ Func openzvezdaP()
 		Return 1
 	Else
 		;writelog("Неудачно " & $htimer & @CRLF)
+		Return 0
+	EndIf
+EndFunc
+
+;~ Func flt_zvezda($flt_str, $isclose)
+;~ 	Local $ty = 0, $tx = 0, $search = 0
+;~ 	If $flt_str <> "" Then
+;~ 		ClipPut($flt_str)
+;~ 	Else
+;~ 		ClipPut("{DEL}")
+;~ 	EndIf
+
+;~  	If openzvezda() = 1 then
+;~ 		$search = _imagesearch("media\zvezda_is_displayed.bmp", 1, $tx, $ty, 70)
+;~ 		MouseMove($tx - 100, $ty, 10 * $tormoza)
+;~ 		MouseClick("left", $tx - 100, $ty, 2)
+;~ 		Local $sData = ClipGet()
+;~ 		Send($sData)
+;~ 	    sleep(1000 * $tormoza)
+
+;~ 		If $isclose = 1 Then
+;~ 			zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+;~ 		EndIf
+
+;~ 		Return 1
+;~ 	Else
+;~ 		Return 0
+;~ 	EndIf
+;~ EndFunc
+
+Func flt_zvezda($flt_str, $isclose)
+	Local $hWnd, $ty = 0, $tx = 0, $search = 0, $def_layout, $let1
+    $hWnd = WinWait($windowTitle)
+	WinActivate($hWnd)
+ 	If openzvezda() = 1 then
+		$search = _imagesearch("media\zvezda_is_displayed.bmp", 1, $tx, $ty, 70)
+		MouseMove($tx - 100, $ty, 10 * $tormoza)
+		MouseClick("left", $tx - 100, $ty, 2)
+		If $flt_str <> "" Then
+ 			local $i1 = 0
+ 			For $i1 = 1 to StringLen($flt_str)
+ 				$let1 = StringMid($flt_str,$i1,1)
+ 				$def_layout = _WinAPI_GetKeyboardLayout($hWnd) ; запомнили раскладку
+				If $Let1 = "|" Then
+					_WinAPI_SetKeyboardLayout($hWnd,0x0409)
+					Send("|")
+				Else
+					If (StringRegExp($Let1,"[a-z]") = 1) and ($def_layout = 0x04190419) Then ; буква латинская, а раскладка RU
+						_WinAPI_SetKeyboardLayout($hWnd,0x0409)
+					ElseIf (StringRegExp($Let1,"[а-яё]") = 1) and ($def_layout = 0x04090409) Then ; буква русская, а раскладка EN
+						_WinAPI_SetKeyboardLayout($hWnd,0x0419)
+					EndIf
+					Send($Let1)
+				EndIf
+ 				sleep(1000 * $tormoza)
+ 			Next
+		Else
+			Send("{DEL}")
+			sleep(1000 * $tormoza)
+		EndIf
+
+		If $isclose = 1 Then
+			zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
+		EndIf
+
+		Return 1
+	Else
 		Return 0
 	EndIf
 EndFunc
@@ -541,10 +617,14 @@ Local $ty = 0, $tx = 0, $search = 0
 	EndSwitch
 EndFunc
 
+global $po4ta_area_x1, $po4ta_area_y1, $po4ta_area_x2, $po4ta_area_y2
+
 Func openpo4ta()
-writelog("Почта ")
+;	writelog("Почта ")
 	Local $ty = 0, $tx = 0, $tcount = 0, $search = 0
+;~	Opt("WinTitleMatchMode",2)
 	While (_imagesearch("media\po4ta_is_displayed.bmp", 1, $tx, $ty, 30) <> 1) AND ($tcount < 50)
+		go5()
 		Sleep(100 * $tormoza)
 		$search = _imagesearch("media\po4ta.bmp", 1, $tx, $ty, 5)
 		If $search = 1 Then
@@ -556,18 +636,89 @@ writelog("Почта ")
 		sleepwhile("media\po4ta_is_displayed.bmp", 30, 15)
 		$tcount = $tcount + 1
 	WEnd
+
 	If $tcount < 50 Then
-		writelog("Успех " & $tcount & @CRLF)
+		;writelog("Успех " & $tcount & @CRLF)
+		$po4ta_area_x1 = $tx - 275
+		$po4ta_area_y1 = $ty
+		$po4ta_area_x2 = $tx + 300
+		$po4ta_area_y2 = $ty + 600
+		TrayTip("", "Открыли почту", 0)
 		Return 1
 	EndIf
-	writelog("Неудачно " & $tcount & @CRLF)
+	;writelog("Неудачно " & $tcount & @CRLF)
 	Return 0
 EndFunc
+
+#comments-start
+func ProverkaKlienta()
+   local $tx = 0, $ty = 0, $var = 0, $search = 0, $i = 0
+   $search = _imagesearch("media\bik.bmp", 1, $tx, $ty, 80)
+   $var = PixelGetColor($tx + 50, $ty + 175)
+   if $search = 1 then
+	   if $var = 16763904 then
+		   $Consol_a_ne_Client = 0
+		   Return 1
+	   elseif $var = 16574876 then
+		   $Consol_a_ne_Client = 0
+		   Return 1
+	   else
+		   if registerALL("ALL") = 1 then
+			   Return 1
+		   endif
+		   Return 0
+	   endif
+   endif
+   $search = _imagesearch("media\seliterka.bmp", 1, $tx, $ty, 20)
+   $var = PixelGetColor($tx, $ty + 229)
+
+   if $search = 1 then
+	   if $var = 16763904 then
+		   $Consol_a_ne_Client = 1
+		   Return 1
+	   elseif $var = 16574876 then
+		   $Consol_a_ne_Client = 1
+		   Return 1
+	   else
+		   PodobtatRazmer(72)
+		   if registerALL("ALL") = 1 then
+			   Return 1
+		   endif
+		   Return 0
+	   endif
+   else
+	   PodobtatRazmer(72)
+	   if registerALL("ALL") = 1 then
+		   Return 1
+	   endif
+	   Return 0
+	endif
+
+   PodobtatRazmer(72)
+   if registerALL("ALL") = 1 then
+	   Return 1
+	endif
+
+   Return 0
+endfunc
+
+func RoditelskayaKategoriya()
+   local $PutKSkriptu = 0, $DelimSleshi = 0, $KolwoSleshey = 0, $PutKRoditelskoyKategorii = "", $i = 1
+   $PutKSkriptu = @ScriptFullPath
+   $DelimSleshi = StringSplit($PutKSkriptu, "\")
+   $KolwoSleshey = UBound($DelimSleshi, 1)
+   while $i < $KolwoSleshey - 2
+	   $PutKRoditelskoyKategorii = $PutKRoditelskoyKategorii & $DelimSleshi[$i] & "/"
+	   $i = $i + 1
+   wend
+   ;MsgBox(0, "Отлично", $PutKRoditelskoyKategorii)
+   Return $PutKRoditelskoyKategorii
+endfunc
+#comments-end
 #EndRegion
 
 func opensvadba()
 	Local $i=0
-	Opt("WinTitleMatchMode",2)
 	WinActivate(WinWait($windowTitle))
 	MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
 	MouseDown("left")
@@ -650,7 +801,6 @@ endfunc
 
 func openpanda()
 	Local $i=0
-	Opt("WinTitleMatchMode",2)
 	WinActivate(WinWait($windowTitle))
 	MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
 	MouseDown("left")
@@ -769,7 +919,6 @@ endfunc
 
 func opentitka($yes)
 	Local $i=0
-	Opt("WinTitleMatchMode",2)
 	WinActivate(WinWait($windowTitle))
 	MouseMove(@DesktopWidth/2, @DesktopHeight/2, 10 * $tormoza)
 	MouseDown("left")
@@ -847,7 +996,6 @@ endif
 endfunc
 
 func CloseTitka()
-   Opt("WinTitleMatchMode",2)
    WinActivate(WinWait($windowTitle))
    Sleep(5000 * $tormoza)
    ZmemSmennuyuKartinkuIZdem("media\pismo.bmp", 30, "media\pismo_.bmp", 30, "media\Close.bmp", 30)
@@ -861,9 +1009,28 @@ func CloseTitka()
    Return 1
 endfunc
 
+#comments-start
+func MyTimer()
+   $chasi = GUICtrlRead($chasi_gui)
+   $minuti = GUICtrlRead($minuti_gui)
+   $sekundi = GUICtrlRead($sekundi_gui)
+   $taimer = $sekundi + $minuti * 60 + $chasi * 3600
+   Sleep(1000 * $taimer)
+endfunc
+#comments-end
+
 Func ReadINI($section, $key, $default)
 	Return BinaryToString(IniRead("autobot.ini", $section, $key, $default), 4)
 EndFunc
+
+#comments-start
+func Read_ini($stroka)
+	$itog = FileReadLine($hfile, $stroka)
+	$sResult = StringInStr($itog, "=")
+		$sText = StringMid($itog, $sResult + 1)
+	Return $sText
+endfunc
+#comments-end
 
 Func sleepwhile2($img, $time, $flag)
 	Local $i = 0, $tolerance = 30, $fl_win = 0
@@ -910,6 +1077,14 @@ func writelog($sms)
    FileWrite($sfile2, $sms)
 endfunc
 
+#comments-start
+func deleteX()
+   while 1
+	   ZmemSmennuyuKartinku("media\x.bmp", 30, "media\x_.bmp", 30)
+   wend
+endfunc
+#comments-end
+
 Func Register()
 if $register = 1 then Return 1
 ;Убираем IF если нужно в платную версию
@@ -925,7 +1100,6 @@ Local $ax=0
 Local $ay=0, $temp="", $i=0, $rezult
 Local $User=_Encoding_URLToHex(@UserProfileDir)
 
-Opt("WinTitleMatchMode",2)
 WinActivate(WinWait($windowTitle))
 if _imagesearcharea("media\pismo.bmp", 1, 50, 50, 300, 400, $ax, $ay, 30) = 0 then Return 0
 $ax = $ax - 115
@@ -966,7 +1140,6 @@ Local $ax=0
 Local $ay=0, $temp=0
 Local $User=_Encoding_URLToHex(@UserProfileDir)
 
-Opt("WinTitleMatchMode",2)
 WinActivate(WinWait($windowTitle))
 if StringLen($Zapros) = 545 then
 	_INetGetSource("http://mysettlers.ru/statistik.php?key="&$Zapros&"&user="&$User)
@@ -1020,11 +1193,11 @@ Func getDataGroupSpecialists($type)
 		If IsArray($specialists) Then
 			Return $specialists
 		Else
-			MsgBox(0 + 16, getLangPhrase("val_038"), getLangPhrase("val_039"))
+			MsgBox(0 + 16, "Ошибка!", "Не удалось получить данные специалистов!")
 			Exit
 		EndIf
 	Else
-		MsgBox(0 + 16, getLangPhrase("val_038"), getLangPhrase("val_040") & @ScriptDir & "\config.json")
+		MsgBox(0 + 16, "Ошибка!", "Не найден файл " & @ScriptDir & "\config.json")
 		Exit
 	EndIf
 EndFunc
@@ -1091,7 +1264,7 @@ Func getGeneralData($general)
 	WEnd
 
 	if ($generalData[0] = "") Then
-		MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_041"))
+		MsgBox(0, "Внимание!", "Неправильный параметр типа Генерала")
 		Return 0
 	Else
 		Return $generalData
@@ -1101,8 +1274,8 @@ EndFunc
 Func getFullGeneralImg($max)
 	Local $fullGenaImg = 0
 
-	If FileExists("media\" & $lang & "\army_values\" & $max & ".bmp") Then
-		$fullGenaImg = "media\" & $lang & "\army_values\" & $max & ".bmp"
+	If FileExists("media\army_values\" & $max & ".bmp") Then
+		$fullGenaImg = "media\army_values\" & $max & ".bmp"
 	EndIf
 
 	Return $fullGenaImg
@@ -1145,10 +1318,10 @@ Func getAllPassages($passagesDir)
 		Next
 		Return $str
 	ElseIf @error = 1 Then
-		MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_042"))
+		MsgBox(0, "Внимание!!!", "Папка с прохождениями не найдена!")
 		Return 0
 	ElseIf @error = 4 Then
-		MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_043"))
+		MsgBox(0, "Внимание!!!", "Файлы с прохождением не найдены!")
 		Return 0
 	EndIf
 EndFunc
@@ -1177,22 +1350,18 @@ Func Telegram_bot($Message)
 	Local $chat_id = ReadINI("telegram", "telegram_chat_id", "")
 
 	If $chat_id <> "" And $bot_token <> "" Then
-		ConsoleWrite(InetRead('https://api.telegram.org/bot' & $bot_token & '/sendMessage?chat_id=' & $chat_id & '&text=' & _URIEncode($Message), 0))
+		local $sGet = InetRead('https://api.telegram.org/bot' & $bot_token & '/sendMessage?chat_id=' & $chat_id & '&text=' & _URIEncode($Message), 1)
 	Else
-		TrayTip("", getLangPhrase("val_044"), 0)
+		TrayTip("", "Выбран режим трансляции ошибок телеграмм-боту, но не указан Token и/или Chat_ID!", 0)
 	EndIf
 EndFunc
 
-Func getLangPhrase($val)
-	Local $langJson, $langValue
-
-	If FileExists(@ScriptDir & "\lang\" & $lang & ".json") Then
-		$langJson = FileRead(@ScriptDir & "\lang\" & $lang & ".json")
-		$langValue = Json_Get(Json_Decode($langJson), ".main[0]." & $val)
-
-		Return $langValue
-	Else
-		MsgBox(0 + 16, getLangPhrase("val_038"), getLangPhrase("val_040") & @ScriptDir & "\lang\" & $lang & ".json")
-		Exit
-	EndIf
-EndFunc
+;~ Func Webhook($WebHookId, $Message)
+;~	   Local $WebHookId = ReadINI("telegram", "DSWebHookID", "")
+;~     Local $Url = "https://discordapp.com/api/webhooks/" & $WebHookId
+;~     Local $oHTTP = ObjCreate("winhttp.winhttprequest.5.1")
+;~     Local $Packet = '{"content": "' & $Message & '"}'
+;~     $oHTTP.open('POST',$Url)
+;~     $oHTTP.setRequestHeader("Content-Type","application/json")
+;~     $oHTTP.send($Packet)
+;~ EndFunc

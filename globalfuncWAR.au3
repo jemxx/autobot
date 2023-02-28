@@ -1,6 +1,5 @@
-#include <math.au3>
-
 Dim $proverkasliva
+Global $sectorGraph =  ReadINI("main", "sector_graphics", "70")
 
 Func podgotovka()
 	chatoff()
@@ -21,7 +20,6 @@ Func podgotovka()
 EndFunc
 
 Func find_sektor($img, $k_x, $k_y, $else_x, $else_y)
-	Opt("WinTitleMatchMode",2)
 	WinActivate(WinWait($windowTitle))
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0, $ax = 0, $ay = 0, $search2 = 0, $ttx = 0, $tty = 0
 	$search2 = _imagesearch("media\pismo.bmp", 1, $ax, $ay, 50)
@@ -190,6 +188,317 @@ Func find_sektor($img, $k_x, $k_y, $else_x, $else_y)
 	Return 0
 EndFunc
 
+#comments-start
+Func perestanovka_geni_iz_zvezdi($general, $nomergenerala, $voisko, $tip_voiska, $img, $k_x, $k_y, $else_x, $else_y, $kudax, $kuday)
+	Local $tx = 0, $ty = 0, $i = 0
+	$gluksnaboromarmii = 0
+	While $gluksnaboromarmii <> 1
+		writelog($gluksnaboromarmii)
+		If openzvezdap() = 1 Then
+			While _imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
+				generali($general, $nomergenerala)
+				Sleep(1000 * $tormoza)
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
+			WEnd
+			If $voisko = 0 Then
+				If $tip_voiska = 0 Then
+					smena_armii(0)
+					applyarmy(0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0)
+				ElseIf $tip_voiska = 1 Then
+					smena_armii(1)
+					apply_elitnoy_army(0, 0, 0, 0, 0, 0, 0, 4, 0)
+				EndIf
+			ElseIf $voisko = 1 Then
+				If $tip_voiska = 0 Then
+					smena_armii(0)
+					applyarmy(1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0)
+				ElseIf $tip_voiska = 1 Then
+					smena_armii(1)
+					apply_elitnoy_army(0, 0, 0, 0, 0, 1, 0, 4, 0)
+				EndIf
+			ElseIf $voisko = 2 Then
+				$gluksnaboromarmii = 1
+			EndIf
+		EndIf
+	WEnd
+	$gluksnaboromarmii = 0
+	zmemsmennuyukartinku("media\truba.bmp", 50, "media\truba_.bmp", 50)
+	If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 1 Then
+		$kudax = $tochka_sektora_x + read_ini($kudax)
+		$kuday = $tochka_sektora_y + read_ini($kuday)
+		While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 10)
+			MouseMove($kudax, $kuday, 10 * $tormoza)
+			Sleep(200 * $tormoza)
+			MouseClick("left", $kudax, $kuday, 1)
+			go5()
+			Sleep(200 * $tormoza)
+			$i = $i + 1
+		WEnd
+		If $i = 10 Then
+			Return 0
+		Else
+			Return 1
+		EndIf
+	EndIf
+	Return 0
+EndFunc
+
+Func movegenapxp($otkudax, $otkuday, $img, $k_x, $k_y, $else_x, $else_y, $kudax, $kuday, $img2, $k_x2, $k_y2, $else_x2, $else_y2)
+	Local $tx = 0, $ty = 0, $search = 0, $i = 0
+	If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 1 Then
+		$otkudax = $tochka_sektora_x + read_ini($otkudax)
+		$otkuday = $tochka_sektora_y + read_ini($otkuday)
+		While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0) AND ($i < 10)
+			MouseMove($otkudax, $otkuday, 10 * $tormoza)
+			Sleep(500 * $tormoza)
+			MouseClick("left", $otkudax, $otkuday, 1)
+			go5()
+			sleepwhile("media\zadacha_geni.bmp", 30, 10)
+			$i = $i + 1
+		WEnd
+		If $i = 10 Then
+			Return 0
+		EndIf
+		zmemsmennuyukartinku("media\truba.bmp", 50, "media\truba_.bmp", 50)
+		$i = 0
+		If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 1 Then
+			$kudax = $tochka_sektora_x + read_ini($kudax)
+			$kuday = $tochka_sektora_y + read_ini($kuday)
+			sleepwhile("media\Otmena.bmp", 30, 10)
+			While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 10)
+				MouseMove($kudax, $kuday, 10 * $tormoza)
+				Sleep(500 * $tormoza)
+				MouseClick("left", $kudax, $kuday, 1)
+				go5()
+				Sleep(500 * $tormoza)
+				$i = $i + 1
+			WEnd
+			If $i = 10 Then
+				Return 0
+			Else
+				Return 1
+			EndIf
+		EndIf
+	EndIf
+	Return 0
+EndFunc
+
+Func atakgenapxp($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $kudax, $kuday)
+	Local $tx = 0, $ty = 0, $search = 0, $i = 0
+	If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+	$otkudax = $tochka_sektora_x + read_ini($otkudax)
+	$otkuday = $tochka_sektora_y + read_ini($otkuday)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 6)
+		MouseMove($otkudax, $otkuday, 10 * $tormoza)
+		Sleep(500 * $tormoza)
+		MouseClick("left", $otkudax, $otkuday, 1)
+		sleepwhile("media\zadacha_geni.bmp", 30, 5)
+		go5()
+		$i = $i + 1
+	WEnd
+	If $i = 6 Then
+		Return 0
+	EndIf
+	zmemsmennuyukartinku("media\Ataka.bmp", 30, "media\Ataka_.bmp", 30)
+	$i = 0
+	If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+	$kudax = $tochka_sektora_x + read_ini($kudax)
+	$kuday = $tochka_sektora_y + read_ini($kuday)
+	sleepwhile("media\Otmena.bmp", 30, 10)
+	While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 6)
+		MouseMove($kudax, $kuday, 10 * $tormoza)
+		Sleep(500 * $tormoza)
+		MouseClick("left", $kudax, $kuday, 1)
+		Sleep(500 * $tormoza)
+		go5()
+		$i = $i + 1
+	WEnd
+	If $i = 6 Then
+		Return 0
+	Else
+		Return 1
+	EndIf
+	Return 0
+EndFunc
+
+Func atakalageraotkritimgenoy($kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
+	Local $tx = 0, $ty = 0, $search = 0, $i = 0
+	zmemsmennuyukartinku("media\Ataka.bmp", 30, "media\Ataka_.bmp", 30)
+	$i = 0
+	If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+	$kudax = $tochka_sektora_x + read_ini($kudax)
+	$kuday = $tochka_sektora_y + read_ini($kuday)
+	sleepwhile("media\Otmena.bmp", 30, 10)
+	While (_imagesearch("media\Otmena.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 6)
+		MouseMove($kudax, $kuday, 10 * $tormoza)
+		Sleep(500 * $tormoza)
+		MouseClick("left", $kudax, $kuday, 1)
+		go5()
+		Sleep(500 * $tormoza)
+		$i = $i + 1
+	WEnd
+	If $i = 6 Then
+		Return 0
+	Else
+		Return 1
+	EndIf
+EndFunc
+
+Func atakagenoyizzvezdi_elita($general, $nomergenerala, $mo, $ks, $strelki, $sb, $rizari, $km, $mechniki, $gena, $kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
+	Local $tx = 0, $ty = 0, $search = 0, $i = 0
+	$gluksnaboromarmii = 0
+	While $gluksnaboromarmii <> 1
+		If openzvezdap() = 1 Then
+			While _imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
+				generali($general, $nomergenerala)
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
+			WEnd
+			If apply_elitnoy_army($mo, $ks, $strelki, $sb, $rizari, $km, $mechniki, $gena, 0) = 1 Then
+				$gluksnaboromarmii = 0
+				Return atakalageraotkritimgenoy($kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
+			Else
+				Return 0
+			EndIf
+		EndIf
+	WEnd
+	$gluksnaboromarmii = 0
+EndFunc
+
+Func atakagenoyizzvezdi($general, $nomergenerala, $nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena, $kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
+	Local $tx = 0, $ty = 0, $search = 0, $i = 0
+	$gluksnaboromarmii = 0
+	While $gluksnaboromarmii <> 1
+		If openzvezdap() = 1 Then
+			While _imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
+				generali($general, $nomergenerala)
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
+			WEnd
+			If applyarmy($nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena, 0) = 1 Then
+				$gluksnaboromarmii = 0
+				Return atakalageraotkritimgenoy($kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
+			Else
+				Return 0
+			EndIf
+		EndIf
+	WEnd
+	$gluksnaboromarmii = 0
+EndFunc
+
+Func atakagenoyizzvezdi_1n($general, $nomergenerala, $nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena, $kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
+	Local $tx = 0, $ty = 0, $search = 0, $i = 0
+	$gluksnaboromarmii = 0
+	While $gluksnaboromarmii <> 1
+		If openzvezdap() = 1 Then
+			While _imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
+				generali($general, $nomergenerala)
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
+			WEnd
+			If haveimage("media\army_values\1.bmp", 20) = 1 Then
+				$gluksnaboromarmii = 0
+				Return atakalageraotkritimgenoy($kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
+			ElseIf applyarmy($nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena, 0) = 1 Then
+				$gluksnaboromarmii = 0
+				Return atakalageraotkritimgenoy($kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
+			Else
+				Return 0
+			EndIf
+		EndIf
+	WEnd
+	$gluksnaboromarmii = 0
+EndFunc
+
+Func viborgenipodataku_elita($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $mo, $ks, $strelki, $sb, $rizari, $km, $mechniki, $gena)
+	Local $tx = 0, $ty = 0, $search = 0, $i = 0
+	If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+	go5()
+	$otkudax = $tochka_sektora_x + read_ini($otkudax)
+	$otkuday = $tochka_sektora_y + read_ini($otkuday)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+		MouseMove($otkudax, $otkuday, 10 * $tormoza)
+		Sleep(200 * $tormoza)
+		MouseClick("left", $otkudax, $otkuday, 1)
+		go5()
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
+		$i = $i + 1
+	WEnd
+	If $i = 10 Then
+		Return 0
+	Else
+		Return apply_elitnoy_army($mo, $ks, $strelki, $sb, $rizari, $km, $mechniki, $gena, 1)
+	EndIf
+	Return 0
+EndFunc
+
+Func viborgenipodataku($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena)
+	Local $tx = 0, $ty = 0, $search = 0, $i = 0
+	If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+	go5()
+	$otkudax = $tochka_sektora_x + read_ini($otkudax)
+	$otkuday = $tochka_sektora_y + read_ini($otkuday)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+		MouseMove($otkudax, $otkuday, 10 * $tormoza)
+		Sleep(200 * $tormoza)
+		MouseClick("left", $otkudax, $otkuday, 1)
+		go5()
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
+		$i = $i + 1
+	WEnd
+	If $i = 10 Then
+		Return 0
+	Else
+		Return applyarmy($nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena, 1)
+	EndIf
+	Return 0
+EndFunc
+
+Func viborgenipodataku_1n($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena)
+	Local $tx = 0, $ty = 0, $search = 0, $i = 0
+	If find_sektor($img, $k_x, $k_y, $else_x, $else_y) = 0 Then Return 0
+	go5()
+	$otkudax = $tochka_sektora_x + read_ini($otkudax)
+	$otkuday = $tochka_sektora_y + read_ini($otkuday)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+		MouseMove($otkudax, $otkuday, 10 * $tormoza)
+		Sleep(200 * $tormoza)
+		MouseClick("left", $otkudax, $otkuday, 1)
+		go5()
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
+		$i = $i + 1
+	WEnd
+	If $i = 10 Then
+		Return 0
+	ElseIf haveimage("media\army_values\1.bmp", 20) = 1 Then
+		zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
+		Return 1
+	Else
+		Return applyarmy($nubi, $menti, $soldati, $elita, $luki, $dluki, $arbi, $koni, $puhi, $gena, 1)
+	EndIf
+	Return 0
+EndFunc
+
+Func estligena($img)
+	If openzvezdap() = 1 Then
+		If haveimage($img, 30) = 1 Then
+			Return 1
+		Else
+			Return 0
+		EndIf
+	EndIf
+	Return 0
+EndFunc
+
+Func proverka_1n($img, $yes)
+	If $yes = 1 Then
+		If haveimage($img, 20) = 1 Then
+			Return 1
+		Else
+			Return 0
+		EndIf
+	EndIf
+	Return 0
+EndFunc
+#comments-end
+
 Func atakalageraotkritimgenoynoini($kudax, $kuday, $img, $k_x, $k_y, $else_x, $else_y)
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
 	zmemsmennuyukartinku("media\Ataka.bmp", 30, "media\Ataka_.bmp", 30)
@@ -283,11 +592,11 @@ Func atakgenapxpnoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $k
 	EndIf
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
-	While (_imagesearch("media\" & $lang & "\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 6)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 6)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(500 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
-		sleepwhile("media\" & $lang & "\zadacha_geni.bmp", 30, 5)
+		sleepwhile("media\zadacha_geni.bmp", 30, 5)
 		go5()
 		$i = $i + 1
 	WEnd
@@ -338,10 +647,10 @@ Func perestanovka_geni_iz_zvezdinoini($general, $nomergenerala, $voisko, $tip_vo
 		writelog($gluksnaboromarmii)
 		If openzvezdap() = 1 Then
 			If selecttabatzvezda("specialisti", 1) = 0 Then Return 0
-			While _imagesearch("media\" & $lang & "\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
+			While _imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0
 				generali($general, $nomergenerala)
 				Sleep(1000 * $tormoza)
-				sleepwhile("media\" & $lang & "\zadacha_geni.bmp", 30, 10)
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
 			WEnd
 			If $voisko = 0 Then
 				If $tip_voiska = 0 Then
@@ -422,12 +731,12 @@ Func viborgenipodatakunoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkud
 	go5()
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
-	While (_imagesearch("media\" & $lang & "\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(200 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
 		go5()
-		sleepwhile("media\" & $lang & "\zadacha_geni.bmp", 30, 10)
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
 		$i = $i + 1
 	WEnd
 	If $i = 10 Then
@@ -459,12 +768,12 @@ Func viborgenipodataku_elitanoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, 
 	go5()
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
-	While (_imagesearch("media\" & $lang & "\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(200 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
 		go5()
-		sleepwhile("media\" & $lang & "\zadacha_geni.bmp", 30, 10)
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
 		$i = $i + 1
 	WEnd
 	If $i = 10 Then
@@ -496,17 +805,17 @@ Func viborgenipodataku_1nnoini($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $ot
 	go5()
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
-	While (_imagesearch("media\" & $lang & "\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 10)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(200 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
 		go5()
-		sleepwhile("media\" & $lang & "\zadacha_geni.bmp", 30, 10)
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
 		$i = $i + 1
 	WEnd
 	If $i = 10 Then
 		Return 0
-	ElseIf haveimage("media\" & $lang & "\army_values\1.bmp", 20) = 1 Then
+	ElseIf haveimage("media\army_values\1.bmp", 20) = 1 Then
 		zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
 		Return 1
 	Else
@@ -521,8 +830,8 @@ Func open_usilok($tb_name, $img_usilka, $currentbuf)
 		If haveimage("media\Otmena.bmp", 50) = 1 Then Return 1
 	EndIf
 	If openzvezdap() = 1 Then
-		If selecttabatzvezda($tb_name, 1) = 1 Then
-			While (haveimage($img_usilka, 50) = 0) AND ($i < 5)
+		If selecttabatzvezda($tb_name, 0) = 1 Then
+			While (haveimage($img_usilka, 50) = 0) AND ($i < 25)
 				zvezdamovepolzunokdown(0)
 				Sleep(Random(500, 1000, 1) * $tormoza)
 				$i = $i + 1
@@ -574,21 +883,21 @@ Func proverkasliva()
 	Local $i = 0, $tx, $ty, $ax, $ay
 	If _imagesearch("media\pismo.bmp", 1, $ax, $ay, 50) = 0 Then Return 0
 	$proverkasliva = NOT $proverkasliva
-	TrayTip("", getLangPhrase("val_045"), 0)
+	TrayTip("", "Проверка слива запущена", 0)
 	While $proverkasliva
 		If (_imagesearcharea("media\friend_atak.bmp", 1, $ax, 0, $ax + 300, $ay + 700, $tx, $ty, 30) = 1) or (_imagesearcharea("media\razgromili.bmp", 1, $ax, 0, $ax + 300, $ay + 700, $tx, $ty, 30) = 1) Then
-			TrayTip("", getLangPhrase("val_046"), 0)
+			TrayTip("", "Друг сливается...", 0)
 			Sleep(12000 * $tormoza)
 			$proverkasliva = NOT $proverkasliva
 		EndIf
 		$i = $i + 2
 		Sleep(2000 * $tormoza)
 		If $i > 6000 Then
-			MsgBox(0, getLangPhrase("val_014"), getLangPhrase("val_047") & @CR & @CR & getLangPhrase("val_048"))
+			MsgBox(0, "Внимание!!!", "Мы не смогли обнаружить слив и вышли по таймеру." & @CR & @CR & "После нажатия кнопки ОК бот продолжит работу.")
 			$proverkasliva = NOT $proverkasliva
 		EndIf
 	WEnd
-	TrayTip("", getLangPhrase("val_049"), 0)
+	TrayTip("", "Проверка слива завершена", 0)
 EndFunc
 
 Func proverkasliva2($time, $okclose)
@@ -633,12 +942,12 @@ Func movegenapxpnoini($otkudax, $otkuday, $img, $k_x, $k_y, $else_x, $else_y, $k
 	EndIf
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
-	While (_imagesearch("media\" & $lang & "\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0) AND ($i < 10)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 30) = 0) AND ($i < 10)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(500 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
 		go5()
-		sleepwhile("media\" & $lang & "\zadacha_geni.bmp", 30, 10)
+		sleepwhile("media\zadacha_geni.bmp", 30, 10)
 		$i = $i + 1
 	WEnd
 	If $i = 10 Then
@@ -683,12 +992,12 @@ EndFunc
 
 Func otpravitgenu($general, $nomergenerala)
 	openzvezdap()
-	While haveimage("media\" & $lang & "\zadacha_geni.bmp", 30) = 0
+	While haveimage("media\zadacha_geni.bmp", 30) = 0
 		If openzvezdap() = 1 Then
 			If selecttabatzvezda("specialisti", 1) = 1 Then
 				generali($general, $nomergenerala)
 				Sleep(500 * $tormoza)
-				sleepwhile("media\" & $lang & "\zadacha_geni.bmp", 30, 10)
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
 			EndIf
 		EndIf
 	WEnd
@@ -697,6 +1006,29 @@ Func otpravitgenu($general, $nomergenerala)
 	zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
 	Return 1
 EndFunc
+
+#comments-start
+Func openpriglosdruga($prikl, $imya)
+	While 1
+		If findclickoncenterandwaitresult($userDIR & $prikl, "media\priglos.bmp", 30, 30, 5, 10, 1, -300, -300) = 1 Then
+			If findclickoncenterandwaitresult("media\priglos.bmp", "media\igroki_in_prikla.bmp", 30, 30, 10, 10, 1, -300, -300) = 1 Then
+				If findclickoncenterandwaitresult("media\plus_igrok.bmp", "media\okdrug_off.bmp", 30, 30, 10, 10, 1, -300, -300) = 1 Then
+					Return 1
+				Else
+					Return 0
+				EndIf
+			Else
+				Return 0
+			EndIf
+		Else
+			Return 0
+		EndIf
+	WEnd
+EndFunc
+
+Func priglosdruga($prikl, $imya)
+EndFunc
+#comments-end
 
 Func stoitligena($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $fl_active)
 	Local $tx = 0, $ty = 0, $search = 0, $i = 0
@@ -718,14 +1050,14 @@ Func stoitligena($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday, $fl_act
 	EndIf
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
-	While (_imagesearch("media\" & $lang & "\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 20)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 20)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(500 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
 		if $fl_active = 1 Then
 			sleepwhile("media\ataka.bmp", 30, 10)
 		Else
-			sleepwhile("media\" & $lang & "\zadacha_geni.bmp", 30, 10)
+			sleepwhile("media\zadacha_geni.bmp", 30, 10)
 		EndIf
 		go5()
 		$i = $i + 1
@@ -833,12 +1165,12 @@ Func setarmy($kogo, $skolko, $gena)
 		If $i < 9 Then
 			Return 1
 		Else
-			TrayTip("", getLangPhrase("val_050"), 0)
+			TrayTip("", "Ошибка: Не набрали войска", 0)
 			Return 0
 		EndIf
 	Else ; ввод обычных значений
 		viborarmii($kogo)
-		$skolkokartinka = "media\" & $lang & "\army_values\" & $diffarmy & ".bmp"
+		$skolkokartinka = "media\army_values\" & $diffarmy & ".bmp"
 		$i = 0
 		While vvodzifr($skolko) <> 1
 			;writelog("+" & $skolko)
@@ -857,7 +1189,7 @@ EndFunc
 Func vvodzifr($skolko)
 	If naborgenarea() = 0 Then Return 0
 	If $skolko = "" Then
-		MsgBox(0, getLangPhrase("val_038"), getLangPhrase("val_051"))
+		MsgBox(0, "ОШИБКА", "Количество армии пустое")
 		Return 0
 	EndIf
 	Local $i = 0, $error = 0, $symbol
@@ -869,7 +1201,7 @@ Func vvodzifr($skolko)
 		$i = $i + 1
 	WEnd
 	If $error <> StringLen($skolko) Then
-		MsgBox(0, getLangPhrase("val_038"), getLangPhrase("val_052"))
+		MsgBox(0, "ОШИБКА", "Недопустимые символы в количестве войск")
 		Return 0
 	EndIf
 	$i = 0
@@ -922,7 +1254,7 @@ Func okclosegena($yes)
 			Return 1
 		Else
 			zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
-			TrayTip("", getLangPhrase("val_053"), 0)
+			TrayTip("", "Ошибка: Не назначили войска", 0)
 			writelog(" ОШИБКА ")
 			Return 0
 		EndIf
@@ -1083,6 +1415,97 @@ Func viborarmii($tabname)
 	Return 0
 EndFunc
 
+#comments-start
+Func generalixxx($general, $nomergenerala)
+	writelog(" ГЕНЕРАЛЫ ")
+	Local $ty = 0, $tx = 0, $search = 0
+	Local $general1x = 0, $general1y = 0, $general2x = 0, $general2y = 0, $general3x = 0, $general3y = 0, $general4x = 0, $general4y = 0
+	$search = _imagesearch($general, 1, $tx, $ty, 20)
+	If $search = 1 Then
+		$general1x = $tx
+		$general1y = $ty
+		If $nomergenerala = 1 Then
+			MouseMove($general1x, $general1y, 10 * $tormoza)
+			Sleep(100 * $tormoza)
+			MouseClick("left", $general1x + Random(1, 2, 1) - 2, $general1y + Random(1, 2, 1) - 2, 1)
+			go5()
+			sleepwhile("media\zadacha_geni.bmp", 30, 20)
+			Return 1
+		EndIf
+		If _imagesearcharea($general, 1, $general1x, $general1y - 50, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+			$general2x = $tx
+			$general2y = $ty
+			If $nomergenerala = 2 Then
+				MouseMove($general2x, $general2y, 10 * $tormoza)
+				Sleep(100 * $tormoza)
+				MouseClick("left", $general2x + Random(1, 2, 1) - 2, $general2y + Random(1, 2, 1) - 2, 1)
+				go5()
+				sleepwhile("media\zadacha_geni.bmp", 30, 20)
+				Return 1
+			EndIf
+		ElseIf _imagesearcharea($general, 1, 0, $general1y, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+			$general2x = $tx
+			$general2y = $ty
+			If $nomergenerala = 2 Then
+				MouseMove($general2x, $general2y, 10 * $tormoza)
+				Sleep(100 * $tormoza)
+				MouseClick("left", $general2x + Random(1, 2, 1) - 2, $general2y + Random(1, 2, 1) - 2, 1)
+				go5()
+				sleepwhile("media\zadacha_geni.bmp", 30, 20)
+				Return 1
+			EndIf
+		EndIf
+		If _imagesearcharea($general, 1, $general2x, $general2y - 50, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+			$general3x = $tx
+			$general3y = $ty
+			If $nomergenerala = 3 Then
+				MouseMove($general3x, $general3y, 10 * $tormoza)
+				Sleep(100 * $tormoza)
+				MouseClick("left", $general3x + Random(1, 2, 1) - 2, $general3y + Random(1, 2, 1) - 2, 1)
+				go5()
+				sleepwhile("media\zadacha_geni.bmp", 30, 20)
+				Return 1
+			EndIf
+		ElseIf _imagesearcharea($general, 1, 0, $general2y, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+			$general3x = $tx
+			$general3y = $ty
+			If $nomergenerala = 3 Then
+				MouseMove($general3x, $general3y, 10 * $tormoza)
+				Sleep(100 * $tormoza)
+				MouseClick("left", $general3x + Random(1, 2, 1) - 2, $general3y + Random(1, 2, 1) - 2, 1)
+				go5()
+				sleepwhile("media\zadacha_geni.bmp", 30, 20)
+				Return 1
+			EndIf
+		EndIf
+		If _imagesearcharea($general, 1, $general3x, $general3y - 50, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+			$general4x = $tx
+			$general4y = $ty
+			If $nomergenerala = 4 Then
+				MouseMove($general4x, $general4y, 10 * $tormoza)
+				Sleep(100 * $tormoza)
+				MouseClick("left", $general4x + Random(1, 2, 1) - 2, $general4y + Random(1, 2, 1) - 2, 2)
+				go5()
+				sleepwhile("media\zadacha_geni.bmp", 30, 20)
+				Return 1
+			EndIf
+		ElseIf _imagesearcharea($general, 1, 0, $general3y, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+			$general4x = $tx
+			$general4y = $ty
+			If $nomergenerala = 4 Then
+				MouseMove($general4x, $general4y, 10 * $tormoza)
+				Sleep(100 * $tormoza)
+				MouseClick("left", $general4x + Random(1, 2, 1) - 2, $general4y + Random(1, 2, 1) - 2, 2)
+				go5()
+				sleepwhile("media\zadacha_geni.bmp", 30, 20)
+				Return 1
+			EndIf
+		EndIf
+	EndIf
+	Return 0
+EndFunc
+#comments-end
+
 Func generali($general, $nomergenerala)
 	Local $ty = 0, $tx = 0, $search = 0, $i = 0, $t = 0, $ii = 0, $count_line = 1, $count_gen_in_line = 9
 	Local $general1x = 0, $general1y = 0, $general2x = 0, $general2y = 0
@@ -1103,7 +1526,7 @@ Func generali($general, $nomergenerala)
 					$ii = $ii + 1
 				EndIf
 			Wend
-			If $ii >= $count_list Then 
+			If $ii > $count_list Then
 				;TrayTip("ОШИБКА", "Не нашли ни одного из выбранных ген!", 5)
 				Return 0
 			EndIf
@@ -1118,8 +1541,8 @@ Func generali($general, $nomergenerala)
 			Sleep(500 * $tormoza)
 			MouseClick("left", $tx + Random(1, 2, 1) - 2, $ty + Random(1, 2, 1) - 2, 1)
 			go5()
-			sleepwhile("media\" & $lang & "\zadacha_geni.bmp", 30, 10)
-			If haveimage("media\" & $lang & "\zadacha_geni.bmp", 30) = 1 Then Return 1
+			sleepwhile("media\zadacha_geni.bmp", 30, 10)
+			If haveimage("media\zadacha_geni.bmp", 30) = 1 Then Return 1
 			$i = $i + 1
 		WEnd
 		Return 0
@@ -1140,8 +1563,8 @@ Func generali($general, $nomergenerala)
 					Sleep(500 * $tormoza)
 					MouseClick("left", $tx + Random(1, 2, 1) - 2, $ty + Random(1, 2, 1) - 2, 1)
 					go5()
-					sleepwhile("media\" & $lang & "\zadacha_geni.bmp", 30, 10)
-					If haveimage("media\" & $lang & "\zadacha_geni.bmp", 30) = 1 Then Return 1
+					sleepwhile("media\zadacha_geni.bmp", 30, 10)
+					If haveimage("media\zadacha_geni.bmp", 30) = 1 Then Return 1
 					$t = $t + 1
 				WEnd
 			EndIf
@@ -1163,8 +1586,8 @@ Func generali($general, $nomergenerala)
 				Sleep(100 * $tormoza)
 				MouseClick("left", $general2x + Random(1, 2, 1) - 2, $general2y + Random(1, 2, 1) - 2, 1)
 				go5()
-				sleepwhile("media\" & $lang & "\zadacha_geni.bmp", 30, 10)
-				If haveimage("media\" & $lang & "\zadacha_geni.bmp", 30) = 1 Then Return 1
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
+				If haveimage("media\zadacha_geni.bmp", 30) = 1 Then Return 1
 			EndIf
 		ElseIf _imagesearcharea($general, 1, 0, $ty, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
 			$general2x = $tx
@@ -1174,8 +1597,8 @@ Func generali($general, $nomergenerala)
 				Sleep(100 * $tormoza)
 				MouseClick("left", $general2x + Random(1, 2, 1) - 2, $general2y + Random(1, 2, 1) - 2, 1)
 				go5()
-				sleepwhile("media\" & $lang & "\zadacha_geni.bmp", 30, 10)
-				If haveimage("media\" & $lang & "\zadacha_geni.bmp", 30) = 1 Then Return 1
+				sleepwhile("media\zadacha_geni.bmp", 30, 10)
+				If haveimage("media\zadacha_geni.bmp", 30) = 1 Then Return 1
 			EndIf
 		Else
 			Return 0
@@ -1186,13 +1609,133 @@ Func generali($general, $nomergenerala)
 	Return 0
 EndFunc
 
+#comments-start
+Func generaliproverka($general, $nomergenerala)
+	writelog(" ГЕНЕРАЛЫ ПРОВЕРКА ")
+	Local $ty = 0, $tx = 0, $search = 0, $i = 0, $skoka_gen_nashli = 0
+	Local $general1x = 0, $general1y = 0, $general2x = 0, $general2y = 0, $general3x = 0, $general3y = 0, $general4x = 0, $general4y = 0, $general5x = 0, $general5y = 0, $general6x = 0, $general6y = 0
+	While $i < 4
+		$search = _imagesearch($general, 1, $tx, $ty, 20)
+		If $search = 1 Then
+			$general1x = $tx
+			$general1y = $ty
+			$skoka_gen_nashli = 1
+			If $nomergenerala = 1 Then
+				Return 1
+			EndIf
+			If _imagesearcharea($general, 1, $general1x, $general1y - 50, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+				$general2x = $tx
+				$general2y = $ty
+				$skoka_gen_nashli = 2
+				If $nomergenerala = 2 Then
+					Return 1
+				EndIf
+			ElseIf _imagesearcharea($general, 1, 0, $general1y, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+				$general2x = $tx
+				$general2y = $ty
+				$skoka_gen_nashli = 2
+				If $nomergenerala = 2 Then
+					Return 1
+				EndIf
+			EndIf
+			If _imagesearcharea($general, 1, $general2x, $general2y - 50, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+				$general3x = $tx
+				$general3y = $ty
+				$skoka_gen_nashli = 3
+				If $nomergenerala = 3 Then
+					Return 1
+				EndIf
+			ElseIf _imagesearcharea($general, 1, 0, $general2y, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+				$general3x = $tx
+				$general3y = $ty
+				$skoka_gen_nashli = 3
+				If $nomergenerala = 3 Then
+					Return 1
+				EndIf
+			EndIf
+			If _imagesearcharea($general, 1, $general3x, $general3y - 50, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+				$general4x = $tx
+				$general4y = $ty
+				$skoka_gen_nashli = 4
+				If $nomergenerala = 4 Then
+					Return 1
+				EndIf
+			ElseIf _imagesearcharea($general, 1, 0, $general3y, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+				$general4x = $tx
+				$general4y = $ty
+				$skoka_gen_nashli = 4
+				If $nomergenerala = 4 Then
+					Return 1
+				EndIf
+			EndIf
+			If _imagesearcharea($general, 1, $general4x, $general4y - 50, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+				$general5x = $tx
+				$general5y = $ty
+				$skoka_gen_nashli = 5
+				If $nomergenerala = 5 Then
+					Return 1
+				EndIf
+			ElseIf _imagesearcharea($general, 1, 0, $general4y, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+				$general5x = $tx
+				$general5y = $ty
+				$skoka_gen_nashli = 5
+				If $nomergenerala = 5 Then
+					Return 1
+				EndIf
+			EndIf
+			If _imagesearcharea($general, 1, $general5x, $general5y - 50, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+				$general6x = $tx
+				$general6y = $ty
+				$skoka_gen_nashli = 6
+				If $nomergenerala = 6 Then
+					Return 1
+				EndIf
+			ElseIf _imagesearcharea($general, 1, 0, $general5y, @DesktopWidth, @DesktopHeight, $tx, $ty, 20) = 1 Then
+				$general6x = $tx
+				$general6y = $ty
+				$skoka_gen_nashli = 6
+				If $nomergenerala = 6 Then
+					Return 1
+				EndIf
+			EndIf
+		EndIf
+		$i = $i + 1
+		$nomergenerala = $nomergenerala - $skoka_gen_nashli
+		zvezdamovepolzunokdown(1)
+		Sleep(1000 * $tormoza)
+	WEnd
+	Return 0
+EndFunc
+
+Func openprikla($kartinka, $kartinka2)
+	Local $tx = 0, $ty = 0
+	If haveimage($kartinka2, 30) = 1 Then
+		Return 1
+	EndIf
+	If openzvezda() = 1 Then
+		If selecttabatzvezda("prikli", 0) = 1 Then
+			While (_imagesearch($kartinka, 1, $tx, $ty, 20) = 0)
+				zvezdamovepolzunokdown(1)
+				Sleep(300 * $tormoza)
+			WEnd
+			If findclickoncenterandwaitresult($kartinka, "media\open_prikla2.bmp", 20, 20, 5, 5, 1, 300, 5) = 1 Then
+				zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
+				Sleep(2000 * $tormoza)
+				zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
+				Return 1
+			EndIf
+		EndIf
+	EndIf
+	Return 0
+EndFunc
+#comments-end
+
 Func openotpravkagen($kartinka)
-	Opt("WinTitleMatchMode",2)
 	WinActivate(WinWait($windowTitle))
 	;writelog("=====ОТПРАВКА ГЕНЕРАЛОВ " & $kartinka & @CRLF)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
-	If findclickoncenterandwaitresult($kartinka, "media\" & $lang & "\otpravit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
-		If findclickoncenterandwaitresult("media\" & $lang & "\otpravit.bmp", "media\otpravka_no.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+	If findclickoncenterandwaitresult($kartinka, "media\otpravit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+		If findclickoncenterandwaitresult("media\otpravit.bmp", "media\otpravka_no.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
 			Sleep(2000 * $tormoza)
 			sleepwhile("media\otppravka_vniz.bmp", 100, 5)
 			If _imagesearcharea("media\otpravka_no.bmp", 1, 500, 100, @DesktopWidth - 200, @DesktopHeight, $tx, $ty, 40) = 0 Then Return 0
@@ -1224,15 +1767,42 @@ Func openotpravkagen($kartinka)
 	Return 0
 EndFunc
 
-Func gotopriclanosleep($kartinka)
+#comments-start
+Func gotopricla($kartinka)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
-	Opt("WinTitleMatchMode",2)
+
 	WinActivate(WinWait($windowTitle))
 
 	writelog("=====ПЕРЕХОД В ПРИКЛЮЧЕНИЕ " & $kartinka & @CRLF)
-	If findclickoncenterandwaitresult($kartinka, "media\" & $lang & "\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
-		If findclickoncenterandwaitresult("media\" & $lang & "\posetit.bmp", "media\" & $lang & "\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
-			While (_imagesearch("media\" & $lang & "\perehod_v_zonu.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 100)
+	If findclickoncenterandwaitresult($kartinka, "media\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+		If findclickoncenterandwaitresult("media\posetit.bmp", "media\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+			While (_imagesearch("media\perehod_v_zonu.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 100)
+				Sleep(6000 * $tormoza)
+				$i = $i + 1
+			WEnd
+			If $i > 98 Then
+				Return 0
+			EndIf
+			collectwarikiatprikl(1)
+			TrayTip("", "Ждём прибытия генералов", 0)
+			Sleep(960000 - 6000 * $i)
+			writelog("=====Успех " & $i * 6 & @CRLF)
+			Return 1
+		EndIf
+	EndIf
+	writelog("=====Ошибка " & $i * 6 & @CRLF)
+	Return 0
+EndFunc
+#comments-end
+
+Func gotopriclanosleep($kartinka)
+	Local $search = 0, $i = 0, $tx = 0, $ty = 0
+	WinActivate(WinWait($windowTitle))
+
+	writelog("=====ПЕРЕХОД В ПРИКЛЮЧЕНИЕ " & $kartinka & @CRLF)
+	If findclickoncenterandwaitresult($kartinka, "media\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+		If findclickoncenterandwaitresult("media\posetit.bmp", "media\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+			While (_imagesearch("media\perehod_v_zonu.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 100)
 				Sleep(6000 * $tormoza)
 				$i = $i + 1
 			WEnd
@@ -1248,12 +1818,11 @@ EndFunc
 
 Func gotohome($kartinka)
 	Local $search = 0, $i = 0, $tx = 0, $ty = 0
-	Opt("WinTitleMatchMode",2)
 	WinActivate(WinWait($windowTitle))
 
-	If findclickoncenterandwaitresult($kartinka, "media\" & $lang & "\gotohome.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
-		If findclickoncenterandwaitresult("media\" & $lang & "\gotohome.bmp", "media\" & $lang & "\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
-			While (_imagesearch("media\" & $lang & "\perehod_v_zonu.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 100)
+	If findclickoncenterandwaitresult($kartinka, "media\gotohome.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+		If findclickoncenterandwaitresult("media\gotohome.bmp", "media\perehod_v_zonu.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+			While (_imagesearch("media\perehod_v_zonu.bmp", 1, $tx, $ty, 20) = 1) AND ($i < 100)
 				Sleep(6000 * $tormoza)
 				$i = $i + 1
 			WEnd
@@ -1273,7 +1842,7 @@ Func gotohome($kartinka)
 EndFunc
 
 Func endpricla($sekund)
-	Opt("WinTitleMatchMode",2)
+	local $i = 0
 	WinActivate(WinWait($windowTitle))
 
 	Sleep($sekund * 1000)
@@ -1282,13 +1851,17 @@ Func endpricla($sekund)
 	If findclickoncenterandwaitnoneresult("media\KNZOK.bmp", 20, 10, 10, 100, 10) = 1 Then
 		Sleep(1000 * $tormoza)
 		zmemsmennuyukartinku("media\KNZOK.bmp", 30, "media\KNZOK_.bmp", 30)
-		While haveimage("media\" & $lang & "\go_home.bmp", 50) = 0
+		While haveimage("media\go_home.bmp", 50) = 0
 			Sleep(1000 * $tormoza)
 		WEnd
-		If findclickoncenterandwaitresult("media\" & $lang & "\go_home.bmp", "media\" & $lang & "\perehod_v_zonu.bmp", 50, 20, 2, 60, 0, 200, 2) = 1 Then
-			While haveimage("media\" & $lang & "\perehod_v_zonu.bmp", 50) = 1
+		If findclickoncenterandwaitresult("media\go_home.bmp", "media\perehod_v_zonu.bmp", 50, 20, 2, 60, 0, 200, 2) = 1 Then
+			While (haveimage("media\perehod_v_zonu.bmp", 50) = 1) and ($i < 300)
 				Sleep(1000 * $tormoza)
+				$i = $i + 1
 			WEnd
+			If $i = 300 Then
+				Return 0
+			EndIf
 			writelog("=====УСПЕХ " & @CRLF)
 			Return 1
 		EndIf
@@ -1310,12 +1883,12 @@ Func ozidanierasstanovki2_L($image, $image_NA, $yes)
 		$i = 0
 		While ($i < $count_list)
 			Select
-				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 0	
+				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 0
 					;Если условие выполняется на первом экране, то ждём появления хотя бы одного активного.
 					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) = 0 Then
 						;TrayTip("Отсутствует ползунок", "Нашли только пассивных на одном экране, ждём появления одного активного.", 5)
 						sleepwhile($image, 30, 900/$count_list)
-					EndIf					
+					EndIf
 					;Если условие выполняется на 4 строки, то проверяем выполнение условия в первой строке.
 					while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) <> 0
 						;TrayTip("Видим только пассивных", "Нашли только пассивных, листаем по 1 строке до первой и ждём появления одного активного.", 5)
@@ -1332,7 +1905,7 @@ Func ozidanierasstanovki2_L($image, $image_NA, $yes)
 					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) = 0 Then
 						;TrayTip("Отсутствует ползунок", "Не нашли ни активных, ни пассивных на одном экране. Надо куда-то выйти", 5)
 						ExitLoop
- 					EndIf					
+ 					EndIf
 					;TrayTip("Не видим никого", "Не нашли ни активных, ни пассивных, листаем 3 строки", 5)
 					zvezdamovepolzunokdown(0)
 					zvezdamovepolzunokdown(0)
@@ -1340,7 +1913,7 @@ Func ozidanierasstanovki2_L($image, $image_NA, $yes)
 					sleep(500*tormoza)
 					$i = $i + 1
 				Case Else
-					;Если оба предыдущих условия не являются истинными, то проверяем отсутствие активных в 3 верхних строках. 
+					;Если оба предыдущих условия не являются истинными, то проверяем отсутствие активных в 3 верхних строках.
 					If (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 82) = 0) Then
 						While (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) <> 0
 							;Если активные в 3 верхних строках отсутствуют, то, листая построчно, проверяем наличие пассивных ИЛИ активных в первой строке.
@@ -1356,10 +1929,10 @@ Func ozidanierasstanovki2_L($image, $image_NA, $yes)
 						;TrayTip("Видим одного активного", "Нашли хотя бы одного активного, выходим", 5)
 						ExitLoop 2
 					EndIf
-			EndSelect		
+			EndSelect
 		Wend
 		$ii = $ii + 1
-		If $i > $count_list Then ExitLoop	
+		If $i > $count_list Then ExitLoop
 	Wend
 	If $ii = 2 Then
 		;TrayTip("ОШИБКА", "Не нашли ни одного из выбранных ген!", 5)
@@ -1386,27 +1959,27 @@ Func ozidanierasstanovki_L($image, $image_NA, $yes)
 		sleep(500*tormoza)
 		while ($i < $count_list)
 			Select
-				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1	
+				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1
 					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) = 0 Then
 						;TrayTip("Отсутствует ползунок", "Нашли и активных, и пассивных на одном экране, ждём пропадания пассивных до 5 мин.", 5)
 						sleepNOwhile($image_NA, 30, 300)
-					EndIf					
+					EndIf
 					;Если условие выполняется на 4 строки, то проверяем выполнение условия в первой строке.
 					while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) <> 0
 						;TrayTip("Видим разных", "Нашли и активных, и пассивных, листаем по 1 строке до первой и ждём пропадания пассивных до 5 мин", 5)
 						If (haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 1) OR (haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3] - 250) = 1) Then
 							sleepNOwhile($image_NA, 30, 300)
-							ExitLoop 
+							ExitLoop
 						Else
 							zvezdamovepolzunokdown(0)
 						EndIf
 					Wend
 					$i = $i + 1
-				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 0	
+				Case haveimageAREA($image_NA, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 1 AND haveimageAREA($image, 20, $zvezda_area[0], $zvezda_area[1], $zvezda_area[2], $zvezda_area[3]) = 0
 					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) = 0 Then
 						;TrayTip("Отсутствует ползунок", "Нашли только пассивных на одном экране, ждём пропадания пассивных до 5 мин.", 5)
 						sleepNOwhile($image_NA, 30, 300)
-					EndIf					
+					EndIf
 					;Если условие выполняется на 4 строки, то проверяем выполнение условия в первой строке.
 					while (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) <> 0
 						;TrayTip("Видим только пассивных", "Нашли только пассивных, листаем по 1 строке до первой и ждём пропадания пассивных до 5 мин", 5)
@@ -1422,7 +1995,7 @@ Func ozidanierasstanovki_L($image, $image_NA, $yes)
 					If (_imagesearcharea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 1, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25, $tx, $ty, 45)) = 0 Then
 						;TrayTip("Отсутствует ползунок", "Не нашли ни активных, ни пассивных на одном экране. Надо куда-то выйти", 5)
 						ExitLoop
- 					EndIf					
+ 					EndIf
 					;TrayTip("Не видим никого", "Не нашли ни активных, ни пассивных, листаем 3 строки", 5)
 					zvezdamovepolzunokdown(0)
 					zvezdamovepolzunokdown(0)
@@ -1441,10 +2014,10 @@ Func ozidanierasstanovki_L($image, $image_NA, $yes)
 						;TrayTip("Видим только активных", "Нашли только активных, выходим", 5)
 						ExitLoop 2
 					EndIf
-			EndSelect		
+			EndSelect
 		Wend
 		$ii = $ii + 1
-		If $i > $count_list Then ExitLoop	
+		If $i > $count_list Then ExitLoop
 	Wend
 	If $ii = 2 Then
 		;TrayTip("ОШИБКА", "Не нашли ни одного из выбранных ген!", 5)
@@ -1461,8 +2034,8 @@ Func ozidanierasstanovki2_M($image, $yes)
 ; Ждем одного генерала
 	;writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
 	Local $tx = 0, $ty = 0, $ii = 1, $i = 0, $fl = 0, $count_line = 4, $count_gen_in_line = 9
-	; $count_list - задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране звезды (4 видимых строки по 9 ген в строке) минус один. Листаний на одно меньше чем экранов, т.к. первый экран виден всегда при открытии звезды  
-	Local $count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line)) - 1
+	; $count_list - задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране звезды (4 видимых строки по 9 ген в строке) минус один. Листаний на одно меньше чем экранов, т.к. первый экран виден всегда при открытии звезды
+	Local $count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line))
 	Sleep(500 * $tormoza)
 	while ($i < 900) ; макисмальное время ожидания в секундах (15 минут)
 		If openzvezdap() = 0 Then
@@ -1500,8 +2073,8 @@ Func ozidanierasstanovki_M($image, $image_NA, $yes)
 ; Ждем всех генералов
 	;writelog("=====ОЖИДАЕМ ПЕРЕСТАНОВКу " & $yes & @CRLF)
 	Local $tx = 0, $ty = 0, $ii = 1, $i = 0, $fl = 0, $count_line = 4, $count_gen_in_line = 9
-	; $count_list - задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране при листании звезды (3 видимых строки по 9 ген в строке) минус один 
-	Local $count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line)) - 1
+	; $count_list - задаем количество листаний звезды - число ген из ини файла делим на количество ген на одном экране при листании звезды (3 видимых строки по 9 ген в строке) минус один
+	Local $count_list = int(ReadINI("main", "total_generals", "50")/($count_line * $count_gen_in_line))
 	Sleep(500 * $tormoza)
 	while 1 AND ($i < 900) ; макисмальное время ожидания в секундах (15 минут)
 		If openzvezdap() = 0 Then
@@ -1723,12 +2296,12 @@ Func set_elitnoy_army($kogo, $skolko, $gena)
 			Return 1
 		Else
 			;writelog("Ошибка " & $i & @CRLF)
-			TrayTip("", getLangPhrase("val_050"), 0)
+			TrayTip("", "Ошибка: Не набрали войска", 0)
 			Return 0
 		EndIf
 	Else
 		vibor_elitnoy_armii($kogo)
-		$skolkokartinka = "media\" & $lang & "\army_values\" & $diffarmy & ".bmp"
+		$skolkokartinka = "media\army_values\" & $diffarmy & ".bmp"
 		;writelog("+" & $skolko)
 		$i = 0
 		While vvodzifr($skolko) <> 1
@@ -1780,7 +2353,7 @@ Func okclose_elitnoy_gena($yes)
 			Return 1
 		Else
 			zmemsmennuyukartinku("media\closegena.bmp", 30, "media\closegena_.bmp", 30)
-			TrayTip("", getLangPhrase("val_053"), 0)
+			TrayTip("", "Ошибка: Не назначили войска", 0)
 			writelog(" ОШИБКА ")
 			Return 0
 		EndIf
@@ -1823,30 +2396,6 @@ Func smena_armii($kakaya)
 	writelog("ОШИБКА!!!" & @CRLF)
 	Return 0
 EndFunc
-
-#comments-start
-Func openpriklaxxx($kartinka, $kartinka2)
-	Local $tx = 0, $ty = 0
-	If haveimage($userDIR & $kartinka2, 30) = 1 Then
-		Return 1
-	EndIf
-	If openzvezda() = 1 Then
-		If selecttabatzvezda("prikli", 0) = 1 Then
-			While (_imagesearch($userDIR & $kartinka, 1, $tx, $ty, 20) = 0)
-				zvezdamovepolzunokdown(1)
-				Sleep(300 * $tormoza)
-			WEnd
-			If findclickoncenterandwaitresult($userDIR & $kartinka, "media\open_prikla2.bmp", 20, 20, 5, 5, 1, 300, 5) = 1 Then
-				zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
-				Sleep(2000 * $tormoza)
-				zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
-				Return 1
-			EndIf
-		EndIf
-	EndIf
-	Return 0
-EndFunc
-#comments-end
 
 Func openpriklaxxx($kartinka, $kartinka2)
 	Local $tx = 0, $ty = 0, $cnt = 0
@@ -1923,7 +2472,6 @@ Func otpravkagenvprikl($prikl, $gena, $shtuk, $imya)
 	Local $tx = 0, $ty = 0, $i = 0, $generalov = 0, $ax = 0, $ay = 0, $search = 0, $error_otpravka = 0
 	Local $for_i, $area_tmp_top_x, $area_tmp_top_y, $area_tmp_bottom_x, $area_tmp_bottom_y
 
-	Opt("WinTitleMatchMode",2)
 	WinActivate(WinWait($windowTitle))
 
 	chatoff()
@@ -2056,6 +2604,75 @@ Func skolko_voisk_v_gene($imya, $area_top_x, $area_top_y, $area_bottom_x, $area_
 	EndIf
 EndFunc
 
+Func gosearch($tp, $fl_stop, $sec_wt_tmpl, $sec_wt_send, $st_type)
+   	Local $hWnd, $i = 0, $tx, $ty
+
+  	WinActivate(WinWait($windowTitle))
+
+	If $tp = "Р" Then
+		Send("{F3}")
+	Else
+		Send("{F4}")
+	EndIf
+
+	While (_imagesearch("media\LoadTmpl.bmp", 1, $tx, $ty, 30) = 0) AND ($i < 15)
+		Sleep(1000)
+		$i = $i + 1
+	WEnd
+
+	If $i < 15 Then
+		; успешно открыли окно поисков
+		MouseMove($tx, $ty, 10 * $tormoza)
+		Sleep(1000 * $tormoza)
+		MouseClick("left", $tx + Random(1, 5, 1), $ty + Random(1, 4, 1), 1)
+		Sleep(5000 * $tormoza)
+		Send($st_type)
+		Sleep(5000 * $tormoza)
+		Send("{ENTER}")
+		Sleep(2000 * $tormoza)
+		; загрузили шаблон
+		go5()
+		Sleep($sec_wt_tmpl * 1000)
+		$i = 0
+		While (_imagesearch("media\SendTmpl.bmp", 1, $tx, $ty, 30) = 1) AND ($i < 10)
+			MouseMove($tx, $ty, 10 * $tormoza)
+			Sleep(1000 * $tormoza)
+			MouseClick("left", $tx + Random(1, 5, 1), $ty + Random(1, 4, 1), 1)
+			go5()
+			Sleep(1000)
+			$i = $i + 1
+		WEnd
+		If $i < 10 Then
+			Sleep(2000 * $tormoza)
+			Sleep($sec_wt_send * 1000)
+			TrayTip("", "Всех отправили.", 0)
+			Return 1
+		Else
+		    $i = 0
+		    While (_imagesearch("media\CloseTmpl.bmp", 1, $tx, $ty, 30) = 1) AND ($i < 10)
+				MouseMove($tx, $ty, 10 * $tormoza)
+				Sleep(1000 * $tormoza)
+				MouseClick("left", $tx + Random(1, 5, 1), $ty + Random(1, 4, 1), 1)
+				go5()
+				Sleep(1000)
+				$i = $i + 1
+			WEnd
+			If $i < 10 Then
+				Sleep(1000 * $tormoza)
+				TrayTip("", "Нет назначенных заданий.", 0)
+					Return $fl_stop
+			Else
+				Sleep(1000 * $tormoza)
+				TrayTip("", "Что-то пошло не так!", 0)
+				Return 0
+			EndIf
+		EndIf
+	Else
+		TrayTip("", "Отправлять некого.", 0)
+		Return 1
+	EndIf
+EndFunc
+
 Func rungeolog($kuda, $skolko, $kakih)
    	Local $i = 0, $ii = 0, $tx, $ty
 
@@ -2066,7 +2683,6 @@ Func rungeolog($kuda, $skolko, $kakih)
 		_ArrayAdd($vidgeologov, "media\" & Json_Get($allGeologistsJson, '[' & $j & '].img_active'))
 	Next
 
-	Opt("WinTitleMatchMode",2)
 	WinActivate(WinWait($windowTitle))
 
 	chatoff()
@@ -2147,92 +2763,124 @@ Func rungeolog($kuda, $skolko, $kakih)
 EndFunc
 
 Global $gx, $gy, $finterrupt = 0, $gpx = 0, $gpy = 0, $vidpoiska = 0, $tippoiska = 0, $kartinkatippoiska = 0, $kartinkavidpoiska = 0, $kartinkatippoiska2 = 0, $kartinkavidpoiska2 = 0, $schet = 0
-#Region Запуск Почты
 
-	Func viborpisma($kuda)
-		Local $ty = 0, $tx = 0, $search = 0, $tcount = 0, $ay = 0, $ax = 0
-		While ($tcount < 5555)
-			If _imagesearcharea("media\srazenie.bmp", 1, 200, 50, (@DesktopWidth / 2), (@DesktopHeight / 3 * 2), $gpx, $gpy, 5) = 1 OR _imagesearcharea("media\baf.bmp", 1, 200, 50, (@DesktopWidth / 2), (@DesktopHeight / 3 * 2), $gpx, $gpy, 5) = 1 Then
-				MouseMove($gpx + 536, $gpy, 5 * $tormoza)
-				MouseClick("left", $gpx + Random(1, 2, 1) + 536, $gpy + Random(1, 2, 1), 1)
-				MouseMove($gpx + 556, $gpy, 5 * $tormoza)
-				Sleep(1000 * $tormoza)
-			Else
-				If _imagesearcharea("media\sunduk_po4ta.bmp", 1, 200, 50, (@DesktopWidth / 2), (@DesktopHeight / 3 * 2), $gpx, $gpy, 5) = 1 Then
-					kliknasklad($kuda)
-				ElseIf _imagesearcharea("media\prikl_po4ta.bmp", 1, 200, 50, (@DesktopWidth / 2), (@DesktopHeight / 3 * 2), $gpx, $gpy, 5) = 1 Then
-					kliknasklad($kuda)
-				Else
-					If _imagesearch("media\prinyato_off.bmp", 1, $gpx, $gpy, 5) = 1 OR _imagesearch("media\prinyato_on.bmp", 1, $gpx, $gpy, 5) = 1 Then
-						MouseClick("left", $gpx + Random(1, 2, 1), $gpy + Random(1, 2, 1), 1)
-						Sleep(1000 * $tormoza)
-						_imagesearch("media\OK_po4ta.bmp", 1, $ax, $ay, 5)
-						MouseMove($ax, $ay, 5 * $tormoza)
-						MouseClick("left", $ax + Random(1, 2, 1), $ay + Random(1, 2, 1), 1)
-						Sleep(1000 * $tormoza)
-					Else
-						Return 0
-					EndIf
-				EndIf
-			EndIf
-			$tcount = $tcount + 1
-			$schet = $schet + 1
-		WEnd
-		Return 0
-	EndFunc
-
-	Func kliknasklad($kuda)
-		Local $ty = 0, $tx = 0, $sklad = 0, $ok = 0
-		MouseMove($gpx, $gpy, 10 * $tormoza)
-		MouseClick("left", $gpx + Random(1, 2, 1), $gpy + Random(1, 2, 1), 1)
-		Sleep(2500 * $tormoza)
-		$sklad = _imagesearcharea($kuda, 1, (@DesktopWidth / 2), (@DesktopHeight / 2), @DesktopWidth, (@DesktopHeight - 50), $tx, $ty, 20)
-		If $sklad = 1 Then
-			MouseMove($tx, $ty, 10 * $tormoza)
-			MouseClick("left", $tx + Random(1, 5, 1), $ty + Random(1, 4, 1), 1)
-			Sleep(200 * $tormoza)
+Func viborpisma($kuda)
+	Local $ty = 0, $tx = 0, $search = 0, $tcount = 0, $ay = 0, $ax = 0
+	While ($tcount < 10000)
+		If _imagesearcharea("media\srazenie.bmp", 1, $po4ta_area_x1, $po4ta_area_y1, $po4ta_area_x2, ($po4ta_area_y2 - $po4ta_area_y1), $gpx, $gpy, 5) = 1 OR _imagesearcharea("media\baf.bmp", 1, $po4ta_area_x1, $po4ta_area_y1, $po4ta_area_x2, ($po4ta_area_y2 - $po4ta_area_y1), $gpx, $gpy, 5) = 1 Then
+			MouseMove($gpx + 520, $gpy, 5 * $tormoza)
+			MouseClick("left", $gpx + Random(1, 2, 1) + 520, $gpy + Random(1, 2, 1), 1)
+			Sleep(2000 * $tormoza)
 			Return 1
 		Else
-			$sklad = _imagesearcharea("media\vniz_po4ta.bmp", 1, (@DesktopWidth / 3 * 2), (@DesktopHeight / 2), @DesktopWidth, (@DesktopHeight - 50), $tx, $ty, 20)
-			If $sklad = 1 Then
-				MouseMove($tx, $ty, 10 * $tormoza)
-				MouseClick("left", $tx + Random(1, 5, 1), $ty + Random(1, 4, 1), 4)
-				Sleep(200 * $tormoza)
-				$sklad = _imagesearcharea($kuda, 1, (@DesktopWidth / 2), (@DesktopHeight / 2), @DesktopWidth, (@DesktopHeight - 50), $tx, $ty, 20)
-				If $sklad = 1 Then
-					MouseMove($tx, $ty, 10 * $tormoza)
-					MouseClick("left", $tx + Random(1, 5, 1), $ty + Random(1, 4, 1), 1)
-					Sleep(200 * $tormoza)
-					Return 1
-				EndIf
+			If (_imagesearcharea("media\sunduk_po4ta.bmp", 1, $po4ta_area_x1, $po4ta_area_y1, $po4ta_area_x2, ($po4ta_area_y2 - $po4ta_area_y1), $gpx, $gpy, 5) = 1) or (_imagesearcharea("media\prikl_po4ta.bmp", 1, $po4ta_area_x1, $po4ta_area_y1, $po4ta_area_x2, ($po4ta_area_y2 - $po4ta_area_y1), $gpx, $gpy, 5) = 1 ) Then
+				kliknasklad($kuda)
+				Return 1
+			Else
+				ExitLoop
 			EndIf
 		EndIf
-		Return 0
-	EndFunc
+		$tcount = $tcount + 1
+		$schet = $schet + 1
+	WEnd
+	TrayTip("", "Читать нечего...", 0)
+	Return 0
+EndFunc
 
-	Func runpo4ta($kuda)
-		Opt("WinTitleMatchMode",2)
-		WinActivate(WinWait($windowTitle))
+Func kliknasklad($kuda)
+	Local $ty = 0, $tx = 0, $sklad = 0
+	MouseMove($gpx, $gpy, 10 * $tormoza)
+	MouseClick("left", $gpx + Random(1, 2, 1), $gpy + Random(1, 2, 1), 1)
+	Sleep(1000 * $tormoza)
+	; переходим в область самого письма
+    MouseMove($po4ta_area_x1, $po4ta_area_y2 - ($po4ta_area_y2 - $po4ta_area_y1) / 3, 10 * $tormoza)
+	Sleep(1000 * $tormoza)
+	MouseClick("left", $po4ta_area_x1, $po4ta_area_y2 - ($po4ta_area_y2 - $po4ta_area_y1) / 3, 1)
+	; крутим мышку наверх
+	MouseWheel("up", 5)
+	Sleep(1000 * $tormoza)
 
-		Local $x = 0, $y = 0
-		TrayTip("", getLangPhrase("val_054"), 0)
-		If openpo4ta() = 0 Then
-			TrayTip("", getLangPhrase("val_055"), 0)
-			Return 0
-		EndIf
-		While viborpisma($kuda) = 1
-			$schet = $schet + 1
-		WEnd
-		If _imagesearch("media\close.bmp", 1, $x, $y, 70) = 1 Then
-			MouseMove($x, $y, 10 * $tormoza)
-			MouseClick("left", $x + Random(1, 5, 1), $y + Random(1, 4, 1), 1)
-			TrayTip("", getLangPhrase("val_056") & $schet & getLangPhrase("val_057"), 0)
+	$sklad = _imagesearcharea($kuda, 1, $po4ta_area_x1, ($po4ta_area_y2 - $po4ta_area_y1), $po4ta_area_x2, $po4ta_area_y2, $tx, $ty, 20)
+	If $sklad = 1 Then
+		MouseMove($tx, $ty, 10 * $tormoza)
+		Sleep(1000 * $tormoza)
+		MouseClick("left", $tx + Random(1, 5, 1), $ty + Random(1, 4, 1), 1)
+		Sleep(1000 * $tormoza)
+		Return 1
+	Else
+		; переходим в область самого письма
+		MouseMove($po4ta_area_x1, $po4ta_area_y2 - ($po4ta_area_y2 - $po4ta_area_y1) / 3, 10 * $tormoza)
+		Sleep(1000 * $tormoza)
+		MouseClick("left", $po4ta_area_x1, $po4ta_area_y2 - ($po4ta_area_y2 - $po4ta_area_y1) / 3, 1)
+		Sleep(1000 * $tormoza)
+		; крутим мышку вниз
+		MouseWheel("down", 10)
+		Sleep(1000 * $tormoza)
+		$sklad = _imagesearcharea($kuda, 1, $po4ta_area_x1, ($po4ta_area_y2 - $po4ta_area_y1), $po4ta_area_x2, $po4ta_area_y2, $tx, $ty, 20)
+		If $sklad = 1 Then
+			MouseMove($tx, $ty, 10 * $tormoza)
+			Sleep(1000 * $tormoza)
+			MouseClick("left", $tx + Random(1, 5, 1), $ty + Random(1, 4, 1), 1)
+			Sleep(1000 * $tormoza)
 			Return 1
 		EndIf
-		Return 0
-	EndFunc
+	EndIf
+EndFunc
 
-#EndRegion
+;~ Func kliknasklad($kuda)
+;~ 	Local $ty = 0, $tx = 0, $sklad = 0, $ok = 0, $vniz_po4ta, $vverh_po4ta
+;~ 	MouseMove($gpx, $gpy, 10 * $tormoza)
+;~ 	MouseClick("left", $gpx + Random(1, 2, 1), $gpy + Random(1, 2, 1), 1)
+;~ 	Sleep(2500 * $tormoza)
+;~ 	; если можно листнуть письмо наверх - листаем
+;~ 	$vverh_po4ta = _imagesearcharea("media\vverh_po4ta.bmp", 1, $po4ta_area_x1, ($po4ta_area_y2 - $po4ta_area_y1), $po4ta_area_x2 + 700, $po4ta_area_y2, $tx, $ty, 20)
+;~ 	If $vverh_po4ta = 1 Then
+;~ 		MouseMove($tx, $ty, 10 * $tormoza)
+;~ 		MouseClick("left", $tx + Random(1, 3, 1), $ty + Random(1, 3, 1), 4)
+;~ 		Sleep(2000 * $tormoza)
+;~ 	EndIf
+;~ 	$sklad = _imagesearcharea($kuda, 1, $po4ta_area_x1, ($po4ta_area_y2 - $po4ta_area_y1), $po4ta_area_x2, $po4ta_area_y2, $tx, $ty, 20)
+;~ 	If $sklad = 1 Then
+;~ 		MouseMove($tx, $ty, 10 * $tormoza)
+;~ 		MouseClick("left", $tx + Random(1, 5, 1), $ty + Random(1, 4, 1), 1)
+;~ 		Sleep(2000 * $tormoza)
+;~ 		Return 1
+;~ 	Else
+;~ 		$vniz_po4ta = _imagesearcharea("media\vniz_po4ta.bmp", 1, $po4ta_area_x1, ($po4ta_area_y2 - $po4ta_area_y1), $po4ta_area_x2 + 700, $po4ta_area_y2, $tx, $ty, 20)
+;~ 		If $vniz_po4ta = 1 Then
+;~ 			MouseMove($tx, $ty, 10 * $tormoza)
+;~ 			MouseClick("left", $tx + Random(1, 3, 1), $ty + Random(1, 3, 1), 4)
+;~ 			Sleep(2000 * $tormoza)
+;~ 			$sklad = _imagesearcharea($kuda, 1, $po4ta_area_x1, ($po4ta_area_y2 - $po4ta_area_y1), $po4ta_area_x2, $po4ta_area_y2, $tx, $ty, 20)
+;~ 			If $sklad = 1 Then
+;~ 				MouseMove($tx, $ty, 10 * $tormoza)
+;~ 				MouseClick("left", $tx + Random(1, 5, 1), $ty + Random(1, 4, 1), 1)
+;~ 				Sleep(2000 * $tormoza)
+;~ 				Return 1
+;~ 			EndIf
+;~ 		EndIf
+;~ 	EndIf
+;~ EndFunc
+
+Func runpo4ta($kuda)
+	WinActivate(WinWait($windowTitle))
+	Local $x = 0, $y = 0
+	TrayTip("", "Почитаем почту...", 0)
+	If openpo4ta() = 0 Then
+		TrayTip("", "Не удалось открыть почту! Отменяем!", 0)
+		Return 0
+	EndIf
+	While viborpisma($kuda) = 1
+		$schet = $schet + 1
+	WEnd
+	If _imagesearch("media\close_po4ta.bmp", 1, $x, $y, 70) = 1 Then
+		MouseMove($x, $y, 10 * $tormoza)
+		MouseClick("left", $x + Random(1, 5, 1), $y + Random(1, 4, 1), 1)
+		TrayTip("", "Мы обработали " & $schet & " писем", 0)
+		Return 1
+	EndIf
+	Return 0
+EndFunc
 
 Func runrazved($adv_srch, $arti, $vidpoiska, $tippoiska, $count_kakih, $Arr_kakih)
 	Local $adv_search_yes = 0
@@ -2249,7 +2897,6 @@ Func runrazved($adv_srch, $arti, $vidpoiska, $tippoiska, $count_kakih, $Arr_kaki
 		_ArrayAdd($slat_yes, 0)
 	Next
 
-	Opt("WinTitleMatchMode",2)
 	WinActivate(WinWait($windowTitle))
 
 	Switch $tippoiska
@@ -2315,8 +2962,8 @@ Func runrazved($adv_srch, $arti, $vidpoiska, $tippoiska, $count_kakih, $Arr_kaki
 				Next
 				$ii = $ii + 1
 				MouseMove($zvezda_area[0] + + Random(-2, 2, 1), $zvezda_area[3] + + Random(-2, 2, 1), 10 * $tormoza)
-				
-				; если 5 раз подергали мышь и не нашли, кого отправить - то листаем звезду 
+
+				; если 5 раз подергали мышь и не нашли, кого отправить - то листаем звезду
 				If $ii > 5 Then
 					If haveimagearea("media\zvezda_polzunok_ewe_mojno_vniz.bmp", 70, $zvezda_area[0] + 385, $zvezda_area[1] + 200, $zvezda_area[2] + 25, $zvezda_area[3] + 25) = 1 Then
 						zvezdamovepolzunokdown(1)
@@ -2325,7 +2972,7 @@ Func runrazved($adv_srch, $arti, $vidpoiska, $tippoiska, $count_kakih, $Arr_kaki
 						zmemsmennuyukartinku("media\close-zv.bmp", 90, "media\close-zv_.bmp", 90)
 						Return 1
 					EndIf
-				EndIf	
+				EndIf
 			WEnd
 			$ii = 0
 			While $ii < 6
@@ -2422,7 +3069,7 @@ Func openGenaOnpxp($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday)
 	$otkudax = $tochka_sektora_x + $otkudax
 	$otkuday = $tochka_sektora_y + $otkuday
 
-	While (_imagesearch("media\" & $lang & "\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 20)
+	While (_imagesearch("media\zadacha_geni.bmp", 1, $tx, $ty, 20) = 0) AND ($i < 20)
 		MouseMove($otkudax, $otkuday, 10 * $tormoza)
 		Sleep(200 * $tormoza)
 		MouseClick("left", $otkudax, $otkuday, 1)
@@ -2433,78 +3080,31 @@ Func openGenaOnpxp($img, $k_x, $k_y, $else_x, $else_y, $otkudax, $otkuday)
 	If $i = 20 Then
 		Return 0
 	EndIf
-	
+
 	Return 1
 EndFunc
 
-Func otpravkapriglasa($kartinka, $nik_kartinka)
-	; отправка приглашения c листанием друзей, входные параметры  $kartinka - иконка прикла, $nik_kartinka - картинка с ником
-	Local $ii, $search, $tx, $ty, $ar1_top_x, $ar1_top_y, $ar2_bottom_x, $ar2_bottom_y ; координаты окна списка друзей
-	Opt("WinTitleMatchMode",2)
-	WinActivate(WinWait($windowTitle))
-	;writelog("=====ОТПРАВКА ГЕНЕРАЛОВ " & $kartinka & @CRLF)
-	If findclickoncenterandwaitresult($kartinka, "media\priglos.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
-		If findclickoncenterandwaitresult("media\priglos.bmp", "media\plus_igrok.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
-			If findclickoncenterandwaitresult("media\plus_igrok.bmp", "media\otpravka_no.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
-				If _imagesearcharea("media\otpravka_no.bmp", 1, 500, 100, @DesktopWidth - 200, @DesktopHeight, $tx, $ty, 40) = 0 Then Return 0
-				$ar1_top_x = $tx - 250
-				$ar1_top_y = $ty - 130
-				$ar2_bottom_x = $tx - 130
-				$ar2_bottom_y = $ty + 10
-				; ищем друга
-				While $ii < 250 ; значение взято из расчета 1000 друзей (250 * листание на 4 строки)
-					If _imagesearcharea($nik_kartinka, 1, $ar1_top_x, $ar1_top_y, $ar2_bottom_x, $ar2_bottom_y, $tx, $ty, 20) = 1 Then
-						If findclickoncenterandwaitresult($nik_kartinka, "media\open_prikla2.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
-							; Приглашаем друга
-							go5()
-							sleep(2000*$tormoza)
-							zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
-							; Закрываем окно приглашения
-							go5()
-							sleep(2000*$tormoza)
-							zmemsmennuyukartinku("media\open_prikla2.bmp", 30, "media\open_prikla2_.bmp", 30)
-							Return 1
-						EndIf
-					EndIf
-					$search = _imagesearcharea("media\otppravka_vniz.bmp", 1, $ar1_top_x, $ar1_top_y, $ar2_bottom_x + 50, $ar2_bottom_y + 50, $tx, $ty, 90)
-					MouseMove($tx, $ty, 10 * $tormoza)
-					Sleep(1000 * $tormoza)
-					; листаем окно отправки
-					MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
-					Sleep(1000 * $tormoza)
-					MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
-					Sleep(1000 * $tormoza)
-					MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
-					Sleep(1000 * $tormoza)
-					MouseClick("left", $tx + Random(0, 2, 1), $ty + Random(0, 2, 1), 1)
-					Sleep(1000 * $tormoza)
-					$ii = $ii + 1
-				WEnd
-			EndIf
-		EndIf
-	EndIf
-	Return 0
-EndFunc
-
-Func otpravkapriglasa_L($kartinka, $nik_kartinka, $letter) ; c вводом 1й буквы ника
+Func otpravkapriglasa_L($kartinka, $nik_kartinka, $letter) ; ввод ника через ClipBoard
 ; отправка приглашения c листанием друзей, входные параметры  $kartinka - иконка прикла, $nik_kartinka - картинка с ником
 	Local $def_layout, $hWnd, $ii, $search, $tx, $ty, $ar1_top_x, $ar1_top_y, $ar2_bottom_x, $ar2_bottom_y ; координаты окна списка друзей
-	Opt("WinTitleMatchMode",2)
-	$hWnd = WinWait($windowTitle)
+    $hWnd = WinWait($windowTitle)
 	WinActivate($hWnd)
-	;writelog("=====ОТПРАВКА ГЕНЕРАЛОВ " & $kartinka & @CRLF)
-	$def_layout = _WinAPI_GetKeyboardLayout($hWnd) ; запомнили раскладку
 	If findclickoncenterandwaitresult($kartinka, "media\priglos.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
 		If findclickoncenterandwaitresult("media\priglos.bmp", "media\plus_igrok.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
 			If findclickoncenterandwaitresult("media\plus_igrok.bmp", "media\otpravka_no.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
 				If $letter <> "_" Then
-					If (StringRegExp($Letter,"[a-z]") = 1) and ($def_layout = 0x04190419) Then ; буква латинская, а раскладка RU
-						_WinAPI_SetKeyboardLayout($hWnd,0x0409)
-					ElseIf (StringRegExp($Letter,"[а-яё]") = 1) and ($def_layout = 0x04090409) Then ; буква русская, а раскладка EN
-						_WinAPI_SetKeyboardLayout($hWnd,0x0419)
-					EndIf
-					Send($Letter)
-					sleep(1000 * $tormoza)
+ 					local $i1 = 0
+ 					For $i1 = 1 to StringLen($letter)
+ 						local $let1 = StringMid($letter,$i1,1)
+ 						$def_layout = _WinAPI_GetKeyboardLayout($hWnd) ; запомнили раскладку
+ 						If (StringRegExp($Let1,"[a-z]") = 1) and ($def_layout = 0x04190419) Then ; буква латинская, а раскладка RU
+ 							_WinAPI_SetKeyboardLayout($hWnd,0x0409)
+ 						ElseIf (StringRegExp($Let1,"[а-яё]") = 1) and ($def_layout = 0x04090409) Then ; буква русская, а раскладка EN
+ 							_WinAPI_SetKeyboardLayout($hWnd,0x0419)
+ 						EndIf
+ 						Send($Let1)
+ 						sleep(1000 * $tormoza)
+ 					Next
 				EndIf
 				If _imagesearcharea("media\otpravka_no.bmp", 1, 500, 100, @DesktopWidth - 200, @DesktopHeight, $tx, $ty, 40) = 0 Then Return 0
 				$ar1_top_x = $tx - 250
@@ -2549,18 +3149,34 @@ Func otpravkapriglasa_L($kartinka, $nik_kartinka, $letter) ; c вводом 1й 
 	Return 0
 EndFunc
 
-Func prinatpriglas($kartinka)
-	Local $ii = 0, $gpx, $gpy, $ax, $ay, $tx, $ty, $search
-	Opt("WinTitleMatchMode",2)
+Func close_pricla($kartinka)
 	WinActivate(WinWait($windowTitle))
+	If haveimage($kartinka, 30) = 0 Then
+		Return 1
+	Else
+		If findclickoncenterandwaitresult($kartinka, "media\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
+			If findclickoncenterandwaitresult("media\posetit.bmp","media\prikl_error.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
+				sleep(500 * $tormoza)
+				zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
+				Return 1
+			EndIf
+		EndIf
+	EndIf
+	Return 0
+EndFunc
+
+Func prinatpriglas($kartinka)
+	Local $hWnd, $ii = 0, $gpx, $gpy, $ax, $ay, $tx, $ty, $search
+	$hWnd = WinWait($WindowTitle)
+	WinActivate($hWnd)
 ;   Проверяем не остался ли открытым предыдущий прикл и если да, закрываем его
     If close_pricla($kartinka) = 0 Then Return 0
 	Sleep(2000 * $tormoza)
 	If openpo4ta() = 0 Then
-		TrayTip("", getLangPhrase("val_059"), 0)
+		TrayTip("", "Не удалось открыть почту! Отменяем!", 0)
 		Return 0
 	EndIf
-	If (_imagesearcharea("media\" & $lang & "\po4ta_prig.bmp", 1, 200, 50, @DesktopWidth - 200, @DesktopHeight - 50, $gpx, $gpy, 5) = 1) OR (_imagesearcharea("media\" & $lang & "\po4ta_prig1.bmp", 1, 200, 50, (@DesktopWidth / 2), (@DesktopHeight / 3 * 2), $gpx, $gpy, 5) = 1) Then
+	If (_imagesearcharea("media\po4ta_prig.bmp", 1, 200, 50, @DesktopWidth - 200, @DesktopHeight - 50, $gpx, $gpy, 5) = 1) OR (_imagesearcharea("media\po4ta_prig1.bmp", 1, 200, 50, (@DesktopWidth / 2), (@DesktopHeight / 3 * 2), $gpx, $gpy, 5) = 1) Then
  		MouseMove($gpx, $gpy, 10 * $tormoza)
  		MouseClick("left", $gpx + Random(1, 2, 1), $gpy + Random(1, 2, 1), 1)
  		Sleep(2000 * $tormoza)
@@ -2586,20 +3202,3 @@ Func prinatpriglas($kartinka)
 	EndIf
 	Return 0
 EndFunc
-
-Func close_pricla($kartinka)
-	Opt("WinTitleMatchMode",2)
-	WinActivate(WinWait($windowTitle))
-	If haveimage($kartinka, 30) = 0 Then
-		Return 1
-	Else
-		If findclickoncenterandwaitresult($kartinka, "media\" & $lang & "\posetit.bmp", 20, 50, 2, 5, 1, -300, -100) = 1 Then
-			If findclickoncenterandwaitresult("media\" & $lang & "\posetit.bmp","media\" & $lang & "\prikl_error.bmp", 50, 20, 2, 5, 1, 0, -100) = 1 Then
-				sleep(500 * $tormoza)
-				zmemsmennuyukartinku("media\nubook.bmp", 30, "media\nubook_.bmp", 30)
-				Return 1
-			EndIf
-		EndIf
-	EndIf
-	Return 0
-EndFunc 
